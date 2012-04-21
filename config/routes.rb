@@ -1,5 +1,7 @@
 Houserule::Application.routes.draw do
 
+  get "users/new"
+
   get "welcome/index"
 
   # The priority is based upon order of creation:
