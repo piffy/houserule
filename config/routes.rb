@@ -1,6 +1,8 @@
 Houserule::Application.routes.draw do
 
-  get "users/new"
+  get "users/show"
+
+  resources :users
 
   get "welcome/index"
 

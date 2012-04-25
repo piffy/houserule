@@ -1,0 +1,19 @@
+%h1 Informazioni su #{@user.name}
+%p Find me in app/views/users/show.html.haml
+
+%ul#details
+  %li
+    Email:
+    = @user.email
+  %li
+    Iscritto il:
+    = @user.created_at.strftime("%B %d, %Y")
+
+%h3#description Descrizione
+
+%p#description= @user.description
+
+= link_to 'Modifica', edit_user_path(@user)
+= button_to 'Cancella', user_path(@movie), :method => :delete, :confirm => 'Sei sicuro?'
+= link_to 'Lista utenti', user_path
+= link_to 'Home', root_path
