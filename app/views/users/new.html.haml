@@ -1,5 +1,7 @@
 %h1 Registrazione nuovo utente
 
+= render 'shared/error_shared', :user => @user
+
 = form_for(@user)  do |f|
 
   = f.label :name
@@ -11,4 +13,4 @@
   = f.label :password , 'Password (6-15 lettere max)'
   = f.password_field :password
   %br
-  = f.submit "Crea l'utente'"
+  = f.submit "Crea utente"
