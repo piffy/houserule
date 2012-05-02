@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    flash[:message] = 'Scollegato.'
     sign_out
     redirect_to root_path
   end
