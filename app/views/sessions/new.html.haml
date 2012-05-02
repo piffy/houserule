@@ -1,0 +1,12 @@
+%h1
+  Login
+
+=form_for(:session, url: sessions_path) do |f|
+  = f.label :email
+  = f.text_field :email
+  %br
+  = f.label :password , 'Password (6-15 lettere max)'
+  = f.password_field :password
+  %br
+  = f.submit "Login"
+
