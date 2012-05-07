@@ -3,5 +3,6 @@ FactoryGirl.define do
     name     "Paperino"
     email    "donald@disney.com"
     password "password"
+    remember_token "ABCDREFGHILM"
   end
 end

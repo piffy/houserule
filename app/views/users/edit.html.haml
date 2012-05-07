@@ -1,0 +1,27 @@
+%h1 Modifica di #{@user.name}
+
+= render 'shared/error_shared', :user => @user
+
+= form_for(@user)  do |f|
+
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.label :email
+  = f.text_field :email
+  %br
+  %h4 In questa prima versione bisogna sempre cambiare la pw
+  = f.label :password , 'Password (6-15 lettere max)'
+  = f.password_field :password
+  %br
+  = f.label :nick , 'Nickname'
+  = f.text_field :nick
+  %br
+  = f.label :location , "Luogo"
+  = f.text_field :location
+  %br
+  = f.label :description , 'Qualcosa su di te:'
+  %br
+  = f.text_area :description
+  %br
+  = f.submit "Modifica"

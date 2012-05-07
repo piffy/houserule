@@ -1,0 +1,6 @@
+%h1 Elenco utenti registrati
+
+%ul{:class=>"users"}
+  -@users.each do |user|
+    %li
+      = link_to user.name, user

@@ -23,3 +23,9 @@ Given /(?:|che )esistono i seguenti utenti/ do |user_table|
   end
 
 end
+
+
+E /^vado alla modifica preferenze di "([^"]*)"$/ do |username|
+  @user = User.find_by_email(username)
+  visit edit_user_path(@user)
+end

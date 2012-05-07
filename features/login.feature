@@ -36,6 +36,14 @@ Scenario:   Login
     Allora dovrei vedere "errata"
 
 
-#Scenario:   Logout
-#Lo scenario non puo' essere testato con Cucumber. Almeno per ora
+  Scenario:   Accesso a pagine senza login
+    Dato   vado alla modifica preferenze di "paolino@nomail.it"
+    Allora dovrei vedere "Login"
 
+  Scenario:   Redirect amichevole
+    Dato   vado alla modifica preferenze di "paolino@nomail.it"
+    Allora dovrei vedere "Login"
+    Quando inserisco in "session_email" "paolino@nomail.it"
+    E      inserisco in "session_password" "12345678"
+    Quando premo "Login"
+    Allora dovrei vedere "Modifica"

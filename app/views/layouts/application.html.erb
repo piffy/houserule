@@ -16,15 +16,14 @@
           <li><%= link_to "Home", root_path %></li>
           <!--- li%= link_to "Help", '#' %> li -->
           <% if signed_in?  %>
-              <li><%= link_to "Users", '#' %></li>
-              <li><%= signed_in?%></li>
+              <li><%= link_to "Utenti", users_path %></li>
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Account <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to "Profilo di "+ current_user.name, user_path(@current_user) %></li>
-                  <li><%= link_to "Preferenze", '#' %></li>
+                  <li><%= link_to "Preferenze", edit_user_path(@current_user) %></li>
                   <li class="divider"></li>
                   <li>
                     <%= link_to "Logout", logout_path, method: "delete", :id => "logout" %>

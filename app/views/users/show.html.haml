@@ -8,8 +8,16 @@
   %li
     Iscritto il:
     = @user.created_at.strftime("%B %d, %Y")
+  %li
+    Nick:
+    = @user.nick
+  %li
+    Luogo:
+    = @user.location
 
 %h3#description Descrizione
+%p
+  = @user.description
 
 %p#description= @user.description
 
