@@ -15,7 +15,14 @@ class UsersController < ApplicationController
 
   end
   def update
+
     @user = User.find(params[:id])
+    # This snippet eliminates pw check and confirmation if left blank
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
+      #@user.password_confirmation=@user.password
+    end
     if @user.update_attributes(params[:user])
       flash[:success] = "Preferenze aggiornate"
       sign_in @user

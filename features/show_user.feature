@@ -8,10 +8,11 @@ Funzionalità: Mostra utente
 
   Contesto:
     Dato   che esistono i seguenti utenti:
-      | name                  | email                 | password  |
-      | Paperino              | paolino@nomail.it     | 12345678  |
-      | Pluto                 | pluto@nomail.it       | 12345678  |
+      | name                  | email                 | password  | password_confirmation |
+      | Paperino              | paolino@nomail.it     | 12345678  | 12345678              |
+      | Pluto                 | pluto@nomail.it       | 12345678  | 12345678              |
     E l'utente  "Paperino" ha fatto il login
+
 
 
   Scenario:   Visualizza propri dati

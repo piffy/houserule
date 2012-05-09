@@ -10,9 +10,12 @@
   = f.label :email
   = f.text_field :email
   %br
-  %h4 In questa prima versione bisogna sempre cambiare la pw
-  = f.label :password , 'Password (6-15 lettere max)'
+  %h5 La password va sempre inserita
+  = f.label :password , 'Password (Se si vuole cambiarla)'
   = f.password_field :password
+  %br
+  = f.label :password_confirmation , 'Conferma password'
+  = f.password_field :password_confirmation
   %br
   = f.label :nick , 'Nickname'
   = f.text_field :nick
