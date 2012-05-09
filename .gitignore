@@ -16,4 +16,4 @@
 
 #Ignore rubymine files
 ./idea/*
-/idea/*
+.idea/*
