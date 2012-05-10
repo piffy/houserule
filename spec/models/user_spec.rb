@@ -18,6 +18,10 @@ describe User do
   it { should respond_to(:password_confirmation)}
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
+  it { should respond_to(:nick) }
+  it { should respond_to(:description) }
+  it { should respond_to(:first_name) }
+  it { should respond_to(:first_name_or_nick) }
   it { should be_valid }
 
   it "should create a new instance given valid attributes" do
@@ -44,6 +48,15 @@ describe User do
   it "should have a nick no longer than 15 characters"  do
     @user.nick = "x" * 16
     @user.should_not be_valid
+  end
+
+  it "should return name or nick correctly"  do
+    @user.first_name.should == "Example"
+    @user.first_name_or_nick.should == "Example"
+    @user.nick = "different"
+    @user.first_name_or_nick.should == "different"
+    @user.nick = ""
+    @user.first_name_or_nick.should == "Example"
   end
 
   it "should have a valid email"  do

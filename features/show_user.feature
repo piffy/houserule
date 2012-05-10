@@ -8,27 +8,30 @@ Funzionalità: Mostra utente
 
   Contesto:
     Dato   che esistono i seguenti utenti:
-      | name                  | email                 | password  | password_confirmation |
-      | Paperino              | paolino@nomail.it     | 12345678  | 12345678              |
-      | Pluto                 | pluto@nomail.it       | 12345678  | 12345678              |
-    E l'utente  "Paperino" ha fatto il login
-
+      | name                  | email                 | password  | password_confirmation | nick | location   |  description |
+      | Paperino              | paolino@nomail.it     | 12345678  | 12345678              | pap  | Paperopoli |  Papero      |
+      | Pluto                 | pluto@nomail.it       | 12345678  | 12345678              |      | Topolinia  |  Cane        |
+    E mi loggo con email "paolino@nomail.it" e password "12345678"
 
 
   Scenario:   Visualizza propri dati
-    Dato che visito la pagina di visualizzazione utente di "paolino@nomail.it"
-    Allora    dovrei vedere "Paperino" nel campo "name"
-    E         dovrei vedere "paolino@nomail.it" nel campo "email"
-    E         dovrei vedere "pap" nel campo "nick"
-    E         dovrei vedere  "Un gran papero" nel campo "description"
-    E         dovrei vedere  "Paperopoli" nel campo "Location"
-    E         dovrei vedere  "Iscritto il"
+    Dato      vado al profilo dell'utente "paolino@nomail.it"
+    Allora    dovrei vedere "Paperino" all'interno di "li"
+    E         dovrei vedere "Bentornato pap!" all'interno di "h1"
+    E         dovrei vedere "pap" all'interno di "li"
+    E         dovrei vedere "Paperopoli" all'interno di "li"
+    E         dovrei vedere "Papero" all'interno di "p#description"
+
+
+  Scenario:   Visualizza dati di altri utenti
+    Dato      vado al profilo dell'utente "pluto@nomail.it"
+    E         mostra la pagina
+    Allora    dovrei vedere "Pluto" all'interno di "li"
+    E         dovrei vedere "Bentornato Pluto!" all'interno di "h1"
+    E         dovrei vedere "Topolinia" all'interno di "li"
+    E         dovrei vedere "Cane" all'interno di "p#description"
 
 
 
-  Scenario:   Non visualizza email di altri utenti (se non sei admin)
-  Dato che visito la pagina di visualizzazione utente di "pluto@nomail.it"
-    Allora    dovrei vedere "Pluto" nel campo "name"
-    E         dovrei non vedere "pluto@nomail.it" nel campo "email"
 
 

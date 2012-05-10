@@ -1,10 +1,9 @@
-%h1 Informazioni su #{@user.name}
-%p Find me in app/views/users/show.html.haml
+%h1 Bentornato #{@user.first_name_or_nick}!
 
 %ul#details
   %li
-    Email:
-    = @user.email
+    Nome completo:
+    = @user.name
   %li
     Iscritto il:
     = @user.created_at.strftime("%d/%m/%Y")
@@ -16,9 +15,6 @@
     = @user.location
 
 %h3#description Descrizione
-%p
-  = @user.description
-
 %p#description= @user.description
 
 = link_to 'Modifica', edit_user_path(@user)

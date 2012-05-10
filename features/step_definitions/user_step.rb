@@ -1,4 +1,6 @@
 
+
+
 Then /^dovrei essere alla  home\s?page$/ do
   request.request_uri.should == "/"
   response.should be_success
@@ -28,4 +30,10 @@ end
 E /^vado alla modifica preferenze di "([^"]*)"$/ do |username|
   @user = User.find_by_email(username)
   visit edit_user_path(@user)
+end
+
+
+Given  /^vado al profilo dell'utente "([^"]*)"$/ do |username|
+  @user = User.find_by_email(username)
+  visit user_path(@user)
 end

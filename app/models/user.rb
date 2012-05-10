@@ -28,6 +28,18 @@ class User < ActiveRecord::Base
 
   end
 
+  def first_name
+    Regexp.new(/^(\w+)/).match(name)[0]
+  end
+
+  def first_name_or_nick
+    unless self.nick.nil?  ||   self.nick.empty?
+      nick
+    else
+      first_name
+    end
+  end
+
   private
 
     def create_remember_token

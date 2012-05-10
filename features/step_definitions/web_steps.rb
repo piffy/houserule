@@ -29,17 +29,21 @@ When /^inserisco in "(\w+)" "([^"]*)"$/ do |name,value|
   fill_in name , :with =>value
 end
 
-Then /^dovrei vedere il messaggio di errore "(.+)"$/ do |text|
+Then /^dovrei vedere il messaggio di errore "([^"]*)"$/ do |text|
   page.should have_css("li", :text => text)
   #page.should have_content(text)
 end
 
-Then /^dovrei vedere "(.+)"$/ do |text|
+Then /^dovrei vedere "([^"]*)"$/ do |text|
   page.should have_content(text)
 end
 
-Then /^dovrei non vedere "(.+)"$/ do |text|
+Then /^dovrei non vedere "([^"]*)"$/ do |text|
   page.should_not have_content(text)
+end
+
+Then /^dovrei vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|
+  page.should have_css(selector, :text => text)
 end
 
 When /^premo "([^"]*)"$/ do |button|
