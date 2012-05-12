@@ -108,6 +108,7 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    railroady (1.0.7)
     rails (3.2.3)
       actionmailer (= 3.2.3)
       actionpack (= 3.2.3)
@@ -196,6 +197,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   pg
+  railroady
   rails (= 3.2.3)
   rspec (= 2.7.0)
   rspec-expectations (= 2.7.0)
