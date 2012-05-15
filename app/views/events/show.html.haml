@@ -1,0 +1,42 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @event.name
+%p
+  %b System:
+  = @event.system
+%p
+  %b Begins at:
+  = @event.begins_at
+%p
+  %b Duration:
+  = @event.duration
+%p
+  %b Description:
+  = @event.description
+%p
+  %b Descr short:
+  = @event.descr_short
+%p
+  %b Deadline:
+  = @event.deadline
+%p
+  %b Status:
+  = @event.status
+%p
+  %b Location:
+  = @event.location
+%p
+  %b Max player num:
+  = @event.max_player_num
+%p
+  %b Min player num:
+  = @event.min_player_num
+%p
+  %b User:
+  = @event.user_id
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

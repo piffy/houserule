@@ -22,6 +22,7 @@ describe User do
   it { should respond_to(:description) }
   it { should respond_to(:first_name) }
   it { should respond_to(:first_name_or_nick) }
+  it { should respond_to(:events) }
   it { should be_valid }
 
   it "should create a new instance given valid attributes" do
@@ -126,6 +127,29 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
 
+  describe "event associations" do
+
+    before { @user.save }
+    let!(:older_event) do
+      FactoryGirl.create(:event, user: @user, begins_at: 2.days.ago)
+    end
+    let!(:newer_event) do
+      FactoryGirl.create(:event, user: @user, begins_at: 1.day.ago)
+    end
+
+    it "should have the events in the right order" do
+      @user.events.should == [newer_event, older_event]
+    end
+
+    it "should destroy associated events" do
+      events = @user.events
+      @user.destroy
+      events.each do |event|
+        Event.find_by_id(event.id).should be_nil
+      end
+    end
+
+  end
 
 
 end

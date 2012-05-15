@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :location, :name, :nick, :password, :password_confirmation
+  has_many :events, dependent: :destroy
+
   valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :email, :presence   => true,

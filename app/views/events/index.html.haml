@@ -1,0 +1,41 @@
+%h1 Listing events
+
+%table
+  %tr
+    %th Name
+    %th System
+    %th Begins at
+    %th Duration
+    %th Description
+    %th Descr short
+    %th Deadline
+    %th Status
+    %th Location
+    %th Max player num
+    %th Min player num
+    %th User
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.name
+      %td= event.system
+      %td= event.begins_at
+      %td= event.duration
+      %td= event.description
+      %td= event.descr_short
+      %td= event.deadline
+      %td= event.status
+      %td= event.location
+      %td= event.max_player_num
+      %td= event.min_player_num
+      %td= event.user_id
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Event', new_event_path

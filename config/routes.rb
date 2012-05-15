@@ -1,5 +1,7 @@
 Houserule::Application.routes.draw do
 
+  resources :events
+
   get "users/show"
 
   resources :users

@@ -1,0 +1,46 @@
+= form_for @event do |f|
+  -if @event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :system
+    = f.text_field :system
+  .field
+    = f.label :begins_at
+    = f.datetime_select :begins_at
+  .field
+    = f.label :duration
+    = f.text_field :duration
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :descr_short
+    = f.text_field :descr_short
+  .field
+    = f.label :deadline
+    = f.datetime_select :deadline
+  .field
+    = f.label :status
+    = f.number_field :status
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label :max_player_num
+    = f.number_field :max_player_num
+  .field
+    = f.label :min_player_num
+    = f.number_field :min_player_num
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .actions
+    = f.submit 'Save'
