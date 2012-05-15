@@ -41,7 +41,6 @@ describe Event do
     @event.should_not be_valid
   end
 
-
   describe "accessible attributes" do
     it "should not allow access to user_id" do
       expect do

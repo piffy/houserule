@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @events = Event.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @events }
     end
   end
@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # show.html.haml
       format.json { render json: @event }
     end
   end
@@ -26,6 +26,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
+    @user=current_user
     @event = Event.new
 
     respond_to do |format|
@@ -42,18 +43,24 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    @user=current_user
+    params[:event].delete("user_id")
+    @event = current_user.events.build(params[:event])
+    @event.status=1; #proposed
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render json: @event, status: :created, location: @event }
+    if @event.deadline > @event.begins_at
+      flash[:error] = "Data di conferma errata"
+      render 'new'
+    else
+      if  @event.save
+        flash[:success] = "Evento creato!"
+        redirect_to user_path(current_user)
       else
-        format.html { render action: "new" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        render 'new'
       end
     end
-  end
+
+end
 
   # PUT /events/1
   # PUT /events/1.json

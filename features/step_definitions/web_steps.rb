@@ -15,6 +15,10 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
     when /pagina di registrazione/
       visit new_user_path
 
+
+    when /pagina di creazione evento/
+      visit new_event_path
+
     when /pagina di login/
       visit login_path
 
@@ -24,6 +28,15 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
   end
 
 end
+
+
+When /^seleziono la data "[^"](\d?\d)-(\d?\d)-(\d{4})" in "([^"]*)"$/ do  |day,month,year, field|
+    #select_date date, :from => field
+    select year,                             :from => "#{field}_1i"
+    select Date::MONTHNAMES[Integer(month)], :from => "#{field}_2i"
+    select day,                              :from => "#{field}_3i"
+end
+
 
 When /^inserisco in "(\w+)" "([^"]*)"$/ do |name,value|
   fill_in name , :with =>value

@@ -18,8 +18,7 @@ describe "events/new.html.haml" do
 
   it "renders new event form" do
     render
-
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
+    rendered.should match(/Nuovo evento per/)
     assert_select "form", :action => events_path, :method => "post" do
       assert_select "input#event_name", :name => "event[name]"
       assert_select "input#event_system", :name => "event[system]"
