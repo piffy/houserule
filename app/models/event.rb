@@ -5,6 +5,6 @@ class Event < ActiveRecord::Base
   validates_presence_of :name, :message => "deve avere un nome"
   validates_length_of :descr_short, :maximum=>255
 
-  default_scope order: 'events.day DESC'
+  default_scope order: 'events.begins_at DESC'
   #named_scope :confirmed, :conditions => { :status => 2 }
 end

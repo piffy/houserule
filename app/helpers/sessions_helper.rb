@@ -45,4 +45,13 @@ module SessionsHelper
   def clear_return_to
     session.delete(:return_to)
   end
+
+  def logged_in_user
+    unless signed_in?
+      store_location
+      flash[:notice] = "Effettuare prima il login"
+      redirect_to login_path
+    end
+
+  end
 end

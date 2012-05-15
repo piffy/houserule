@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   # GET /events
   # GET /events.json
+  before_filter :logged_in_user, only: [:create, :destroy, :new]
+
   def index
     @events = Event.all
 

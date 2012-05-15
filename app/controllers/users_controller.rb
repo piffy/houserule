@@ -46,14 +46,7 @@ class UsersController < ApplicationController
 
   private
 
-  def logged_in_user
-    unless signed_in?
-      store_location
-      flash[:notice] = "Effettuare prima il login"
-      redirect_to login_path
-    end
 
-  end
 
   def correct_user
     @user = User.find(params[:id])
