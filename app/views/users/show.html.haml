@@ -21,6 +21,7 @@
   %h3#organized-events
     Eventi organizzati:
     =@user.events.count
+    = link_to '[Organizza evento]', new_event_path
   -if @user.events.any?
     %ol{:class =>"events"}
       - @events.each do |event|
@@ -41,5 +42,5 @@
 
 = link_to 'Modifica', edit_user_path(@user)
 = button_to 'Cancella', user_path(@movie), :method => :delete, :confirm => 'Sei sicuro?'
-= link_to 'Lista utenti', user_path
+= link_to 'Lista utenti', users_path
 = link_to 'Home', root_path

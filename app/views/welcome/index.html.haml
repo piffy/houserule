@@ -1,11 +1,22 @@
 %h1 House Rules
 %h2 Un sito per la gestione delle partite tra amici
 %p
-  Questa è la home page. Il sito è chiaramente in fase di costruzione Potete per&ograve; testare alcune limitate
-  funzionalit&agrave; come ad esempio....
+  Questa è la home page. Il sito è chiaramente in fase di costruzione!! Attualmente nel sistema sono presenti
+  = @user_count
+  utenti, e un totale di
+  =@event_count
+  eventi.
+
+  Vi preghiamo comunque di testare alcune limitate funzionalit&agrave; come ad esempio....
 %ul
   %li
     =link_to 'Registra nuovo utente', new_user_path
   %li
-    Login (TODO)
+    =link_to 'Registra nuovo utente', login_path
+  %li
+    =link_to 'Elenco eventi', events_path
+
+%p
+
+
 
