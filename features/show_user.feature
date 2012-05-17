@@ -21,7 +21,8 @@ Funzionalità: Mostra utente
     E         dovrei vedere "pap" all'interno di "li"
     E         dovrei vedere "Paperopoli" all'interno di "li"
     E         dovrei vedere "Papero" all'interno di "p#description"
-    E         dovrei non vedere "Eventi organizzati"
+    E         dovrei vedere "Eventi organizzati: 0"
+    E         dovrei vedere "Organizza evento"
 
 
   Scenario:   Visualizza partite organizzate
@@ -30,7 +31,6 @@ Funzionalità: Mostra utente
       | Evento 1              | Risiko     |
       | Evento 2              | Monopoli   |
     Dato  vado al profilo dell'utente "paolino@nomail.it"
-    E mostra la pagina
     Allora dovrei vedere "Eventi organizzati" all'interno di "h3#organized-events"
     E dovrei vedere "2" all'interno di "h3#organized-events"
     E dovrei vedere "Evento 1" all'interno di "span"
@@ -39,12 +39,11 @@ Funzionalità: Mostra utente
 
   Scenario:   Visualizza dati di altri utenti
     Dato      vado al profilo dell'utente "pluto@nomail.it"
-    E         mostra la pagina
     Allora    dovrei vedere "Pluto" all'interno di "li"
     E         dovrei vedere "Bentornato Pluto!" all'interno di "h1"
     E         dovrei vedere "Topolinia" all'interno di "li"
     E         dovrei vedere "Cane" all'interno di "p#description"
-
+    E         dovrei non vedere "Organizza evento"
 
 
 
