@@ -21,6 +21,20 @@ Funzionalità: Mostra utente
     E         dovrei vedere "pap" all'interno di "li"
     E         dovrei vedere "Paperopoli" all'interno di "li"
     E         dovrei vedere "Papero" all'interno di "p#description"
+    E         dovrei non vedere "Eventi organizzati"
+
+
+  Scenario:   Visualizza partite organizzate
+    Dato che esistono i seguenti eventi dell'utente "paolino@nomail.it":
+      | name                  | system     |
+      | Evento 1              | Risiko     |
+      | Evento 2              | Monopoli   |
+    Dato  vado al profilo dell'utente "paolino@nomail.it"
+    E mostra la pagina
+    Allora dovrei vedere "Eventi organizzati" all'interno di "h3#organized-events"
+    E dovrei vedere "2" all'interno di "h3#organized-events"
+    E dovrei vedere "Evento 1" all'interno di "span"
+    E dovrei vedere "Evento 2" all'interno di "span"
 
 
   Scenario:   Visualizza dati di altri utenti

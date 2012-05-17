@@ -33,6 +33,8 @@ class UsersController < ApplicationController
   end
   def show
     @user=User.find(params[:id])
+    @events = @user.events
+    #TODO Paginate
   end
   def create
     @user = User.new(params[:user])

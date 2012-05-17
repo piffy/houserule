@@ -1,9 +1,9 @@
 # language: it
 
 Funzionalità: Aggiungi evento
-Come utente loggato
-Voglio poter creare un nuovo evento
-Per poter farlo sapere agli amici
+Come organizzatore (loggato)
+voglio poter creare una partita
+perché gli altri utenti si possano iscrivere
 
   Contesto:
     Dato   che esistono i seguenti utenti:
@@ -29,7 +29,6 @@ Per poter farlo sapere agli amici
     E      seleziono la data "09-5-2013" in "event_deadline"
     Quando premo "Invia"
     Allora dovrei vedere "Evento creato!"
-    E mostra la pagina
 
 
   Scenario:   Dimenticare il nome (percorso triste)
@@ -42,7 +41,8 @@ Per poter farlo sapere agli amici
     E      seleziono la data "09-5-2013" in "event_begins_at"
     E      seleziono la data "10-5-2013" in "event_deadline"
     Quando premo "Invia"
-    Allora dovrei vedere il messaggio di errore "Data di conferma errata"
+    Allora dovrei vedere "Data di conferma errata"
+
 
 
 

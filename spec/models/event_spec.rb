@@ -4,7 +4,7 @@ describe Event do
   let(:user) { FactoryGirl.create(:user) }
   before do
     # This code is wrong!
-    @event = user.events.build(:name => "A name")
+    @event = user.events.build(:name => "A name", :system => "A System", :begins_at => "2012-04-04")
 
 
   end

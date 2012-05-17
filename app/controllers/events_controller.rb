@@ -48,6 +48,7 @@ class EventsController < ApplicationController
     @event = current_user.events.build(params[:event])
     @event.status=1; #proposed
 
+    #TODO -> Transform it into a regular validation (ugly)
     if @event.deadline > @event.begins_at
       flash[:error] = "Data di conferma errata"
       render 'new'

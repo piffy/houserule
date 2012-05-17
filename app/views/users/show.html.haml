@@ -17,6 +17,28 @@
 %h3#description Descrizione
 %p#description= @user.description
 
+%div
+  %h3#organized-events
+    Eventi organizzati:
+    =@user.events.count
+  -if @user.events.any?
+    %ol{:class =>"events"}
+      - @events.each do |event|
+        %li
+          %span{:class => "title"}
+            %a{:href => event_path(event)}
+              =event.name
+          %span{:class => "system"}
+            per
+            =event.system
+          %span{:class => "timestamp"}
+            (
+            =  event.begins_at.blank? ? "Da stabilire" : event.begins_at.blank?
+            )
+
+    -# will_paginate @events [TODO]
+
+
 = link_to 'Modifica', edit_user_path(@user)
 = button_to 'Cancella', user_path(@movie), :method => :delete, :confirm => 'Sei sicuro?'
 = link_to 'Lista utenti', user_path
