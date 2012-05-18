@@ -1,19 +1,16 @@
-%h1 Listing events
+%h1 Elenco eventi
 
 %table
   %tr
-    %th Name
-    %th System
-    %th Begins at
-    %th Duration
-    %th Description
-    %th Descr short
-    %th Deadline
+    %th{:class => @name_header}= link_to 'Nome evento', events_path(:sort => 'name'), :id => 'name_header'
+    %th{:class => @system_header}= link_to 'Sistema', events_path(:sort => 'system'), :id => 'system_header'
+    %th{:class => @begins_at_header}= link_to 'Data e ora', events_path(:sort => 'begins_at'), :id => 'name_header'
+    %th Durata
+    %th Descrizione
+    %th Conferma?
     %th Status
-    %th Location
-    %th Max player num
-    %th Min player num
-    %th User
+    %th Luogo
+    %th Giocatori
     %th
     %th
     %th
@@ -24,17 +21,14 @@
       %td= event.system
       %td= event.begins_at
       %td= event.duration
-      %td= event.description
       %td= event.descr_short
       %td= event.deadline
       %td= event.status
       %td= event.location
-      %td= event.max_player_num
-      %td= event.min_player_num
-      %td= event.user_id
-      %td= link_to 'Show', event
+      %td= event.max_player_num.to_s + " - "  + event.min_player_num.to_s
+      %td= link_to 'Dettagli', event
       %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Elimina', event, :confirm => 'Sei sicuro?', :method => :delete
 
 %br
 

@@ -22,6 +22,9 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
     when /pagina di login/
       visit login_path
 
+    when /pagina di elenco eventi/
+      visit login_path
+
     else
       raise "Non posso mappare \"#{page_name}\" a un percorso.\n"
 

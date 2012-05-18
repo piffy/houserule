@@ -25,21 +25,19 @@ Funzionalità: mostrare la lista deglie eventi secondo vari criteri
 
 
   Scenario: ordina gli eventi in ordine alfabetico
-    Quando premo "Refresh"
-    E seguo il link "event_name"
+    Quando seguo il link "event_name"
+    E mostra la pagina
     Allora dovrei vedere "Campionato" prima di  "Concorso"
     E dovrei vedere "Concorso" prima di  "LAN Party"
     E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
 
   Scenario: ordina gli eventi per data decrescente
-    Quando premo "Refresh"
     E seguo il link "event_begins_at"
     Allora dovrei vedere  "Torneo" prima di "Campionato"
     E dovrei vedere  "LAN Party" prima di  "Campagna"
     E dovrei vedere "Semifinale Torneo" prima di "Concorso"
 
   Scenario: ordina gli eventi per sistema di gioco
-    Quando premo "Refresh"
     E seguo il link "event_system"
     Allora dovrei vedere "Campionato" prima di  "Torneo"
     E dovrei vedere "Campagna" prima di  "LAN Party"

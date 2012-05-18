@@ -8,3 +8,8 @@ Given /^che esistono i seguenti eventi dell'utente "([^"]*)":$/ do |user_email, 
   end
 
 end
+
+
+Then /^dovrei vedere "([^"]*)" prima di  "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
