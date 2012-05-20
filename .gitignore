@@ -17,3 +17,7 @@
 #Ignore rubymine files
 ./idea/*
 .idea/*
+
+#Ignore strange file
+C:\\nppdf32Log\\debuglog.txt
+
