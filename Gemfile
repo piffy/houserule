@@ -31,6 +31,9 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'haml-rails'
 
+# Handle dates properly
+gem "date_validator", "~> 0.6.3"
+
 
 # use Ruby debugger
 group :development, :test do

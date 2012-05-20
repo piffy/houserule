@@ -14,10 +14,10 @@
     = f.text_field :system
   .field
     = f.label :begins_at, 'Inizio'
-    = f.datetime_select :begins_at
+    = f.datetime_select :begins_at , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year]}
   .field
     = f.label :deadline , 'Confermare entro'
-    = f.datetime_select :deadline
+    = f.datetime_select :deadline , {:minute_step => 15, :use_month_numbers=>true, :order => [:day, :month, :year]}
   .field
     = f.label :duration, 'Durata'
     = f.text_field :duration
@@ -31,10 +31,10 @@
     = f.label :location, 'Luogo'
     = f.text_field :location
   .field
-    = f.label :max_player_num, 'Massimo giocatori'
-    = f.number_field :max_player_num
-  .field
-    = f.label :min_player_num, 'Minimo giocatori'
-    = f.number_field :min_player_num
+    Numero di giocatori
+    = f.label :max_player_num, 'massimo: '
+    = f.number_field :max_player_num, :min=>"0", :size=>"3", :maxlenght =>3
+    = f.label :min_player_num, 'minimo: '
+    = f.number_field :min_player_num, :min=>"0", :size=>"3", :maxlenght =>3
   .actions
     = f.submit 'Invia'

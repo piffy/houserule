@@ -32,12 +32,9 @@
             %a{:href => event_path(event)}
               =event.name
           %span{:class => "system"}
-            per
-            =event.system
+            = "per '" + event.system+"'"  unless event.system.blank?
           %span{:class => "timestamp"}
-            (
-            =  event.begins_at.blank? ? "Da stabilire" : event.begins_at.blank?
-            )
+            =  "("+event.begins_at.strftime('%d-%m-%y') +")"
 
     -# will_paginate @events [TODO]
 
