@@ -45,21 +45,20 @@ class EventsController < ApplicationController
   def create
     @user=current_user
     params[:event].delete("user_id")
+
+
+
     @event = current_user.events.build(params[:event])
     @event.status=1; #proposed
 
-    #TODO -> Transform it into a regular validation (ugly)
-    if @event.deadline > @event.begins_at
-      flash[:error] = "Data di conferma errata"
-      render 'new'
+
+    if  @event.save
+      flash[:success] = "Evento creato!"
+      redirect_to user_path(current_user)
     else
-      if  @event.save
-        flash[:success] = "Evento creato!"
-        redirect_to user_path(current_user)
-      else
-        render 'new'
-      end
+      render 'new'
     end
+
 
 end
 

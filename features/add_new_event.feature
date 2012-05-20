@@ -36,12 +36,21 @@ perché gli altri utenti si possano iscrivere
     Allora dovrei vedere il messaggio di errore "non deve essere vuoto"
 
 
-  Scenario:   Conferma incompatibile  (percorso triste)
+  Scenario:   Numero giocatori errato (percorso triste)
+    Dato   inserisco in "event_name" "Evento"
+    E      inserisco in "event_min_player_num" "4"
+    E      inserisco in "event_max_player_num" "2"
+    Quando premo "Invia"
+    Allora dovrei vedere il messaggio di errore "Max player num"
+
+
+
+  Scenario:   Conferma impossibile  (percorso triste)
     Dato   inserisco in "event_name" "Evento"
     E      seleziono la data "09-5-2013" in "event_begins_at"
     E      seleziono la data "10-5-2013" in "event_deadline"
     Quando premo "Invia"
-    Allora dovrei vedere "Data di conferma errata"
+    Allora dovrei vedere il messaggio di errore "Deadline"
 
 
 
