@@ -21,7 +21,14 @@ Then /^dovrei vedere "([^"]*)" prima di  "([^"]*)"$/ do |arg1, arg2|
 end
 
 
-Then  /^dovrei essere nella pagina dettagli dell'evento  "([^"]*)"$/ do |event_title|
+Then  /^dovrei essere nella pagina di (\w+) dell'evento  "([^"]*)"$/ do |action, event_title|
   event = Event.find_by_name(event_title)
-  assert_equal "/events/#{event.id}", URI.parse(current_url).path
+  path = case action
+           when "dettagli"
+             "/events/#{event.id}"
+           when  "modifica"
+             "/events/#{event.id}/edit"
+
+         end
+  assert_equal path, URI.parse(current_url).path
 end

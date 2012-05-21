@@ -20,7 +20,7 @@ end
 Given /(?:|che )esistono i seguenti utenti/ do |user_table|
 
   user_table.hashes.each do |user|
-
+    user["password_confirmation"]=user["password"]
     User.create!(user)
   end
 

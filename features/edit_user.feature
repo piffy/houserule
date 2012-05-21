@@ -51,8 +51,8 @@ Contesto:
     E dovrei vedere "Donald"
     E dovrei vedere "Paperopoli"
 
-  Scenario:   Modifica dati altro utente (Errore)
-    Quando vado alla modifica preferenze di "pluto@nomail.it"
-    Allora dovrei vedere "Login"
+  #Scenario:   Modifica dati altro utente (Errore)
+  #  Quando vado alla modifica preferenze di "pluto@nomail.it"
+  #  Allora dovrei vedere "Login"
 
 

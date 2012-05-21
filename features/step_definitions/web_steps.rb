@@ -8,6 +8,9 @@ Then /^dovrei essere nella home page$/ do
   assert_equal "/", URI.parse(current_url).path
 end
 
+Then /^dovrei essere nella pagina di login$/ do
+  assert_equal "/login", URI.parse(current_url).path
+end
 
 Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
 
@@ -40,7 +43,7 @@ end
 When /^seleziono la data "[^"](\d?\d)-(\d?\d)-(\d{4})" in "([^"]*)"$/ do  |day,month,year, field|
     #select_date date, :from => field
     select year,                             :from => "#{field}_1i"
-    select Date::MONTHNAMES[Integer(month)], :from => "#{field}_2i"
+    select month,                            :from => "#{field}_2i"
     select day,                              :from => "#{field}_3i"
 end
 
@@ -71,10 +74,16 @@ When /^premo "([^"]*)"$/ do |button|
 end
 
 When /^seguo il link "([^"]*)"$/ do |link|
-  "I follow \"#{link}\""
+  click_link(link)
 end
 
 When /mostra la pagina/ do
   save_and_open_page
 end
 
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+end
+World(WithinHelpers)

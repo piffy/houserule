@@ -26,15 +26,12 @@ Funzionalità: Usare i link delle'elenco eventi
   Scenario: Dettagli evento
     Dato mi trovo nella pagina di elenco eventi
     Quando seguo il link "Campionato"
-    * mostra la pagina
-    Allora  dovrei essere nella pagina dettagli dell'evento  "Campionato"
-
-
+    Allora  dovrei essere nella pagina di dettagli dell'evento  "Campionato"
 
   Scenario: Modifica evento (non loggato)
     Dato mi trovo nella pagina di elenco eventi
-    Quando premo "Edit"
-    Allora  mi trovo alla pagina di login
+    Quando seguo il link "Modifica"
+    Allora  dovrei essere nella pagina di login
 
   Scenario: Modifica evento (loggato)
     Dato   mi trovo nella pagina di login
@@ -42,7 +39,7 @@ Funzionalità: Usare i link delle'elenco eventi
     E      inserisco in "session_password" "12345678"
     E      premo "Login"
     E      mi trovo nella pagina di elenco eventi
-    Quando premo "Edit"
-    Allora  mi trovo alla pagina di dettaglio evento per l'evento "Campionato"
+    Quando seguo il link "Modifica"
+    Allora  dovrei essere nella pagina di modifica dell'evento  "Semifinale Torneo"
 
 

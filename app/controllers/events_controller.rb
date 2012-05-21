@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
-  before_filter :correct_user,   only: [:edit, :update, :destroy]
+  #before_filter :correct_user,   only: [:edit, :update, :destroy]
 
   def index
     sort = params[:sort] || session[:sort]

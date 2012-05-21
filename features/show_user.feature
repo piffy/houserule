@@ -22,14 +22,13 @@ Funzionalità: Mostra utente
     E         dovrei vedere "Paperopoli" all'interno di "li"
     E         dovrei vedere "Papero" all'interno di "p#description"
     E         dovrei vedere "Eventi organizzati: 0"
-    E         dovrei vedere "Organizza evento"
 
 
   Scenario:   Visualizza partite organizzate
     Dato che esistono i seguenti eventi dell'utente "paolino@nomail.it":
-      | name                  | system     |
-      | Evento 1              | Risiko     |
-      | Evento 2              | Monopoli   |
+      | name                  | system     |  begins_at |
+      | Evento 1              | Risiko     |  10-5-2013 |
+      | Evento 2              | Monopoli   |  13-5-2013 |
     Dato  vado al profilo dell'utente "paolino@nomail.it"
     Allora dovrei vedere "Eventi organizzati" all'interno di "h3#organized-events"
     E dovrei vedere "2" all'interno di "h3#organized-events"
