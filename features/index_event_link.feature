@@ -13,20 +13,24 @@ Funzionalità: Usare i link delle'elenco eventi
       | Paperino              | paolino@nomail.it     | 12345678  | 12345678              | pap  | Paperopoli |  Papero      |
       | Pluto                 | pluto@nomail.it       | 12345678  | 12345678              |      | Topolinia  |  Cane        |
     E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
-      | name                  | system     | begins_at  |
-      | Campionato            | Risiko     | 10-5-2013  |
-      | Torneo                | Monopoli   | 11-5-2013  |
-      | Campagna              | D&D        | 12-5-2013  |
-      | LAN Party             | Diablo3    | 13-5-2013  |
-      | Concorso              | Pandemics  | 14-5-2013  |
-      | Semifinale Torneo     | Scacchi    | 15-5-2013  |
+      | name                  | system     | begins_at  | deadline   |  status |
+      | Campionato            | Risiko     | 10-5-2013  | 10-5-2013  |  1      |
+      | Torneo                | Monopoli   | 11-5-2013  | 11-5-2013  |  1      |
+      | Campagna              | D&D        | 12-5-2013  | 12-5-2013  |  1      |
+      | LAN Party             | Diablo3    | 13-5-2013  | 13-5-2013  |  1      |
+      | Concorso              | Pandemics  | 14-5-2013  | 14-5-2013  |  1      |
+      | Semifinale Torneo     | Scacchi    | 15-5-2013  | 15-5-2013  |  1      |
 
 
 
   Scenario: Dettagli evento
     Dato mi trovo nella pagina di elenco eventi
-    Quando premo "Dettagli"
-    Allora  mi trovo alla pagina di dettagli evento
+    Quando I follow "Dettagli" for row containing "Campionato"
+    #Quando seguo il link "Campionato"
+    * mostra la pagina
+    Allora  dovrei essere nella pagina dettagli dell'evento  "Campionato"
+
+
 
   Scenario: Modifica evento (non loggato)
     Dato mi trovo nella pagina di elenco eventi

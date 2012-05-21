@@ -4,6 +4,10 @@ require 'cgi'
 
 
 
+Then /^dovrei essere nella home page$/ do
+  assert_equal "/", URI.parse(current_url).path
+end
+
 
 Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
 
@@ -23,7 +27,7 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
       visit login_path
 
     when /pagina di elenco eventi/
-      visit login_path
+      visit events_path
 
     else
       raise "Non posso mappare \"#{page_name}\" a un percorso.\n"
@@ -73,3 +77,4 @@ end
 When /mostra la pagina/ do
   save_and_open_page
 end
+

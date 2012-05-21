@@ -4,17 +4,34 @@ class EventsController < ApplicationController
   before_filter :logged_in_user, only: [:create, :destroy, :new]
 
   def index
-    @events = Event.all
-
-    respond_to do |format|
-      format.html # index.html.haml
-      format.json { render json: @events }
+    sort = params[:sort] || session[:sort]
+    case sort
+      when 'name'
+        ordering,@name_header = {:order => :name}, 'hilite'
+      when 'begins_at'
+        @begins_at_header = 'hilite'
+      when 'system'
+        ordering,@system_header = {:order => :system}, 'hilite'
     end
+
+    if ordering.nil?
+      @events = Event.all
+    else
+      @events = Event.unscoped.all(ordering)
+    end
+
+
+
+
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+
+
+
+
     @event = Event.find(params[:id])
 
     respond_to do |format|

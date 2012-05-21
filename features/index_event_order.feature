@@ -20,29 +20,35 @@ Funzionalità: mostrare la lista deglie eventi secondo vari criteri
       | LAN Party             | Diablo3    | 13-5-2013  |
       | Concorso              | Pandemics  | 14-5-2013  |
       | Semifinale Torneo     | Scacchi    | 15-5-2013  |
-    E mi trovo nella pagina di elenco eventi
 
 
 
 
-  Scenario: ordina gli eventi per data decrescente (standard)
-    E seguo il link "event_begins_at"
-    Allora dovrei vedere  "Torneo" prima di "Campionato"
-    E dovrei vedere  "LAN Party" prima di  "Campagna"
-    E dovrei vedere "Semifinale Torneo" prima di "Concorso"
+  Scenario: ordina gli eventi in ordine di data (default)
+    Dato mi trovo nella pagina di elenco eventi
+    Allora dovrei vedere "Torneo" prima di  "Campionato"
+    E dovrei vedere "Concorso" prima di  "LAN Party"
+    E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
 
   Scenario: ordina gli eventi in ordine alfabetico
-    Quando seguo il link "event_name"
-    E mostra la pagina
+    Dato mi trovo nell'elenco eventi con ordinamento "name"
     Allora dovrei vedere "Campionato" prima di  "Concorso"
     E dovrei vedere "Concorso" prima di  "LAN Party"
     E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
 
+  Scenario: ordina gli eventi in ordine di data decrescente
+    Dato mi trovo nell'elenco eventi con ordinamento "begins_at"
+    * mostra la pagina
+    Allora dovrei vedere "Torneo" prima di  "Campionato"
+    E dovrei vedere "Concorso" prima di  "LAN Party"
+    E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
 
   Scenario: ordina gli eventi per sistema di gioco
-    E seguo il link "event_system"
-    Allora dovrei vedere "Campionato" prima di  "Torneo"
+
+    Dato mi trovo nell'elenco eventi con ordinamento "system"
+    * mostra la pagina
+    Allora dovrei vedere "Torneo" prima di  "Campionato"
     E dovrei vedere "Campagna" prima di  "LAN Party"
-    E dovrei vedere "Concorso" prima di  "Torneo"
+    E dovrei vedere "Torneo" prima di  "Concorso"
 
 
