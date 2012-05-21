@@ -15,4 +15,15 @@ class Event < ActiveRecord::Base
   default_scope order: 'events.begins_at DESC'
   #named_scope :confirmed, :conditions => { :status => 2 }
 
+  def status_to_s
+    case self.status
+      when 1
+        "Proposto"
+      when 2
+        "Confermato"
+      when 3
+        "Sospeso"
+
+    end
+  end
 end

@@ -25,8 +25,7 @@ Funzionalità: Usare i link delle'elenco eventi
 
   Scenario: Dettagli evento
     Dato mi trovo nella pagina di elenco eventi
-    Quando I follow "Dettagli" for row containing "Campionato"
-    #Quando seguo il link "Campionato"
+    Quando seguo il link "Campionato"
     * mostra la pagina
     Allora  dovrei essere nella pagina dettagli dell'evento  "Campionato"
 
