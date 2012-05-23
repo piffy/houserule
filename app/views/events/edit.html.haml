@@ -1,7 +1,9 @@
-%h1 Editing event
+%h1 Modifica evento
 
 = render 'form'
 
-= link_to 'Show', @event
+= link_to 'Dettagli', @event
 \|
-= link_to 'Back', events_path
+= link_to 'Elimina', @event, :confirm => 'Sei sicuro?', :method => :delete
+\|
+= link_to 'Elenco eventi', events_path

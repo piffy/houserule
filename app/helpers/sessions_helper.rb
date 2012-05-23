@@ -35,17 +35,6 @@ module SessionsHelper
     session[:return_to] = request.fullpath
   end
 
-  private
-
-  def user_from_remember_token
-    remember_token = cookies[:remember_token]
-    User.find_by_remember_token(remember_token) unless remember_token.nil?
-  end
-
-  def clear_return_to
-    session.delete(:return_to)
-  end
-
   def logged_in_user
     unless signed_in?
       store_location
@@ -54,9 +43,29 @@ module SessionsHelper
     end
 
 
-  def correct_user
+    def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      #@user=user_from_remember_token
+      unless current_user?(@user)
+        flash[:notice] = "Azione non consentita"
+        redirect_to(root_path)
+      end
     end
   end
+
+
+  private
+
+  def user_from_remember_token
+    remember_token = cookies[:remember_token]
+    User.find_by_remember_token(remember_token) unless remember_token.nil?
+  end
+
+
+
+  def clear_return_to
+    session.delete(:return_to)
+  end
+
+
 end

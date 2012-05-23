@@ -34,7 +34,7 @@
           %span{:class => "system"}
             = "per '" + event.system+"'"  unless event.system.blank?
           %span{:class => "timestamp"}
-            =  "("+event.begins_at.strftime('%d-%m-%y') +")"
+            =  "("+event.begins_at.strftime('%d-%m-%y %H:%M') +")"
 
     -# will_paginate @events [TODO]
 

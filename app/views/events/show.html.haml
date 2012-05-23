@@ -1,42 +1,37 @@
 %p#notice= notice
 
-%p
-  %b Name:
+%h2
   = @event.name
-%p
-  %b System:
-  = @event.system
-%p
-  %b Begins at:
-  = @event.begins_at
-%p
-  %b Duration:
-  = @event.duration
-%p
-  %b Description:
-  = @event.description
-%p
-  %b Descr short:
+%h3
   = @event.descr_short
 %p
-  %b Deadline:
-  = @event.deadline
+  %b Sistema:
+  = @event.system
+%p
+  %b Inizio:
+  = @event.begins_at.strftime('%d-%m-%y %H:%M')
+%p
+  %b Durata:
+  = @event.duration
+%p
+  %b Desrizione:
+  = @event.description
+%p
+  %b Conferma entro:
+  = @event.deadline.strftime('%d-%m-%y %H:%M')
 %p
   %b Status:
-  = @event.status
+  = @event.status_to_s
 %p
-  %b Location:
+  %b Luogo:
   = @event.location
 %p
-  %b Max player num:
-  = @event.max_player_num
+  %b Giocatori:
+  =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
 %p
-  %b Min player num:
-  = @event.min_player_num
-%p
-  %b User:
-  = @event.user_id
+  %b Organizzato da:
+  = link_to @event.user.first_name_or_nick,user_path(@event.user)
 
-= link_to 'Edit', edit_event_path(@event)
+= link_to 'Modifica', edit_event_path(@event)
 \|
-= link_to 'Back', events_path
+= link_to 'Elenco', events_path

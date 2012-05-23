@@ -21,6 +21,12 @@ Then /^dovrei vedere "([^"]*)" prima di  "([^"]*)"$/ do |arg1, arg2|
 end
 
 
+E /^vado alla modifica evento di "([^"]*)"$/ do |name|
+  @user = Event.find_by_name(name)
+  visit edit_event_path(@user)
+end
+
+
 Then  /^dovrei essere nella pagina di (\w+) dell'evento  "([^"]*)"$/ do |action, event_title|
   event = Event.find_by_name(event_title)
   path = case action
