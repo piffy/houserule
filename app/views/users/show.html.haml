@@ -25,16 +25,8 @@
 
       = link_to '[Organizza evento]', new_event_path
   -if @user.events.any?
-    %ol{:class =>"events"}
-      - @events.each do |event|
-        %li
-          %span{:class => "title"}
-            %a{:href => event_path(event)}
-              =event.name
-          %span{:class => "system"}
-            = "per '" + event.system+"'"  unless event.system.blank?
-          %span{:class => "timestamp"}
-            =  "("+event.begins_at.strftime('%d-%m-%y %H:%M') +")"
+    = render "shared/list_event"
+
 
     -# will_paginate @events [TODO]
 

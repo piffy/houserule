@@ -42,4 +42,8 @@ Funzionalità: Usare i link delle'elenco eventi
     Quando seguo il link "Modifica"
     Allora  dovrei essere nella pagina di modifica dell'evento  "Semifinale Torneo"
 
-
+  Scenario: Mostra gli ultimi 5 eventi impostati nella hp
+    Dato mi trovo nella homepage
+    Allora dovrei non vedere "Campionato"
+    E dovrei vedere "Concorso" all'interno di "a"
+    E dovrei vedere "Semifinale Torneo" all'interno di "a"

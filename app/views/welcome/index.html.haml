@@ -1,21 +1,30 @@
 %h1 House Rules
 %h2 Un sito per la gestione delle partite tra amici
-%p
-  Questa è la home page. Il sito è chiaramente in fase di costruzione!! Attualmente nel sistema sono presenti
+-if @events.any?
+  %h3
+    Ultimi
+    = link_to 'eventi', events_path
+  = render "shared/list_event"
+
+%h5
+  Il sistema contiene attualmente
   = @user_count
   utenti, e un totale di
   =@event_count
   eventi.
 
-  Vi preghiamo comunque di testare alcune limitate funzionalit&agrave; come ad esempio....
+  Sito in fase di costruzione!
+
+%h4 Azioni attualmente abilitate e testabili
+
 %ul
   %li
+    Gestione utente:
     =link_to 'Registra nuovo utente', new_user_path
-  %li
-    =link_to 'Registra nuovo utente', login_path
-  %li
-    =link_to 'Elenco eventi', events_path
-
+    \|
+    =link_to 'Login', login_path
+  %li Aggiungere, modificare e cancellare un evento
+  %li NEXT: Prenotazioni
 %p
 
 
