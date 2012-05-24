@@ -1,22 +1,35 @@
 == Welcome to House Rule
 
 House Rule aims to become the site to advertise, contact and manage gaming
-sessions for you and your friend. 
+sessions for you and your friend, with a modern, "web 2.0" attitude
 
 At this moment we're at the planning stage, but you'll find some code and
-functionality.
+functionality anyway.
 
 
 == People involved 
 
-* Francesco 'jaramir' Gigli
+=== Active developers
 * Marcello 'piffy' Missiroli
 * Song 'China' Zhu
+
+=== Testing team
+* Francesco 'jaramir' Gigli
 * Federico 'Quelo' Gigliotti
 * Andrea 'Mechvigiak' Vigiak
 
-...We're looking for help, anyway.   And I'm wondering why I'm writing this in English.
+== Getting involved in the project
+...We're looking for help, of course.   And I'm wondering why I'm writing this in English.
 There must be a reason. Somewhere. Deep inside.    Oh well-
+E qui c'è la traduzione in italiano, per gli anglolesi:
+Si tratta di un sito pensato per organizzare e gestire eventi di gioco in maniera molto simile ai
+ social network: molto web, recupero inforamazioni e così via.
+ Incidentalmente, è pensato come palestra per quanti volessero cimentarsi con lo sviluppo in Ruby on Rails,
+ quindi se avete voglia anche solo di PROVARE a collaborare, anche se non conoscete il linguaggio, vi accogliamo
+ volentieri. Vi offriamo un abiente di sviluppo completo, comprensivo di editor "intelligente"
+ E se siete esperti di gioco, i vostri suggerimenti, richieste e consigli sono altrettanot ben accetti
+
+
 
 == License
 
