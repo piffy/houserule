@@ -7,7 +7,7 @@
       %span{:class => "system"}
         = "per '" + event.system+"'"  unless event.system.blank?
       %span{:class => "timestamp"}
-        =  " alle "+event.begins_at.strftime('%d-%m-%y %H:%M')+", "
+        =  event.begins_at.strftime('il %d-%m-%y alle %H:%M')+", "
       %span{:class => "user"}
         proposto da
         =  link_to event.user.first_name_or_nick,event.user
