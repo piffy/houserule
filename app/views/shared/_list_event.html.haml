@@ -1,0 +1,13 @@
+%ol{:class =>"events"}
+  - @events.each do |event|
+    %li
+      %span{:class => "title"}
+        %a{:href => event_path(event)}
+          =event.name
+      %span{:class => "system"}
+        = "per '" + event.system+"'"  unless event.system.blank?
+      %span{:class => "timestamp"}
+        =  " alle "+event.begins_at.strftime('%d-%m-%y %H:%M')+", "
+      %span{:class => "user"}
+        proposto da
+        =  link_to event.user.first_name_or_nick,event.user
