@@ -30,10 +30,10 @@
       %td= event.status_to_s
       %td= event.location
       %td= "da "+event.min_player_num.to_s + " a "  + event.max_player_num.to_s
-      %td= link_to 'Prenota', "#"
-      %td= link_to 'Modifica', edit_event_path(event)
+      %td= link_to 'Prenota', "#", :class =>"btn"
+      %td= link_to 'Modifica', edit_event_path(event), :class =>"btn"
 
 
 %br
 
-= link_to 'Aggiungi evento', new_event_path
+= link_to 'Aggiungi evento', new_event_path, :class =>"btn"

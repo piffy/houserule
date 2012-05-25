@@ -1,31 +1,35 @@
-%h1 House Rules
-%h2 Un sito per la gestione delle partite tra amici
--if @events.any?
-  %h3
-    Ultimi
-    = link_to 'eventi', events_path
-  = render "shared/list_event"
+%h1 House Rule
 
-%h5
-  Il sistema contiene attualmente
-  = @user_count
-  utenti, e un totale di
-  =@event_count
-  eventi.
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %h2 Vuoi giocare?
+    %p Questo sito &egrave; concepito per aiutarti a organizzare le partite con i tuoi amici, con il tuoo gruppo, eccetera..
+    -unless signed_in?
+      %a{ :class=>"btn btn-primary"}
+        Login
+      oppure
+      %a{ :class=>"btn btn-primary"}
+        Registrati
+  %div{:class =>"span8"}
+    -if @events.any?
+      %h2  Ultimi eventi proposti
+      = render "shared/list_event"
+      =link_to "Elenco completo eventi...", events_path, :class =>"btn"
 
-  Sito in fase di costruzione!
-
-%h4 Azioni attualmente abilitate e testabili
-
-%ul
-  %li
-    Gestione utente:
-    =link_to 'Registra nuovo utente', new_user_path
-    \|
-    =link_to 'Login', login_path
-  %li Aggiungere, modificare e cancellare un evento
-  %li NEXT: Prenotazioni
-%p
+%hr
 
 
-
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %h3 Status
+    %p
+      Il sistema contiene attualmente
+      = @user_count
+      utenti, e un totale di
+      =@event_count
+      eventi.
+  %div{:class =>"span8"}
+    %h3 Attenzione!
+    %p
+      Come potete vedere, questo sito &egrave; in fase di costruzione. Siete invitati a provare e soprattutto indicare cosa non va!!
+      In particolare, potete Registrarvi e Proporre un evento. Ora stiamo lavorando sulle prenotazioni degli eventi.

@@ -2,19 +2,31 @@
 <html>
 <head>
   <title>Houserule</title>
+  <link rel="shortcut icon" href="/favicon.ico" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 </head>
 <body>
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "House Rule", root_path, id: "logo" %>
+      <%= link_to image_tag("tiny_logo.jpg", alt: "House Rule", id: "logo") %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
           <!--- li%= link_to "Help", '#' %> li -->
+          <li id="fat2-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Eventi <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Eventi", events_path  %></li>
+              <li><%= link_to "Proponi evento", new_event_path %></li>
+            </ul>
           <% if signed_in?  %>
               <li><%= link_to "Utenti", users_path %></li>
               <li id="fat-menu" class="dropdown">
@@ -42,7 +54,6 @@
   <% flash.each do |key, value| %>
       <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
-  <img alt="logo" src="/logo.jpg">
   <%= yield %>
   <%= debug(params) if Rails.env.development? %>
 </div>
