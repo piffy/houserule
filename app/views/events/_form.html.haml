@@ -1,44 +1,55 @@
-%div{:class=>"row-fluid"}
-  %div{:class=>"span8 well"}
 
-    = form_for @event, :html => {:class => "form-horizontal"} do |f|
-      -if @event.errors.any?
-        #error_explanation
-          %h2= "#{@event.errors.count} errori non hanno reso possibile il salvataggio dell'evento:"
-          %ul
-            - @event.errors.full_messages.each do |msg|
-              %li= msg
 
+= form_for @event, :html => {:class => "form-horizontal"} do |f|
+  -if @event.errors.any?
+    #error_explanation
+      %h2= "#{@event.errors.count} errori non hanno reso possibile il salvataggio dell'evento:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
       .field
         = f.label :name, 'Nome'
         = f.text_field :name
+    %div{:class=>"span4"}
       .field
         = f.label :system, 'Sistema'
         = f.text_field :system
-      .field
-        = f.label :begins_at, 'Inizio'
-        = f.datetime_select :begins_at , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1 }
-      .field
-        = f.label :deadline , 'Confermare entro'
-        = f.datetime_select :deadline , {:minute_step => 15, :use_month_numbers=>true, :order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1}
-      .field
-        = f.label :duration, 'Durata'
-        = f.text_field :duration
-      .field
-        = f.label :descr_short , 'Descrizione breve'
-        = f.text_field :descr_short
-      .field
-        = f.label :description , 'Descrizione'
-        = f.text_area :description
+    %div{:class=>"span4"}
       .field
         = f.label :location, 'Luogo'
         = f.text_field :location
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
       .field
-        Numero di giocatori
-        = f.label :min_player_num, 'minimo: '
-        = f.number_field :min_player_num, :min=>"0", :size=>"3", :maxlenght =>3
-        = f.label :max_player_num, 'massimo: '
-        = f.number_field :max_player_num, :min=>"0", :size=>"3", :maxlenght =>3
+        = f.label :begins_at, 'Inizio'
+        = f.datetime_select :begins_at , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1 }
+    %div{:class=>"span4"}
+      .field
+        = f.label :deadline , 'Confermare entro'
+        = f.datetime_select :deadline , {:minute_step => 15, :use_month_numbers=>true, :order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1}
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      .field
+        = f.label :duration, 'Durata'
+        = f.text_field :duration
+    %div{:class=>"span4"}
+      .field
+        = f.label :descr_short , 'Descrizione breve'
+        = f.text_field :descr_short
+    %div{:class=>"span2"}
+      = f.label :min_player_num, 'Giocatori, minimo: '
+      = f.number_field :min_player_num, :min=>"0", :size=>"3", :maxlenght =>3
+    %div{:class=>"span2"}
+      = f.label :max_player_num, 'massimo: '
+      = f.number_field :max_player_num, :min=>"0", :size=>"3", :maxlenght =>3
 
-      .actions
-        = f.submit 'Invia'
+    %div{:class=>"row-fluid"}
+      %div
+        .field
+          = f.label :description , 'Descrizione'
+          = f.text_area :description
+
+    .actions
+      = f.submit(:class=>"btn", :value => 'Invia')

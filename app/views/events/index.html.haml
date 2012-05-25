@@ -1,6 +1,6 @@
 %h1 Elenco eventi
 
-%table
+%table{:class => "table table-striped"}
   %tr
     %th{:class => @name_header}= link_to 'Nome evento', events_path(:sort => 'name'), :id => 'name_header'
     %th{:class => @system_header}= link_to 'Sistema', events_path(:sort => 'system'), :id => 'system_header'

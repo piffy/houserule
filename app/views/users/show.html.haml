@@ -1,37 +1,33 @@
 %h1 Bentornato #{@user.first_name_or_nick}!
 
-%ul#details
-  %li
-    Nome completo:
-    = @user.name
-  %li
-    Iscritto il:
-    = @user.created_at.strftime("%d/%m/%Y")
-  %li
-    Nick:
-    = @user.nick
-  %li
-    Luogo:
-    = @user.location
 
-%h3#description Descrizione
-%p#description= @user.description
-
-%div
-  %h3#organized-events
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %p
+      Nome completo:
+      = @user.name
+    %p
+      Iscritto il:
+      = @user.created_at.strftime("%d/%m/%Y")
+    %p
+      Nick:
+      = @user.nick
+    %p
+      Luogo:
+      = @user.location
+    %p
+      Descrizione:
+      = @user.description
+  %div{:class =>"span8"}
     Eventi organizzati:
     =@user.events.count
+    -if @user.events.any?
+      = render "shared/list_event"
     - if current_user?(@user)
+      = link_to 'Organizza evento', new_event_path, :class => "btn"
+%hr
 
-      = link_to '[Organizza evento]', new_event_path
-  -if @user.events.any?
-    = render "shared/list_event"
-
-
-    -# will_paginate @events [TODO]
-
-
-= link_to 'Modifica', edit_user_path(@user)
-= button_to 'Cancella', user_path(@movie), :method => :delete, :confirm => 'Sei sicuro?'
-= link_to 'Lista utenti', users_path
-= link_to 'Home', root_path
+= link_to 'Lista utenti', users_path,  :class => "btn"
+= link_to 'Home', root_path,  :class => "btn"
+= link_to 'Modifica', edit_user_path(@user), :class => "btn"
+= button_to 'Cancella utente', user_path(@movie), :method => :delete, :confirm => 'Sei sicuro?' ,  :class => "btn"
