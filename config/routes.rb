@@ -1,5 +1,13 @@
 Houserule::Application.routes.draw do
 
+  get "info/index"
+
+  get "info/about"
+
+  get "info/contact"
+
+  get "info/license"
+
   resources :events
 
   get "users/show"

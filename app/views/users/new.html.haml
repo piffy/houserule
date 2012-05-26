@@ -3,17 +3,19 @@
 = render 'shared/error_shared', :user => @user
 
 = form_for(@user)  do |f|
-
-  = f.label :name
-  = f.text_field :name
-  %br
-  = f.label :email
-  = f.text_field :email
-  %br
-  = f.label :password , 'Password (6-15 lettere max)'
-  = f.password_field :password
-  %br
-  = f.label :password , 'Conferma Password'
-  = f.password_field :password_confirmation
-  %br
-  = f.submit "Crea utente"
+  %div{:class =>"row"}
+    %div{:class =>"span4"}
+      = f.label :name
+      = f.text_field :name
+      %br
+      = f.label :email
+      = f.text_field :email
+      %br
+    %div{:class =>"span4"}
+      = f.label :password , 'Password (6-15 lettere)'
+      = f.password_field :password
+      %br
+      = f.label :password , 'Conferma Password'
+      = f.password_field :password_confirmation
+      %br
+  = f.submit "Crea utente", :class => "btn btn-primary"
