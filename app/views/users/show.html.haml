@@ -4,19 +4,24 @@
 %div{:class =>"row"}
   %div{:class =>"span4"}
     %p
-      Nome completo:
+      %b
+        Nome completo:
       = @user.name
     %p
-      Iscritto il:
+      %b
+        Iscritto il:
       = @user.created_at.strftime("%d/%m/%Y")
     %p
-      Nick:
+      %b
+        Nick:
       = @user.nick
     %p
-      Luogo:
+      %b
+        Luogo:
       = @user.location
     %p
-      Descrizione:
+      %b
+        Descrizione:
       = @user.description
   %div{:class =>"span8"}
     Eventi organizzati:
@@ -26,8 +31,7 @@
     - if current_user?(@user)
       = link_to 'Organizza evento', new_event_path, :class => "btn"
 %hr
-
-= link_to 'Lista utenti', users_path,  :class => "btn"
-= link_to 'Home', root_path,  :class => "btn"
-= link_to 'Modifica', edit_user_path(@user), :class => "btn"
-= button_to 'Cancella utente', user_path(@movie), :method => :delete, :confirm => 'Sei sicuro?' ,  :class => "btn"
+%div{:class=>"btn-group"}
+  = link_to 'Lista utenti', users_path,  :class => "btn"
+  = link_to 'Modifica', edit_user_path(@user), :class => "btn"
+  = button_to 'Cancella utente', "#"+user_path(@user), :method => :delete, :confirm => 'Sei sicuro?' ,  :class => "btn"
