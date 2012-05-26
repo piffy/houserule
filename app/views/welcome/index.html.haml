@@ -5,11 +5,9 @@
     %h2 Vuoi giocare?
     %p Questo sito &egrave; concepito per aiutarti a organizzare le partite con i tuoi amici, con il tuoo gruppo, eccetera..
     -unless signed_in?
-      %a{ :class=>"btn btn-primary"}
-        Login
+      =link_to "Login", login_path, :class =>"btn btn-primary"
       oppure
-      %a{ :class=>"btn btn-primary"}
-        Registrati
+      =link_to "Registrati", new_user_path, :class =>"btn btn-primary"
   %div{:class =>"span8"}
     -if @events.any?
       %h2  Ultimi eventi proposti

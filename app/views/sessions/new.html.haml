@@ -1,12 +1,14 @@
 %h1
   Login
 
-=form_for(:session, url: sessions_path) do |f|
-  = f.label :email
-  = f.text_field :email
+=form_for(:session, url: sessions_path , :html => {:class => "form-horizontal"}) do |f|
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      = f.label :email
+      = f.text_field :email
+    %div{:class=>"span4"}
+      = f.label :password
+      = f.password_field :password
   %br
-  = f.label :password , 'Password (6-15 lettere max)'
-  = f.password_field :password
-  %br
-  = f.submit "Login"
+  = f.submit(:class=>"btn btn-primary btn-large", :value => 'Login')
 

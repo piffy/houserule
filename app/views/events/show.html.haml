@@ -1,9 +1,12 @@
 %p#notice= notice
 
-%h2
-  = @event.name
-%h3
-  = @event.descr_short
+%h1
+  = '"'+@event.name+'"'
+  %span{:class=>"label label-info"}
+    = @event.status_to_s
+-unless @event.descr_short.blank?
+  %h2
+    = "("+@event.descr_short+")"
 %p
   %b Sistema:
   = @event.system
@@ -14,14 +17,8 @@
   %b Durata:
   = @event.duration
 %p
-  %b Desrizione:
-  = @event.description
-%p
   %b Conferma entro:
   = @event.deadline.strftime('%d-%m-%y %H:%M')
-%p
-  %b Status:
-  = @event.status_to_s
 %p
   %b Luogo:
   = @event.location
@@ -31,7 +28,11 @@
 %p
   %b Organizzato da:
   = link_to @event.user.first_name_or_nick,user_path(@event.user)
+%p
+  %b Descrizione:
+  = @event.description
 
-= link_to 'Modifica', edit_event_path(@event)
-\|
-= link_to 'Elenco', events_path
+%div{:class=>"btn-group"}
+  = link_to 'Modifica', edit_event_path(@event), :class=>"btn"
+  = link_to 'Elenco', events_path, :class=>"btn"
+
