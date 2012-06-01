@@ -3,10 +3,15 @@ require 'spec_helper'
 describe Event do
   let(:user) { FactoryGirl.create(:user) }
   before do
-    @event = user.events.build(:name => "A name", :system => "A System", :begins_at => "2012-05-13 18:56:50")
+    @event = user.events.build(:name => "A name",
+                               :system => "A System",
+                               :begins_at => "2012-05-13 18:56:50",
+                               :deadline =>"2012-05-12 18:56:50",
+                               :status =>1 )
 
 
   end
+
 
   subject { @event }
 
@@ -24,6 +29,10 @@ describe Event do
   it { should respond_to(:name) }
   it { should respond_to(:user) }
   its(:user) { should == user }
+
+  describe "when everything is OK" do
+    it { should be_valid }
+  end
 
   describe "when user_id is not present" do
     before { @event.user_id = nil }
@@ -44,6 +53,11 @@ describe Event do
     @event.should_not be_valid
   end
 
+  it "should accept a long descripion"  do
+    @event.description = "x" * 200
+    @event.should be_valid
+  end
+
   it "should have valid begin date"  do
     @event.begins_at="Not a date";
     @event.should_not be_valid
@@ -54,10 +68,8 @@ describe Event do
     @event.should_not be_valid
   end
 
-  it "should have possibile deadline or none at all"  do
+  it "should have a plausible deadline"  do
     @event.deadline=@event.begins_at+1.day;
-    @event.should_not be_valid
-    @event.deadline=@event.begins_at;
     @event.should_not be_valid
   end
 

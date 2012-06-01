@@ -21,6 +21,7 @@ functionality anyway.
 == Getting involved in the project
 ...We're looking for help, of course.   And I'm wondering why I'm writing this in English.
 There must be a reason. Somewhere. Deep inside.    Oh well-
+--------------------------------------------------------------------
 E qui c'è la traduzione in italiano, per gli anglolesi:
 Si tratta di un sito pensato per organizzare e gestire eventi di gioco in maniera molto simile ai
 social network: molto web, recupero inforamazioni e così via.
