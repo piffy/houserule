@@ -214,9 +214,9 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-/* microposts */
+/* reservations */
 
-.microposts {
+.reservations {
   list-style: none;
   margin: 10px 0 0 0;
 
@@ -226,9 +226,6 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-.content {
-  display: block;
-}
 
 .timestamp {
   color: $grayLight;

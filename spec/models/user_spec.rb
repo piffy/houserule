@@ -127,6 +127,17 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
 
+  describe "reservations associations" do
+    before { @user.save }
+    let!(:event) do
+      FactoryGirl.create(:event, user: @user, begins_at: 2.days.ago)
+    end
+    let!(:reservations) do
+      FactoryGirl.create(:reservations, user: @user, event: event)
+    end
+
+  end
+
   describe "event associations" do
 
     before { @user.save }

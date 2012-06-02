@@ -1,0 +1,19 @@
+%h1
+  Prenotazione di
+  ="'"+@event.name+"'"
+
+%p
+  Vuoi confermare un posto per
+  ="'"+@event.name+"'"
+  che si terr&agrave; il
+  =@event.begins_at.strftime('%d-%m-%y alle %H:%M')
+  =" a"+@event.location  unless @event.location.blank?
+  ? In caso contrario, puoi tornare ai
+  = link_to 'dettagli dell\'evento', event_path(@event)
+  oppure all'
+  = link_to 'elenco eventi', events_path
+
+= form_for([@event, @reservation])  do |f|
+  = f.submit "Si, confermo", :class => "btn btn-primary"
+
+

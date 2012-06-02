@@ -28,4 +28,11 @@ class Event < ActiveRecord::Base
 
     end
   end
+  def can_be_reserved_by(user)
+    #At the moment, no check
+    return true
+
+  end
+
 end
+

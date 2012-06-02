@@ -25,6 +25,8 @@
 %p
   %b Giocatori:
   =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
+  Prenotazioni attuali:
+  =@event.reservations.count
 %p
   %b Organizzato da:
   = link_to @event.user.first_name_or_nick,user_path(@event.user)
