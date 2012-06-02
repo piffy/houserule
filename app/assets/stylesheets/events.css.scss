@@ -5,3 +5,29 @@
 .hilite {
   text-decoration:underline;
   font-weight:bold; }
+
+div.player
+{
+  margin:2px;
+  border:1px solid #000000;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+}
+
+img.player-icon
+{
+  display:inline;
+  margin:2px;
+  border:1px solid #ffffff;
+  height: 64px;
+  width: 64px;
+}
+.player-description
+{
+  text-align:center;
+  font-weight:normal;
+  width:100px;
+  margin:2px;
+}

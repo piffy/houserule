@@ -12,8 +12,17 @@ class ReservationsController < ApplicationController
     case @event.can_be_reserved_by(@user)
       when true
         #Create reservation and save it
-        flash[:success] = "Prenotazione effettuata"
-        redirect_to event_path(@event)
+        @reservation = @event.reservations.build(params[:event])
+        @reservation.user_id=@current_user.id
+        @reservation.status=1; #proposed
+        if  @reservation.save
+          flash[:success] = "Prenotazione effettuata!"
+          redirect_to event_path(@event)
+        else
+          flash[:error] = "problemi"
+          render 'new'
+        end
+
       else
         flash[:error] = "Errore sconosciuto"
         redirect_to events_path

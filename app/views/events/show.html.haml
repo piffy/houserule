@@ -1,40 +1,62 @@
-%p#notice= notice
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %h4
+      Data e ora
+    %p
+      = @event.begins_at.strftime('%d-%m-%y alle %H:%M')
+      = "("+@event.duration+")" unless @event.duration.blank?
+    %br
+      %b Deadline:
+      = @event.deadline.strftime('%d-%m-%y alle %H:%M')
 
-%h1
-  = '"'+@event.name+'"'
-  %span{:class=>"label label-info"}
-    = @event.status_to_s
--unless @event.descr_short.blank?
-  %h2
-    = "("+@event.descr_short+")"
-%p
-  %b Sistema:
-  = @event.system
-%p
-  %b Inizio:
-  = @event.begins_at.strftime('%d-%m-%y %H:%M')
-%p
-  %b Durata:
-  = @event.duration
-%p
-  %b Conferma entro:
-  = @event.deadline.strftime('%d-%m-%y %H:%M')
-%p
-  %b Luogo:
-  = @event.location
-%p
-  %b Giocatori:
-  =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
-  Prenotazioni attuali:
-  =@event.reservations.count
-%p
-  %b Organizzato da:
-  = link_to @event.user.first_name_or_nick,user_path(@event.user)
-%p
-  %b Descrizione:
-  = @event.description
 
-%div{:class=>"btn-group"}
-  = link_to 'Modifica', edit_event_path(@event), :class=>"btn"
-  = link_to 'Elenco', events_path, :class=>"btn"
+  %div{:class =>"span8"}
+    %h1
+      = '"'+@event.name+'"'
+      -unless @event.descr_short.blank?
+        %h4{:class =>"center"}
+          = "("+@event.descr_short+")"
+%hr
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %h4
+      Sistema di gioco
+    %p
+      = @event.system
+    %h4
+      Luogo
+    %p
+      = @event.location
 
+  %div{:class =>"span8"}
+  %p
+    %b
+      Giocatori:
+    =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
+    = "(Prenotati: "+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+")"
+    = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
+  %div{:class=> "player"}
+    =link_to image_tag("user-icon.png", alt: "organizer", class: "player-icon"), user_path(@event.user)
+    %div{:class=> "player-description"}
+      %i{:class=>"icon-asterisk"}
+      =@event.user.first_name_or_nick
+  - @event.reservations.each do |reservation|
+    %div{:class=> "player"}
+      =link_to image_tag("offline-user-icon.png", alt: "player", class: "player-icon"), user_path(reservation.user_id)
+      %div{:class=> "player-description"}
+        =User.find_by_id(reservation.user_id).first_name_or_nick
+
+
+
+%hr
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %span{:class=>"label label-info"}
+      = @event.status_to_s
+    %br
+    = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
+    %br
+    = link_to 'Elenco eventi', events_path, :class=>"btn"
+  %div{:class =>"span8"}
+    %br
+    = @event.description

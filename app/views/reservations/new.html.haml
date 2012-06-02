@@ -14,6 +14,12 @@
   = link_to 'elenco eventi', events_path
 
 = form_for([@event, @reservation])  do |f|
+  -if @reservation.errors.any?
+    #error_explanation
+      %h2= "#{@reservation.errors.count} errori non hanno reso possibile la prenotazione:"
+      %ul
+        - @reservation.errors.full_messages.each do |msg|
+          %li= msg
   = f.submit "Si, confermo", :class => "btn btn-primary"
 
 
