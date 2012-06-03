@@ -36,6 +36,20 @@ Funzionalità: Mostra utente
     E dovrei vedere "Evento 2" all'interno di "span"
 
 
+  Scenario:   Visualizza le prenotazioni
+    Dato che esistono i seguenti eventi dell'utente "paolino@nomail.it":
+      | name                  | system     |  begins_at |
+      | Evento 1              | Risiko     |  10-5-2013 |
+      | Evento 2              | Monopoli   |  13-5Evento 1-2013 |
+    E che esiste la prenotazione dell'evento "Evento 1" per l'utente "paolino@nomail.it"
+    Quando  vado al profilo dell'utente "pluto@nomail.it"
+    Allora dovrei vedere "Eventi prenotati" all'interno di "h3#reserved-events"
+    E dovrei vedere "1" all'interno di "h3#organized-events"
+    E dovrei vedere "Evento 1" all'interno di "span"
+
+
+
+
   Scenario:   Visualizza dati di altri utenti
     Dato      vado al profilo dell'utente "pluto@nomail.it"
     Allora    dovrei vedere "Pluto" all'interno di "li"
