@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   before_filter :has_rights_to,   only: [:edit, :update, :destroy]
 
   def index
+    @user=current_user
     sort = params[:sort] || session[:sort]
     case sort
       when 'name'
@@ -27,6 +28,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+  @user=current_user
   @event = Event.find(params[:id])
 
     respond_to do |format|

@@ -28,8 +28,33 @@ class Event < ActiveRecord::Base
 
     end
   end
+
+  def already_reserved_by(user)
+
+    r=Reservation.where("user_id = :user_id AND event_id = :event_id", { :user_id => user.id, :event_id => self.id } ).first
+
+    if (r==nil)
+      return false
+    else
+      return true
+    end
+  end
+
+
   def can_be_reserved_by(user)
-    #At the moment, no check
+    if already_reserved_by(user)
+      return 1
+    end
+    if Time.now > self.begins_at
+      return 2
+    end
+    if Time.now > self.deadline
+      return 3
+    end
+
+    if self.max_player_num >0 && self.reservations.count >= self.max_player_num
+      return 4
+    end
     return true
 
   end

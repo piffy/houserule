@@ -36,9 +36,18 @@ Scenario:   Login
     Allora dovrei vedere "errata"
 
 
-  Scenario:   Accesso a pagine senza login
+  Scenario:   Accesso a preferenze senza login
     Dato   vado alla modifica preferenze di "paolino@nomail.it"
     Allora dovrei vedere "Login"
+
+  Scenario:   Accesso a prenotazioni senza login
+    Dato che esistono i seguenti eventi dell'utente "paolino@nomail.it":
+      | name                  | system     | begins_at  |
+      | Campionato            | Risiko     | 10-5-2015  |
+    Quando vado alla visualizzazione evento di "Campionato"
+    E seguo il link "Prenota"
+    Allora dovrei vedere "Login"
+
 
   Scenario:   Redirect amichevole
     Dato   vado alla modifica preferenze di "paolino@nomail.it"

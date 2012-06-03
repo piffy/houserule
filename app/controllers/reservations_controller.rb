@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_filter :logged_in_user
+
   def new
     @event = Event.find(params[:event_id])
     @user = current_user
@@ -10,6 +12,9 @@ class ReservationsController < ApplicationController
     @user = current_user
 
     case @event.can_be_reserved_by(@user)
+      when 1
+        #Already reserved
+        @error_condition=1
       when true
         #Create reservation and save it
         @reservation = @event.reservations.build(params[:event])

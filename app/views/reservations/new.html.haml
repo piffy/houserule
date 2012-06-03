@@ -2,24 +2,54 @@
   Prenotazione di
   ="'"+@event.name+"'"
 
-%p
-  Vuoi confermare un posto per
-  ="'"+@event.name+"'"
-  che si terr&agrave; il
-  =@event.begins_at.strftime('%d-%m-%y alle %H:%M')
-  =" a"+@event.location  unless @event.location.blank?
-  ? In caso contrario, puoi tornare ai
-  = link_to 'dettagli dell\'evento', event_path(@event)
-  oppure all'
-  = link_to 'elenco eventi', events_path
+-case @event.can_be_reserved_by(@user)
+  -when 1
+    %h3{:class => "alert alert-error"}
+      Prenotazione impossibile
+    %p{:class => "alert alert-error"}
+      Sei già prenotato
+    = link_to 'torna all\'evento', event_path(@event),  :class => "btn btn-primary"
+  -when 2
+    %h3{:class => "alert alert-error"}
+      Prenotazione impossibile
+      %p{:class => "alert alert-error"}
+        L'evento &egrave; iniziato il
+        =@event.begins_at.strftime('%d-%m-%y alle %H:%M')
+    = link_to 'torna all\'evento', event_path(@event),  :class => "btn btn-primary"
+  -when 3
+    %h3{:class => "alert alert-error"}
+      Prenotazione impossibile
+      %p{:class => "alert alert-error"}
+        Non si pu&ograve; pi&ugrave; prenotare dopo il
+        =@event.deadline.strftime('%d-%m-%y alle %H:%M')
+    = link_to 'torna all\'evento', event_path(@event),  :class => "btn btn-primary"
+  -when 4
+    %h3{:class => "alert alert-error"}
+      Prenotazione impossibile
+      %p{:class => "alert alert-error"}
+        Posti esauriti
+        ="("+@event.max_player_num.to_s+")!"
+    = link_to 'torna all\'evento', event_path(@event),  :class => "btn btn-primary"
+  -else
 
-= form_for([@event, @reservation])  do |f|
-  -if @reservation.errors.any?
-    #error_explanation
-      %h2= "#{@reservation.errors.count} errori non hanno reso possibile la prenotazione:"
-      %ul
-        - @reservation.errors.full_messages.each do |msg|
-          %li= msg
-  = f.submit "Si, confermo", :class => "btn btn-primary"
+    %p
+      Vuoi confermare un posto per
+      ="'"+@event.name+"'"
+      che si terr&agrave; il
+      =@event.begins_at.strftime('%d-%m-%y alle %H:%M')
+      =" a"+@event.location  unless @event.location.blank?
+      ? In caso contrario, puoi tornare ai
+      = link_to 'dettagli dell\'evento', event_path(@event)
+      oppure all'
+      = link_to 'elenco eventi', events_path
+
+    = form_for([@event, @reservation])  do |f|
+      -if @reservation.errors.any?
+        #error_explanation
+          %h2= "#{@reservation.errors.count} errori non hanno reso possibile la prenotazione:"
+          %ul
+            - @reservation.errors.full_messages.each do |msg|
+              %li= msg
+      = f.submit "Confermo", :class => "btn btn-primary"
 
 

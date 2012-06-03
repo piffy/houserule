@@ -4,7 +4,9 @@ Given /^che esistono i seguenti eventi dell'utente "([^"]*)":$/ do |user_email, 
 
   event_table.hashes.each do |event|
     event["status"]=1
-    event["deadline"]=event["begins_at"]
+    if event["deadline"].nil?
+      event["deadline"]=event["begins_at"]
+    end
     ev=user.events.build(event)
     ev.save!
   end
@@ -21,9 +23,19 @@ Then /^dovrei vedere "([^"]*)" prima di  "([^"]*)"$/ do |arg1, arg2|
 end
 
 
-E /^vado alla modifica evento di "([^"]*)"$/ do |name|
-  @user = Event.find_by_name(name)
-  visit edit_event_path(@user)
+E /^vado alla (\w+) evento di "([^"]*)"$/ do |action,name|
+  @event = Event.find_by_name(name)
+  case action
+    when "modifica"
+      visit edit_event_path(@event)
+    when "visualizzazione"
+      visit event_path(@event)
+    when "prenotazione"
+      visit new_event_reservation_path(@event)
+    else
+      raise "Non posso mappare \"#{action}\" a un percorso relativo ad un evento!\n"
+  end
+
 end
 
 
@@ -34,7 +46,8 @@ Then  /^dovrei essere nella pagina di (\w+) dell'evento  "([^"]*)"$/ do |action,
              "/events/#{event.id}"
            when  "modifica"
              "/events/#{event.id}/edit"
-
+           when "prenotazione"
+             "/events/#{event.id}/reservations/new"
          end
   assert_equal path, URI.parse(current_url).path
 end
