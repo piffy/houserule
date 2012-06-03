@@ -54,7 +54,7 @@ describe Event do
   end
 
   it "should accept a long descripion"  do
-    @event.description = "x" * 200
+    @event.description = "x" * 4000
     @event.should be_valid
   end
 

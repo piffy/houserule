@@ -30,7 +30,6 @@ perché gli altri utenti si possano iscrivere
     Quando premo "Invia"
     Allora dovrei vedere "Evento creato!"
 
-
   Scenario:   Dimenticare il nome (percorso triste)
     Quando premo "Invia"
     Allora dovrei vedere il messaggio di errore "non deve essere vuoto"

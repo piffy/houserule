@@ -18,16 +18,16 @@ ActiveRecord::Schema.define(:version => 20120601231922) do
     t.string   "system"
     t.datetime "begins_at"
     t.string   "duration"
-    t.text     "description",    :limit => 4096
+    t.text     "description",    :limit => 255
     t.string   "descr_short"
     t.datetime "deadline"
     t.integer  "status"
     t.string   "location"
-    t.integer  "max_player_num",                 :default => 0
-    t.integer  "min_player_num",                 :default => 0
+    t.integer  "max_player_num",                :default => 0
+    t.integer  "min_player_num",                :default => 0
     t.integer  "user_id"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   add_index "events", ["begins_at"], :name => "index_events_on_begins_at"
