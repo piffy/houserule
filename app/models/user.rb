@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :location, :name, :nick, :password, :password_confirmation
   has_many :events, dependent: :destroy
-  has_many :reservations, dependent: :destroy
-  #has_many :reserved_events, :class_name => 'Event' :through => reservations
+  has_many :reservations, dependent: :destroy, :through => :events
+  #has_many :reserved_events, :class_name => 'Event',:through => :reservations, :source => :events
+
+
 
   valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

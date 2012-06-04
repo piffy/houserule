@@ -33,7 +33,11 @@ class UsersController < ApplicationController
   end
   def show
     @user=User.find(params[:id])
+    #List of event ORGANIZED by user
     @events = @user.events
+    #List of events reserved  by user
+    @reserved_events = Event.find_by_sql("select events.* from events,reservations where events.id=reservations.event_id AND reservations.user_id="+@user.id.to_s)
+
     #TODO Paginate
   end
   def create
