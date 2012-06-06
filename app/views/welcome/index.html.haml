@@ -11,7 +11,7 @@
   %div{:class =>"span8"}
     -if @events.any?
       %h2  Ultimi eventi proposti
-      = render "shared/list_event"
+      = render "shared/list_event", :events => @events , :show_organizer => true
       =link_to "Elenco completo eventi...", events_path, :class =>"btn"
 
 %hr

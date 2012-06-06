@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def reserved_events
+    Event.find_by_sql("select events.* from events,reservations where events.id=reservations.event_id AND reservations.user_id="+self.id.to_s)
+  end
+
   private
 
     def create_remember_token

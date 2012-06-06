@@ -29,15 +29,17 @@
       =@user.events.count
       - if current_user?(@user)
         = link_to 'Organizza evento', new_event_path, :class => "btn"
+
     -if @user.events.any?
-      = render "shared/list_event" , :locals => { :events => @events }
+      -@events=@user.events
+      = render "shared/list_event",  :events => @user.events ,:show_organizer => false
 
     %p#reserved-events
       Eventi prenotati:
-      =@user.reservations.count
+      =@user.reserved_events.count
 
-    -if @reserved_events.any?
-      = render "shared/list_event" , :locals => { :events => @reserved_events }
+    -if @user.reserved_events.any?
+      = render "shared/list_event" , :events => @user.reserved_events ,:show_organizer => true
 
 %hr
 %div{:class=>"btn-group"}

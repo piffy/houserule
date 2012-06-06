@@ -1,5 +1,5 @@
 %ol{:class =>"events"}
-  - @events.each do |event|
+  - events.each do |event|
     %li
       %span{:class => "title"}
         %a{:href => event_path(event)}
@@ -7,7 +7,8 @@
       %span{:class => "system"}
         = "per '" + event.system+"'"  unless event.system.blank?
       %span{:class => "timestamp"}
-        =  event.begins_at.strftime('il %d-%m-%y alle %H:%M')+", "
-      %span{:class => "user"}
-        proposto da
-        =  link_to event.user.first_name_or_nick,event.user
+        =  event.begins_at.strftime('il %d-%m-%y alle %H:%M')
+      -if show_organizer
+        %span{:class => "user"}
+          \- proposto da
+          =  link_to event.user.first_name_or_nick,event.user
