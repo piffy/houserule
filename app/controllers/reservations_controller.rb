@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_filter :logged_in_user
-  before_filter :has_rights_to
+  before_filter :has_rights_to, only: [:edit, :update, :destroy]
 
   def new
     @event = Event.find(params[:event_id])
