@@ -36,20 +36,26 @@
     = "(Prenotati: "+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+")"
 
     - if !@user.nil? && @event.already_reserved_by(@user)
-      = link_to 'Elimina prenotazione', "#", :class=>"btn btn-danger"
+      = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
     - else
       = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
 
   %div{:class=> "player"}
     =link_to image_tag("user-icon.png", alt: "organizer", class: "player-icon"), user_path(@event.user)
     %div{:class=> "player-description"}
-      %i{:class=>"icon-asterisk"}
       =@event.user.first_name_or_nick
+      %span{:class=>"label label-info"}
+        Org
   - @event.reservations.each do |reservation|
     %div{:class=> "player"}
       =link_to image_tag("offline-user-icon.png", alt: "player", class: "player-icon"), user_path(reservation.user_id)
       %div{:class=> "player-description"}
         =User.find_by_id(reservation.user_id).first_name_or_nick
+        %span{:class=>"label label-success"}
+          Ok
+
+        =link_to   "X", event_reservation_path(@event, reservation), class: "btn btn-danger nomargin"
+
 
 
 

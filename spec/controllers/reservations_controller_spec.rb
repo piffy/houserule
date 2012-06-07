@@ -16,7 +16,7 @@ describe ReservationsController do
     end
   end
 
-  describe "GET 'delete'" do
+  describe "GET 'show'" do
     it "returns http success" do
       get 'delete'
       response.should be_success

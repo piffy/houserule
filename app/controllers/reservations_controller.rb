@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_filter :logged_in_user
+  before_filter :has_rights_to
 
   def new
     @event = Event.find(params[:event_id])
@@ -37,6 +38,40 @@ class ReservationsController < ApplicationController
 #    render 'new'
   end
 
-  def delete
+  def show
+    @r= Reservation.find(params[:id])
+    @event = @r.event
+    @user = current_user
+    if @user != @r.user
+        @reservation_owner="PLALL"
+    else
+      @reservation_owner=""
+    end
+    if @event.check_time >0
+      flash[:notice] = "Impossibile modificare la prenotazione"
+      redirect_to event_path(@event)
+    end
+
+
   end
+
+
+  def destroy
+    reservation= Reservation.find(params[:id])
+    @event = Event.find(params[:event_id])
+    reservation.destroy
+    flash[:success] = "Prenotazione eliminata"
+    redirect_to event_path(@event)
+  end
+
+  private
+
+  def has_rights_to
+    r = Reservation.find(params[:id])
+    unless current_user?(r.user) || current_user?(r.event.user)
+      flash[:notice] = "Azione non consentita"
+      redirect_to event_path(r.event)
+    end
+  end
+
 end

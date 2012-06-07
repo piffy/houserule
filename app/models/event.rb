@@ -36,10 +36,19 @@ class Event < ActiveRecord::Base
     if (r==nil)
       return false
     else
-      return true
+      return r
     end
   end
 
+  def check_time
+    if Time.now > self.begins_at
+      return 2
+    end
+    if Time.now > self.deadline
+      return 3
+    end
+    return 0
+  end
 
   def can_be_reserved_by(user)
     if already_reserved_by(user)

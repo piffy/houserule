@@ -7,3 +7,17 @@ Dato /^che esiste la prenotazione dell'evento "([^"]*)" per l'utente "([^"]*)"$/
   res.event_id = event.id
   res.save
 end
+
+Allora /^dovrei essere nella pagina di visualizzazione della prenotazione con id "([^"]*)"$/ do  |id|
+  r=Reservation.find_by_id(id);
+  e=Event.find_by_id(id)
+  path=event_reservation_path(e,r)
+  assert_equal path, URI.parse(current_url).path
+end
+
+Allora /^vado alla pagina di visualizzazione della prenotazione con id "([^"]*)"$/ do  |id|
+  r=Reservation.find_by_id(id);
+  e=r.event
+  path=event_reservation_path(e,r)
+  visit path
+end

@@ -65,7 +65,6 @@ class EventsController < ApplicationController
     @event = current_user.events.build(params[:event])
     @event.status=1; #proposed
 
-
     if  @event.save
       flash[:success] = "Evento creato!"
       redirect_to user_path(current_user)

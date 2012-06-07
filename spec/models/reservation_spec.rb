@@ -5,8 +5,7 @@ describe Reservation do
   let!(:user) { FactoryGirl.create(:user) }
   let!(:event) { FactoryGirl.create(:event) }
   before do
-    @reservation = user.reservations.build(:event_id => event.id,
-                               :status =>1 )
+    @reservation = Reservation.new(:event_id => event.id,:status =>1, :user_id => user.id )
     @reservation.save
   end
 
@@ -36,13 +35,33 @@ describe Reservation do
     @reservation.user_id=nil
     @reservation.should_not be_valid
   end
+
   it "should not allow doubles"  do
     expect do
-      @reservation2 = user.reservations.create(:event_id => event.id,
-                                        :status =>1 )
+      @reservation2 = @reservation.dup
+      @reservation2.save
     end.should raise_error
-
   end
 
+  it "should allow destruction" do
+    @reservation.save
+    n = Reservation.count
+    @reservation.destroy
+    Reservation.count.should == n-1
+  end
+
+  it "should be destroyed when its user is destroyed" do
+    @reservation.save
+    n = Reservation.count
+    user.destroy
+    Reservation.count.should == n-1
+  end
+
+  it "should be destroyed when its event is destroyed" do
+    @reservation.save
+    n = Reservation.count
+    event.destroy
+    Reservation.count.should == n-1
+  end
 
 end

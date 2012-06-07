@@ -1,0 +1,22 @@
+%h1
+  Elimina prenotazione
+%h2
+  Prenotazione a
+  ="'"+@event.name+"'"
+  di
+  =@user.name
+
+%p
+  Vuoi davvero eliminare la
+  = "tua" if @r.user == @user
+  prenotazione
+  = "di "+@r.user.name unless @r.user == @user
+  per l'evento per
+  ="'"+@event.name+"'"
+  che si terr&agrave; il
+  =@event.begins_at.strftime('%d-%m-%y alle %H:%M')
+  =" a "+@event.location  unless @event.location.blank?
+  ?
+%p
+  = link_to 'Elimina', @reservation, :method => :delete, :class => "btn btn-danger"
+

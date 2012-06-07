@@ -12,7 +12,7 @@ Houserule::Application.routes.draw do
 
 
   resources :events do
-    resources :reservations, only: [:new, :create, :destroy]
+    resources :reservations, only: [:new, :create, :destroy, :show]
   end
 
 
