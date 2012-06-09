@@ -13,10 +13,10 @@
       %br
     %div{:class =>"span4"}
       = f.label :password , 'Password (6-15)'
-      = f.password_field :password
-      %br
+      = f.password_field :password,:placeholder => "Lascia vuoto se non vuoi cambiarla"
+      .field
       = f.label :password , 'Conferma Password'
-      = f.password_field :password_confirmation
+      = f.password_field :password_confirmation, :placeholder => "Lascia vuoto se non vuoi cambiarla"
       %br
   %div{:class =>"row"}
     %div{:class =>"span4"}

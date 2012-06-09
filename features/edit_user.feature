@@ -54,7 +54,7 @@ Contesto:
   Scenario:   Modifica dati altro utente - no admin (Errore)
     Quando vado alla modifica preferenze di "pluto@nomail.it"
     Allora dovrei essere nella home page
-    E dovrei vedere il messaggio di errore "Operazione non consentita"
+    E dovrei vedere "Azione non consentita"
 
   Scenario:   Modifica informazioni varie - senza modificare password
     Dato inserisco in "user_description" "Un bellissimo papero"

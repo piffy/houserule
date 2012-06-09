@@ -18,9 +18,9 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     # This snippet eliminates pw check and confirmation if left blank
-    if params[:password].blank? && params[:password_confirmation].blank?
-      params.delete(:password)
-      params.delete(:password_confirmation)
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user][:password]=@user.password
+      params[:user][:password_confirmation]=@user.password
       #@user.password_confirmation=@user.password
     end
     if @user.update_attributes(params[:user])
