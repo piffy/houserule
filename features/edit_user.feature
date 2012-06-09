@@ -51,8 +51,20 @@ Contesto:
     E dovrei vedere "Donald"
     E dovrei vedere "Paperopoli"
 
-  #Scenario:   Modifica dati altro utente (Errore)
-  #  Quando vado alla modifica preferenze di "pluto@nomail.it"
-  #  Allora dovrei vedere "Login"
+  Scenario:   Modifica dati altro utente - no admin (Errore)
+    Quando vado alla modifica preferenze di "pluto@nomail.it"
+    Allora dovrei essere nella home page
+    E dovrei vedere il messaggio di errore "Operazione non consentita"
+
+  Scenario:   Modifica informazioni varie - senza modificare password
+    Dato inserisco in "user_description" "Un bellissimo papero"
+    E inserisco in "user_nick" "Donald"
+    E inserisco in "user_location" "Paperopoli"
+    Quando premo "Modifica"
+    Allora dovrei vedere "Profilo di Paperino"
+    E dovrei vedere "Un bellissimo papero"
+    E dovrei vedere "Donald"
+    E dovrei vedere "Paperopoli"
+
 
 

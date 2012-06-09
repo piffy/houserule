@@ -56,3 +56,25 @@ Scenario:   Login
     E      inserisco in "session_password" "12345678"
     Quando premo "Login"
     Allora dovrei vedere "Modifica"
+
+  Scenario:   Non ripetere il login
+    Dato   mi trovo nella pagina di login
+    E      non sono loggato come utente "Paperino"
+    Quando inserisco in "session_email" "paolino@nomail.it"
+    E      inserisco in "session_password" "12345678"
+    Quando premo "Login"
+    Allora dovrei vedere "Profilo di Paperino"
+    Quando mi trovo nella pagina di login
+    Allora dovrei essere nella home page
+    E dovrei vedere "login effettuato"
+
+  Scenario:   Non ricreare utente
+    Dato   mi trovo nella pagina di login
+    E      non sono loggato come utente "Paperino"
+    Quando inserisco in "session_email" "paolino@nomail.it"
+    E      inserisco in "session_password" "12345678"
+    Quando premo "Login"
+    Allora dovrei vedere "Profilo di Paperino"
+    Quando   mi trovo nella pagina di registrazione
+    Allora dovrei essere nella home page
+    E dovrei vedere "login effettuato"
