@@ -66,7 +66,7 @@ Scenario:   Login
     Allora dovrei vedere "Profilo di Paperino"
     Quando mi trovo nella pagina di login
     Allora dovrei essere nella home page
-    E dovrei vedere "login effettuato"
+    E dovrei vedere "Sei già loggato"
 
   Scenario:   Non ricreare utente
     Dato   mi trovo nella pagina di login
@@ -77,4 +77,4 @@ Scenario:   Login
     Allora dovrei vedere "Profilo di Paperino"
     Quando   mi trovo nella pagina di registrazione
     Allora dovrei essere nella home page
-    E dovrei vedere "login effettuato"
+    E dovrei vedere "Sei già loggato"

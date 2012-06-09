@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UsersController < ApplicationController
   before_filter :logged_in_user, only: [:index, :edit, :update]
   before_filter :correct_user,   only: [:edit, :update]
@@ -7,6 +8,10 @@ class UsersController < ApplicationController
   end
 
   def new
+    if current_user
+      flash[:notice] = 'Sei già loggato.'
+      redirect_to root_path
+    end
     @user=User.new
 
   end

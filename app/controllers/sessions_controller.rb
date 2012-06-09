@@ -1,5 +1,10 @@
+# encoding: utf-8
 class SessionsController < ApplicationController
   def new
+    if current_user
+      flash[:notice] = 'Sei già loggato.'
+      redirect_to root_path
+    end
   end
   def create
     user = User.find_by_email(params[:session][:email])
