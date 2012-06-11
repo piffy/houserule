@@ -45,4 +45,4 @@
 %div{:class=>"btn-group"}
   = link_to 'Lista utenti', users_path,  :class => "btn"
   = link_to 'Modifica', edit_user_path(@user), :class => "btn"
-  = button_to 'Cancella utente', "#"+user_path(@user), :method => :delete, :confirm => 'Sei sicuro?' ,  :class => "btn"
+  = link_to 'Elimina utente', edit_user_path(@user)+".delete", :class => "btn btn-danger"

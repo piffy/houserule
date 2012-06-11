@@ -1,0 +1,34 @@
+%h3 Disattivazione
+
+%p
+  Disattivare è un'operazione piuttosto drastica, che può avere un forte impatto sul programma, per cui
+  ti offriamo diverse possibilità:
+
+= form_for(@user,:method => :delete )  do |f|
+  %div{:class =>"row well"}
+    %div{:class =>"span8"}
+      %p
+        = radio_button_tag 'delete_style', "destroy", true, :class=>"checkbox"
+        %b
+          Distruggi
+        %br
+        In questo modo, l'utente
+        = "''"+@user.name+"''"
+        viene totalmente eliminato dal sistema senza lasciare tracce. Nello stesso momento vengono eliminati
+        tutti i suoi riferimenti, preferenze, ecc.
+
+      %p
+        = radio_button_tag 'delete_style', "deactivate", false, :disabled => true
+        %b
+          Disattiva
+        %i (Opzione non ancora attivata)
+        %br
+        In questo modo, l'utente
+        = "''"+@user.name+"''"
+        viene disattivato e non può più fare il login, nè essere invitato o fornire feedback.
+        Mantiene però le preferenze, le partite organizzate, i feedback (che possono essere consultati).
+        Con una semplice procedure l'utente può riattivarsi'
+
+
+  = f.submit "Elimina", :class=>"btn btn-danger",  :confirm => 'Sei sicuro? Non si può tornare indietro!'
+

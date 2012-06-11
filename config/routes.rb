@@ -15,10 +15,11 @@ Houserule::Application.routes.draw do
     resources :reservations, only: [:new, :create, :destroy, :show]
   end
 
+  match 'users/:id/deactivate', :to => 'users#deactivate'
 
   get "users/show"
 
-  resources :users
+  resources :users#  , :collection =>{ :deactivate => :get }
 
   get "welcome/index"
 

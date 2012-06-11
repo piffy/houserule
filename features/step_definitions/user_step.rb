@@ -37,3 +37,9 @@ Given  /^vado al profilo dell'utente "([^"]*)"$/ do |username|
   @user = User.find_by_email(username)
   visit user_path(@user)
 end
+
+Quando /^vado alla eliminazione dell'utente "([^"]*)"$/ do |username|
+  user = User.find_by_email(username)
+  user.should be
+  Capybara.current_session.driver.delete user_path(user.id)
+end

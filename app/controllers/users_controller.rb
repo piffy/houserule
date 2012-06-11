@@ -1,7 +1,7 @@
 # encoding: utf-8
 class UsersController < ApplicationController
   before_filter :logged_in_user, only: [:index, :edit, :update]
-  before_filter :correct_user,   only: [:edit, :update]
+  before_filter :correct_user,   only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
   def edit
     @user=User.find(params[:id] )
+    @format=params[:format]
 
   end
   def update
@@ -38,10 +39,6 @@ class UsersController < ApplicationController
   end
   def show
     @user=User.find(params[:id])
-    #List of event ORGANIZED by user
-    #@events = @user.events
-    #List of events reserved  by user
-    #@reserved_events = @user.reserved_events
     #TODO Paginate
   end
   def create
@@ -52,6 +49,15 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    #TODO You should NOT be able to destroy id #1 (Admin) and #2 (Generic user)
+    flash[:success] = "Utente "+@user.name+" eliminato. Addio per sempre!"
+    redirect_to "/"
+    sign_out
+    @user.destroy
   end
 
   private
