@@ -1,10 +1,9 @@
 FactoryGirl.define do
   factory :user do
-    name     "Pippo"
-    email    "goofy@disney.com"
-    password "password"
-    password_confirmation "password"
-    remember_token "ABCDREFGHILM"
+    sequence(:name)  { |n| Faker::Name.name }
+    sequence(:email) { |n| Faker::Internet.email }
+    password "foobar"
+    password_confirmation "foobar"
 
     factory :admin do
       name     "Admin"

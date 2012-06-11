@@ -1,5 +1,7 @@
 %h1 Elenco eventi
 
+=will_paginate
+
 %table{:class => "table table-striped"}
   %tr
     %th{:class => @name_header}= link_to 'Nome evento', events_path(:sort => 'name'), :id => 'name_header'
@@ -36,7 +38,7 @@
         %td= link_to 'Prenota', new_event_reservation_path(event), :class =>"btn btn-primary"
       %td= link_to 'Modifica', edit_event_path(event), :class =>"btn"
 
-
+= will_paginate
 %br
 
 = link_to 'Aggiungi evento', new_event_path, :class =>"btn"

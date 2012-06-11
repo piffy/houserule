@@ -1,6 +1,10 @@
 %h1 Elenco utenti registrati
 
+= will_paginate
+
 %ul{:class=>"users"}
   -@users.each do |user|
     %li
       = link_to user.name, user
+
+= will_paginate

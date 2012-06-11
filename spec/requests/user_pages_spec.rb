@@ -19,6 +19,7 @@ describe "User pages" do
       before(:all) { 30.times { FactoryGirl.create(:user) } }
       after(:all) { User.delete_all }
 
+      it { should have_selector('div.pagination') }
       let(:first_page) { User.paginate(page: 1) }
       let(:second_page) { User.paginate(page: 2) }
 
@@ -34,12 +35,6 @@ describe "User pages" do
       it "should list the first page of users" do
         first_page.each do |user|
           page.should have_selector('li', text: user.name)
-        end
-      end
-
-      it "should not list the second page of users" do
-        second_page.each do |user|
-          page.should_not have_selector('li', text: user.name)
         end
       end
 
@@ -77,7 +72,7 @@ describe "User pages" do
   end
 
   describe "profile page" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:admin) }
     let!(:m1) { FactoryGirl.create(:event, user: user, name: "Foo") }
     let!(:m2) { FactoryGirl.create(:event, user: user, name: "Bar") }
 
@@ -91,7 +86,6 @@ describe "User pages" do
       it { should have_content(user.events.count) }
     end
 
-    it { should have_selector('h1', text: user.name) }
 =begin
     describe "follow/unfollow buttons" do
       let(:other_user) { FactoryGirl.create(:user) }
