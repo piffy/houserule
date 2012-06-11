@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     sort = params[:sort] || session[:sort]
     case sort
       when 'name'
-        ordering,@name_header = 'name DESC', 'hilite'
+        ordering,@name_header = 'name', 'hilite'
       when 'begins_at'
         @begins_at_header = 'hilite'
       when 'system'
@@ -18,7 +18,7 @@ class EventsController < ApplicationController
       @events = Event.paginate(page: params[:page])
     else
 
-      @events = Event.page(params[:page]).order(ordering)
+      @events = Event.unscoped.page(params[:page]).order(ordering)
       #@events = Event.unscoped.all(ordering)
     end
 
