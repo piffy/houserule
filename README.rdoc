@@ -1,10 +1,11 @@
 == Welcome to House Rule
+=== version 0.1, 15/06/2012
 
 House Rule aims to become the site to advertise, contact and manage gaming
 sessions for you and your friend, with a modern, "web 2.0" attitude
 
-At this moment we're at the planning stage, but you'll find some code and
-functionality anyway.
+At this moment we've done our very first release (0.1), and we are celebrating.
+But we'll be nusy soon enough!
 
 
 == People involved 
@@ -13,10 +14,12 @@ functionality anyway.
 * Marcello 'piffy' Missiroli
 * Song 'China' Zhu
 
-=== Testing team
+=== Testing/Consulting team
 * Francesco 'jaramir' Gigli
 * Federico 'Quelo' Gigliotti
 * Andrea 'Mechvigiak' Vigiak
+* Lorenzo 'Lollo' Trenti
+* Saverio 'Sassa' Barbieri
 
 == Getting involved in the project
 ...We're looking for help, of course.   And I'm wondering why I'm writing this in English.
@@ -28,7 +31,12 @@ social network: molto web, recupero inforamazioni e così via.
 Incidentalmente, è pensato come palestra per quanti volessero cimentarsi con lo sviluppo in Ruby on Rails,
 quindi se avete voglia anche solo di PROVARE a collaborare, anche se non conoscete il linguaggio, vi accogliamo
 volentieri. Vi offriamo un abiente di sviluppo completo, comprensivo di editor "intelligente"
-E se siete esperti di gioco, i vostri suggerimenti, richieste e consigli sono altrettanot ben accetti
+E se siete esperti di gioco, i vostri suggerimenti, richieste e consigli sono altrettanto ben accetti.
+
+== Test implementation
+Our test implemetation is currently hosted on Heroku at this address.
+http://afternoon-spring-6294.herokuapp.com/
+Please come, have a look, and leave a feedback.
 
 
 

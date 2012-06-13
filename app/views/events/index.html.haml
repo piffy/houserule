@@ -8,28 +8,24 @@
     %th{:class => @system_header}= link_to 'Sistema', events_path(:sort => 'system'), :id => 'system_header'
     %th{:class => @begins_at_header}= link_to 'Data e ora', events_path(:sort => 'begins_at'), :id => 'begins_at_header'
     %th Durata
-    %th Descrizione
     %th Conferma?
-    %th Status
     %th Luogo
-    %th Pren.
+    %th Prenotati
     %th
     %th
     %th
 
   - @events.each do |event|
     %tr
-      %td= link_to event.name, event
+      %td= link_to event.name, event, :title => event.descr_short
       %td= event.system
       %td= event.begins_at.strftime('%d-%m-%y')
       %td= event.duration
-      %td= event.descr_short
       %td
         -if event.begins_at==event.deadline
           No
         -else
           =event.deadline.strftime('%d-%m-%y')
-      %td= event.status_to_s
       %td= event.location
       %td
         = event.reservations.count

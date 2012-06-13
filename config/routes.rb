@@ -1,13 +1,10 @@
 Houserule::Application.routes.draw do
 
-  #get "reservations/new"
-  #get "reservations/create"
-  #get "reservations/delete"
-
   get "info/index"
   get "info/about"
   get "info/contact"
   get "info/license"
+  get "info/feedback"
 
 
 

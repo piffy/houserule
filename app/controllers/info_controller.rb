@@ -10,4 +10,7 @@ class InfoController < ApplicationController
 
   def license
   end
+
+  def feedback
+  end
 end
