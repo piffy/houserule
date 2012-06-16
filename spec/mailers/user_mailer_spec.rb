@@ -30,6 +30,7 @@ describe UserMailer do
 =end
 
   it 'should send welcome email' do
+    url_regex = /(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/
     lambda { UserMailer.welcome_email(user).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
     sent.first.subject.should =~ /Registrazione a House Rule/#correct subject
     sent.first.body.should include(user.name) #correct username
