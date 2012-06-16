@@ -1,0 +1,13 @@
+!!! XML
+!!!
+%html
+  %head
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
+  %body
+    %h1
+      ="Benvenuto ad Houserule v. "+@version.to_s+", "+@user.name
+    %p
+      Se leggi questa mail, vuol dire che ti sei registrato con successo.
+
+      Grazie per esserti unito a noi, e visitaci
+      = link_to 'qui', @url

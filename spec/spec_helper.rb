@@ -31,3 +31,8 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 end
+
+def get_message_part (mail, content_type)
+  mail.body.parts.find { |p| p.content_type.match content_type }.body.raw_source
+end
+
