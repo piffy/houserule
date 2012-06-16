@@ -43,8 +43,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      begin
       UserMailer.welcome_email(@user).deliver
       flash[:success] = "Utente #{@user.name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login"
+      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+        flash[:success] = "Utente #{@user.name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login. Problemi di invio mail"
+      end
       redirect_to "/"
     else
       render 'new'
