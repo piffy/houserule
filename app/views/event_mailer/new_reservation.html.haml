@@ -1,0 +1,22 @@
+!!! XML
+!!!
+%html
+  %head
+    %meta{:content=>'text/html; charset=utf-8', :"http-equiv"=>'Content-Type'}
+  %body
+    %h3
+      ="Nuovo iscritto"
+    %p
+      Un nuovo iscritto per l'evento
+      =@event.name
+      organizzato da te: si è iscritto
+      =@user.name
+
+    %p
+      Il numero totale degli iscritti all'evento è attualmente
+      =@event.reservations.count.to_s + "(Massimo previsto: "+@event.max_player_num.to_s+")"
+
+    %p
+      Puoi controllare il tuo evento andando
+      = link_to "qui", @url
+    %p Your House Rule Robot

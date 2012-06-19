@@ -69,6 +69,7 @@ Funzionalità: Elimina prenotazione
   Dato che esiste la prenotazione dell'evento "Alternative" per l'utente "pluto@nomail.it"
   E vado alla visualizzazione evento di "Alternative"
   Quando vado alla pagina di visualizzazione della prenotazione con id "2"
+  E seguo il link "Elimina"
   Allora dovrei essere nella pagina di dettagli dell'evento  "Alternative"
   E dovrei vedere "Azione non consentita"
 

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     '0.1'
   end
 
-  def self.url
-    'http://afternoon-spring-6294.herokuapp.com/'
+  def self.hostname
+    'afternoon-spring-6294.herokuapp.com'
   end
 end

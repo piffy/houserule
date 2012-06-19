@@ -58,6 +58,13 @@ class ReservationsController < ApplicationController
 
   def destroy
     reservation= Reservation.find(params[:id])
+    #send confirmation email
+    if reservation.user == current_user
+      EventMailer.delete_reservation(reservation)
+    else
+      EventMailer.delete_reservation(reservation,current_user)
+    end
+
     @event = Event.find(params[:event_id])
     reservation.destroy
     flash[:success] = "Prenotazione eliminata"

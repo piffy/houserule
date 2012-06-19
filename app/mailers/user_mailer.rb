@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    @url  = ApplicationController.url
+    @url = login_url(:host => ApplicationController.hostname)
     @version = ApplicationController.version
     mail(:to => user.email, :subject => "Registrazione a House Rule")
   end

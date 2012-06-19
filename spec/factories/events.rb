@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :event do
-    name "Event"
+    sequence(:name) { |n| "Event #{n}" }
     system "Strange System"
     begins_at "2012-05-13 18:56:50"
     duration "2h"
@@ -13,6 +13,6 @@ FactoryGirl.define do
     location "MyString"
     max_player_num 4
     min_player_num 1
-    user_id 1
+    association :user
   end
 end

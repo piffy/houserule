@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Reservation do
 
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:event) { FactoryGirl.create(:event) }
+  let!(:event) { FactoryGirl.create(:event, :user => user) }
   before do
     @reservation = Reservation.new(:event_id => event.id,:status =>1, :user_id => user.id )
     @reservation.save

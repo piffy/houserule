@@ -1,9 +1,9 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :reservations do
-    user_id 1
-    event_id 1
+  factory :reservation do
+    association :user
+    association :event
     status 1
   end
 end
