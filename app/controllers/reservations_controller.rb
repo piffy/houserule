@@ -60,9 +60,9 @@ class ReservationsController < ApplicationController
     reservation= Reservation.find(params[:id])
     #send confirmation email
     if reservation.user == current_user
-      EventMailer.delete_reservation(reservation)
+      EventMailer.delete_reservation(reservation).deliver
     else
-      EventMailer.delete_reservation(reservation,current_user)
+      EventMailer.delete_reservation(reservation,current_user).deliver
     end
 
     @event = Event.find(params[:event_id])
