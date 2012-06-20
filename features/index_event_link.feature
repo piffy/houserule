@@ -12,15 +12,12 @@ Funzionalità: Usare i link delle'elenco eventi
       | name                  | email                 | password  | password_confirmation | nick | location   |  description |
       | Paperino              | paolino@nomail.it     | 12345678  | 12345678              | pap  | Paperopoli |  Papero      |
       | Pluto                 | pluto@nomail.it       | 12345678  | 12345678              |      | Topolinia  |  Cane        |
-    E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
-      | name                  | system     | begins_at  | deadline   |  status |
-      | Campionato            | Risiko     | 10-5-2013  | 10-5-2013  |  1      |
-      | Torneo                | Monopoli   | 11-5-2013  | 11-5-2013  |  1      |
-      | Campagna              | D&D        | 12-5-2013  | 12-5-2013  |  1      |
-      | LAN Party             | Diablo3    | 13-5-2013  | 13-5-2013  |  1      |
-      | Concorso              | Pandemics  | 14-5-2013  | 14-5-2013  |  1      |
-      | Semifinale Torneo     | Scacchi    | 15-5-2013  | 15-5-2013  |  1      |
 
+    E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
+      | name                  | system     | begins_at  |
+      | Campionato            | Risiko     | 10-5-2013  |
+
+    Dato ci sono 3 eventi di "paolino@nomail.it"
 
 
   Scenario: Dettagli evento
@@ -40,10 +37,19 @@ Funzionalità: Usare i link delle'elenco eventi
     E      premo "Login"
     E      mi trovo nella pagina di elenco eventi
     Quando seguo il link "Modifica"
-    Allora  dovrei essere nella pagina di modifica dell'evento  "Semifinale Torneo"
+    Allora  dovrei essere nella pagina di modifica dell'evento  "Campionato"
 
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp
-    Dato mi trovo nella homepage
-    Allora dovrei non vedere "Campionato"
-    E dovrei vedere "Concorso" all'interno di "a"
-    E dovrei vedere "Semifinale Torneo" all'interno di "a"
+    Dato ci sono 2 eventi di "pluto@nomail.it"
+    E mi trovo nella homepage
+    * mostra la pagina
+    Allora dovrei non vedere "Event 10"
+    E dovrei vedere "Campionato" all'interno di "a"
+    E dovrei vedere "Event 11" all'interno di "a"
+    E dovrei vedere "6 eventi nel database"
+
+  Scenario: Non mostra gli eventi passati nella hp
+    Dato ci sono 2 eventi passati di "pluto@nomail.it"
+    E mi trovo nella homepage
+    Allora dovrei non vedere "Past Event"
+    E dovrei vedere "6 eventi nel database"

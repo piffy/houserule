@@ -8,8 +8,8 @@ describe "User pages" do
 
     before do
       login FactoryGirl.create(:user)
-      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
-      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      FactoryGirl.create(:user)
+      FactoryGirl.create(:user)
       visit users_path
     end
 
@@ -73,8 +73,8 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:admin) }
-    let!(:m1) { FactoryGirl.create(:event, user: user, name: "Foo") }
-    let!(:m2) { FactoryGirl.create(:event, user: user, name: "Bar") }
+    let!(:m1) { FactoryGirl.create(:event, user: user) }
+    let!(:m2) { FactoryGirl.create(:event, user: user) }
 
     before { visit user_path(user) }
 

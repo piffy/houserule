@@ -5,8 +5,8 @@ describe Event do
   before do
     @event = user.events.build(:name => "A name",
                                :system => "A System",
-                               :begins_at => "2012-05-13 18:56:50",
-                               :deadline =>"2012-05-12 18:56:50",
+                               :begins_at => Time.stub!(:now)+1.week,
+                               :deadline => :begins_at ,
                                :status =>1 )
 
 

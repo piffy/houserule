@@ -22,7 +22,7 @@
     %p
       %b
         Descrizione:
-      = @user.description
+      = simple_format(@user.description)
   %div{:class =>"span8"}
     %p#organized-events
       Eventi organizzati:

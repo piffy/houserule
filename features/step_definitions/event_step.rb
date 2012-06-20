@@ -13,6 +13,19 @@ Given /^che esistono i seguenti eventi dell'utente "([^"]*)":$/ do |user_email, 
 
 end
 
+Dato /^(?:|che )ci sono (\d+) eventi? ?(passati)? di "([^"]*)"$/ do |n, past, user_email|
+  user = User.find_by_email(user_email)
+  #FactoryGirl.reload
+  if past.blank?
+  n.to_i.times {FactoryGirl.create(:event, :user => user) }
+  else
+  n.to_i.times {u=FactoryGirl.create(:event, :user => user);
+                u.name="Past "+u.name; u.begins_at-=1.year;
+                u.deadline-=1.year; u.save}
+  end
+
+end
+
 Dato /^mi trovo nell'elenco eventi con ordinamento "([^"]*)"$/ do |order|
   visit events_path+"?sort="+order
 end

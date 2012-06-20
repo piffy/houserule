@@ -70,4 +70,4 @@
     = link_to 'Elenco eventi', events_path, :class=>"btn"
   %div{:class =>"span8"}
     %br
-    = @event.description
+    = simple_format(@event.description)
