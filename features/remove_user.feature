@@ -23,7 +23,12 @@ Funzionalità: Elimina utente
     Allora dovrei vedere "Modifica di Paperino"
     E dovrei vedere "Disattivazione"
     Quando vado alla eliminazione dell'utente "paolino@nomail.it"
-    Allora dovrei essere nella home page
     #Il prossimo passo NON può essere testato automaticamente
+    E      mi trovo nella pagina di login
+    Allora dovrei vedere "Utente Paperino eliminato. Addio per sempre!"
+    E      inserisco in "session_email" "paolino@nomail.it"
+    E      inserisco in "session_email" "paolino@nomail.it"
+    E      premo "Login"
+    Allora dovrei vedere "Email o password errata"
 
 

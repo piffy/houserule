@@ -1,5 +1,5 @@
 #language: it
-Funzionalità: Usare i link delle'elenco eventi
+Funzionalità: Usare i link dell'elenco eventi
 
   Come potenziale giocatore
   Voglio poter andare alla pagina di prenotazione o di modifica eventi
@@ -42,7 +42,6 @@ Funzionalità: Usare i link delle'elenco eventi
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp
     Dato ci sono 2 eventi di "pluto@nomail.it"
     E mi trovo nella homepage
-    * mostra la pagina
     Allora dovrei non vedere "Event 10"
     E dovrei vedere "Campionato" all'interno di "a"
     E dovrei vedere "Event 11" all'interno di "a"

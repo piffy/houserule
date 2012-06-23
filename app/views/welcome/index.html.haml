@@ -16,7 +16,11 @@
       %br
       %i{:class=>"icon-calendar", :title=>"Eventi"}
       =@event_count
-      eventi nel database
+      eventi nel database, di cui
+      %br
+      %i{:class=>"icon-calendar", :title=>"Eventi"}
+      =@not_yet_started_event_count
+      non ancora iniziati
   %div{:class =>"span8"}
     -if @events.any?
       %h2  Ultimi eventi proposti

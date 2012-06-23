@@ -15,19 +15,27 @@ class Event < ActiveRecord::Base
 
 
   default_scope order: 'events.begins_at DESC'
+  scope :all_events
+  scope :not_begun, lambda { {:conditions => ["begins_at > ?", Date.today ]} }
   #named_scope :confirmed, :conditions => { :status => 2 }
+  #named_scope :cheap, :conditions => { :price => 0..5 }
+  #named_scope :recent, lambda { |*args| {:conditions => ["released_at > ?", (args.first || 2.weeks.ago)]} }
+  #named_scope :visible, :include => :category, :conditions => { 'categories.hidden' => false }
 
-  def status_to_s
-    case self.status
-      when 1
-        "Proposto"
-      when 2
-        "Confermato"
-      when 3
-        "Sospeso"
 
-    end
+  def self.status_string
+    %w(Archiviato Proposto Confermato Sospeso)
   end
+
+
+  def self.status_to_s
+    self.status_string[self.status]
+  end
+
+  def begun?
+    begins_at > Time.now
+  end
+
 
   def already_reserved_by(user)
 

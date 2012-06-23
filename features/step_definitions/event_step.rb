@@ -7,6 +7,8 @@ Given /^che esistono i seguenti eventi dell'utente "([^"]*)":$/ do |user_email, 
     if event["deadline"].nil?
       event["deadline"]=event["begins_at"]
     end
+    #hash=FactoryGirl.attributes_for(:event)
+    #hash.merge(event)
     ev=user.events.build(event)
     ev.save!
   end

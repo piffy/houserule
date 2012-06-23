@@ -1,5 +1,19 @@
 %h1 Elenco eventi
 
+
+= form_tag events_path, :method => :get, :id => 'filter_form',:html => {:class => "form-horizontal"} do
+  %span{:class =>"label label-info" }
+    = radio_button_tag 'selection', 'all_events', @selection=='all_events'
+    Tutti
+    %span{:class =>"label label-info" }
+    = radio_button_tag 'selection', 'not_begun', @selection=='not_begun'
+    Non iniziati
+  %br
+  = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
+
+  = @x
+  = @selection
+
 =will_paginate
 
 %table{:class => "table table-striped"}

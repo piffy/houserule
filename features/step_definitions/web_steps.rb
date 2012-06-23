@@ -73,6 +73,10 @@ When /^premo "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+When /^scelgo "([^"]*)"$/ do |choice|
+  choose(choice)
+end
+
 When /^seguo il link "([^"]*)"$/ do |link|
   click_link(link)
 end

@@ -63,7 +63,7 @@
 %div{:class =>"row"}
   %div{:class =>"span4"}
     %span{:class=>"label label-info"}
-      = @event.status_to_s
+      = Event.status_string[@event.status]
     %br
     = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
     %br

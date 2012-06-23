@@ -38,15 +38,12 @@ Funzionalità: mostrare la lista deglie eventi secondo vari criteri
 
   Scenario: ordina gli eventi in ordine di data decrescente
     Dato mi trovo nell'elenco eventi con ordinamento "begins_at"
-    * mostra la pagina
     Allora dovrei vedere "Torneo" prima di  "Campionato"
     E dovrei vedere "Concorso" prima di  "LAN Party"
     E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
 
   Scenario: ordina gli eventi per sistema di gioco
-
     Dato mi trovo nell'elenco eventi con ordinamento "system"
-    * mostra la pagina
     Allora dovrei vedere "Torneo" prima di  "Campionato"
     E dovrei vedere "Campagna" prima di  "LAN Party"
     E dovrei vedere "Torneo" prima di  "Concorso"

@@ -4,7 +4,10 @@ class EventsController < ApplicationController
 
   def index
     @user=current_user
+    @selection =  params[:selection] || session[:selection] || :all_events
     sort = params[:sort] || session[:sort]
+
+    #Handle sorting
     case sort
       when 'name'
         ordering,@name_header = 'name', 'hilite'
@@ -14,16 +17,30 @@ class EventsController < ApplicationController
         ordering,@system_header = 'system', 'hilite'
     end
 
-    if ordering.nil?
-      @events = Event.paginate(page: params[:page])
-    else
 
-      @events = Event.unscoped.page(params[:page]).order(ordering)
-      #@events = Event.unscoped.all(ordering)
+    #Preserve sorting selection in session
+    if params[:sort] != session[:sort]
+      session[:sort] = sort
+      redirect_to :sort => sort, :selection => @selection and return
     end
 
 
 
+    #preserve selection is session
+    if params[:selection] != session[:selection]
+      session[:selection] = params[:selection]
+      redirect_to :sort => sort, :selection => @selection and return
+    end
+
+
+  #Handle Pagination
+    if ordering.nil?
+      @events = Event.send(@selection).paginate(page: params[:page])
+    else
+
+      @events = Event.unscoped.send(@selection).page(params[:page]).order(ordering)
+
+    end
 
   end
 
