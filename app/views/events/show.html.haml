@@ -13,9 +13,10 @@
   %div{:class =>"span8"}
     %h1
       = '"'+@event.name+'"'
-      -unless @event.descr_short.blank?
-        %h4{:class =>"center"}
-          = "("+@event.descr_short+")"
+  -unless @event.descr_short.blank?
+    %p{:class =>"center"}
+      %strong
+        = "("+@event.descr_short+")"
 %hr
 %div{:class =>"row"}
   %div{:class =>"span4"}

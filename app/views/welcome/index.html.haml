@@ -1,6 +1,10 @@
-%div{:class=>"hero-unit"}
-  %h1 House Rule <span class="label">ALPHA</span>
-  %p Il sito per organizzare le tue partite (di giochi di simulazione, ruolo o altro) con i tuoi amici. Oppure al Club. Oppure online. Insomma, dove e quando ti pare!
+%div
+  %p{:class=>"center"}
+    =link_to image_tag("large_logo.png", alt: "House Rule logo", id: "large logo")
+
+%div
+  %p
+    %em Il sito per organizzare le tue partite (di giochi di simulazione, ruolo o altro) con i tuoi amici. Oppure al Club. Oppure online. Insomma, dove e quando ti pare!
   -unless signed_in?
     =link_to "Login", login_path, :class =>"btn btn-primary"
     oppure
@@ -23,19 +27,20 @@
       non ancora iniziati
   %div{:class =>"span8"}
     -if @events.any?
-      %h2  Ultimi eventi proposti
+      %h2  Prossimi eventi in partenza
       = render "shared/list_event", :events => @events , :show_organizer => true
       =link_to "Elenco completo eventi...", events_path, :class =>"btn"
 
 %hr
 
 
-%h4 Alpha warning!
+%h4
+  <span class="label">ALPHA</span>
 %p
-  Come potete vedere, questo sito &egrave; in fase di lavorazione. Siete invitati a provare e soprattutto indicare cosa non va!!
-  Le funzionalità attive sono: Login, Registrazione, Creazione/Modifica Evento, Prenotazione ad evento, Consultazione evento
-  Dopo di che, se potete, lasciate un commento qui
-  =link_to "qui.", info_feedback_path
+  Il sito è in fase di lavorazione, ma siamo "quasi pronti" alla release 0.1. Le funzionalità essenziali sono già
+  funzionanti... siete quindi invitati a provarle! E per farci capire cosa non funziona o non vi piace, ci fareste un
+  gran piacere lasciandoci un commento
+  =link_to "in questa sondaggio gentilmente offerto da Google.", info_feedback_path
   %br
   Per ulteriori dettagli visitate
   =link_to "la pagina informativa del progetto", info_about_path
