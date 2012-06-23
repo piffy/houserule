@@ -50,6 +50,7 @@ class EventsController < ApplicationController
   @user=current_user
   @event = Event.find(params[:id])
 
+
     respond_to do |format|
       format.html # show.html.haml
       format.json { render json: @event }
@@ -61,6 +62,9 @@ class EventsController < ApplicationController
   def new
     @user=current_user
     @event = Event.new
+    @event.begins_at = 7.days.from_now
+    @event.deadline = 6.days.from_now
+
 
     respond_to do |format|
       format.html # new.html.erb
