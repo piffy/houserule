@@ -44,7 +44,6 @@ Funzionalità: Mostra utente
       | Evento 2              | Monopoli   |  13-5Evento 1-2013 |
     E che esiste la prenotazione dell'evento "Evento 1" per l'utente "paolino@nomail.it"
     Quando  vado al profilo dell'utente "paolino@nomail.it"
-    * mostra la pagina
     Allora dovrei vedere "Eventi prenotati" all'interno di "p#reserved-events"
     E dovrei vedere "2" all'interno di "p#organized-events"
     E dovrei vedere "Evento 1" all'interno di "span"
