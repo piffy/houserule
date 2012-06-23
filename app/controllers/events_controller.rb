@@ -105,7 +105,7 @@ end
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Evento aggiornato' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -38,7 +38,7 @@ Funzionalità: Modifica Evento
     E      seleziono la data "10-11-2013" in "event_begins_at"
     E      seleziono la data "09-5-2013" in "event_deadline"
     E      premo "Invia"
-    Allora dovrei vedere "Event was successfully updated"
+    Allora dovrei vedere "Evento aggiornato"
 
 
   Scenario:   Utente non loggato
@@ -55,5 +55,15 @@ Funzionalità: Modifica Evento
     Allora dovrei essere nella home page
     E dovrei vedere "Azione non consentita"
 
+
+  Scenario:   Modifica completa
+    Dato   mi trovo nella pagina di login
+    E      inserisco in "session_email" "paolino@nomail.it"
+    E      inserisco in "session_password" "12345678"
+    E      premo "Login"
+    E      vado alla modifica evento di "Campionato"
+    E      seleziono la data "09-4-2013" in "event_begins_at"
+    Quando premo "Invia"
+    Allora dovrei vedere "Deadline non deve precedere l'inizio"
 
 

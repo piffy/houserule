@@ -11,9 +11,6 @@
   %br
   = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
 
-  = @x
-  = @selection
-
 =will_paginate
 
 %table{:class => "table table-striped"}
@@ -33,13 +30,13 @@
     %tr
       %td= link_to event.name, event, :title => event.descr_short
       %td= event.system
-      %td= event.begins_at.strftime('%d-%m-%y')
+      %td= l(event.begins_at, :format => :medium)
       %td= event.duration
       %td
         -if event.begins_at==event.deadline
           No
         -else
-          =event.deadline.strftime('%d-%m-%y')
+          =l(event.deadline, :format => :short)
       %td= event.location
       %td
         = event.reservations.count

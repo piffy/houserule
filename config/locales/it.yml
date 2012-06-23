@@ -123,6 +123,8 @@ it:
       default: "%a %d %b %Y, %H:%M:%S %z"
       short: "%d %b %H:%M"
       long: "%d %B %Y %H:%M"
+      medium: "%d %b %Y - %H:%M"
+      formatted: "il %d %b %y alle %H:%M"
     am: 'am'
     pm: 'pm'
 
@@ -222,6 +224,13 @@ it:
 
   activerecord:
     errors:
+      models:
+        event:
+          attributes:
+            deadline:
+              before_or_equal_to: "non deve precedere l'inizio"
+
+
       template:
         header:
           one: "Non posso salvare questo %{model}: 1 errore"
