@@ -26,9 +26,9 @@ Funzionalità: mostrare la lista deglie eventi secondo vari criteri
 
   Scenario: ordina gli eventi in ordine di data (default)
     Dato mi trovo nella pagina di elenco eventi
-    Allora dovrei vedere "Torneo" prima di  "Campionato"
-    E dovrei vedere "Concorso" prima di  "LAN Party"
-    E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
+    Allora dovrei vedere "Campionato" prima di  "Torneo"
+    E dovrei vedere "LAN Party" prima di  "Concorso"
+    E dovrei vedere "Torneo" prima di  "Semifinale Torneo"
 
   Scenario: ordina gli eventi in ordine alfabetico
     Dato mi trovo nell'elenco eventi con ordinamento "name"
@@ -38,9 +38,9 @@ Funzionalità: mostrare la lista deglie eventi secondo vari criteri
 
   Scenario: ordina gli eventi in ordine di data decrescente
     Dato mi trovo nell'elenco eventi con ordinamento "begins_at"
-    Allora dovrei vedere "Torneo" prima di  "Campionato"
-    E dovrei vedere "Concorso" prima di  "LAN Party"
-    E dovrei vedere "Semifinale Torneo" prima di  "Torneo"
+    Allora dovrei vedere "Campionato" prima di  "Torneo"
+    E dovrei vedere "LAN Party" prima di  "Concorso"
+    E dovrei vedere "Torneo" prima di  "Semifinale Torneo"
 
   Scenario: ordina gli eventi per sistema di gioco
     Dato mi trovo nell'elenco eventi con ordinamento "system"
@@ -48,4 +48,8 @@ Funzionalità: mostrare la lista deglie eventi secondo vari criteri
     E dovrei vedere "Campagna" prima di  "LAN Party"
     E dovrei vedere "Torneo" prima di  "Concorso"
 
-
+  Scenario: ordina gli eventi in ordine di data nella home page
+    Dato mi trovo nella home page
+    Allora dovrei vedere "Campionato" prima di  "Torneo"
+    E dovrei vedere "LAN Party" prima di  "Concorso"
+    E dovrei vedere "Torneo" prima di  "Concorso"

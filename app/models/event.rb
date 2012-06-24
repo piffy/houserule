@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   validates :deadline, :date => {:before_or_equal_to => :begins_at }
 
 
-  default_scope order: 'events.begins_at DESC'
+  default_scope order: 'events.begins_at ASC'
   scope :all_events
   scope :not_begun, lambda { {:conditions => ["begins_at > ?", Date.today ]} }
   #named_scope :confirmed, :conditions => { :status => 2 }

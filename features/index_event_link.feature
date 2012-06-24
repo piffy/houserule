@@ -37,14 +37,16 @@ Funzionalità: Usare i link dell'elenco eventi
     E      premo "Login"
     E      mi trovo nella pagina di elenco eventi
     Quando seguo il link "Modifica"
-    Allora  dovrei essere nella pagina di modifica dell'evento  "Campionato"
+    Allora  dovrei essere nella pagina di modifica dell'evento  "Event 7"
 
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp
     Dato ci sono 2 eventi di "pluto@nomail.it"
     E mi trovo nella homepage
-    Allora dovrei non vedere "Event 10"
-    E dovrei vedere "Campionato" all'interno di "a"
-    E dovrei vedere "Event 11" all'interno di "a"
+    Allora dovrei non vedere "Event 15"
+    * mostra la pagina
+    E dovrei non vedere "Campionato"
+    E dovrei vedere "Event 10" all'interno di "a"
+    E dovrei vedere "Event 14" all'interno di "a"
     E dovrei vedere "6 eventi nel database"
 
   Scenario: Non mostra gli eventi passati nella hp
