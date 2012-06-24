@@ -242,3 +242,9 @@ it:
 
       full_messages:
         format: "%{attribute} %{message}"
+
+
+  will_paginate:
+    previous_label: "&#8592; Precedente"
+    next_label: "Prossimo &#8594;"
+    page_gap: "&hellip;"
