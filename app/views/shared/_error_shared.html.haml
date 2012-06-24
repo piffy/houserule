@@ -1,9 +1,8 @@
 -if @user.errors.any?
-  %div{:id => "error_explanation"}
-    %div{:class=>"alert alert-error"}
-      The form contains
-      = pluralize(@user.errors.count, "error")
-      %ul
-      - @user.errors.full_messages.each do |msg|
-        %li
-          = msg
+  %div{:id => "error_explanation", :class=>"alert alert-error"}
+    = @user.errors.count == 1 ? "Un errore non ha" : "#{@user.errors.count} errori non hanno"
+    reso possibile il salvataggio
+    %ul
+    - @user.errors.full_messages.each do |msg|
+      %li
+        = msg

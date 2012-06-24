@@ -33,7 +33,7 @@ perché gli altri utenti si possano iscrivere
   Scenario:   Dimenticare il nome (percorso triste)
     Quando premo "Invia"
     Allora dovrei vedere il messaggio di errore "Name non deve essere vuoto"
-
+    E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
   Scenario:   Numero giocatori errato (percorso triste)
     Dato   inserisco in "event_name" "Evento"
@@ -41,7 +41,7 @@ perché gli altri utenti si possano iscrivere
     E      inserisco in "event_max_player_num" "2"
     Quando premo "Invia"
     Allora dovrei vedere il messaggio di errore "Max player num deve essere superiore o uguale a 4"
-
+    E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
 
   Scenario:   Conferma impossibile  (percorso triste)
@@ -50,7 +50,7 @@ perché gli altri utenti si possano iscrivere
     E      seleziono la data "10-5-2013" in "event_deadline"
     Quando premo "Invia"
     Allora dovrei vedere il messaggio di errore "Deadline non deve precedere l'inizio"
-
+    E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
 
 

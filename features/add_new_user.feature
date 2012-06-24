@@ -28,8 +28,8 @@ Scenario:   Email esistente
   E      inserisco in "user_password" "12345678"
   E      inserisco in "user_password_confirmation" "12345678"
   Quando premo "Crea utente"
-  * mostra la pagina
   Allora dovrei vedere il messaggio di errore "Email è già in uso"
+  E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
 Scenario:   Password  troppo corta
   Dato   mi trovo nella pagina di registrazione
@@ -39,7 +39,7 @@ Scenario:   Password  troppo corta
   E      inserisco in "user_password_confirmation" "1234"
   Quando premo "Crea utente"
   Allora dovrei vedere il messaggio di errore "Password è troppo corto (il minimo è 6 caratteri)"
-
+  E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
 Scenario:   Password  troppo lunga
   Dato   mi trovo nella pagina di registrazione
@@ -49,7 +49,7 @@ Scenario:   Password  troppo lunga
   E      inserisco in "user_password_confirmation" "1234567890123456"
   Quando premo "Crea utente"
   Allora dovrei vedere il messaggio di errore "Password è troppo lungo (il massimo è 15 caratteri)"
-
+  E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
   Scenario:  Nome utente assente
   Dato   che mi trovo nella pagina di registrazione
@@ -58,6 +58,7 @@ Scenario:   Password  troppo lunga
   E      inserisco in "user_password_confirmation" "12345678"
   Quando premo "Crea utente"
   Allora dovrei vedere il messaggio di errore "Name non può essere lasciato in bianco"
+  E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 
   Scenario:  Errata conferma password
   Dato   che mi trovo nella pagina di registrazione
@@ -66,6 +67,7 @@ Scenario:   Password  troppo lunga
   E      inserisco in "user_password_confirmation" "error"
   Quando premo "Crea utente"
   Allora dovrei vedere il messaggio di errore "Password non coincide con la conferma"
+  E dovrei vedere "2 errori non hanno reso possibile il salvataggio"
 
   Scenario:  Conferma password vuota
   Dato   che mi trovo nella pagina di registrazione
@@ -73,4 +75,4 @@ Scenario:   Password  troppo lunga
   E      inserisco in "user_password" "12345678"
   Quando premo "Crea utente"
   Allora dovrei vedere il messaggio di errore "Password confirmation non può essere lasciato in bianco"
-
+  E dovrei vedere "3 errori non hanno reso possibile il salvataggio"

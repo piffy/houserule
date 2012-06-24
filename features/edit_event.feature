@@ -66,4 +66,15 @@ Funzionalità: Modifica Evento
     Quando premo "Invia"
     Allora dovrei vedere "Deadline non deve precedere l'inizio"
 
+  Scenario:   Conferma impossibile
+    Dato   mi trovo nella pagina di login
+    E      inserisco in "session_email" "paolino@nomail.it"
+    E      inserisco in "session_password" "12345678"
+    E      premo "Login"
+    E      vado alla modifica evento di "Campionato"
+    E      seleziono la data "09-5-2013" in "event_begins_at"
+    E      seleziono la data "10-5-2013" in "event_deadline"
+    Quando premo "Invia"
+    Allora dovrei vedere il messaggio di errore "Deadline non deve precedere l'inizio"
+    E dovrei vedere "Un errore non ha reso possibile il salvataggio"
 

@@ -3,7 +3,9 @@
 = form_for @event, :html => {:class => "form-horizontal"} do |f|
   -if @event.errors.any?
     #error_explanation
-      %h2= "#{@event.errors.count} errori non hanno reso possibile il salvataggio dell'evento:"
+      %h2
+        = @event.errors.count == 1 ? "Un errore non ha" : "#{@event.errors.count} errori non hanno"
+        reso possibile il salvataggio
       %ul
         - @event.errors.full_messages.each do |msg|
           %li= msg
