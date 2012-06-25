@@ -2,12 +2,15 @@ class ReservationsController < ApplicationController
   before_filter :logged_in_user
   before_filter :has_rights_to, only: [:edit, :update, :destroy]
 
+  #Ask confirm for reservation
   def new
     @event = Event.find(params[:event_id])
     @user = current_user
     @reservation = Reservation.new
   end
 
+  #Ask confirm of reservation
+  #Sends email to owner
   def create
     @event = Event.find(params[:event_id])
     @user = current_user

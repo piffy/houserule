@@ -5,6 +5,8 @@ class UserMailer < ActionMailer::Base
   #http://snipplr.com/view/23845/
   #http://stackoverflow.com/questions/4857031/git-deployment-configuration-files-heroku
 
+
+  #Sends a welcome email to newly registered users
   def welcome_email(user)
     @user = user
     @url = login_url(:host => ApplicationController.hostname)

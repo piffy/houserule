@@ -1,3 +1,5 @@
+#This class holds the user model, including name, password, email
+#Email must be unique, whereas name can be duplicated
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :location, :name, :nick, :password, :password_confirmation
   has_many :events, dependent: :destroy
@@ -34,10 +36,12 @@ class User < ActiveRecord::Base
 
   end
 
+  # Returns first name of user (actually, first word)
   def first_name
     Regexp.new(/^(\w+)/).match(name)[0]
   end
 
+  # Returns user nick. If it is empty, returns first name
   def first_name_or_nick
     unless self.nick.nil?  ||   self.nick.empty?
       nick
@@ -46,6 +50,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Returns a list of the events to which the user has a reservation (plain SQL query)
   def reserved_events
     Event.find_by_sql("select events.* from events,reservations where events.id=reservations.event_id AND reservations.user_id="+self.id.to_s)
   end

@@ -12,7 +12,7 @@ class EventMailer < ActionMailer::Base
     mail(:from => "noreplay.houserules@heroku.com", :to => @organizer.email, :subject => "Nuovo iscritto a #{@event.name}")
   end
 
-#use this method to send to event owner or player that a reservation has been deleted
+#Use this method to send to event owner or player that a reservation has been deleted
   def delete_reservation(reservation,admin=nil)
     @event = reservation.event
     @reservation = reservation
@@ -29,7 +29,7 @@ class EventMailer < ActionMailer::Base
 
   end
 
-
+  #Use this method to send to send info to a list of users. Unused in 0.1
   def send_info(sender, event, user_list, information)
     subject "Informazioni su #{event.name}"
     from sender.name

@@ -1,3 +1,5 @@
+#This class represents a reservation to a given Event by a given User
+#Classic n:m relationship.Has status, but unused in 0.1
 class Reservation < ActiveRecord::Base
   attr_accessible :event_id, :status, :user_id
   belongs_to :event

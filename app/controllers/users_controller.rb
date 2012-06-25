@@ -1,4 +1,5 @@
 # encoding: utf-8
+#Contrller class for User object
 class UsersController < ApplicationController
   before_filter :logged_in_user, only: [:index, :edit, :update]
   before_filter :correct_user,   only: [:edit, :update, :destroy]
@@ -7,6 +8,7 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
 
+  #Register a new user. You can't register if you're logged in.
   def new
     if current_user
       flash[:notice] = 'Sei già loggato.'
@@ -15,6 +17,8 @@ class UsersController < ApplicationController
     @user=User.new
 
   end
+
+  #2 actions here: normal edit and ask for confirmation of deletion
   def edit
     @user=User.find(params[:id] )
     @format=params[:format]
@@ -40,6 +44,8 @@ class UsersController < ApplicationController
   def show
     @user=User.find(params[:id])
   end
+
+  #Create user and send welcome mail
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -55,6 +61,8 @@ class UsersController < ApplicationController
     end
   end
 
+  #Currently wipes out the user completely
+  #Should allow a gentlier destroy!
   def destroy
     @user = User.find(params[:id])
     #TODO You should NOT be able to destroy id #1 (Admin) and #2 (Generic user)

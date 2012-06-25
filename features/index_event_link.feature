@@ -43,7 +43,6 @@ Funzionalità: Usare i link dell'elenco eventi
     Dato ci sono 2 eventi di "pluto@nomail.it"
     E mi trovo nella homepage
     Allora dovrei non vedere "Event 15"
-    * mostra la pagina
     E dovrei non vedere "Campionato"
     E dovrei vedere "Event 10" all'interno di "a"
     E dovrei vedere "Event 14" all'interno di "a"
