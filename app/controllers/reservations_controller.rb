@@ -22,7 +22,8 @@ class ReservationsController < ApplicationController
         @reservation.user_id=@current_user.id
         @reservation.status=1; #proposed
         if  @reservation.save
-          flash[:success] = "Prenotazione effettuata!"
+          EventMailer.new_reservation(@reservation).deliver
+          flash[:success] = "Prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
           redirect_to event_path(@event)
         else
           flash[:error] = "problemi"
@@ -61,13 +62,15 @@ class ReservationsController < ApplicationController
     #send confirmation email
     if reservation.user == current_user
       EventMailer.delete_reservation(reservation).deliver
+      msg=" Mail inviata all'organizzatore ("+reservation.event.user.name+")"
     else
       EventMailer.delete_reservation(reservation,current_user).deliver
+      msg=" Mail inviata all'utente ("+reservation.user.name+")"
     end
 
     @event = Event.find(params[:event_id])
     reservation.destroy
-    flash[:success] = "Prenotazione eliminata"
+    flash[:success] = "Prenotazione eliminata."+msg
     redirect_to event_path(@event)
   end
 
