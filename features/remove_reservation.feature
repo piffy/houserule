@@ -28,7 +28,9 @@ Funzionalità: Elimina prenotazione
     Allora dovrei essere nella pagina di visualizzazione della prenotazione con id "1"
     Quando seguo il link "Elimina"
     Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
+    E il sistema ha inviato 1 email
     E dovrei vedere "Prenotazione eliminata"
+    E dovrei vedere "Mail inviata all'organizzatore"
     E dovrei non vedere "Elimina prenotazione"
 
   Scenario: Elimina prenotazione (con navigazione da elenco eventi)
@@ -37,7 +39,9 @@ Funzionalità: Elimina prenotazione
     Allora dovrei essere nella pagina di visualizzazione della prenotazione con id "1"
     Quando seguo il link "Elimina"
     Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
+    E il sistema ha inviato 1 email
     E dovrei vedere "Prenotazione eliminata"
+    E dovrei vedere "Mail inviata all'organizzatore"
     E dovrei non vedere "Elimina prenotazione"
 
   Scenario: Elimina prenotazione a evento iniziato (errore)
@@ -80,7 +84,9 @@ Funzionalità: Elimina prenotazione
   Allora dovrei vedere "di Pluto"
   Quando seguo il link "Elimina"
   Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
+  E il sistema ha inviato 1 email
   E dovrei vedere "Prenotazione eliminata"
+  E dovrei vedere "Mail inviata all'utente"
 
 
 

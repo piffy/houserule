@@ -1,3 +1,13 @@
+
+Then /^il sistema ha inviato (\d+) emails?$/ do |email_count|
+  ActionMailer::Base.deliveries.size.to_s.should == email_count
+end
+
+
+Then /^il sistema non ha ancora inviato emails?$/ do
+  ActionMailer::Base.deliveries = []
+end
+
 Allora /^dovrebbe spedire una mail di conferma registrazione a "([^"]*)"$/ do |address|
   @user = User.find_by_email(address)
   @email = UserMailer.welcome_email(@user)
