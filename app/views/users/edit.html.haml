@@ -1,4 +1,14 @@
-%h1 Modifica di #{@user.name}
+%div{class:"row"}
+  %aside{class:"span4"}
+    %section
+      %h1
+        = gravatar_for @user
+        = "Modifica di "+ @user.first_name_or_nick
+      %span<
+        L'icona è fornita da
+        %nbsp
+        = link_to "Gravatar", "http://www.gravatar.com"
+
 
 = render 'shared/error_shared', :user => @user
 

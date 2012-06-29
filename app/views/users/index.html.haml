@@ -5,6 +5,11 @@
 %ul{:class=>"users"}
   -@users.each do |user|
     %li
+      %span{class:"span6"}
+      = gravatar_for user, 32
       = link_to user.name, user
+      %span{class:"span4"}
+      (iscritto il
+      =l(user.created_at, :format => :long_date_only) + ")"
 
 = will_paginate

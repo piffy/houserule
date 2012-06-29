@@ -125,6 +125,7 @@ it:
       long: "%d %B %Y %H:%M"
       medium: "%d %b %Y - %H:%M"
       formatted: "il %d %b %y alle %H:%M"
+      long_date_only: "%d %B %Y"
     am: 'am'
     pm: 'pm'
 

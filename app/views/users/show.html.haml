@@ -1,7 +1,9 @@
-%h1 Bentornato #{@user.first_name_or_nick}!
-
-
-%div{:class =>"row"}
+%div{class:"row"}
+  %aside{class:"span4"}
+    %section
+      %h1
+        = gravatar_for @user
+        = @user.first_name_or_nick
   %div{:class =>"span4"}
     %p
       %b
@@ -19,6 +21,10 @@
       %b
         Luogo:
       = @user.location
+
+
+%div{:class =>"row"}
+  %div{:class =>"span4"}
     %p
       %b
         Descrizione:
