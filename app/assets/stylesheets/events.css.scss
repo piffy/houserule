@@ -41,3 +41,18 @@ a.nomargin
   margin-left: 2px;
 
 }
+
+#event_begins_at_3i, #event_begins_at_2i,  #event_begins_at_4i,  #event_begins_at_5i,
+#event_deadline_3i, #event_deadline_2i,  #event_deadline_4i,  #event_deadline_5i
+{
+  width:75px;
+}
+
+#event_begins_at_1i,#event_deadline_1i
+{
+  width:100px;
+}
+
+#event_description {
+  height: 100px
+}
