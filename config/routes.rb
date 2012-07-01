@@ -1,5 +1,7 @@
 Houserule::Application.routes.draw do
 
+  resources :groups
+
   get "info/index"
   get "info/about"
   get "info/contact"

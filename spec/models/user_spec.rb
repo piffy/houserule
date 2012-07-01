@@ -145,11 +145,11 @@ describe User do
       FactoryGirl.create(:event, user: @user, begins_at: 2.days.ago)
     end
     let!(:newer_event) do
-      FactoryGirl.create(:event, user: @user, begins_at: 1.day.ago)
+      FactoryGirl.create(:event, user: @user, begins_at: 1.day.from_now)
     end
 
     it "should have the events in the right order" do
-      @user.events.should == [newer_event, older_event]
+      @user.events.should == [ older_event, newer_event]
     end
 
     it "should destroy associated events" do

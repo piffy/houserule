@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @group.name
+%p
+  %b Description:
+  = @group.description
+%p
+  %b User:
+  = @group.user_id
+%p
+  %b Location:
+  = @group.location
+%p
+  %b Website url:
+  = @group.website_url
+%p
+  %b Image url:
+  = @group.image_url
+
+= link_to 'Edit', edit_group_path(@group)
+\|
+= link_to 'Back', groups_path
