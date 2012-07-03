@@ -27,6 +27,8 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
 
+
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @group }
@@ -41,7 +43,8 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(params[:group])
+    params[:group].delete("user_id")
+    @group = current_user.groups.build(params[:group])
 
     respond_to do |format|
       if @group.save

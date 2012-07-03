@@ -22,3 +22,7 @@ Then  /^dovrei essere nella pagina di (\w+) del gruppo "([^"]*)"$/ do |action, e
   assert_equal path, URI.parse(current_url).path
 end
 
+E /^che esistono i seguenti gruppi:$/ do |table|
+  # table is a Cucumber::Ast::Table
+  pending # express the regexp above with the code you wish you had
+end

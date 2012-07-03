@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Group do
   let(:user) { FactoryGirl.create(:user) }
   before(:each) do
-    @group = Group.new
-    @group.name = "Group Name"
+    @group = user.groups.build(:name => "Group name" )
   end
 
   subject { @group }
@@ -15,8 +14,8 @@ describe Group do
   it { should respond_to(:location) }
   it { should respond_to(:website_url) }
   it { should respond_to(:image_url) }
-  #it { should respond_to(:user) }
-  #its(:user) { should == user }
+  it { should respond_to(:user) }
+  its(:user) { should == user }
 
 
   describe "when everything is OK" do
@@ -62,7 +61,7 @@ describe Group do
     @group_2.should_not be_valid
   end
 
-=begin
+
   describe "accessible attributes" do
     it "should not allow access to user_id" do
       expect do
@@ -70,8 +69,6 @@ describe Group do
       end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
-
-=end
 
 end
 

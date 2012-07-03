@@ -3,6 +3,7 @@
 class User < ActiveRecord::Base
   attr_accessible :description, :email, :location, :name, :nick, :password, :password_confirmation
   has_many :events, dependent: :destroy
+  has_many :groups, dependent: :destroy
   has_many :reservations, dependent: :destroy, :through => :events
   #has_many :reserved_events, :class_name => 'Event',:through => :reservations, :source => :events
 

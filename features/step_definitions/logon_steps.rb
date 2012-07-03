@@ -3,11 +3,11 @@ Then /^non sono loggato come utente "(\w+)"/ do |utente|
 end
 
 Given /^mi loggo con email "([^"]*)" e password "([^"]*)"$/ do |utente, password|
-  "mi trovo nella pagina di login"
-  "inserisco in \"session_email\" \"#{utente}\""
-  "inserisco in \"session_password\" \"#{password}\""
-  "inserisco in \"session_password_confirmation\" \"#{password}\""
-  "premo \"Login\""
-  "dovrei vedere \"Profilo\""
+  unless utente.blank?
+    visit login_path
+    fill_in "Email", :with => utente
+    fill_in "Password", :with => password
+    click_button "Login"
+  end
 end
 
