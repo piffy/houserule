@@ -2,7 +2,9 @@ require 'uri'
 require 'cgi'
 
 
-
+Then /^dovrei vedere il titolo "([^"]*)"$/ do |title|
+  page.should have_selector('title', :text => title)
+end
 
 Then /^dovrei essere nella home page$/ do
   assert_equal "/", URI.parse(current_url).path
@@ -31,6 +33,9 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
 
     when /pagina di elenco eventi/
       visit events_path
+
+    when /pagina di creazione gruppo/
+      visit new_group_path
 
     else
       raise "Non posso mappare \"#{page_name}\" a un percorso.\n"

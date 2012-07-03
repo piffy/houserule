@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
   # GET /groups
   # GET /groups.json
   def index
@@ -44,7 +45,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to @group, notice: 'Gruppo creato.' }
         format.json { render json: @group, status: :created, location: @group }
       else
         format.html { render action: "new" }
