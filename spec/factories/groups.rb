@@ -2,11 +2,12 @@
 
 FactoryGirl.define do
   factory :group do
-    name {  Faker::Name.first_name }
-    description description {Faker::Lorem.sentence}
-    user_id 1
+    sequence(:name) { |n| "Group #{n}" }
+    #sequence(:description) { |n| "A description" }
+    description {Faker::Lorem.sentence}
     location { Faker::Address.city }
     website_url  { "http://"+Faker::Internet.domain_name }
     image_url { "http://"+Faker::Internet.domain_name+"/image.jpg" }
+    association :user
   end
 end

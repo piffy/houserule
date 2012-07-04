@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

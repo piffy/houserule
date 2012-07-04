@@ -1,3 +1,8 @@
+Dato /^che ci sono (\d+) gruppi di "([^"]*)"$/ do |n, user_email|
+  user = User.find_by_email(user_email)
+  n.to_i.times {FactoryGirl.create(:group, :user => user) }
+end
+
 Allora /^dovrei essere nella pagina di elenco gruppo$/ do
   path=groups_path
   assert_equal path, URI.parse(current_url).path

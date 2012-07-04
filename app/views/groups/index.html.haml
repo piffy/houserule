@@ -1,29 +1,32 @@
-%h1 Listing groups
+=provide(:title, 'Gruppi')
+%h1 Elenco gruppi
 
-%table
+=will_paginate
+
+%table{:class => "table table-striped"}
   %tr
-    %th Name
-    %th Description
-    %th User
-    %th Location
-    %th Website url
-    %th Image url
+    %th Nome
+    %th Descrizione
+    %th Creato da
+    %th Luogo
+    %th Iscritti
     %th
     %th
     %th
 
   - @groups.each do |group|
     %tr
-      %td= group.name
+      %td=  link_to group.name, group
       %td= group.description
-      %td= group.user_id
+      %td=  link_to group.user.name, group.user
       %td= group.location
-      %td= group.website_url
-      %td= group.image_url
-      %td= link_to 'Show', group
-      %td= link_to 'Edit', edit_group_path(group)
-      %td= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete
+      %td= 0
+      %td= link_to 'Sito', group.website_url, :class =>"btn" unless group.website_url.blank?
+      %td= link_to 'Modifica', edit_group_path(group), :class =>"btn"
+      %td= link_to 'Iscriviti', "#", :class =>"btn btn-primary" unless group.user==current_user
 
 %br
 
-= link_to 'New Group', new_group_path
+=will_paginate
+
+= link_to 'Crea gruppo', new_group_path
