@@ -1,7 +1,10 @@
+=provide(:title, 'Modifica gruppo')
 %h1 Editing group
 
 = render 'form'
 
-= link_to 'Show', @group
+= link_to 'Dettagli', @group,  :class => "btn"
 \|
-= link_to 'Back', groups_path
+= link_to 'Elimina', @event, :confirm => 'Sei sicuro?', :method => :delete ,  :class => "btn btn-danger"
+\|
+= link_to 'Elenco gruppi', groups_path,  :class => "btn"

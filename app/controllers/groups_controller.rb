@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
+  before_filter :has_rights_to,   only: [:edit, :update, :destroy]
   # GET /groups
   # GET /groups.json
   def index
@@ -64,7 +65,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to @group, notice: 'Gruppo modificato.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -84,4 +85,15 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def has_rights_to
+    @group = Group.find(params[:id])
+    unless current_user?(@group.user)
+      flash[:notice] = "Azione non consentita"
+      redirect_to group_path(@group)
+    end
+  end
+
+
+
 end
