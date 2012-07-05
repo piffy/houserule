@@ -25,7 +25,7 @@ Funzionalità: Visualizzare i gruppi presenti
   Scenario: Paginazione
     Dato che ci sono 31 gruppi di "paolino@nomail.it"
     E vado alla pagina di elenco gruppo
-    Allora dovrei vedere "Group 1"
-    E dovrei non vedere "Group 31"
+    Allora dovrei vedere "Group 7"
+    E dovrei non vedere "Group 37"
 
 

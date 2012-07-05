@@ -15,6 +15,7 @@ describe Group do
   it { should respond_to(:website_url) }
   it { should respond_to(:image_url) }
   it { should respond_to(:user) }
+  it { should respond_to(:image_url_or_default) }
   its(:user) { should == user }
 
 
@@ -45,6 +46,16 @@ describe Group do
     @group.website_url = "Certainly_not_an_url"
     @group.should_not be_valid
   end
+
+  it "should have add the http:// prefix if it's missing"  do
+    @group.website_url = "www.houserule.it"
+    @group.image_url = "www.houserule.it/image.jpg"
+    @group.save
+    @group.website_url.should == "http://www.houserule.it"
+    @group.image_url.should == "http://www.houserule.it/image.jpg"
+  end
+
+
 
   it "should have a valid url for images, if it has one"  do
     @group.should be_valid

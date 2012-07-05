@@ -1,0 +1,13 @@
+Gruppi:
+= groups.count
+%ul{:class =>"groups"}
+  - groups.each do |group|
+    %li{:class=> "no-bullet"}
+      %span{:class => "name"}
+        %a{:href => group_path(group)}
+          = image_tag group.image_url_or_default, :alt => "logo", :class =>"tiny-group-logo"
+          = group.name
+      -if group.user == current_user
+        %a{:href => edit_group_path(group)}
+          %i{:class =>"icon-edit"}
+

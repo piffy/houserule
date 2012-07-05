@@ -1,24 +1,41 @@
-%p#notice= notice
+=provide(:title, 'Dettagli gruppo')
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %p
+      %b
+        =  "Creato da "
+      = @group.user.name
+    %p
+      %b il
+      =l(@group.created_at, :format => :short)
+    %p
+      %b Luogo:
+      = @group.location
+    %p
+      %b Membri:
+      0
+    %p
+      = link_to 'Modifica', edit_group_path(@group)
+      \|
+      = link_to 'Indietro', groups_path
+  %div{:class =>"span6"}
+    %h1
+      = @group.name
+    %h2
+      = link_to "Sito web", @group.website_url unless @group.website_url.blank?
+  %div{:class =>"span2"}
+    %p
+      = image_tag @group.image_url_or_default, :alt => "Group logo", :id =>"group-logo"
 
-%p
-  %b Name:
-  = @group.name
-%p
-  %b Description:
-  = @group.description
-%p
-  %b User:
-  = @group.user_id
-%p
-  %b Location:
-  = @group.location
-%p
-  %b Website url:
-  = @group.website_url
-%p
-  %b Image url:
-  = @group.image_url
 
-= link_to 'Edit', edit_group_path(@group)
-\|
-= link_to 'Back', groups_path
+
+
+%hr
+  %div{:class =>"row"}
+    %div{:class =>"span12"}
+      = simple_format(@group.description)
+
+
+%hr
+
+

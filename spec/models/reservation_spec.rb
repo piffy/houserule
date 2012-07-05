@@ -64,4 +64,5 @@ describe Reservation do
     Reservation.count.should == n-1
   end
 
+
 end

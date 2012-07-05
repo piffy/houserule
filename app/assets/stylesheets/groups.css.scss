@@ -1,3 +1,20 @@
 // Place all the styles related to the Groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ #group-logo
+{
+  display:inline;
+  margin:2px;
+  border:1px solid #ffffff;
+  max-height:128px;
+  max-width: 128px;
+}
+
+.tiny-group-logo
+{
+  display:inline;
+  margin:1px;
+  border:0px ;
+  max-height:32px;
+  max-width: 32px;
+}

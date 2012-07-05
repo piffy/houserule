@@ -49,7 +49,7 @@ Scenario:   Altro utente
 Scenario:   Eliminazione Gruppo (con navigazione)
   Dato mi loggo con email "paolino@nomail.it" e password "12345678"
   E      vado alla modifica gruppo di "Gruppo 1"
-  E      dovrei vedere "Elimina"
+  E      dovrei vedere il pulsante "Elimina"
   Quando vado alla eliminazione del gruppo "Gruppo 1"
   E      vado alla pagina di elenco gruppo
   Allora dovrei non vedere "Gruppo 1"

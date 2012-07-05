@@ -5,25 +5,32 @@
 
 %table{:class => "table table-striped"}
   %tr
-    %th Nome
+    %th{colspan:"2"} Nome
     %th Descrizione
     %th Creato da
     %th Luogo
     %th Iscritti
-    %th
+    %th Sito?
     %th
     %th
 
   - @groups.each do |group|
     %tr
+      %td
+        = image_tag group.image_url_or_default, :alt => "logo", :class =>"tiny-group-logo"
       %td=  link_to group.name, group
       %td= group.description
       %td=  link_to group.user.name, group.user
       %td= group.location
       %td= 0
-      %td= link_to 'Sito', group.website_url, :class =>"btn" unless group.website_url.blank?
-      %td= link_to 'Modifica', edit_group_path(group), :class =>"btn"
-      %td= link_to 'Iscriviti', "#", :class =>"btn btn-primary" unless group.user==current_user
+      -unless group.website_url.blank?
+        %td= link_to 'Si', group.website_url
+      -else
+        %td No
+      -if group.user==current_user
+        %td= link_to 'Modifica', edit_group_path(group), :class =>"btn"
+      -else
+        %td= link_to 'Iscriviti', "#", :class =>"btn btn-primary"
 
 %br
 

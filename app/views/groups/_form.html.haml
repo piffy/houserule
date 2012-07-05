@@ -23,11 +23,11 @@
     %div{:class=>"span4"}
       .field
         = f.label :website_url, 'Sito web'
-        = f.text_field :website_url
+        = f.text_field :website_url, :value => ""
     %div{:class=>"span4"}
       .field
         = f.label :image_url, 'Immagine'
-        = f.text_field :image_url
+        = f.text_field :image_url, :value => ""
 
   %div{:class=>"row-fluid"}
     %div{:class=>"span12"}

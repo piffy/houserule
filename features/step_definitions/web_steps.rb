@@ -78,6 +78,10 @@ When /^premo "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+When /^dovrei vedere il pulsante "([^"]*)"$/ do |name|
+  find_button(name).should_not be_nil
+end
+
 When /^scelgo "([^"]*)"$/ do |choice|
   choose(choice)
 end

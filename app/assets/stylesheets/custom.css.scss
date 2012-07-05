@@ -237,3 +237,9 @@ aside {
     margin-bottom: 5px;
   }
 }
+.no-bullet {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 0;
+  font-weight: bold;
+}

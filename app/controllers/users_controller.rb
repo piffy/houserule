@@ -43,6 +43,8 @@ class UsersController < ApplicationController
   end
   def show
     @user=User.find(params[:id])
+    #@groups=@users.groups
+
   end
 
   #Create user and send welcome mail
