@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120701150222) do
+ActiveRecord::Schema.define(:version => 20120707211445) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(:version => 20120701150222) do
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true
+
+  create_table "interests", :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+    t.boolean "is_visible", :default => true
+    t.boolean "is_banned",  :default => false
+    t.boolean "gets_email", :default => true
+  end
+
+  add_index "interests", ["group_id"], :name => "index_interests_on_group_id"
+  add_index "interests", ["user_id", "group_id"], :name => "index_interests_on_user_id_and_group_id", :unique => true
+  add_index "interests", ["user_id"], :name => "index_interests_on_user_id"
 
   create_table "reservations", :force => true do |t|
     t.integer  "user_id"
