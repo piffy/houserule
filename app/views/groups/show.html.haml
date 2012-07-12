@@ -18,8 +18,9 @@
       = link_to 'Modifica', edit_group_path(@group)
       \|
       = link_to 'Indietro', groups_path
-      \|
-      = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"
+      - unless @group.user == current_user
+        \|
+        = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"
   %div{:class =>"span6"}
     %h1
       = @group.name

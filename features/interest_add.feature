@@ -27,4 +27,34 @@ Allora dovrei vedere il titolo "Dettagli gruppo"
 E dovrei vedere "Pippo" all'interno di "a"
 
 
+Scenario: Iscrizione vietata al proprio un gruppo
+Dato che esistono i seguenti gruppi di "pippo@nomail.it":
+| name                  | description               |
+| Gruppo 2              | Un piccolo gruppo         |
+E    vado alla visualizzazione gruppo di "Gruppo 2"
+Quando vado alla iscrizione gruppo di "Gruppo 2"
+Quando premo "Confermo"
+Allora dovrei essere nella pagina di dettagli del gruppo "Gruppo 2"
+E dovrei vedere "Non puoi interessarti al tuo gruppo"
+E dovrei non vedere "Mi interessa"
+
+Scenario: Iscrizione senza opzione email
+Dato dovrei vedere "Mi interessa" all'interno di "a"
+Quando seguo il link "Mi interessa"
+Allora dovrei vedere il titolo "Segnala interesse"
+Quando deseleziono la casella "interest_gets_email"
+Quando premo "Confermo"
+Allora dovrei vedere il titolo "Dettagli gruppo"
+E dovrei vedere "Pippo" all'interno di "a"
+E dovrei non vedere "E" all'interno di "span"
+
+Scenario: Iscrizione senza opzione visibile
+Dato dovrei vedere "Mi interessa" all'interno di "a"
+Quando seguo il link "Mi interessa"
+Allora dovrei vedere il titolo "Segnala interesse"
+Quando deseleziono la casella "interest_is_visible"
+Quando premo "Confermo"
+Allora dovrei vedere il titolo "Dettagli gruppo"
+E dovrei vedere "Pippo" all'interno di "a"
+E dovrei non vedere "V" all'interno di "span"
 

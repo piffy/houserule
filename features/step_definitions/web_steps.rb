@@ -74,6 +74,10 @@ Then /^dovrei vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|
   page.should have_css(selector, :text => text)
 end
 
+Then /^dovrei non vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|
+  page.should_not have_css(selector, :text => text)
+end
+
 When /^premo "([^"]*)"$/ do |button|
   click_button(button)
 end
@@ -92,6 +96,10 @@ end
 
 When /mostra la pagina/ do
   save_and_open_page
+end
+
+When /^deseleziono la casella "([^"]*)"$/ do |arg1|
+  uncheck(arg1)
 end
 
 module WithinHelpers

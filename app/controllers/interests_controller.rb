@@ -20,13 +20,19 @@ class InterestsController < ApplicationController
     #@user = current_user
     @interest = @group.interests.build(params[:interest])
     @interest.user=current_user
-    if  @interest.save
+    if  @group.user!=@interest.user &&  @interest.save
       #groupMailer.new_interest(@interest).deliver
       flash[:success] = "Interesse registrato"
       redirect_to group_path(@group)
     else
-      flash[:error] = "Errori durante l'operazione"
-      render 'new'
+      if @group.user==@interest.user
+        flash[:error] = "Non puoi interessarti al tuo gruppo"
+        redirect_to group_path(@group)
+      else
+        flash[:error] = "Errori durante l'operazione"
+        render 'new'
+      end
+
     end
 
   end

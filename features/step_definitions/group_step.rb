@@ -54,7 +54,7 @@ E /^vado alla (\w+) gruppo di "([^"]*)"$/ do |action,name|
     when "visualizzazione"
       visit group_path(@group)
     when "iscrizione"
-      visit new_event_subscription_path(@group)
+      visit new_group_interest_path(@group)
     else
       raise "Non posso mappare \"#{action}\" a un percorso relativo ad un gruppo!\n"
   end
