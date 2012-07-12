@@ -1,0 +1,30 @@
+=provide(:title, 'Segnala interesse')
+%h1
+  Indica interesse per il gruppo
+  ="'"+@group.name+"'"
+%p
+  Vuoi confermare il tuo interesse per il gruppo
+  ="'"+@group.name+"'"
+  ? In caso contrario, puoi tornare ai
+  = link_to 'dettagli del gruppo', group_path(@group)
+  oppure all'
+  = link_to 'elenco gruppo', groups_path
+
+= form_for([@group, @interest])  do |f|
+  -if @interest.errors.any?
+    #error_explanation
+      %h2= "#{@interest.errors.count} errori non hanno reso possibile la modifica:"
+      %ul
+        - @interest.errors.full_messages.each do |msg|
+          %li= msg
+
+  %h4 Puoi scegliere tra le seguenti opzioni:
+  .field<
+    = f.check_box :is_visible
+    VISIBILE (Gli altri utenti potranno vedere che ti interessa questo gruppo)
+  .field
+    = f.check_box :gets_email
+    EMAIL (Riceverai le email relative a questo gruppo)
+  = f.submit "Confermo", :class => "btn btn-primary"
+
+

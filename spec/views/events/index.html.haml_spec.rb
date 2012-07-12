@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "events/index.html.haml" do
+describe "events/_list_interested_users.html.haml" do
   before(:each) do
     assign(:events, [
       stub_model(Event,
