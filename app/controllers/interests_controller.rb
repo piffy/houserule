@@ -1,5 +1,5 @@
 class InterestsController < ApplicationController
-  #before_filter :logged_in_user
+  before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
   #before_filter :has_rights_to, only: [:edit, :update, :destroy]
 
   #Ask confirm for Interest
@@ -9,30 +9,24 @@ class InterestsController < ApplicationController
     @interest = Interest.new
   end
 
-  def index
-
+  def edit
+    @group = Group.find(params[:group_id])
+    @interest = Interest.find(params[:id])
   end
 
-  #Ask confirm of Interest
-  #Sends email to owner
+  #Sends email to group owner
   def create
     @group = Group.find(params[:group_id])
-    #@user = current_user
-    @interest = @group.interests.build(params[:interest])
-    @interest.user=current_user
-    if  @group.user!=@interest.user &&  @interest.save
-      #groupMailer.new_interest(@interest).deliver
-      flash[:success] = "Interesse registrato"
-      redirect_to group_path(@group)
-    else
-      if @group.user==@interest.user
+    case show_interest(@group)
+      when 1
         flash[:error] = "Non puoi interessarti al tuo gruppo"
         redirect_to group_path(@group)
-      else
+      when false
         flash[:error] = "Errori durante l'operazione"
         render 'new'
-      end
-
+      when true
+        flash[:success] = "Interesse registrato"
+        redirect_to group_path(@group)
     end
 
   end
@@ -62,6 +56,21 @@ class InterestsController < ApplicationController
     redirect_to group_path(@group)
 =end
   end
+
+
+  def show_interest (group,user=nil)
+    if user==nil
+      user=current_user
+    end
+    interest = user.interests.build(params[:interest])
+    interest.group=group
+    if interest.user == group.user
+      return  1 #no self-interest
+    end
+    interest.save
+
+  end
+
 
   private
 

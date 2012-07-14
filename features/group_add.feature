@@ -26,6 +26,7 @@ Funzionalità: Creazione gruppo
     Quando premo "Invia"
     Allora  dovrei essere nella pagina di dettagli del gruppo "Un nome"
     E dovrei vedere "Gruppo creato"
+    E dovrei vedere "Paperino" all'interno di "span#group_owner"
 
   Scenario:  Non inserisco il nome
     Dato mi loggo con email "paolino@nomail.it" e password "12345678"
@@ -50,15 +51,4 @@ Funzionalità: Creazione gruppo
     Quando inserisco in "group_name" "Un nome"
     Quando premo "Invia"
     Allora dovrei vedere il messaggio di errore "Name è già in uso"
-
-  Scenario: Elenco dei gruppi creati nel profilo utente
-    Dato che esistono i seguenti gruppi di "paolino@nomail.it":
-      | name                  | description               |
-      | Gruppo Strano         | Un grande gruppo          |
-    E mi loggo con email "paolino@nomail.it" e password "12345678"
-    Quando vado al profilo dell'utente "paolino@nomail.it"
-    Allora dovrei vedere "Gruppo Strano" all'interno di "li"
-
-
-
 

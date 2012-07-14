@@ -8,6 +8,9 @@ Gruppi:
           = image_tag group.image_url_or_default, :alt => "logo", :class =>"tiny-group-logo"
           = group.name
       -if group.user == current_user
-        %a{:href => edit_group_path(group)}
-          %i{:class =>"icon-edit"}
+        = link_to "Gestisci", edit_group_path(group)
+      USER_ID::
+      = group.user.id
+      \|
+      = group.user.name
 

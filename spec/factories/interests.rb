@@ -5,7 +5,7 @@ FactoryGirl.define do
     association :group
     association :user
     is_visible true
-    is_banned true
+    is_banned false
     gets_email false
   end
 end

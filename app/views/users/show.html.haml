@@ -48,8 +48,8 @@
     -if @user.reserved_events.any?
       = render "shared/list_event" , :events => @user.reserved_events ,:show_organizer => true
 
-    -if @user.groups.any?
-      = render "shared/list_group" , :groups => @user.groups
+    -if @groups.any?
+      = render "shared/list_group" , :groups => @groups
 %hr
 %div{:class=>"btn-group"}
   = link_to 'Lista utenti', users_path,  :class => "btn"

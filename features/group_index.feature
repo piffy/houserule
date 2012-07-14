@@ -19,7 +19,7 @@ Funzionalità: Visualizzare i gruppi presenti
     E      dovrei vedere "Descrizione" all'interno di "th"
     E      dovrei vedere "Luogo" all'interno di "th"
     E      dovrei vedere "Creato da" all'interno di "th"
-    E      dovrei vedere "Iscritti" all'interno di "th"
+    E      dovrei vedere "Interessati" all'interno di "th"
 
 
   Scenario: Paginazione
@@ -28,4 +28,22 @@ Funzionalità: Visualizzare i gruppi presenti
     Allora dovrei vedere "Group 7"
     E dovrei non vedere "Group 37"
 
+Scenario: Non loggato (Redirect amichevole)
+  Dato che ci sono 1 gruppi di "paolino@nomail.it"
+  E vado alla pagina di elenco gruppo
+  Allora dovrei vedere "Group 38"
+  E dovrei vedere "Mi interessa" all'interno di "a"
+  Quando seguo il link "Mi interessa"
+  Allora dovrei essere nella pagina di login
+  Quando mi loggo con email "pluto@nomail.it" e password "12345678"
+  Allora dovrei vedere il titolo "Segnala interesse"
+
+Scenario: Già interessato
+Quando mi loggo con email "pluto@nomail.it" e password "12345678"
+Dato che ci sono 1 gruppi di "paolino@nomail.it"
+E che i seguenti utenti sono interessati al gruppo "Group 39"
+| user_name               | is_visible | is_banned | gets_email |
+| Pluto                   | 1          | 0         | 1          |
+E vado alla pagina di elenco gruppo
+Allora dovrei vedere "Cambia" all'interno di "a"
 

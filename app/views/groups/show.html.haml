@@ -4,7 +4,8 @@
     %p
       %b
         =  "Creato da "
-      = @group.user.name
+      %span{:id => "group_owner"}
+        = @group.user.name
     %p
       %b il
       =l(@group.created_at, :format => :short)
@@ -18,7 +19,7 @@
       = link_to 'Modifica', edit_group_path(@group)
       \|
       = link_to 'Indietro', groups_path
-      - unless @group.user == current_user
+      - unless @group.user == current_user   || already_interested?(current_user,@group)
         \|
         = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"
   %div{:class =>"span6"}

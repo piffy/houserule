@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  include GroupsHelper
   before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
   before_filter :has_rights_to,   only: [:edit, :update, :destroy]
   # GET /groups
@@ -16,6 +17,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+
 
     respond_to do |format|
       format.html # show.html.erb

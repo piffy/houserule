@@ -57,4 +57,3 @@ Quando premo "Confermo"
 Allora dovrei vedere il titolo "Dettagli gruppo"
 E dovrei vedere "Pippo" all'interno di "a"
 E dovrei non vedere "V" all'interno di "span"
-

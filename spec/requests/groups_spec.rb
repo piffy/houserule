@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe "Groups" do
-  describe "GET /groups" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+
+  let(:user) { FactoryGirl.create(:user) }
+  before { @group = user.groups.build(name: "new group") }
+
+  subject { page }
+
+  describe "index" do
+    it "responds to index" do
       get groups_path
       response.status.should be(200)
     end

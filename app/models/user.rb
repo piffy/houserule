@@ -57,6 +57,11 @@ class User < ActiveRecord::Base
     Event.find_by_sql("select events.* from events,reservations where events.id=reservations.event_id AND reservations.user_id="+self.id.to_s)
   end
 
+  # Returns a list of the groups to which the user has shown interest (plain SQL query)
+  def interesting_groups
+    Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+self.id.to_s)
+  end
+
   private
 
     def create_remember_token

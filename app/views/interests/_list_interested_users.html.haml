@@ -1,18 +1,19 @@
 %ul{:class=>"users"}
   -interests.each do |interest|
-    %li
-      %span{class:"span6"}
-      = gravatar_for interest.user, 32
-      = link_to interest.user.name, interest.user
-      %span{class:"span2"}
-      -if interest.is_visible
-        %span{class:"badge badge-info", title:"visibile"}
-          V
-      -if interest.is_banned
-        %span{class:"badge badge-important", title:"bannao"}
-          B
-      -if interest.gets_email
-        %span{class:"badge badge-success", title:"email"}
-          M
-      %span{class:"span4"}
-        =link_to 'Modifica', edit_group_interest_path(@group,interest), :class =>"btn btn-primary"
+    -if interest.is_visible || @group.user==current_user || interest.user==current_user
+      %li
+        %span{class:"span6"}
+        = gravatar_for interest.user, 32
+        = link_to interest.user.name, interest.user
+        %span{class:"span2"}
+        -if interest.is_visible
+          %span{class:"badge badge-info", title:"visibile"}
+            V
+        -if interest.is_banned
+          %span{class:"badge badge-important", title:"bannato"}
+            B
+        -if interest.gets_email
+          %span{class:"badge badge-success", title:"email"}
+            M
+        %span{class:"span4"}
+          =link_to 'Modifica', edit_group_interest_path(@group,interest), :class =>"btn btn-primary"

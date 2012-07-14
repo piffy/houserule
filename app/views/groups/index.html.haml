@@ -9,7 +9,7 @@
     %th Descrizione
     %th Creato da
     %th Luogo
-    %th Iscritti
+    %th Interessati
     %th Sito?
     %th
     %th
@@ -22,7 +22,7 @@
       %td= group.description
       %td=  link_to group.user.name, group.user
       %td= group.location
-      %td= 0
+      %td= group.interests.count
       -unless group.website_url.blank?
         %td= link_to 'Si', group.website_url
       -else
@@ -30,7 +30,11 @@
       -if group.user==current_user
         %td= link_to 'Modifica', edit_group_path(group), :class =>"btn"
       -else
-        %td= link_to 'Iscriviti', "#", :class =>"btn btn-primary"
+        -if already_interested?(current_user,group)
+          %td= link_to 'Cambia', edit_group_interest_path(group,already_interested?(current_user,group)), :class =>"btn btn-primary"
+        -else
+          %td= link_to 'Mi interessa', new_group_interest_path(group), :class =>"btn btn-primary"
+
 
 %br
 

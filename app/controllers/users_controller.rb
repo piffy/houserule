@@ -43,7 +43,9 @@ class UsersController < ApplicationController
   end
   def show
     @user=User.find(params[:id])
-    #@groups=@users.groups
+    @groups=@user.groups
+    @groups<<@user.interesting_groups
+
 
   end
 
