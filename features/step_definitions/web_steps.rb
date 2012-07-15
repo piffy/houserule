@@ -102,6 +102,10 @@ When /^deseleziono la casella "([^"]*)"$/ do |arg1|
   uncheck(arg1)
 end
 
+When /^seleziono la casella "([^"]*)"$/ do |arg1|
+  check(arg1)
+end
+
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield

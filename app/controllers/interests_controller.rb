@@ -1,6 +1,6 @@
 class InterestsController < ApplicationController
-  before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
-  #before_filter :has_rights_to, only: [:edit, :update, :destroy]
+  before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update]
+  before_filter :has_rights_to, only: [:edit, :update, :destroy]
 
   #Ask confirm for Interest
   def new
@@ -12,6 +12,21 @@ class InterestsController < ApplicationController
   def edit
     @group = Group.find(params[:group_id])
     @interest = Interest.find(params[:id])
+  end
+
+  def update
+    @group = Group.find(params[:group_id])
+    @interest = Interest.find(params[:id])
+
+    respond_to do |format|
+      if @interest.update_attributes(params[:interest])
+        format.html { redirect_to @group, notice: 'Interesse aggiornato' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   #Sends email to group owner
@@ -32,29 +47,18 @@ class InterestsController < ApplicationController
   end
 
   def show
-    #@group = Group.find(params[:group_id])
     @interest= Interest.find(params[:id])
     @group = @interest.group
   end
 
 
   def destroy
-=begin
-    interest= Interest.find(params[:id])
-    #send confirmation email
-    if interest.user == current_user
-      groupMailer.delete_Interest(Interest).deliver
-      msg=" Mail inviata all'organizzatore ("+interest.group.user.name+")"
-    else
-      groupMailer.delete_Interest(interest,current_user).deliver
-      msg=" Mail inviata all'utente ("+interest.user.name+")"
-    end
+    @group = Group.find(params[:group_id])
+    @interest= Interest.find(params[:id])
 
-    @group = group.find(params[:group_id])
-    Interest.destroy
-    flash[:success] = "Prenotazione eliminata."+msg
+    @interest.destroy
+    flash[:success] = "Interesse eliminato."
     redirect_to group_path(@group)
-=end
   end
 
 
@@ -76,6 +80,10 @@ class InterestsController < ApplicationController
 
   def has_rights_to
     r = Interest.find(params[:id])
+    if r.is_banned?
+      flash[:notice] = "Sei stato bannato"
+      redirect_to group_path(r.group)
+    end
     unless current_user?(r.user) || current_user?(r.group.user)
       flash[:notice] = "Azione non consentita"
       redirect_to group_path(r.group)

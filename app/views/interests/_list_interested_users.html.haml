@@ -7,13 +7,10 @@
         = link_to interest.user.name, interest.user
         %span{class:"span2"}
         -if interest.is_visible
-          %span{class:"badge badge-info", title:"visibile"}
-            V
+          %i{class:"icon-eye-open", title:"visibile"}
         -if interest.is_banned
-          %span{class:"badge badge-important", title:"bannato"}
-            B
+          %i{class:"icon-fire", title:"bannato"}
         -if interest.gets_email
-          %span{class:"badge badge-success", title:"email"}
-            M
+          %i{class:"icon-envelope", title:"email"}
         %span{class:"span4"}
           =link_to 'Modifica', edit_group_interest_path(@group,interest), :class =>"btn btn-primary"

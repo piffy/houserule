@@ -3,12 +3,18 @@
   Modifica interesse per il gruppo
   ="'"+@group.name+"'"
 %p
-  Vuoi confermare il tuo interesse per il gruppo
+  Qui puoi modificare le opzioni relative al gruppo
   ="'"+@group.name+"'"
-  ? In caso contrario, puoi
+  (gestito da
+  =@group.user.name+")"
+  - if @interest.user != current_user
+    per l'utente
+    =@interest.user.name
+  In alternativa puoi tornare ai
   = link_to 'dettagli del gruppo', group_path(@group)
-  oppure all'
-  = link_to 'elenco gruppo', groups_path
+  o infine
+  = link_to 'eliminare', group_interest_path(@group,@interest) , :confirm => 'Sei sicuro?', :method => :delete
+  il l'iscrizione al gruppo.
 
 = form_for([@group, @interest])  do |f|
   -if @interest.errors.any?
@@ -25,6 +31,13 @@
   .field
     = f.check_box :gets_email
     EMAIL (Riceverai le email relative a questo gruppo)
+  -if @group.user == current_user
+    .field
+      = f.check_box :is_banned
+      BANNATO (Impedisce all'utente di iscriversi al gruppo)
   = f.submit "Confermo", :class => "btn btn-primary"
+
+= form_for([@group, @interest],:method => :delete )  do |f|
+  = f.submit "Elimina", :class=>"btn btn-danger",  :confirm => 'Sei sicuro?'
 
 

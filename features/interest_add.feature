@@ -25,7 +25,8 @@ Allora dovrei vedere il titolo "Segnala interesse"
 Quando premo "Confermo"
 Allora dovrei vedere il titolo "Dettagli gruppo"
 E dovrei vedere "Pippo" all'interno di "a"
-
+E dovrei vedere "" all'interno di "i.icon-eye-open"
+E dovrei vedere "" all'interno di "i.icon-envelope"
 
 Scenario: Iscrizione vietata al proprio un gruppo
 Dato che esistono i seguenti gruppi di "pippo@nomail.it":
@@ -46,7 +47,8 @@ Quando deseleziono la casella "interest_gets_email"
 Quando premo "Confermo"
 Allora dovrei vedere il titolo "Dettagli gruppo"
 E dovrei vedere "Pippo" all'interno di "a"
-E dovrei non vedere "E" all'interno di "span"
+E dovrei vedere "" all'interno di "i.icon-eye-open"
+E dovrei non vedere "" all'interno di "i.icon-envelope"
 
 Scenario: Iscrizione senza opzione visibile
 Dato dovrei vedere "Mi interessa" all'interno di "a"
@@ -56,4 +58,5 @@ Quando deseleziono la casella "interest_is_visible"
 Quando premo "Confermo"
 Allora dovrei vedere il titolo "Dettagli gruppo"
 E dovrei vedere "Pippo" all'interno di "a"
-E dovrei non vedere "V" all'interno di "span"
+E dovrei non vedere "" all'interno di "i.icon-eye-open"
+E dovrei vedere "" all'interno di "i.icon-envelope"
