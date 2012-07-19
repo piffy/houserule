@@ -98,6 +98,12 @@ When /mostra la pagina/ do
   save_and_open_page
 end
 
+
+When /debugga la pagina/ do
+  save_and_open_page
+  true
+end
+
 When /^deseleziono la casella "([^"]*)"$/ do |arg1|
   uncheck(arg1)
 end

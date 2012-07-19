@@ -1,16 +1,14 @@
 %ul{:class=>"users"}
   -interests.each do |interest|
-    -if interest.is_visible || @group.user==current_user || interest.user==current_user
-      %li
-        %span{class:"span6"}
-        = gravatar_for interest.user, 32
-        = link_to interest.user.name, interest.user
-        %span{class:"span2"}
-        -if interest.is_visible
-          %i{class:"icon-eye-open", title:"visibile"}
-        -if interest.is_banned
-          %i{class:"icon-fire", title:"bannato"}
-        -if interest.gets_email
-          %i{class:"icon-envelope", title:"email"}
-        %span{class:"span4"}
-          =link_to 'Modifica', edit_group_interest_path(@group,interest), :class =>"btn btn-primary"
+    -if (interest.is_visible  && !interest.is_banned)  || @group.user==current_user || interest.user==current_user
+      %li{class:"no-bullet"}
+        %span
+          = gravatar_for interest.user, 16
+          = link_to interest.user.name, edit_group_interest_path(@group,interest)
+        %span
+          -if interest.is_visible
+            %i{class:"icon-eye-open", title:"visibile"}
+          -if interest.is_banned
+            %i{class:"icon-fire", title:"bannato"}
+          -if interest.gets_email
+            %i{class:"icon-envelope", title:"email"}

@@ -44,7 +44,8 @@ class UsersController < ApplicationController
   def show
     @user=User.find(params[:id])
     @groups=@user.groups
-    @groups<<@user.interesting_groups
+    @interesting_groups=Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+@user.id.to_s)
+    #@groups<<@user.interesting_groups
 
 
   end

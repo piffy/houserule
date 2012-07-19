@@ -1,15 +1,12 @@
 =provide(:title, 'Utente')
+%h1
+  = @user.first_name_or_nick
 %div{class:"row"}
   %aside{class:"span4"}
     %section
       %h1
         = gravatar_for @user
-        = @user.first_name_or_nick
-  %div{:class =>"span4"}
-    %p
-      %b
-        Nome completo:
-      = @user.name
+        = @user.name
     %p
       %b
         Iscritto il:
@@ -22,36 +19,36 @@
       %b
         Luogo:
       = @user.location
-
-
-%div{:class =>"row"}
-  %div{:class =>"span4"}
     %p
       %b
         Descrizione:
       = simple_format(@user.description)
-  %div{:class =>"span8"}
-    %p#organized-events
-      Eventi organizzati:
-      =@user.events.count
-      - if current_user?(@user)
-        = link_to 'Organizza evento', new_event_path, :class => "btn"
-
+  %div{:class =>"span4"}
+    %h3
+      %b Eventi:
+      =@user.events.count + @user.reserved_events.count
     -if @user.events.any?
       -@events=@user.events
       = render "shared/list_event",  :events => @user.events ,:show_organizer => false
-
-    %p#reserved-events
-      Eventi prenotati:
-      =@user.reserved_events.count
-
     -if @user.reserved_events.any?
       = render "shared/list_event" , :events => @user.reserved_events ,:show_organizer => true
 
-    -if @groups.any?
-      = render "shared/list_group" , :groups => @groups
+  %div{:class =>"span4"}
+    %h3
+      %b Gruppi:
+      %span{:id => "group_count"}
+        =@groups.count+@interesting_groups.count
+    %ol{:class =>"groups"}
+      -if @groups.any?
+        = render "shared/list_group" , :groups => @groups
+      -if @interesting_groups.any?
+        = render "shared/list_group" , :groups => @interesting_groups
+
 %hr
 %div{:class=>"btn-group"}
   = link_to 'Lista utenti', users_path,  :class => "btn"
   = link_to 'Modifica', edit_user_path(@user), :class => "btn"
+  - if current_user?(@user)
+    = link_to 'Organizza evento', new_event_path, :class => "btn"
+    = link_to 'Crea gruppo', new_group_path, :class => "btn"
   = link_to 'Elimina utente', edit_user_path(@user)+".delete", :class => "btn btn-danger"

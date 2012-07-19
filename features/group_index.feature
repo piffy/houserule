@@ -41,9 +41,10 @@ Scenario: Non loggato (Redirect amichevole)
 Scenario: Già interessato
 Quando mi loggo con email "pluto@nomail.it" e password "12345678"
 Dato che ci sono 1 gruppi di "paolino@nomail.it"
-E che i seguenti utenti sono interessati al gruppo "Group 39"
-| user_name               | is_visible | is_banned | gets_email |
-| Pluto                   | 1          | 0         | 1          |
+E che esistono i seguenti gruppi di "paolino@nomail.it":
+| name                  |
+| Gruppo OK             |
+E a "Pluto" interessa il gruppo "Gruppo OK"
 E vado alla pagina di elenco gruppo
 Allora dovrei vedere "Cambia" all'interno di "a"
 

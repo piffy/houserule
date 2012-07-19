@@ -1,45 +1,49 @@
 =provide(:title, 'Dettagli gruppo')
-%div{:class =>"row"}
+%h1
+  = @group.name
+%div{class:"row"}
+  %aside{class:"span4"}
+    %section
+      %h1
+        = image_tag @group.image_url_or_default, :alt => "Group logo", :id =>"group-logo", :class => "gravatar"
+
   %div{:class =>"span4"}
     %p
       %b
-        =  "Creato da "
+        Sito web:
+      = link_to "Sito web", @group.website_url unless @group.website_url.blank?
+    %p
+      %b
+        Creato il:
+      =l(@group.created_at, :format => :short)
+    %p
+      %b
+        =  "Gestito da: "
       %span{:id => "group_owner"}
         = @group.user.name
     %p
-      %b il
-      =l(@group.created_at, :format => :short)
-    %p
-      %b Luogo:
+      %b
+        Luogo:
       = @group.location
-    %p
+    = simple_format("<b>Descrizione: </b>"+@group.description, :id => "description")
+
+
+
+  %div{:class =>"span4"}
+    %h3
       %b Membri:
-      =@group.interests.count
+      %span{:id => "member_count"}
+        =@group.interests.count
+    = render 'interests/list_interested_users', :interests => @group.interests
+
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+
+
     %p
-      = link_to 'Modifica', edit_group_path(@group)
-      \|
-      = link_to 'Indietro', groups_path
+      = link_to 'Modifica', edit_group_path(@group), :class => "btn"
+      %nbsp
+      = link_to 'Indietro', groups_path, :class => "btn"
       - unless @group.user == current_user   || already_interested?(current_user,@group)
-        \|
+        %nbsp
         = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"
-  %div{:class =>"span6"}
-    %h1
-      = @group.name
-    %h2
-      = link_to "Sito web", @group.website_url unless @group.website_url.blank?
-  %div{:class =>"span2"}
-    %p
-      = image_tag @group.image_url_or_default, :alt => "Group logo", :id =>"group-logo"
-
-
-
-
-%hr
-  %div{:class =>"row"}
-    %div{:class =>"span12"}
-      = simple_format(@group.description)
-
-
-%hr
-
-= render 'interests/list_interested_users', :interests => @group.interests

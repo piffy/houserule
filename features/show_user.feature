@@ -16,13 +16,10 @@ Funzionalità: Mostra utente
 
   Scenario:   Visualizza propri dati
     Dato      vado al profilo dell'utente "paolino@nomail.it"
-    Allora    dovrei vedere "Paperino" all'interno di "p"
-    E         dovrei vedere "Bentornato pap!" all'interno di "h1"
-    E         dovrei vedere "pap" all'interno di "p"
+    Allora    dovrei vedere "Paperino" all'interno di "h1"
+    E         dovrei vedere "pap" all'interno di "h1"
     E         dovrei vedere "Paperopoli" all'interno di "p"
     E         dovrei vedere "Papero" all'interno di "p"
-    E         dovrei vedere "Eventi organizzati: 0"
-    E         dovrei vedere "Eventi prenotati: 0"
 
 
   Scenario:   Visualizza partite organizzate
@@ -31,29 +28,25 @@ Funzionalità: Mostra utente
       | Evento 1              | Risiko     |  10-5-2013 |
       | Evento 2              | Monopoli   |  13-5-2013 |
     Dato  vado al profilo dell'utente "paolino@nomail.it"
-    Allora dovrei vedere "Eventi organizzati" all'interno di "p#organized-events"
-    E dovrei vedere "2" all'interno di "p#organized-events"
-    E dovrei vedere "Evento 1" all'interno di "span"
-    E dovrei vedere "Evento 2" all'interno di "span"
+    Allora dovrei vedere "2" all'interno di "p"
+    E dovrei vedere "Evento 1" all'interno di "li"
+    E dovrei vedere "Evento 2" all'interno di "li"
 
 
   Scenario:   Visualizza le prenotazioni
     Dato che esistono i seguenti eventi dell'utente "paolino@nomail.it":
       | name                  | system     |  begins_at |
       | Evento 1              | Risiko     |  10-5-2013 |
-      | Evento 2              | Monopoli   |  13-5Evento 1-2013 |
+      | Evento 2              | Monopoli   |  13-5-2013 |
     E che esiste la prenotazione dell'evento "Evento 1" per l'utente "paolino@nomail.it"
     Quando  vado al profilo dell'utente "paolino@nomail.it"
-    Allora dovrei vedere "Eventi prenotati" all'interno di "p#reserved-events"
-    E dovrei vedere "2" all'interno di "p#organized-events"
-    E dovrei vedere "Evento 1" all'interno di "span"
-    E dovrei vedere "1" all'interno di "p#reserved-events"
+    Allora dovrei vedere "2" all'interno di "p"
+    E dovrei vedere "Evento 1" all'interno di "li"
 
 
   Scenario:   Visualizza dati di altri utenti
     Dato      vado al profilo dell'utente "pluto@nomail.it"
-    Allora    dovrei vedere "Pluto" all'interno di "p"
-    E         dovrei vedere "Bentornato Pluto!" all'interno di "h1"
+    Allora    dovrei vedere "Pluto" all'interno di "h1"
     E         dovrei vedere "Topolinia" all'interno di "p"
     E         dovrei vedere "Cane" all'interno di "p"
     E         dovrei non vedere "Organizza evento"

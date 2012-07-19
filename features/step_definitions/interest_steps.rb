@@ -5,20 +5,6 @@ Allora /^dovrei essere nella pagina di iscrizione gruppo di "([^"]*)"$/ do |grou
   assert_equal path, URI.parse(current_url).path
 end
 
-
-E /^che i seguenti utenti sono interessati al gruppo "([^"]*)"$/ do |group_name, table|
-  # table is a Cucumber::Ast::Table
-  group = Group.find_by_name(group_name)
-  table.map_headers!(/user_name/i => :user_id)
-
-  table.hashes.each do |interest|
-    user=User.find_by_name(interest[:user_id])
-    interest[:user_id]=user.id
-    i=group.interests.build(interest)
-    i.save!
-  end
-end
-
 Dato /^a "([^"]*)" interessa il gruppo "([^"]*)"$/ do |user_name, group_name|
   user=User.find_by_name(user_name)
   group = Group.find_by_name(group_name)
@@ -30,6 +16,14 @@ Dato /^"([^"]*)" è bannato dal gruppo "([^"]*)"$/ do |user_name, group_name|
   group = Group.find_by_name(group_name)
   i=user.interests.build( :group_id => group.id)
   i.is_banned=true
+  i.save!
+end
+
+Dato /^"([^"]*)" è invisibile nel gruppo "([^"]*)"$/ do |user_name, group_name|
+  user=User.find_by_name(user_name)
+  group = Group.find_by_name(group_name)
+  i=user.interests.build( :group_id => group.id)
+  i.is_visible=false
   i.save!
 end
 

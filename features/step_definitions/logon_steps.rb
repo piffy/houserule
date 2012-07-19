@@ -11,3 +11,12 @@ Given /^mi loggo con email "([^"]*)" e password "([^"]*)"$/ do |utente, password
   end
 end
 
+
+Given /^faccio il logout/ do
+  cookies.to_hash.each_pair do |k, v|
+    cookies[k.to_sym] = { :value => '',
+                          :path => '/',
+                          :domain => '.domain.com',
+                          :expire => 1.day.ago }
+  end
+end

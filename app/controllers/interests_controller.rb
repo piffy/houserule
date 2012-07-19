@@ -29,19 +29,23 @@ class InterestsController < ApplicationController
     end
   end
 
-  #Sends email to group owner
+  #TODO Sends email to group owner
   def create
     @group = Group.find(params[:group_id])
-    case show_interest(@group)
-      when 1
-        flash[:error] = "Non puoi interessarti al tuo gruppo"
-        redirect_to group_path(@group)
-      when false
-        flash[:error] = "Errori durante l'operazione"
-        render 'new'
-      when true
+    @user=current_user
+    if @user==@group.user
+      flash[:error] = "Non puoi interessarti al tuo gruppo"
+      redirect_to group_path(@group)
+    else
+      @interest = @user.interests.build(params[:interest])
+      @interest.group=@group
+      if @interest.save
         flash[:success] = "Interesse registrato"
         redirect_to group_path(@group)
+      else
+        flash[:error] = "Errori durante l'operazione"
+        render 'new'
+      end
     end
 
   end
@@ -61,7 +65,7 @@ class InterestsController < ApplicationController
     redirect_to group_path(@group)
   end
 
-
+=begin
   def show_interest (group,user=nil)
     if user==nil
       user=current_user
@@ -74,13 +78,13 @@ class InterestsController < ApplicationController
     interest.save
 
   end
-
+=end
 
   private
 
   def has_rights_to
     r = Interest.find(params[:id])
-    if r.is_banned?
+    if r.is_banned? && !current_user?(r.group.user)
       flash[:notice] = "Sei stato bannato"
       redirect_to group_path(r.group)
     end
