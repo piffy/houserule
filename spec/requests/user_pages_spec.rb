@@ -23,7 +23,7 @@ describe "User pages" do
       let(:first_page) { User.paginate(page: 1) }
       let(:second_page) { User.paginate(page: 2) }
 
-      it { should have_link('Next') }
+      it { should have_link('Prossimo') }
       its(:html) { should match('>2</a>') }
 
       it "should list each user" do

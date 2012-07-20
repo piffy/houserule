@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def self.version
-    '0.1'
+    '0.1.3'
   end
 
   def self.hostname

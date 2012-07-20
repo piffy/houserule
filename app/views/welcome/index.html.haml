@@ -17,13 +17,15 @@
     %p
       %i{:class=>"icon-user", :title=>"Utenti"}
       = @user_count
-      utenti registrati
+      = link_to "utenti registrati", users_path
+      organizzati in
+      = @group_count
+      = link_to "gruppi", groups_path
       %br
       %i{:class=>"icon-calendar", :title=>"Eventi"}
       =@event_count
-      eventi nel database, di cui
-      %br
-      %i{:class=>"icon-calendar", :title=>"Eventi"}
+      = link_to "eventi", events_path
+      presenti, di cui
       =@not_yet_started_event_count
       non ancora iniziati
   %div{:class =>"span8"}
@@ -36,11 +38,14 @@
 
 
 %h4
-  <span class="label">ALPHA</span>
+  %span{class: "label"}
+    ALPHA
+    =ApplicationController.version
 %p
-  Il sito è in fase di lavorazione, ma siamo "quasi pronti" alla release 0.1. Le funzionalità essenziali sono già
-  funzionanti... siete quindi invitati a provarle! E per farci capire cosa non funziona o non vi piace, ci fareste un
-  gran piacere lasciandoci un commento
+  Il sito è in fase di lavorazione, e si sta lavorando alla release successiva (0.2). Le funzionalità essenziali sono già
+  funzionanti... La nuova funzionalità in lavorazione è quella relativa ai gruppi, in modo da poter
+  annunciare i nuovi eventi e le modifiche in modo più granulare.
+  Vi saremmo comunque grati se voleste lasciarci un commento
   =link_to "in questa sondaggio gentilmente offerto da Google.", info_feedback_path
   %br
   Per ulteriori dettagli visitate
