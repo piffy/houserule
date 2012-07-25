@@ -14,4 +14,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Registrazione a House Rule")
   end
 
+  def reset_password_email(user)
+    @user = user
+    @version = ApplicationController.version
+    mail(:to => user.email, :subject => "Reset password per House Rule")
+  end
 end

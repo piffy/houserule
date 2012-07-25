@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   end
 
   def self.hostname
-    'afternoon-spring-6294.herokuapp.com'
+    if Rails.env == 'production'
+      'afternoon-spring-6294.herokuapp.com'
+    else
+      'localhost:3000'
+    end
   end
 end

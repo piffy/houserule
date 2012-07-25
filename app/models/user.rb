@@ -61,6 +61,11 @@ class User < ActiveRecord::Base
   #def interesting_groups
   #  Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+self.id.to_s)
   #end
+  def reset_password_url
+    #self.create_perishable_token
+    #self.save
+    "http://"+ApplicationController.hostname+"/password_resets/"+self.remember_token+"/edit"
+  end
 
   private
 

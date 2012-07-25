@@ -1,0 +1,17 @@
+=provide(:title, 'Password dimenticata')
+%h1
+  Password dimenticata
+%p
+  Se ti sei dimenticato la password, puoi indicare la mail con la quale hai effettuato la
+  registrazione nel form sottostante. Ti arriverà una mail contenente le modalità per cambiare la
+  password e poter nuovamente accedere al sistema.
+
+
+=form_for(:password_reset, :url => password_resets_path, :html => {:class => "form-horizontal"}) do |f|
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      .field
+        = f.label :email
+        = f.text_field :email
+  %br
+  = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia email per la password')

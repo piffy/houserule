@@ -1,0 +1,20 @@
+=provide(:title, 'Cambio password')
+%h1
+  Cambio password
+
+%p
+  Inserisci la nuova password che intendi usare.
+
+= render 'shared/error_shared', :user => @user
+
+=form_for(:password_reset, :url => password_reset_path, :html => {:class => "form-horizontal", :method => "put"}) do |f|
+  %div{:class =>"row"}
+    %div{:class =>"span4"}
+      = f.label :password , 'Password (6-15 lettere)'
+      = f.password_field :password
+    %div{:class =>"span4"}
+      = f.label :password_confirmation , 'Conferma Password'
+      = f.password_field :password_confirmation
+      %br
+      = f.hidden_field :token, value: @token
+  = f.submit "Reimposta password", :class => "btn btn-primary"

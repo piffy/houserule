@@ -37,6 +37,14 @@ describe UserMailer do
     sent.first.body.should =~ url_regex #has an URL
   end
 
+  it 'should send password reset instruction email' do
+    url_regex = /(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/
+    lambda { UserMailer.reset_password_email(user).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should =~ /Reset password per House Rule/#correct subject
+    sent.first.body.should include(user.name) #correct username
+    sent.first.body.should include(user.remember_token) #correct token
+    sent.first.body.should =~ url_regex #has an URL
+  end
 
   def sent
     ActionMailer::Base.deliveries

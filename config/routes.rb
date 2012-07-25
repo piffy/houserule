@@ -25,6 +25,7 @@ Houserule::Application.routes.draw do
   get "welcome/index"
 
   resources :sessions, only: [:new, :create, :destroy]
+  resources :password_resets, :only => [ :new, :create, :edit, :update ]
 
   match '/registrazione',  to: 'users#new'
   match '/login',  to: 'sessions#new'

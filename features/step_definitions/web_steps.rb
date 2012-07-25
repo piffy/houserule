@@ -2,6 +2,8 @@ require 'uri'
 require 'cgi'
 
 
+
+
 Then /^dovrei vedere il titolo "([^"]*)"$/ do |title|
   page.should have_selector('title', :text => title)
 end
