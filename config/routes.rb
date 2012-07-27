@@ -14,6 +14,7 @@ Houserule::Application.routes.draw do
 
   resources :events do
     resources :reservations, only: [:new, :create, :destroy, :show]
+    resources :announcements, only: [:new, :create]
   end
 
   match 'users/:id/deactivate', :to => 'users#deactivate'

@@ -29,18 +29,22 @@
       Luogo
     %p
       = @event.location
+    %p
+      %span{:class=>"label label-info"}
+        = Event.status_string[@event.status]
 
   %div{:class =>"span8"}
-  %p
-    %b
-      Giocatori:
-    =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
-    = "(Prenotati: "+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+")"
+  -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
+    %p
+      %b Giocatori prenotati:
+      = @event.reservations.count
+  -else
+    %p
+      %b
+        Giocatori:
+      =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
+      = "(Prenotati: "+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+")"
 
-    - if !@user.nil? && @event.already_reserved_by(@user)
-      = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
-    - else
-      = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
 
   %div{:class=> "player"}
     =link_to image_tag("user-icon.png", alt: "organizer", class: "player-icon"), user_path(@event.user)
@@ -55,21 +59,28 @@
         =User.find_by_id(reservation.user_id).first_name_or_nick
         %span{:class=>"label label-success"}
           Ok
+        %a{:href =>  event_reservation_path(@event, reservation), class: "nomargin" }
+          %i{class:"icon-edit", title:"modifica"}
+        -#=link_to   "X", event_reservation_path(@event, reservation), class: "btn btn-danger nomargin"
 
-        =link_to   "X", event_reservation_path(@event, reservation), class: "btn btn-danger nomargin"
-
-
+-unless @event.description.blank?
+  %hr
+  %div{:class =>"row"}
+    %div{:class =>"span12"}
+      = simple_format(@event.description)
 
 
 %hr
 %div{:class =>"row"}
-  %div{:class =>"span4"}
-    %span{:class=>"label label-info"}
-      = Event.status_string[@event.status]
-    %br
+  %div{:class =>"span12"}
+    -if !@user.nil? && @event.already_reserved_by(@user)
+      = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
+    - else
+      = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
+
     = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
-    %br
+    %nbsp
     = link_to 'Elenco eventi', events_path, :class=>"btn"
-  %div{:class =>"span8"}
-    %br
-    = simple_format(@event.description)
+    -if !@user.nil? && current_user?(@event.user)
+      %nbsp
+      = link_to 'Annuncia', new_event_announcement_path(@event), :class=>"btn"

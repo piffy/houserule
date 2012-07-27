@@ -41,6 +41,15 @@ describe UserMailer do
     sent.first.to.should include(organizer.email)
   end
 
+  it 'should send email to user list for a new event' do
+    lambda { EventMailer.announcement(organizer, event, user.email+";"+organizer.email).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should =~ /Nuovo evento: #{event.name}/#correct subject
+    sent.first.body.should include(event.name) #correct
+    sent.first.to.should include(user.email)
+    sent.first.to.should include(organizer.email)
+    sent.first.body.should include(organizer.name)
+  end
+
 
   def sent
     ActionMailer::Base.deliveries

@@ -1,0 +1,42 @@
+=provide(:title, 'Annunci')
+%h1
+  Annunci per
+  ="'"+@event.name+"'"
+%p
+  Puoi inviare messaggi a tuoi amici, siano essi utenti del sistema oppure no.
+  Non esagerare però, dato che c'è un limite giornaliero alle email inviate dal sistema
+
+%ul{:id => id="myTab",:class=>"nav nav-tabs"}
+  %li{:class =>"active"}
+    %a{ :href=>"#email", "data-toggle"=>"tab"}
+      Email
+  %li
+    %a{:href=>"#profile","data-toggle"=>"tab"}
+      Profile
+  %li
+    %a{:href=>"#users","data-toggle"=>"tab"}
+      Users
+
+%div{:id=>"myTabContent",:class=>"tab-content"}
+  %div{:class=>"tab-pane fade in active", :id=>"email"}
+    %p
+      First tab
+  %div{:class=>"tab-pane fade in active", :id=>"profile"}
+    %p
+      Second tab content
+  %div{:class=>"tab-pane fade in active", :id=>"users"}
+    %p Inserisci gli indirizzi di 6 persone (al massimo) cui vuoi segnalare questo evento
+
+    =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
+      %div{:class=>"row-fluid"}
+        %div{:class=>"span6"}
+          - 6.times do  |n|
+            .field
+              = f.text_field "email"+n.to_s
+        %div{:class=>"span6"}
+          = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia annuncio')
+      %br
+
+
+:javascript
+  $(function () {$('#myTab a:last').tab('show'); })

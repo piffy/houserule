@@ -1,0 +1,24 @@
+!!! XML
+!!!
+%html
+  %head
+    %meta{:content=>'text/html; charset=utf-8', :"http-equiv"=>'Content-Type'}
+  %body
+    %h3
+      ="Nuovo evento"
+    %p
+      Con questa mail,
+      =@user.name
+      intende informati che organizza un nuovo evento, chiamato
+      =@event.name
+
+    %h4
+      Descrizione dell'evento'
+      '
+    %p
+      Per ulteriori informazioni, incluso la possibilità di prenotarti, puoi iscriverti
+      = link_to "qui", @url
+    %p Your House Rule Robot
+
+    %h5
+      House Rule è un sito gratuito per l'organizzazione di partite di varie tipologie di giochi.
