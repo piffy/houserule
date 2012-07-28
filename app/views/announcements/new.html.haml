@@ -4,27 +4,67 @@
   ="'"+@event.name+"'"
 %p
   Puoi inviare messaggi a tuoi amici, siano essi utenti del sistema oppure no.
-  Non esagerare però, dato che c'è un limite giornaliero alle email inviate dal sistema
+  Non esagerare però, dato che c'è un limite giornaliero alle email inviate dal sistema. Altrimenti puoi tornare alla
+  =link_to "pagina dell'evento", event_path(@event)
 
 %ul{:id => id="myTab",:class=>"nav nav-tabs"}
   %li{:class =>"active"}
-    %a{ :href=>"#email", "data-toggle"=>"tab"}
-      Email
-  %li
-    %a{:href=>"#profile","data-toggle"=>"tab"}
-      Profile
+    %a{ :href=>"#group", "data-toggle"=>"tab"}
+      Gruppo
   %li
     %a{:href=>"#users","data-toggle"=>"tab"}
-      Users
+      Utenti
+  %li
+    %a{:href=>"#email","data-toggle"=>"tab"}
+      Email
 
 %div{:id=>"myTabContent",:class=>"tab-content"}
-  %div{:class=>"tab-pane fade in active", :id=>"email"}
-    %p
-      First tab
-  %div{:class=>"tab-pane fade in active", :id=>"profile"}
-    %p
-      Second tab content
+  %div{:class=>"tab-pane fade in active", :id=>"group"}
+
+    -if @groups.nil?
+      %p
+        Non ci sono gruppi selezionabili
+    -else
+      %p
+        Seleziona i gruppi di cui fai parte cui vuoi segnalare questo evento
+      =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
+        %div{:class=>"row-fluid"}
+          %div{:class=>"span6"}
+            - @groups.each do  |group|
+              .field<
+                = check_box_tag "group_ids[#{group.id}]",group.id
+                %nbsp
+                = group.name
+
+          %div{:class=>"span6"}
+            .field<
+              = check_box_tag "send_cc", 1, true, :disabled => true
+              Spediscimi una copia dell'annuncio
+            = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia annuncio ai gruppi')
+        %br
+
+
+
   %div{:class=>"tab-pane fade in active", :id=>"users"}
+    %p
+      Seleziona gli utenti (massimo 6 per volta) cui vuoi segnalare questo evento
+    =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
+      %div{:class=>"row-fluid"}
+        %div{:class=>"span6"}
+          - @users.each do  |user|
+            .field<
+              = check_box_tag "user_ids[#{user.id}]",user.id
+              %nbsp
+              = user.name
+              = "("+user.nick+")" unless user.nick.blank?
+        %div{:class=>"span6"}
+          .field<
+            = check_box_tag "send_cc", 1, false, :disabled => true
+            Spediscimi una copia dell'annuncio
+          = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia annuncio a questi utenti')
+      %br
+
+  %div{:class=>"tab-pane fade in active", :id=>"email"}
     %p Inserisci gli indirizzi di 6 persone (al massimo) cui vuoi segnalare questo evento
 
     =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
@@ -34,9 +74,17 @@
             .field
               = f.text_field "email"+n.to_s
         %div{:class=>"span6"}
-          = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia annuncio')
+          .field<
+            = check_box_tag "send_cc", 1, false, :disabled => true
+            Spediscimi una copia dell'annuncio
+          = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia annuncio a questi indirizzi')
       %br
-
 
 :javascript
   $(function () {$('#myTab a:last').tab('show'); })
+-if !@commit.nil?  && @commit=="Invia annuncio ai gruppi"
+  :javascript
+    $(function () {$('#myTab a[href="#group"]').tab('show'); })
+-if !@commit.nil?  && @commit=="Invia annuncio a questi utenti"
+  :javascript
+    $(function () {$('#myTab a[href="#users"]').tab('show'); })

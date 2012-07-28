@@ -4,6 +4,8 @@ class Group < ActiveRecord::Base
   validates :name, presence: true, :uniqueness => { case_sensitive: false }
   before_validation :smart_add_url_protocol
   has_many :interests, dependent: :destroy
+  has_many :users, :through => :interests
+
 
   valid_url_regex_or_empty = /^$|(^((http|https):\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]*)+.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   validates :image_url,  :format     => { with: valid_url_regex_or_empty }

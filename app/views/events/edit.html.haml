@@ -1,10 +1,12 @@
 =provide(:title, 'Modifica evento')
-%h1 Modifica evento
+%h1
+  Modifica di
+  = "'"+@event.name+"'"
 
 = render 'form'
 
-= link_to 'Dettagli', @event
-\|
-= link_to 'Elimina', @event, :confirm => 'Sei sicuro?', :method => :delete
-\|
-= link_to 'Elenco eventi', events_path
+= link_to 'Dettagli', @event ,  :class=>"btn"
+
+= link_to 'Elimina', @event, :confirm => 'Sei sicuro?', :method => :delete ,:class=>"btn btn-danger"
+
+= link_to 'Elenco eventi', events_path, :class=>"btn"

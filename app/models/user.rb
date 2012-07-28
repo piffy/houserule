@@ -58,9 +58,9 @@ class User < ActiveRecord::Base
   end
 
   # Returns a list of the groups to which the user has shown interest (plain SQL query)
-  #def interesting_groups
-  #  Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+self.id.to_s)
-  #end
+  def interesting_groups
+    Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+self.id.to_s)
+  end
   def reset_password_url
     #self.create_perishable_token
     #self.save
