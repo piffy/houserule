@@ -1,0 +1,23 @@
+=provide(:title, 'Componi messaggio')
+%h1
+  Composizione messaggi
+%p
+  Puoi inviare messaggi all'organizzatore dell'evento (se sei prenotato) oppure agli
+  iscritti dell'evento, se ne sei l'organizzatore
+
+=form_for(:announcement, :url => event_deliver_path(@event), :html => {:class => "form-vertical"}) do |f|
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span6"}
+      %h4
+        Messaggio per
+        = @event.user.name
+      %br
+      .field
+        = f.label :subject , "Oggetto:"
+        = f.text_field :subject
+      .field
+        = f.text_area :body, rows: 4
+
+    %div{:class=>"span6"}
+      = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia messaggio')
+  %br

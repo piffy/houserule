@@ -11,10 +11,14 @@ Houserule::Application.routes.draw do
   get "info/feedback"
 
 
+  #match  'announcements/compose', :to => "announcements#compose", :as => "compose", :path_prefix => "/event/:event_id"
+
 
   resources :events do
     resources :reservations, only: [:new, :create, :destroy, :show]
     resources :announcements, only: [:new, :create]
+    match  'announcements/compose', :to => "announcements#compose", :as => "compose"
+    match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
   end
 
   match 'users/:id/deactivate', :to => 'users#deactivate'

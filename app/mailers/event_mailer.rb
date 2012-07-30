@@ -29,15 +29,13 @@ class EventMailer < ActionMailer::Base
 
   end
 
-  #Use this method to send info to a list of users. Unused in 0.1
-  def send_info(sender, event, user_list, information)
-    subject "Informazioni su #{event.name}"
-    from sender.name
-    a=Array.new
-    user_list.each { |user| puts a<<user.email }
-    recipients a.join(";")
-    sent_on Time.now
-    body :offer => information
+  #Use this method to send info to a list of users.
+  def send_message(sender, event, user_list, subject, text)
+    @event = event
+    @user = sender
+    @text = text
+    @url  = root_url(:host => ApplicationController.hostname)+"events/"+@event.id.to_s
+    mail(:from => "noreplay.houserules@heroku.com", :to => user_list, :subject => subject )
   end
 
   #Use this method to announce an event

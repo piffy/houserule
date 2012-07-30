@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
   before_filter :logged_in_user
-  before_filter :has_rights_to
+  before_filter :has_rights_to, :except => [ :compose, :deliver ]
 
   def new
     @event = Event.find(params[:event_id])
@@ -70,6 +70,24 @@ class AnnouncementsController < ApplicationController
     end
 
 
+  end
+
+  #Composition of messages for members
+  def compose
+    @event = Event.find(params[:event_id])
+    @users = []
+  end
+
+  def deliver
+    @event = Event.find(params[:event_id])
+    text=params[:announcement][:body]
+    subject=params[:announcement][:subject] || "House Rule: messaggio relativo a: #{@event.name}"
+    #case one: mail to organizer
+    unless @event.user == current_user
+      EventMailer.send_message(current_user, @event, @event.user.email, subject, text).deliver
+      flash[:success] = "Messaggio inviato a "+@event.user.name
+      redirect_to event_path(@event)
+    end
   end
 
   private
