@@ -1,6 +1,6 @@
 =provide(:title, 'Componi messaggio')
 %h1
-  Composizione messaggi
+  Composizione messaggio
 %p
   Puoi inviare messaggi all'organizzatore dell'evento (se sei prenotato) oppure agli
   iscritti dell'evento, se ne sei l'organizzatore
@@ -8,15 +8,23 @@
 =form_for(:announcement, :url => event_deliver_path(@event), :html => {:class => "form-vertical"}) do |f|
   %div{:class=>"row-fluid"}
     %div{:class=>"span6"}
-      %h4
-        Messaggio per
-        = @event.user.name
+      - if current_user == @event.user
+        %h4
+          Destinatari:
+        - @event.reservations.each do |reservation|
+          .field<
+            = check_box_tag "user_ids[#{reservation.user_id}]",reservation.user_id, true
+            %nbsp
+            =User.find_by_id(reservation.user_id).first_name_or_nick
+      -else
+        %h4
+          Messaggio per:
+          = @event.user.name
       %br
       .field
-        = f.label :subject , "Oggetto:"
-        = f.text_field :subject
+        = f.text_field :subject, :placeholder => "Oggetto"
       .field
-        = f.text_area :body, rows: 4
+        = f.text_area :body, rows: 4, :placeholder => "Testo"
 
     %div{:class=>"span6"}
       = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia messaggio')

@@ -75,19 +75,46 @@ class AnnouncementsController < ApplicationController
   #Composition of messages for members
   def compose
     @event = Event.find(params[:event_id])
-    @users = []
+    if @event.user == current_user &&  @event.reservations.count==0
+      flash[:notice] = "Non ci sono giocatori prenotati"
+      redirect_to event_path(@event)
+    end
+
   end
 
   def deliver
     @event = Event.find(params[:event_id])
     text=params[:announcement][:body]
     subject=params[:announcement][:subject] || "House Rule: messaggio relativo a: #{@event.name}"
-    #case one: mail to organizer
+    #controls
+    if text.blank?
+      redirect_to event_path(@event) and return
+    end
+
+
     unless @event.user == current_user
+      #case one: mail to organizer
       EventMailer.send_message(current_user, @event, @event.user.email, subject, text).deliver
       flash[:success] = "Messaggio inviato a "+@event.user.name
-      redirect_to event_path(@event)
+      #redirect_to event_path(@event)
+    else
+      #case two: mail to reserved people
+
+      unless params[:user_ids].nil?
+        params[:user_ids].each do  |user_id|
+          user=User.find_by_id(user_id)
+          EventMailer.send_message(current_user, @event, user.email, subject, text).deliver
+        end
+        count=params[:user_ids].count.to_s
+        flash[:success] = count + ((count=="1")?" messaggio inviato": " messaggi inviati")
+        #redirect_to event_path(@event)
+      else
+        flash[:error] = "Nessun destinatario"
+
+      end
+
     end
+  redirect_to event_path(@event)
   end
 
   private
