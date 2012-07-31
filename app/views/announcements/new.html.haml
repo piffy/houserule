@@ -27,13 +27,12 @@
     -else
       %p
         Seleziona i gruppi di cui fai parte cui vuoi segnalare questo evento
-      =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
+      =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-horizontal"}) do |f|
         %div{:class=>"row-fluid"}
           %div{:class=>"span6"}
             - @groups.each do  |group|
-              .field<
-                = check_box_tag "group_ids[#{group.id}]",group.id
-                %nbsp
+              %label{ :for => "group_ids[#{group.id}]"}
+                = check_box_tag "group_ids[#{group.id}]",group.id, :id => "group_ids[#{group.id}]"
                 = group.name
 
           %div{:class=>"span6"}
@@ -48,15 +47,13 @@
   %div{:class=>"tab-pane fade in active", :id=>"users"}
     %p
       Seleziona gli utenti (massimo 6 per volta) cui vuoi segnalare questo evento
-    =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
+    =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-horizontal"}) do |f|
       %div{:class=>"row-fluid"}
         %div{:class=>"span6"}
           - @users.each do  |user|
-            .field<
-              = check_box_tag "user_ids[#{user.id}]",user.id
-              %nbsp
+            %label{ :for => "user_ids_#{user.id}", :class => "inline"}
+              = check_box_tag "user_ids[#{user.id}]",user.id, :id => "user_ids_#{user.id}", :class => "inline"
               = user.name
-              = "("+user.nick+")" unless user.nick.blank?
         %div{:class=>"span6"}
           .field<
             = check_box_tag "send_cc", 1, false, :disabled => true

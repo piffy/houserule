@@ -71,8 +71,8 @@ Allora dovrei vedere "Gruppo 1"
 E dovrei vedere "Gruppo 2"
 E dovrei vedere "Gruppo 3"
 E dovrei non vedere "Gruppo 4"
-Quando seleziono la casella "group_ids_1"
-E seleziono la casella "group_ids_3"
+Quando seleziono la casella "Gruppo 1"
+E seleziono la casella "Gruppo 3"
 Quando premo "Invia annuncio ai gruppi"
 Allora dovrei vedere "Annuncio inviato a 2 indirizzi"
 E il sistema ha inviato 1 email
@@ -84,15 +84,17 @@ Dato che esistono i seguenti gruppi di "paolino@nomail.it":
 | Gruppo 1              | Un grande gruppo          |
 | Gruppo 2              | Un altro gruppo           |
 E vado alla pagina di nuovo annuncio per "Campionato"
-Quando premo "Invia annuncio ai gruppi"
+Quando deseleziono la casella "Gruppo 1"
+E deseleziono la casella "Gruppo 2"
+E premo "Invia annuncio ai gruppi"
 Allora dovrei vedere "Non sono stati inseriti gruppi"
 
 @email
 Scenario: Invio mail di annuncio a uno o più utenti
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E vado alla pagina di nuovo annuncio per "Campionato"
-Quando seleziono la casella "user_ids_272"
-E seleziono la casella "user_ids_273"
+Quando seleziono la casella "Pluto"
+E seleziono la casella "Paperoga"
 Quando premo "Invia annuncio a questi utenti"
 Allora dovrei vedere "Annuncio inviato a 2 indirizzi"
 E il sistema ha inviato 1 email
@@ -101,7 +103,9 @@ E il sistema ha inviato 1 email
 Scenario: Non seleziono utenti
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E vado alla pagina di nuovo annuncio per "Campionato"
-Quando premo "Invia annuncio a questi utenti"
+Quando deseleziono la casella "Pluto"
+E deseleziono la casella "Paperoga"
+E premo "Invia annuncio a questi utenti"
 Allora dovrei vedere "Non sono stati inseriti utenti"
 
 

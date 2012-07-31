@@ -12,10 +12,9 @@
         %h4
           Destinatari:
         - @event.reservations.each do |reservation|
-          .field<
-            = check_box_tag "user_ids[#{reservation.user_id}]",reservation.user_id, true
-            %nbsp
-            =User.find_by_id(reservation.user_id).first_name_or_nick
+          %label{ :for => "user_ids_#{reservation.user_id}"}
+            = check_box_tag "user_ids[#{reservation.user_id}]",reservation.user_id, :id => "user_ids_#{reservation.user_id}"
+            = User.find_by_id(reservation.user_id).first_name_or_nick
       -else
         %h4
           Messaggio per:
