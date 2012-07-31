@@ -16,6 +16,10 @@ class InfoController < ApplicationController
   def license
   end
 
+  #Guide /Help
+  def help
+  end
+
   #Link to google module
   def feedback
   end

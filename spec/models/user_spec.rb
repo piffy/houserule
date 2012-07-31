@@ -142,10 +142,10 @@ describe User do
 
     before { @user.save }
     let!(:older_event) do
-      FactoryGirl.create(:event, user: @user, begins_at: 2.days.ago)
+      FactoryGirl.create(:event, user: @user, begins_at: 2.days.ago, deadline: 2.days.ago)
     end
     let!(:newer_event) do
-      FactoryGirl.create(:event, user: @user, begins_at: 1.day.from_now)
+      FactoryGirl.create(:event, user: @user, begins_at: 1.day.from_now, deadline: 1.day.from_now)
     end
 
     it "should have the events in the right order" do

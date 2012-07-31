@@ -91,8 +91,8 @@ Allora dovrei vedere "Non sono stati inseriti gruppi"
 Scenario: Invio mail di annuncio a uno o più utenti
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E vado alla pagina di nuovo annuncio per "Campionato"
-Quando seleziono la casella "user_ids_152"
-E seleziono la casella "user_ids_153"
+Quando seleziono la casella "user_ids_272"
+E seleziono la casella "user_ids_273"
 Quando premo "Invia annuncio a questi utenti"
 Allora dovrei vedere "Annuncio inviato a 2 indirizzi"
 E il sistema ha inviato 1 email

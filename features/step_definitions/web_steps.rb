@@ -114,6 +114,10 @@ When /^seleziono la casella "([^"]*)"$/ do |arg1|
   check(arg1)
 end
 
+Quando /^seleziono la prima casella$/ do
+  check(find("input[type='checkbox']"))
+end
+
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield

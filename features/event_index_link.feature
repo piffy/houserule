@@ -46,10 +46,10 @@ Funzionalità: Usare i link dell'elenco eventi
     E dovrei non vedere "Campionato"
     E dovrei vedere "Event 10" all'interno di "a"
     E dovrei vedere "Event 14" all'interno di "a"
-    E dovrei vedere "6 eventi nel database"
+    E dovrei vedere "6 eventi presenti"
 
   Scenario: Non mostra gli eventi passati nella hp
     Dato ci sono 2 eventi passati di "pluto@nomail.it"
     E mi trovo nella homepage
     Allora dovrei non vedere "Past Event"
-    E dovrei vedere "6 eventi nel database"
+    E dovrei vedere "6 eventi presenti"

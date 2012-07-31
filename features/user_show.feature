@@ -49,7 +49,7 @@ Funzionalità: Mostra utente
     Allora    dovrei vedere "Pluto" all'interno di "h1"
     E         dovrei vedere "Topolinia" all'interno di "p"
     E         dovrei vedere "Cane" all'interno di "p"
-    E         dovrei non vedere "Organizza evento"
+    E         dovrei non vedere "Organizza evento" all'interno di "a#button"
 
 
 

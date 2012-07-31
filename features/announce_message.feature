@@ -78,8 +78,8 @@ Dato che esiste la prenotazione dell'evento "Campionato" per l'utente "paperoga@
 E il sistema non ha ancora inviato emails
 Quando vado alla pagina di nuovo messaggio per "Campionato"
 Allora dovrei vedere il titolo "Componi messaggio"
-Quando deseleziono la casella "user_ids_152"
-E deseleziono la casella "user_ids_153"
+Quando deseleziono la casella "user_ids_272"
+E deseleziono la casella "user_ids_273"
 E inserisco in "announcement_subject" "Messaggio importante"
 E inserisco in "announcement_body" "Non posso esserci"
 Quando premo "Invia messaggio"

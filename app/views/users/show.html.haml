@@ -49,6 +49,6 @@
   = link_to 'Lista utenti', users_path,  :class => "btn"
   = link_to 'Modifica', edit_user_path(@user), :class => "btn"
   - if current_user?(@user)
-    = link_to 'Organizza evento', new_event_path, :class => "btn"
+    = link_to 'Organizza evento', new_event_path, :class => "btn", :id => "button"
     = link_to 'Crea gruppo', new_group_path, :class => "btn"
   = link_to 'Elimina utente', edit_user_path(@user)+".delete", :class => "btn btn-danger"
