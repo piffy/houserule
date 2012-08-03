@@ -1,0 +1,38 @@
+=provide(:title, 'Inviti')
+%h1
+  Creazione inviti per
+  = "'"+@event.name+"'"
+%p
+  Qui puoi inviare inviti realtivi all'evento evento. Rimarrà valido fino alla data indicata.
+  Puoi indicare quanti utenti o gruppi desideri, in ogni caso il sistema invierà al massimo un invito per persona.
+
+
+
+=form_for [@event, @invitation], :html => {:class => "form-horizontal"} do  |f|
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      %h3 Utenti
+      - @users.each do  |user|
+        - unless current_user?(user)
+          %label{ :for => "user_ids_#{user.id}"}
+            = check_box_tag "user_ids[#{user.id}]",user.id, false, :id => "user_ids[#{user.id}]"
+            = user.name
+    %div{:class=>"span4"}
+      %h3 Gruppi
+      - @groups.each do  |group|
+        %label{ :for => "group_ids[#{group.id}]"}
+          = check_box_tag "group_ids[#{group.id}]",group.id, false, :id => "group_ids[#{group.id}]"
+          = group.name
+
+
+    %div{:class=>"span4"}
+      %h3{:style => "visibility:hidden"}
+        Azioni
+      .field
+        = f.label :begins_at, 'Scadenza'
+        = f.datetime_select :valid_until , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1 }
+
+      = f.submit(:class=>"btn btn-primary btn-large", :value => 'Spedisci inviti')
+
+
+

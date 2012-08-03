@@ -1,0 +1,28 @@
+%h1
+  Inviti per
+  = "'"+@event.name+"'"
+
+= link_to 'Invita', new_event_invitation_path(@event), :class =>"btn"
+
+%table{:class => "table table-striped"}
+  %tr
+    %th Nome
+    %th Stato
+    %th
+    %th
+    %th
+
+  -unless @invitations.nil? || @invitations.count ==0
+
+    - @invitations.each do |invitation|
+      %tr
+        %td{:class => "user_listing"}
+          = gravatar_for invitation.user, 32
+          = link_to invitation.user.name, user_path(invitation.user)
+        %td
+          Status
+          = l(@event.begins_at, :format => :medium)
+        %td= link_to 'Elimina', "#", :class =>"btn btn-danger"
+        %td= link_to 'Reinvita', "#", :class =>"btn"
+
+

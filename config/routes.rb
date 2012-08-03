@@ -1,5 +1,13 @@
 Houserule::Application.routes.draw do
 
+  #get "invitations/new"
+
+  #get "invitations/create"
+
+  #get "invitations/update"
+
+  #get "invitations/destroy"
+
   resources :groups do
     resources :interests
   end
@@ -18,6 +26,7 @@ Houserule::Application.routes.draw do
   resources :events do
     resources :reservations, only: [:new, :create, :destroy, :show]
     resources :announcements, only: [:new, :create]
+    resources :invitations
     match  'announcements/compose', :to => "announcements#compose", :as => "compose"
     match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
   end

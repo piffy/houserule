@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :groups, dependent: :destroy
   has_many :interests, dependent: :destroy
   has_many :reservations, dependent: :destroy, :through => :events
+  has_many :invitations, dependent: :destroy
   #has_many :reserved_events, :class_name => 'Event',:through => :reservations, :source => :events
 
 
