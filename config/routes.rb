@@ -22,7 +22,6 @@ Houserule::Application.routes.draw do
 
   #match  'announcements/compose', :to => "announcements#compose", :as => "compose", :path_prefix => "/event/:event_id"
 
-
   resources :events do
     resources :reservations, only: [:new, :create, :destroy, :show]
     resources :announcements, only: [:new, :create]

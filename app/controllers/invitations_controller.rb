@@ -1,7 +1,9 @@
+#coding: utf-8
 class InvitationsController < ApplicationController
   include InvitationsHelper
   before_filter :logged_in_user
-  before_filter :has_rights_to
+  before_filter :has_rights_to , :except => [:edit, :update]
+  before_filter :is_invited , :only => [:edit, :update]
 
   def new
     @event = Event.find(params[:event_id])
@@ -55,10 +57,84 @@ class InvitationsController < ApplicationController
     @invitations=Invitation.find_all_by_event_id(@event.id)
   end
 
+  def edit
+    @event = Event.find(params[:event_id])
+    @invitation=Invitation.find(params[:id])
+    unless @invitation.pending?
+      flash[:error] = "invito già utilizzato"
+      redirect_to user_path(current_user)
+    end
+    if @invitation.expired?
+      flash[:error] = "Invito scaduto"
+      redirect_to user_path(current_user)
+    end
+
+  end
+
+  #this action is used to resend an invitation
+  def show
+    @event = Event.find(params[:event_id])
+    @invitation=Invitation.find(params[:id])
+    if @event.check_time !=0
+      flash[:error] = "Impossibile rinnovare invito, troppo tardi"
+
+    else
+      @invitation.valid_until=@event.deadline
+      @invitation.pending=true
+      @invitation.accepted=false
+      if @invitation.save
+      #Re-send email
+        flash[:success] = "Invito rinnovato sino a " +  l( @invitation.valid_until, :format => :short )
+      else
+        flash[:success] = "Impossibile salvare invito aggiornato"
+      end
+    end
+    redirect_to event_invitations_path(@event)
+  end
+
   def update
+    @event = Event.find(params[:event_id])
+    @invitation=Invitation.find(params[:id])
+    unless @invitation.pending? &&  !@invitation.expired?
+      redirect_to user_path(current_user) and return
+    end
+    case params[:commit]
+      when "Confermo"
+        @reservation = @event.reservations.build
+        @reservation.user_id=@invitation.user_id
+        @reservation.status=2; #confirmed
+        if  @reservation.save
+          @invitation.pending=false
+          @invitation.accepted=true
+          @invitation.save
+          EventMailer.new_reservation(@reservation).deliver
+          flash[:success] = "Invito accettato e prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
+          redirect_to event_path(@event)
+        else
+          flash[:error] = "Impossibile prenotare"
+          render 'edit'
+        end
+      when "Rinuncio"
+        @invitation.pending=false
+        @invitation.accepted=false
+        @invitation.save
+        #EventMailer.new_reservation(@reservation).deliver
+        flash[:success] = "Invito rifiutato. Mail inviata all'organizzatore ("+@event.user.name+")"
+        redirect_to event_path(@event)
+
+
+
+
+    end
   end
 
   def destroy
+    @invitation=Invitation.find(params[:id])
+    @event = Event.find(params[:event_id])
+    @interest.destroy
+    flash[:success] = "Invito all'evento #{@event.name} per #{@invitation.user.name} eliminato."
+    redirect_to group_path(@group)
+
   end
 
 
@@ -69,4 +145,13 @@ class InvitationsController < ApplicationController
       redirect_to event_path(e)
     end
   end
+
+  def is_invited
+    r = Invitation.find(params[:id])
+    unless current_user?(r.user)
+      flash[:notice] = "Azione non consentita"
+      redirect_to event_path(r.event)
+    end
+  end
+
 end

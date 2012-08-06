@@ -8,6 +8,7 @@
   %tr
     %th Nome
     %th Stato
+    %th Scadenza
     %th
     %th
     %th
@@ -20,9 +21,25 @@
           = gravatar_for invitation.user, 32
           = link_to invitation.user.name, user_path(invitation.user)
         %td
-          Status
-          = l(@event.begins_at, :format => :medium)
-        %td= link_to 'Elimina', "#", :class =>"btn btn-danger"
-        %td= link_to 'Reinvita', "#", :class =>"btn"
+          -if invitation.pending?
+            #span{:class=>"label label-success"}
+              In attesa
+          -else
+            -if invitation.accepted?
+              #span{:class=>"label label-success"}
+                Accettato
+            -else
+              #span{:class=>"label label-important"}
+                Rifiutato
+        %td
+          -if invitation.expired?
+            #span{:class=>"label label-inverse"}
+              Scaduto
+          -else
+            - if invitation.pending?
+              = l(invitation.valid_until, :format => :short)
 
+        %td= link_to 'Elimina', event_invitation_path(@event,invitation), :confirm => 'Sei sicuro? In genere non c\'è alcun motivo per farlo, ma siamo in un paese libero!', :method => :delete, :class => "btn btn-danger"
+
+        %td= link_to 'Reinvita', event_invitation_path(@event,invitation), :class =>"btn"
 

@@ -20,6 +20,7 @@ describe Invitation do
   it { should respond_to(:pending) }
   it { should respond_to(:accepted) }
   it { should respond_to(:valid_until) }
+  it { should respond_to(:expired) }
 
 
 
@@ -49,6 +50,13 @@ describe Invitation do
     n = Invitation.count
     @invitation.destroy
     Invitation.count.should == n-1
+  end
+
+  it "should allow check expiry date properly" do
+    @invitation.expired?.should == false
+    @invitation.valid_until= "2011-10-13 18:56:50"
+
+    @invitation.expired?.should == true
   end
 
 end

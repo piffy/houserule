@@ -33,6 +33,10 @@ E dovrei vedere "Pluto" all'interno di "label"
 E dovrei vedere "Paperoga" all'interno di "label"
 E dovrei non vedere "Paperino" all'interno di "label"
 
+Scenario: Personalizza scadenza
+
+Scenario: Scadenza errata
+
 Scenario: Non loggato
 Dato non sono loggato come utente "Paperino"
 Quando vado alla visualizzazione evento di "Campionato"
@@ -56,6 +60,7 @@ E seleziono la casella "Paperoga"
 Quando premo "Spedisci inviti"
 Allora dovrei trovarmi nella pagina di elenco inviti per "Campionato"
 E dovrei vedere "Pluto" all'interno di "td.user_listing"
+E dovrei vedere "In attesa" all'interno di "div.label"
 E dovrei vedere "Paperoga" all'interno di "td.user_listing"
 
 
@@ -69,7 +74,6 @@ Allora dovrei non vedere "Pluto" all'interno di "label"
 Scenario:   Impedisci doppio invito  se già invitato
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 Dato che esiste l'invito all'evento "Campionato" per l'utente "pluto@nomail.it"
-Allora vado alla pagina di elenco inviti per "Campionato"
 Quando vado alla pagina di nuovi inviti per "Campionato"
 Allora dovrei non vedere "Pluto" all'interno di "label"
 

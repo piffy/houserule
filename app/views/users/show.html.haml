@@ -32,6 +32,25 @@
       = render "shared/list_event",  :events => @user.events ,:show_organizer => false
     -if @user.reserved_events.any?
       = render "shared/list_event" , :events => @user.reserved_events ,:show_organizer => true
+    -if @user.invitations.any?
+      %h3
+        %b
+          Inviti pendenti:
+          = @user.invitations.count
+      %ol{:class =>"events"}
+        - @user.invitations.each do |invitation|
+          -if invitation.pending?
+            %li
+              %span{:class => "title"}
+                %a{:href => edit_event_invitation_path(invitation.event,invitation)}
+                  =invitation.event.name
+              %span{:class => "system"}
+                = " per '" + invitation.event.system+"'"  unless invitation.event.system.blank?
+              %span{:class => "timestamp"}
+                = ", scade il "+l(invitation.valid_until, :format => :formatted )
+
+
+
 
   %div{:class =>"span4"}
     %h3

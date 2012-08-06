@@ -2,7 +2,9 @@ require 'uri'
 require 'cgi'
 
 
-
+Quando /^premo il pulsante "([^"]*)"$/ do |button|
+  click_button(button)
+end
 
 Then /^dovrei vedere il titolo "([^"]*)"$/ do |title|
   page.should have_selector('title', :text => title)

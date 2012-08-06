@@ -1,0 +1,21 @@
+=provide(:title, 'Conferma invito')
+%h1
+  Conferma invito per
+  = "'"+@event.name+"'"
+
+
+%p
+  Sei stato invitato a questo evento. Puoi decidere di accettare l'invito (e - se possibile - sarai iscritto), oppure rinunciare. L'evento scade il
+  = @invitation.valid_until
+  oioioio
+  = @invitation.expired?
+  oioioi
+  = Time.now
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+    %div{:class=>"span4"}
+      =form_for [@event, @invitation] do  |f|
+        = f.submit "Confermo", :class => "btn btn-primary"
+    %div{:class=>"span4"}
+      =form_for [@event, @invitation] do  |f|
+        = f.submit "Rinuncio", :class => "btn btn-danger"
