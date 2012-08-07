@@ -20,7 +20,7 @@ describe Invitation do
   it { should respond_to(:pending) }
   it { should respond_to(:accepted) }
   it { should respond_to(:valid_until) }
-  it { should respond_to(:expired) }
+  it { should respond_to(:expired?) }
 
 
 

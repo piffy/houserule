@@ -24,6 +24,9 @@ E che esistono i seguenti eventi dell'utente "pluto@nomail.it":
 Scenario:   Navigazione
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E vado alla visualizzazione evento di "Campionato"
+Allora dovrei vedere "Inviti" all'interno di "a"
+Quando seguo il link "Inviti"
+Allora dovrei trovarmi nella pagina di elenco inviti per "Campionato"
 Allora dovrei vedere "Invita" all'interno di "a"
 Quando seguo il link "Invita"
 Allora dovrei trovarmi nella pagina di nuovi inviti per "Campionato"
@@ -51,17 +54,21 @@ Allora dovrei non vedere "Invita" all'interno di "a"
 Quando vado alla pagina di nuovi inviti per "Semifinale"
 Allora dovrei vedere "Azione non consentita"
 
-
+@email
 Scenario:   Nuovo invito a utenti
-Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+Dato il sistema non ha ancora inviato email
+E mi loggo con email "paolino@nomail.it" e password "12345678"
 Quando vado alla pagina di nuovi inviti per "Campionato"
 Quando seleziono la casella "Pluto"
 E seleziono la casella "Paperoga"
 Quando premo "Spedisci inviti"
 Allora dovrei trovarmi nella pagina di elenco inviti per "Campionato"
+E dovrei vedere "2 email con l'invito spedite"
 E dovrei vedere "Pluto" all'interno di "td.user_listing"
 E dovrei vedere "In attesa" all'interno di "div.label"
 E dovrei vedere "Paperoga" all'interno di "td.user_listing"
+E il sistema ha inviato 2 email
+E l'ultima mail dovrebbe contenere "Paperino"
 
 
 Scenario:   Impedisci doppio invito  se già invitato
@@ -71,13 +78,8 @@ Allora vado alla pagina di elenco inviti per "Campionato"
 Quando vado alla pagina di nuovi inviti per "Campionato"
 Allora dovrei non vedere "Pluto" all'interno di "label"
 
-Scenario:   Impedisci doppio invito  se già invitato
-Dato mi loggo con email "paolino@nomail.it" e password "12345678"
-Dato che esiste l'invito all'evento "Campionato" per l'utente "pluto@nomail.it"
-Quando vado alla pagina di nuovi inviti per "Campionato"
-Allora dovrei non vedere "Pluto" all'interno di "label"
 
-Scenario:   Impedisci doppio invito  se già
+Scenario:   Impedisci doppio invito  se già prenotato
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E che esiste la prenotazione dell'evento "Campionato" per l'utente "pluto@nomail.it"
 Quando vado alla pagina di nuovi inviti per "Campionato"

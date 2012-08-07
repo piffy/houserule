@@ -3,13 +3,20 @@ class EventMailer < ActionMailer::Base
 
 
 #use this method to send to event owner that a new reservation has arrived
-  def new_reservation(reservation)
+  def new_reservation(reservation,invitation=nil)
     @event = reservation.event
     @reservation = reservation
     @user = reservation.user
     @organizer = @event.user
+    if invitation == nil
+      subject = "Nuovo iscritto a #{@event.name}"
+      @invitation_message="."
+    else
+      subject = "Invito per #{@event.name} accettato"
+      @invitation_message=" accettando il tuo invito."
+    end
     @url  = root_url(:host => ApplicationController.hostname)+"events/"+@event.id.to_s
-    mail(:from => "noreplay.houserules@heroku.com", :to => @organizer.email, :subject => "Nuovo iscritto a #{@event.name}")
+    mail(:from => "noreplay.houserules@heroku.com", :to => @organizer.email, :subject => subject )
   end
 
 #Use this method to send to event owner or player that a reservation has been deleted

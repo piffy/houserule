@@ -43,10 +43,14 @@ class InvitationsController < ApplicationController
                                   :pending => true,
                                   :valid_until=>@event.deadline)
       invitation.event=@event
-      invitation.save!
-      #invitation.update_attributes(params[:invitation])
+      if invitation.save!
+        InvitationMailer.new_invitation(invitation).deliver
+        @invites=@invites+1
+      end
+
 
     end
+    flash[:success] = @invites.to_s+" email con l'invito spedite"
     redirect_to event_invitations_path(@event)
 
 
@@ -84,6 +88,7 @@ class InvitationsController < ApplicationController
       @invitation.accepted=false
       if @invitation.save
       #Re-send email
+        InvitationMailer.new_invitation(@invitation,true).deliver
         flash[:success] = "Invito rinnovato sino a " +  l( @invitation.valid_until, :format => :short )
       else
         flash[:success] = "Impossibile salvare invito aggiornato"
@@ -107,7 +112,7 @@ class InvitationsController < ApplicationController
           @invitation.pending=false
           @invitation.accepted=true
           @invitation.save
-          EventMailer.new_reservation(@reservation).deliver
+          EventMailer.new_reservation(@reservation,@invitation).deliver
           flash[:success] = "Invito accettato e prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
           redirect_to event_path(@event)
         else
@@ -118,7 +123,7 @@ class InvitationsController < ApplicationController
         @invitation.pending=false
         @invitation.accepted=false
         @invitation.save
-        #EventMailer.new_reservation(@reservation).deliver
+        InvitationMailer.deny_invitation(@invitation).deliver
         flash[:success] = "Invito rifiutato. Mail inviata all'organizzatore ("+@event.user.name+")"
         redirect_to event_path(@event)
 

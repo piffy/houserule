@@ -2,11 +2,9 @@
 
 FactoryGirl.define do
   factory :invitation do
-    event_id 1
-    user_id 1
-    pending "MyString"
-    boolean "MyString"
+    association :user
+    association :event
     accepted false
-    valid_until "MyString"
+    valid_until "2013-11-13 18:56:50"
   end
 end

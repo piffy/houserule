@@ -1,0 +1,28 @@
+!!! XML
+!!!
+%html
+  %head
+    %meta{:content=>'text/html; charset=utf-8', :"http-equiv"=>'Content-Type'}
+  %body
+    %h3
+      ="Invito"
+    - if @resend
+      %p
+        =@organizer
+        ti ha sollecitato a iscriverti a
+        =@event.name.to_s + "."
+    - else
+      %p
+        =@organizer
+        ti ha invitato a partecipare a
+        =@event.name.to_s + "."
+
+
+    %p
+      Per accettare (o rifiutare) l'invito puoi fare click
+      = link_to "qui", @url
+
+    %p
+      = link_to "Qui invece", @event_url
+      puoi vedere i dettagli dell'evento a cui sei stato invitato.
+    %p Your House Rule Robot

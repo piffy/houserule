@@ -23,9 +23,10 @@ Funzionalità: Conferma invito
 
     E che esiste l'invito all'evento "Campionato" per l'utente "pluto@nomail.it"
 
-
+  @email
   Scenario: Conferma di un invito e conseguente iscrizione
       Dato mi loggo con email "pluto@nomail.it" e password "12345678"
+      E il sistema non ha ancora inviato email
       Allora dovrei vedere "Profilo di Pluto"
       E dovrei vedere "Campionato"
       Quando seguo il link "Campionato"
@@ -39,10 +40,13 @@ Funzionalità: Conferma invito
       E dovrei vedere "Pluto" all'interno di "div.player-description"
       Quando vado alla pagina di conferma invito dell'evento "Campionato" dell'utente "Pluto"
       Allora dovrei vedere "invito già utilizzato"
+      E il sistema ha inviato 1 email
+      E l'ultima mail dovrebbe contenere "Pluto"
+      E l'ultima mail dovrebbe contenere "accettando"
 
-
-
+    @email
     Scenario: Rinuncia a un invito
+      E il sistema non ha ancora inviato email
       Dato mi loggo con email "pluto@nomail.it" e password "12345678"
       E vado alla pagina di conferma invito dell'evento "Campionato" dell'utente "Pluto"
       Quando premo il pulsante "Rinuncio"
@@ -51,7 +55,9 @@ Funzionalità: Conferma invito
       E dovrei non vedere "Pluto" all'interno di "div.player-description"
       Quando vado alla pagina di conferma invito dell'evento "Campionato" dell'utente "Pluto"
       Allora dovrei vedere "invito già utilizzato"
-
+      E il sistema ha inviato 1 email
+      E l'ultima mail dovrebbe contenere "Pluto"
+      E l'ultima mail dovrebbe contenere "rifiutato"
 
     Scenario: Invito scaduto
       Dato che esiste l'invito scaduto all'evento "Campionato" per l'utente "paperoga@nomail.it"

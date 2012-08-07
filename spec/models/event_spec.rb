@@ -2,12 +2,9 @@ require 'spec_helper'
 
 describe Event do
   let(:user) { FactoryGirl.create(:user) }
+  let!(:event) { FactoryGirl.create(:event, :user => user) }
   before do
-    @event = user.events.build(:name => "A name",
-                               :system => "A System",
-                               :begins_at => Time.stub!(:now)+1.week,
-                               :deadline => :begins_at ,
-                               :status =>1 )
+    @event = event
 
 
   end

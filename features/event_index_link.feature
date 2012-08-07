@@ -37,6 +37,7 @@ Funzionalità: Usare i link dell'elenco eventi
     E      premo "Login"
     E      mi trovo nella pagina di elenco eventi
     Quando seguo il link "Modifica"
+    * mostra la pagina
     Allora  dovrei essere nella pagina di modifica dell'evento  "Event 7"
 
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp
