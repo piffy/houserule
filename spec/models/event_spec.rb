@@ -25,6 +25,8 @@ describe Event do
   it { should respond_to(:min_player_num) }
   it { should respond_to(:name) }
   it { should respond_to(:user) }
+  it { should respond_to(:invite_only) }
+  it { should respond_to(:reservation_locked) }
   its(:user) { should == user }
 
   describe "when everything is OK" do

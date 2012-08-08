@@ -42,11 +42,15 @@
       %td
         = event.reservations.count
         = " / "  + event.max_player_num.to_s unless event.max_player_num ==0
-      -if !@current_user.nil? && event.already_reserved_by(@current_user)
-        %td= link_to 'Sprenota', event_reservation_path(event, event.already_reserved_by(@current_user)), :class =>"btn btn-danger"
-      -else
-        %td= link_to 'Prenota', new_event_reservation_path(event), :class =>"btn btn-primary"
-      %td= link_to 'Modifica', edit_event_path(event), :class =>"btn"
+      -unless event.invite_only? ||  event.reservation_locked?
+        -if !@current_user.nil? && event.already_reserved_by(@current_user)
+          %td= link_to 'Sprenota', event_reservation_path(event, event.already_reserved_by(@current_user)), :class =>"btn btn-danger"
+        -else
+          %td
+            = link_to 'Prenota', new_event_reservation_path(event), :class =>"btn btn-primary"
+      %td
+        -if !@current_user.nil? && @current_user==event.user
+          = link_to 'Modifica', edit_event_path(event), :class =>"btn"
 
 = will_paginate
 %br

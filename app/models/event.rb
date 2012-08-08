@@ -2,7 +2,9 @@
 #An 'Event' is defined as an activity occuring ONCE, at a given time and a given place
 #It must have an organizer at all time
 class Event < ActiveRecord::Base
-  attr_accessible :begins_at, :deadline, :descr_short, :description, :duration, :location, :max_player_num, :min_player_num, :name, :status, :system
+  attr_accessible :begins_at, :deadline, :descr_short, :description, :duration,
+                  :location, :max_player_num, :min_player_num, :name, :status, :system,
+                  :invite_only, :reservation_locked
   belongs_to :user
   has_many :reservations, dependent: :destroy
   has_many :invitations, dependent: :destroy
@@ -79,6 +81,15 @@ class Event < ActiveRecord::Base
     if self.max_player_num >0 && self.reservations.count >= self.max_player_num
       return 4
     end
+
+    if self.invite_only?
+      return 5
+    end
+
+    if self.reservation_locked?
+      return 6
+    end
+
     return true
 
   end

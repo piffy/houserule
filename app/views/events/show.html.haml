@@ -32,6 +32,12 @@
     %p
       %span{:class=>"label label-info"}
         = Event.status_string[@event.status]
+    -if @event.invite_only?
+      %span{:class=>"label label-warning"}
+        Solo invitati
+    -if @event.reservation_locked?
+      %span{:class=>"label label-important"}
+        Prenotazioni bloccate
 
   %div{:class =>"span8"}
   -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
@@ -73,10 +79,11 @@
 %hr
 %div{:class =>"row"}
   %div{:class =>"span12"}
-    -if !@user.nil? && @event.already_reserved_by(@user)
-      = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
-    - else
-      = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
+    -unless @event.invite_only? || @event.reservation_locked?
+      -if !@user.nil? && @event.already_reserved_by(@user)
+        = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
+      - else
+        = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
 
     = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
     %nbsp

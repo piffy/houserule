@@ -1,3 +1,17 @@
+# encoding: utf-8
+
+Given /^l'evento "([^"]*)" è "([^"]*)"$/ do |event_name, condition|
+  event = Event.find_by_name(event_name)
+  if condition=="riservato"
+    event.invite_only=true
+    event.save
+  end
+  if condition=="bloccato"
+    event.reservation_locked=true
+    event.save
+  end
+end
+
 Given /^che esistono i seguenti eventi dell'utente "([^"]*)":$/ do |user_email, event_table|
 
   user = User.find_by_email(user_email)

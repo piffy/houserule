@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ReservationsController < ApplicationController
   before_filter :logged_in_user
   before_filter :has_rights_to, only: [:edit, :update, :destroy]
@@ -7,6 +9,10 @@ class ReservationsController < ApplicationController
     @event = Event.find(params[:event_id])
     @user = current_user
     @reservation = Reservation.new
+    if @event.invite_only?
+      flash.now[:error] = "Questo evento è solo a invito"
+    end
+
   end
 
   #Ask confirm of reservation
@@ -19,6 +25,14 @@ class ReservationsController < ApplicationController
       when 1
         #Already reserved
         @error_condition=1
+      when 5
+        #Only invited
+        flash[:error] = "Prenotazione impossibile: evento a inviti"
+        redirect_to event_path(@event)
+      when 6
+        #Only invited
+        flash[:error] = "Prenotazione impossibile: prenotazioni bloccate"
+        redirect_to event_path(@event)
       when true
         #Create reservation and save it
         @reservation = @event.reservations.build(params[:event])

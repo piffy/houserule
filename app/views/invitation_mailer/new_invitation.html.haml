@@ -17,6 +17,11 @@
         ti ha invitato a partecipare a
         =@event.name.to_s + "."
 
+    -if @event.reservation_locked?
+      %p
+        %b Nota.
+        In questo momento le prenotazioni sono bloccate dall' organizzatore. Anche se sei invitato, non
+        potrai sfruttare l'invito sinché le prenotazioni non saranno riaperte.
 
     %p
       Per accettare (o rifiutare) l'invito puoi fare click

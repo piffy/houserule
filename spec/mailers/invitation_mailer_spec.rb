@@ -45,6 +45,16 @@ describe UserMailer do
     sent.first.to.should include(organizer.email)
   end
 
+  it 'should send email to invited with warning if event is locked' do
+    event.reservation_locked=true
+    event.save
+    lambda { InvitationMailer.new_invitation(invitation).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should =~ /Invito per #{event.name}/#correct subject
+    sent.first.body.should include(event.name) #correct event name
+    sent.first.body.should include("Nota") #correct event name
+    sent.first.to.should include(user.email)
+  end
+
   def sent
     ActionMailer::Base.deliveries
   end

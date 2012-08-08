@@ -100,26 +100,34 @@ class InvitationsController < ApplicationController
   def update
     @event = Event.find(params[:event_id])
     @invitation=Invitation.find(params[:id])
+    #TODO UGLY! Refactor!
     unless @invitation.pending? &&  !@invitation.expired?
       redirect_to user_path(current_user) and return
     end
     case params[:commit]
       when "Confermo"
-        @reservation = @event.reservations.build
-        @reservation.user_id=@invitation.user_id
-        @reservation.status=2; #confirmed
-        if  @reservation.save
-          @invitation.pending=false
-          @invitation.accepted=true
-          @invitation.save
-          EventMailer.new_reservation(@reservation,@invitation).deliver
-          flash[:success] = "Invito accettato e prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
-          redirect_to event_path(@event)
+        status=@event.can_be_reserved_by(@invitation.user)
+        if status==true || status ==5
+          @reservation = @event.reservations.build
+          @reservation.user_id=@invitation.user_id
+          @reservation.status=2; #confirmed
+          if  @reservation.save
+            @invitation.pending=false
+            @invitation.accepted=true
+            @invitation.save
+            EventMailer.new_reservation(@reservation,@invitation).deliver
+            flash[:success] = "Invito accettato e prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
+            redirect_to event_path(@event)
+          else
+            flash[:error] = "Impossibile prenotare"
+            render 'edit'
+          end
+
         else
           flash[:error] = "Impossibile prenotare"
           render 'edit'
         end
-      when "Rinuncio"
+       when "Rinuncio"
         @invitation.pending=false
         @invitation.accepted=false
         @invitation.save

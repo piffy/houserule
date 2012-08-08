@@ -5,7 +5,11 @@
 %p
   Qui puoi inviare inviti realtivi all'evento evento. Rimarrà valido fino alla data indicata.
   Puoi indicare quanti utenti o gruppi desideri, in ogni caso il sistema invierà al massimo un invito per persona.
-
+-if @event.reservation_locked?
+  %p
+    %i
+      %b Attenzione!
+      In questo momento le prenotazioni sono bloccate, per cui gli inviti non possono essere utilizzati!
 
 
 =form_for [@event, @invitation], :html => {:class => "form-horizontal"} do  |f|
