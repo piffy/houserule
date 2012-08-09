@@ -27,8 +27,8 @@ Funzionalità: Usare i link dell'elenco eventi
 
   Scenario: Modifica evento (non loggato)
     Dato mi trovo nella pagina di elenco eventi
-    Quando seguo il link "Modifica"
-    Allora  dovrei essere nella pagina di login
+    Allora dovrei non vedere "Modifica"
+
 
   Scenario: Modifica evento (loggato)
     Dato   mi trovo nella pagina di login
@@ -37,7 +37,6 @@ Funzionalità: Usare i link dell'elenco eventi
     E      premo "Login"
     E      mi trovo nella pagina di elenco eventi
     Quando seguo il link "Modifica"
-    * mostra la pagina
     Allora  dovrei essere nella pagina di modifica dell'evento  "Event 7"
 
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp

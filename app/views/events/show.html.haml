@@ -4,11 +4,11 @@
     %h4
       Data e ora
     %p
-      = @event.begins_at.strftime('%d-%m-%y alle %H:%M')
+      = l(@event.begins_at, :format => :long)
       = "("+@event.duration+")" unless @event.duration.blank?
     %br
       %b Deadline:
-      = @event.deadline.strftime('%d-%m-%y alle %H:%M')
+      = l(@event.deadline, :format => :long)
 
 
   %div{:class =>"span8"}
@@ -21,14 +21,22 @@
 %hr
 %div{:class =>"row"}
   %div{:class =>"span4"}
-    %h4
-      Sistema di gioco
     %p
-      = @event.system
-    %h4
-      Luogo
-    %p
-      = @event.location
+      %b Organizzatore:
+    %div{:class =>"row organizer"}
+      %span{:id =>"organizer-icon"}
+      = gravatar_for(@event.user,48)
+      %a{:href=> event_path(@event.user)}
+        =@event.user.first_name_or_nick
+    %div{:class =>"row"}
+    -unless @event.system.blank?
+      %p
+        %b Sistema di gioco:
+        = @event.system
+    -unless @event.location.blank?
+      %p
+        %b Luogo:
+        = @event.location
     %p
       %span{:class=>"label label-info"}
         = Event.status_string[@event.status]
@@ -53,14 +61,11 @@
 
 
   %div{:class=> "player"}
-    =link_to image_tag("user-icon.png", alt: "organizer", class: "player-icon"), user_path(@event.user)
-    %div{:class=> "player-description"}
-      =@event.user.first_name_or_nick
-      %span{:class=>"label label-info"}
-        Org
   - @event.reservations.each do |reservation|
     %div{:class=> "player"}
-      =link_to image_tag("offline-user-icon.png", alt: "player", class: "player-icon"), user_path(reservation.user_id)
+      %a{:href=>user_path(reservation.user)}
+        = gravatar_for(reservation.user,80,"player-icon")
+      -#=link_to image_tag("offline-user-icon.png", alt: "player", class: "player-icon"), user_path(reservation.user_id)
       %div{:class=> "player-description"}
         =User.find_by_id(reservation.user_id).first_name_or_nick
         %span{:class=>"label label-success"}

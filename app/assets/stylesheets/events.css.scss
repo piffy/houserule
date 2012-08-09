@@ -16,14 +16,32 @@ div.player
   text-align:center;
 }
 
+div.organizer
+{
+  margin:2px;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+}
+
 img.player-icon
 {
   display:inline;
   margin:2px;
-  border:1px solid #ffffff;
   height: 64px;
   width: 64px;
 }
+
+#organizer-icon
+{
+  display:inline;
+  margin:2px;
+  height: 64px;
+  width: 48px;
+  float:right;
+}
+
 .player-description
 {
   text-align:center;

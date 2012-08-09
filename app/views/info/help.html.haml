@@ -55,6 +55,21 @@
   alla data prevista dall'evento
   Le altre informazioni sono del tutto opzionali, ma possono essere utili per capire di che
   tipo di evento si tratta.
+%p
+  E' possibile anche attiviare alcune speciali proprietà:
+  %ul
+    %li
+      = check_box_tag :invite_only
+      Evento a soli inviti
+      %br
+      Permette le iscrizioni solo a persone invitate (v. oltre)
+    %li
+      = check_box_tag :reservation_locked
+      Prenotazioni bloccate
+      %br
+      Blocca del tutto le prenotazioni (anche quelle su invito)
+
+
 %h4
   Modifica e cancellazione
 %p
@@ -97,3 +112,19 @@
 %p
   In quanto proprietari del gruppo, potrete modificare i parametri del gruppo e le iscrizioni al gruppo stesso.
   In particolare, potrete "bannare" utenti che non volete facciano parte del vostro gruppo.
+%h2
+  Inviti
+%p
+  Se lo si desidera, l'organizzatore può invitare direttamente uno o più giocatori (che in questo caso devono essere utenti già registrati nel sistema)
+  Se il giocatore accetta, sarà automaticamente prenotato per l'evento in questione. Se rinuncia, non potrà più farlo.
+  L'organizzatore può anche sollecitare l'invito.
+%p
+  Per invitare qualcuno basta fare click su
+  = link_to 'Inviti', "#", :class=>"btn"
+  e successivamente sul pulsante
+  = link_to 'Invita', "#", :class=>"btn"
+%p
+  Qui potrete selezionare gli utenti desiderati e/o gruppi di interesse. Indipendentemente dalla scelta, ogni utente riceverà al massimo un messaggio di invito.
+
+
+
