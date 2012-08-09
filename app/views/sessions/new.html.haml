@@ -13,7 +13,11 @@
   %br
   = f.submit(:class=>"btn btn-primary btn-large", :value => 'Login')
 %hr
-Ti sei per caso
-=link_to "dimenticato la password?", new_password_reset_path, :class =>"btn"
+%p
+  Ti sei per caso
+  =link_to "dimenticato la password?", new_password_reset_path
+%p
+  Oppure devi
+  =link_to "registrarti?", new_user_path
 
 
