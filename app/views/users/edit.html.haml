@@ -9,7 +9,8 @@
         L'icona è fornita da
         %nbsp
         = link_to "Gravatar", "http://www.gravatar.com"
-
+        %a{:href=> info_help_path+"#gravatar" }
+          %i{:class=>"icon-question-sign"}
 
 = render 'shared/error_shared', :user => @user
 
