@@ -82,7 +82,7 @@ class EventsController < ApplicationController
   def create
     @user=current_user
     params[:event].delete("user_id")
-
+    datepicker_adapter
 
 
     @event = current_user.events.build(params[:event])
@@ -102,6 +102,9 @@ end
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
+
+    datepicker_adapter
+
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -134,5 +137,20 @@ def has_rights_to
    unless current_user?(@event.user)
     flash[:notice] = "Azione non consentita"
     redirect_to(root_path)
+  end
+end
+
+def datepicker_adapter
+  if params[:event][:"begins_at_date_only"]
+    /(\d\d)-(\d\d)-(\d\d\d\d)/ =~ params[:event]["begins_at_date_only"]
+    params[:event][:"begins_at(1i)"]=Regexp.last_match[3]
+    params[:event][:"begins_at(2i)"]=Regexp.last_match[2]
+    params[:event][:"begins_at(3i)"]=Regexp.last_match[1]
+    /(\d\d)-(\d\d)-(\d\d\d\d)/ =~ params[:event]["deadline_date_only"]
+    params[:event][:"deadline(1i)"]=Regexp.last_match[3]
+    params[:event][:"deadline(2i)"]=Regexp.last_match[2]
+    params[:event][:"deadline(3i)"]=Regexp.last_match[1]
+    params[:event].delete("begins_at_date_only")
+    params[:event].delete("deadline_date_only")
   end
 end

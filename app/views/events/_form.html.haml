@@ -1,5 +1,7 @@
 
 
+
+
 = form_for @event, :html => {:class => "form-horizontal well"} do |f|
   -if @event.errors.any?
     #error_explanation
@@ -34,12 +36,32 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span6"}
       .field
-        = f.label :begins_at, 'Inizio il'
-        = f.datetime_select :begins_at , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1 }
+        = f.label :begins_at, "Inizio il "
+
+        %div{:class=>"input-append date", :id=>"begins_at_date", :"data-date"=> @event.begins_at.strftime("%d-%m-%Y"), :"data-date-format"=>"dd-mm-yyyy"}
+          %input{:class=>"span4", :type=>"text", :value=>@event.begins_at.strftime("%d-%m-%Y"), :name => "event[begins_at_date_only]", :id => "event_begins_at_date_only"  }
+            #span{:class=>"add-on"}
+              #i{:class=>"icon-th"}
+          \-
+          = f.time_select :begins_at, :ignore_date => true,:minute_step => 15
+        :javascript
+          $('#begins_at_date').datepicker()
+
+
+        -#= f.date_select :begins_at, :use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1
+
+
     %div{:class=>"span6"}
       .field
         = f.label :deadline , 'Conferma entro il'
-        = f.datetime_select  :deadline , {:class=>"span4", :minute_step => 15, :use_month_numbers=>true, :order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1}
+        %div{:class=>"input-append date", :id=>"deadline_date", :"data-date"=> @event.deadline.strftime("%d-%m-%Y"), :"data-date-format"=>"dd-mm-yyyy"}
+          %input{:class=>"span4", :type=>"text", :value=>@event.deadline.strftime("%d-%m-%Y"), :name => "event[deadline_date_only]", :id => "event_deadline_date_only" }
+            #span{:class=>"add-on"}
+              #i{:class=>"icon-th"}
+          \-
+          = f.time_select :deadline, :ignore_date => true,:minute_step => 15
+        :javascript
+          $('#deadline_date').datepicker()
 
     %div{:class=>"row-fluid"}
       %div{:class=>"span8"}
