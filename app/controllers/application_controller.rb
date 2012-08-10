@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def self.version
-    '0.1.4'
+    '0.2.0'
   end
 
+  #Added in order to have working links in development environment
   def self.hostname
     if Rails.env == 'production'
       'afternoon-spring-6294.herokuapp.com'
