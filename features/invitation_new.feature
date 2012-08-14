@@ -92,9 +92,11 @@ Scenario:   Visualizzazione invito nel profilo
   E che esiste l'invito all'evento "Campionato" per l'utente "pluto@nomail.it"
   E che esiste l'invito scaduto all'evento "Scadenza" per l'utente "pluto@nomail.it"
   Quando vado al profilo dell'utente "pluto@nomail.it"
-  * mostra la pagina
   Allora dovrei vedere "Inviti pendenti: 2"
   E dovrei vedere "Campionato" all'interno di "a"
   E dovrei non vedere "Scadenza" all'interno di "a"
   E dovrei vedere "Scaduto"
+  Quando vado alla visualizzazione evento di "Campionato"
+  Allora dovrei vedere "Inviti: 1"
+
 
