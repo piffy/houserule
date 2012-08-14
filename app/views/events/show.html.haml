@@ -26,7 +26,7 @@
     %div{:class =>"row organizer"}
       %span{:id =>"organizer-icon"}
       = gravatar_for(@event.user,48)
-      %a{:href=> event_path(@event.user)}
+      %a{:href=> user_path(@event.user)}
         =@event.user.first_name_or_nick
     %div{:class =>"row"}
     -unless @event.system.blank?
