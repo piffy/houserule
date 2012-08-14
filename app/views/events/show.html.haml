@@ -59,7 +59,7 @@
         Giocatori:
       =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
       = "(Prenotati: "+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+")"
-      = "/ Inviti: " +  @event.invitations.pending.count.to_s unless @event.pending.invitations.count == 0
+      = "/ Inviti: " +  @event.invitations.pending.count.to_s unless @event.invitations.pending.count == 0
 
 
   %div{:class=> "player"}
