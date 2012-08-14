@@ -16,6 +16,7 @@ Dato   che esistono i seguenti utenti:
 E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
 | name                  | system     | begins_at  |
 | Campionato            | Risiko     | 10-5-2013  |
+| Scadenza              | Yatzee     | 10-4-2013  |
 
 E che esistono i seguenti eventi dell'utente "pluto@nomail.it":
 | name                  | system     | begins_at  |
@@ -84,4 +85,16 @@ Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E che esiste la prenotazione dell'evento "Campionato" per l'utente "pluto@nomail.it"
 Quando vado alla pagina di nuovi inviti per "Campionato"
 Allora dovrei non vedere "Pluto" all'interno di "label"
+
+
+Scenario:   Visualizzazione invito nel profilo
+  Dato mi loggo con email "pluto@nomail.it" e password "12345678"
+  E che esiste l'invito all'evento "Campionato" per l'utente "pluto@nomail.it"
+  E che esiste l'invito scaduto all'evento "Scadenza" per l'utente "pluto@nomail.it"
+  Quando vado al profilo dell'utente "pluto@nomail.it"
+  * mostra la pagina
+  Allora dovrei vedere "Inviti pendenti: 2"
+  E dovrei vedere "Campionato" all'interno di "a"
+  E dovrei non vedere "Scadenza" all'interno di "a"
+  E dovrei vedere "Scaduto"
 

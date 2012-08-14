@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def self.version
-    '0.2.0'
+    '0.2.1'
   end
 
   #Added in order to have working links in development environment
