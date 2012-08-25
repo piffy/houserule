@@ -25,8 +25,8 @@ perché gli altri utenti si possano iscrivere
     E      inserisco in "event_location" "Paperopoli"
     E      inserisco in "event_min_player_num" "2"
     E      inserisco in "event_max_player_num" "4"
-    E      inserisco in "event_begins_at_date_only" "10-5-2013"
-    E      inserisco in "event_deadline_date_only" "09-5-2013"
+    E      inserisco in "event_begins_at_date_only" "10-05-2013"
+    E      inserisco in "event_deadline_date_only" "09-05-2013"
     Quando premo "Invia"
     Allora dovrei vedere "Evento creato!"
 
@@ -46,8 +46,8 @@ perché gli altri utenti si possano iscrivere
 
   Scenario:   Conferma impossibile  (percorso triste)
     Dato   inserisco in "event_name" "Evento"
-    E      seleziono la data "09-5-2013" in "event_begins_at"
-    E      seleziono la data "10-5-2013" in "event_deadline"
+    E      inserisco in "event_begins_at_date_only" "09-05-2013"
+    E      inserisco in "event_deadline_date_only" "10-05-2013"
     Quando premo "Invia"
     Allora dovrei vedere il messaggio di errore "Deadline non deve precedere l'inizio"
     E dovrei vedere "Un errore non ha reso possibile il salvataggio"
