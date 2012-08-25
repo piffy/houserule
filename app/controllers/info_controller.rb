@@ -1,6 +1,6 @@
 #This class is a simple distributor of semi-static content
 class InfoController < ApplicationController
-  #Unused in 0.1
+  #Unused in 0.2
   def index
   end
 

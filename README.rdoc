@@ -1,11 +1,11 @@
 == Welcome to House Rule
-=== version 0.1.3, 20/07/2012
+=== version 0.2.0, 12/08/2012
 
 House Rule aims to become the site to advertise, contact and manage gaming
 sessions among friends, with a modern, "web 2.0" attitude
 
-At this moment we've done our very first release (0.1), and we are busy on our
-next release.
+At this moment release 0.2 is out. We added a lot of functionality to our previous relelase, focusing on
+communication between users.
 
 
 == People involved 
@@ -20,6 +20,7 @@ next release.
 * Andrea 'Mechvigiak' Vigiak
 * Lorenzo 'Lollo' Trenti
 * Saverio 'Sassa' Barbieri
+* Pierpaolo Garagnani
 
 == Getting involved in the project
 ...We're looking for help, of course.   And I'm wondering why I'm writing this in English.

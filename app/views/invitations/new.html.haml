@@ -30,13 +30,14 @@
 
 
     %div{:class=>"span4"}
+      = f.submit(:class=>"btn btn-primary btn-large", :value => 'Spedisci inviti')
       %h3{:style => "visibility:hidden"}
         Azioni
-      .field
-        = f.label :begins_at, 'Scadenza'
-        = f.datetime_select :valid_until , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1 }
+        .field
+          = f.label :begins_at, 'Scadenza'
+          = f.datetime_select :valid_until , {:minute_step => 15,:use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1, :disabled => true}
 
-      = f.submit(:class=>"btn btn-primary btn-large", :value => 'Spedisci inviti')
+
 
 
 

@@ -2,7 +2,7 @@
 %h1 Guida rapida all'uso di "House Rule"'
 
 %h2
-  Per iniziare
+  Per iniziare: registratevi
 %p
   Anche se potete consultare gli eventi disponibili, per fruire appieno delle funzionalità
   del sito dovete registrarvi, andando
@@ -10,12 +10,34 @@
   Per registravi basta fornire un' email e una password e potete immediatamente
   usarla (vi verrà invata una email di conferma, ma l'attivazione non è ancora prevista.)
   A quel punto potete accedere alla modifica del vostro utente e aggiungere i dati restanti.
+%h4
+  Email
+%p
+  L'email è anche l'username di accesso al sistema. Al momento, non può essere modificato
+%h4
+  Nome utente
+%p
+  Il nome utente può essere modificato liberamente e non è necessario sia un nome reale, (anche se aiuta gli altri giocatori)!
+  Sono possibili omonimie.
+%h4
+  Luogo
+%p
+  Potete indicare il luogo in cui vi trovate. Ciò può aiutare potenziali giocatori a trovarvi e, in futuro, il sistema potrebbe
+  trovare automaticamente eventi e giocatori a voi vicini.
+%h4
+  Nick
+%a{:name => "gravatar"}
+  %nbsp
+%p
+  Il nick è a sua volta un elemento che aiuta gli altri giocatori ad identificarvi. Anche quiesto può non essere univoco.
+%h4
+  Icona e Gravatar
 %p
   L'unico elemento insolito è l'uso di
   = link_to "Gravatar", "http://www.gravatar.com"
-  per fornire la propria immagine. Gravatar è un sito tramite il quale potete caricare i vostri avatar ina volta
-  per tutte e utilizzarla in tutti i siti abilitati, il cui numero è rapida crescita. Se non lo fate,
-  Gravatar vi fornirà un motivo geometrico in sostituzione.
+  per fornire la propria immagine. Gravatar è un sito tramite il quale potete caricare le vostre icone legate
+  alla vostra email. Una volta fatto potete utilizzarla "automagicamnte" in tutti i siti abilitati,
+  l cui numero è rapida crescita. Se non lo fate, Gravatar vi fornirà un motivo geometrico in sostituzione.
 
 %h2
   Gli eventi
@@ -24,7 +46,7 @@
   = link_to "prima pagina", root_path
   presenta i prossimi cinque eventi in ordine di tempo, ma potete avere un quadro più completo nella
   = link_to "pagina di elenco degli eventi,", events_path
-  dove potrete scorrere eventi nuovi e vecchi, cambiare l'ordine di visuazizzazione (in prospettiva ci sarà una funzione di ricerca più completa)
+  dove potrete scorrere eventi nuovi e vecchi, cambiare l'ordine di visualizzazione (in prospettiva ci sarà una funzione di ricerca più completa)
 %h2
   Iscrizione
 %p
@@ -35,10 +57,10 @@
   In certi casi la prenotazione non è possibile (per esempio, se ci sono troppi iscritti, oppure se l'evento
   è iniziato o oltre il limite fissato dall'organizzatore). Se la prenotazione ha successo, l'organizzatore
   riceve un messaggio dell'avvenuta prenotazione
-%h4
-  Creazione
+%h2
+  Organizzare un nuovo evento
 %p
-  Per creare un evento è sufficiente premere il pulsante
+  Per organizzare un evento è sufficiente premere il pulsante
   = link_to 'Organizza evento', new_event_path, :class => "btn"
   presente nella pagina del proprio utente,  oppure tramite menu da qualunque pagina.
 %p
@@ -90,9 +112,10 @@
   = link_to 'Messaggi', "#", :class=>"btn"
   invece, potrete inviare messaggi a chi si è iscritto al vostro evento e, allo stesso modo,
   gli iscritti potranno comuncare con voi
+%a{:name => "groups"}
+  %nbsp
 %h2
   Gruppi
-%a{:name => "#groups"}
 %p
   I gruppi hanno po' le stesse funzionalità dei gruppi dei social networks, riunendo utenti con
   interessi simili (in questo sistema le funzioni sono molto più semplici).

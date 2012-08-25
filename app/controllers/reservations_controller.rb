@@ -60,11 +60,6 @@ class ReservationsController < ApplicationController
     @r= Reservation.find(params[:id])
     @event = @r.event
     @user = current_user
-    if @user != @r.user
-        @reservation_owner="PLALL"
-    else
-      @reservation_owner=""
-    end
     if @event.check_time >0
       flash[:notice] = "Impossibile modificare la prenotazione"
       redirect_to event_path(@event)

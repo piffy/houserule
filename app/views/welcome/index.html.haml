@@ -42,16 +42,18 @@
     ALPHA
     =ApplicationController.version
 %p
-  Il sito è in fase di lavorazione, e si sta lavorando alla release successiva (0.2, aka "comms").
-  Le nuove funzionalità da testare sono
-  %ul
-    %li Creazione e gestione gruppi (OK)
-    %li Invio annunci di eventi  via email a utenti,  gruppi e singole email (OK)
-    %li Invio messaggi da organizzatore iscritti e viceversa (OK)
-    %li Inviti (In lavorazione)
+  Il sito è in fase di lavorazione, vi preghiamo di provarlo e di segnalarci eventuali errori via
+  = link_to "email.", "mailto:piffy@treemme.org"
+  Abbiamo appena rilasciato la nuova release, (0.2), che si concentra sulle nuove funzionalità relative ai
+  Gruppi, Annunci e Messaggi. Vi preghiamo pertanto di provare in particolare le nuove funzionalità (un grazie a quelli che
+  lo hanno già fatto)
+
 %p
   Vi saremmo comunque grati se voleste lasciarci un commento
-  =link_to "in questa sondaggio gentilmente offerto da Google.", info_feedback_path
+  =link_to "in questa sondaggio.", info_feedback_path
+  %br
+    %i
+      (Nota: il sondaggio è nuovo, se lo avete già fatto per la 0.1 siete pregati di rifarlo per registrare i miglioramenti/peggioramenti)
   %br
   Per ulteriori dettagli visitate
   =link_to "la pagina informativa del progetto", info_about_path
