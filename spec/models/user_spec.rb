@@ -23,7 +23,9 @@ describe User do
   it { should respond_to(:first_name) }
   it { should respond_to(:first_name_or_nick) }
   it { should respond_to(:events) }
+  it { should respond_to(:admin) }
   it { should be_valid }
+  it { should_not be_admin }
 
   it "should create a new instance given valid attributes" do
     @user.save
@@ -126,6 +128,16 @@ describe User do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+
+    it { should be_admin }
+  end
+
 
   describe "reservations associations" do
     before { @user.save }

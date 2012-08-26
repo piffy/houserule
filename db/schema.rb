@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808100812) do
+ActiveRecord::Schema.define(:version => 20120826065705) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -90,9 +90,10 @@ ActiveRecord::Schema.define(:version => 20120808100812) do
     t.string   "nick"
     t.string   "description"
     t.string   "location"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "remember_token"
+    t.boolean  "admin",          :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

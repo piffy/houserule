@@ -1,4 +1,6 @@
 FactoryGirl.define do
+  Faker::Config.locale = :it
+
   factory :user do
     name {  Faker::Name.name }
     email  { Faker::Internet.email }
@@ -8,8 +10,7 @@ FactoryGirl.define do
     password_confirmation "foobar"
 
     factory :admin do
-      name     "Admin"
-      email    "admin@disney.com"
+      admin true
     end
   end
 end
