@@ -37,6 +37,9 @@ Houserule::Application.routes.draw do
   resources :users#  , :collection =>{ :deactivate => :get }
 
   get "welcome/index"
+  get "welcome/administration", :as => "administration"
+  get "welcome/wall"
+  match "welcome/wall", :to => "welcome#deliver", :as => "deliver" , :via => :post
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :password_resets, :only => [ :new, :create, :edit, :update ]

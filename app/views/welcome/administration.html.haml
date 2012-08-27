@@ -1,0 +1,29 @@
+=provide(:title, 'Amministrazione')
+%div
+  %h1{:class=>"center"}
+    Amministrazione
+
+%div{:class =>"row"}
+  %div{:class =>"span4"}
+    %h2 Status
+    %p
+      %i{:class=>"icon-user", :title=>"Utenti"}
+      = @user_count
+      = link_to "utenti", users_path
+      %br
+      %i{:class=>"icon-calendar", :title=>"Eventi"}
+      =@event_count
+      = link_to "eventi", events_path
+      %br
+      %i{:class=>"icon-resize-vertical", :title=>"Occupazione"}
+      =@total_rows_percentage.to_s + "/10000 occupato sul DB"
+  %div{:class =>"span8"}
+    %h2 Azioni speciali
+    %p
+      %b
+        = link_to "Wall",welcome_wall_path
+      Invia un messaggio a tutti gli utenti
+      = #@user_count
+
+%hr
+

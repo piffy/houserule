@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
   before_filter :logged_in_user
-  before_filter :has_rights_to, :except => [ :compose, :deliver ]
+  before_filter :correct_event_related_to_user, :except => [ :compose, :deliver ]
 
   def new
     @event = Event.find(params[:event_id])
@@ -117,13 +117,4 @@ class AnnouncementsController < ApplicationController
   redirect_to event_path(@event)
   end
 
-  private
-
-  def has_rights_to
-    e = Event.find(params[:event_id])
-    unless current_user?(e.user)
-      flash[:notice] = "Azione non consentita"
-      redirect_to event_path(e)
-    end
-  end
 end

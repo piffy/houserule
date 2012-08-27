@@ -49,7 +49,7 @@
           %td
             = link_to 'Prenota', new_event_reservation_path(event), :class =>"btn btn-primary"
       %td
-        -if !@current_user.nil? && @current_user==event.user
+        -if !@current_user.nil? && (@current_user==event.user || @current_user.admin)
           = link_to 'Modifica', edit_event_path(event), :class =>"btn"
 
 = will_paginate

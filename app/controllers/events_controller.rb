@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
-  before_filter :has_rights_to,   only: [:edit, :update, :destroy]
+  before_filter :correct_event_for_user,   only: [:edit, :update, :destroy]
 
   def index
     @user=current_user
@@ -132,13 +132,6 @@ end
 
 private
 
-def has_rights_to
-  @event = Event.find(params[:id])
-   unless current_user?(@event.user)
-    flash[:notice] = "Azione non consentita"
-    redirect_to(root_path)
-  end
-end
 
 def datepicker_adapter
   if params[:event][:"begins_at_date_only"]

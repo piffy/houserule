@@ -52,7 +52,17 @@ describe UserMailer do
   it 'should send info email to user(s)' do
     text = Faker::Lorem.paragraph(3)
     subject = Faker::Lorem.words(1)[0]
-    lambda { EventMailer.send_message(organizer, event, user.email, subject, text).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    lambda { EventMailer.send_message(admin, user.email, subject, text).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should include(subject) #correct subject
+    sent.first.body.should include(text) #correct
+    sent.first.to.should include(user.email)
+    sent.first.body.should include(organizer.name)
+  end
+
+  it 'should send info admin email to user(s)' do
+    text = Faker::Lorem.paragraph(3)
+    subject = Faker::Lorem.words(1)[0]
+    lambda { EventMailer.send_admin_message(organizer, user.email, subject, text.deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
     sent.first.subject.should include(subject) #correct subject
     sent.first.body.should include(text) #correct
     sent.first.to.should include(user.email)

@@ -88,7 +88,7 @@ class InterestsController < ApplicationController
       flash[:notice] = "Sei stato bannato"
       redirect_to group_path(r.group)
     end
-    unless current_user?(r.user) || current_user?(r.group.user)
+    unless current_user?(r.user) || current_user?(r.group.user) || current_user.admin
       flash[:notice] = "Azione non consentita"
       redirect_to group_path(r.group)
     end

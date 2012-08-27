@@ -1,0 +1,17 @@
+=provide(:title, 'Wall')
+%h1
+  Messaggi amministrativi
+%p
+  Puoi un messaggio a tutti gli utenti per informarli di novità sul servizio del sito
+
+=form_for(:welcome, :html => {:class => "form-vertical"}) do |f|
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span6"}
+      .field
+        = f.text_field :subject, :placeholder => "Oggetto"
+      .field
+        = f.text_area :body, rows: 4, :placeholder => "Testo"
+
+    %div{:class=>"span6"}
+      = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia messaggio')
+  %br

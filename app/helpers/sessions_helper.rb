@@ -46,11 +46,28 @@ module SessionsHelper
     def correct_user
       @user = User.find(params[:id])
       #@user=user_from_remember_token
-      unless current_user?(@user)
+      unless current_user?(@user) || current_user.admin?
         flash[:notice] = "Azione non consentita"
         redirect_to(root_path)
       end
     end
+
+    def correct_event_for_user
+        @event = Event.find(params[:id])
+        unless current_user?(@event.user) || current_user.admin?
+          flash[:notice] = "Azione non consentita"
+          redirect_to(event_path(@event))
+        end
+    end
+
+    def correct_event_related_to_user
+      @event = Event.find(params[:event_id])
+      unless current_user?(@event.user) || current_user.admin?
+        flash[:notice] = "Azione non consentita"
+        redirect_to(event_path(@event))
+      end
+    end
+
   end
 
 

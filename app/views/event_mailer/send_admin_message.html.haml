@@ -1,0 +1,20 @@
+!!! XML
+!!!
+%html
+  %head
+    %meta{:content=>'text/html; charset=utf-8', :"http-equiv"=>'Content-Type'}
+  %body
+    %h3<
+      Messaggio dall'amministratore
+      =@user.name
+      inviato a tutti gli utenti di House Rule
+
+    =simple_format(@text)
+
+    %p
+      =@user.first_name_or_nick
+
+    %p Your House Rule Robot
+
+    %h5
+      House Rule è un sito gratuito per l'organizzazione di partite di varie tipologie di giochi.

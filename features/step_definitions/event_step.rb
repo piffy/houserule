@@ -51,6 +51,15 @@ Then /^dovrei vedere "([^"]*)" prima di  "([^"]*)"$/ do |arg1, arg2|
   x.should == true
 end
 
+Quando /^vado alla modifica di un evento$/ do
+  @event = Event.first
+  visit edit_event_path(@event)
+end
+
+Quando /^vado ai dettagli di un evento$/ do
+  @event = Event.first
+  visit event_path(@event)
+end
 
 E /^vado alla (\w+) evento di "([^"]*)"$/ do |action,name|
   @event = Event.find_by_name(name)

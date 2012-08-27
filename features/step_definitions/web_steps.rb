@@ -38,6 +38,9 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
     when /pagina di elenco eventi/
       visit events_path
 
+    when /pagina di elenco utenti/
+      visit users_path
+
     when /pagina di creazione gruppo/
       visit new_group_path
 
@@ -48,6 +51,9 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
 
 end
 
+Quando /^vado alla pagina di amministrazione$/ do
+  visit administration_path
+end
 
 When /^seleziono la data "[^"](\d?\d)-(\d?\d)-(\d{4})" in "([^"]*)"$/ do  |day,month,year, field|
     #select_date date, :from => field

@@ -2,7 +2,7 @@
 class InvitationsController < ApplicationController
   include InvitationsHelper
   before_filter :logged_in_user
-  before_filter :has_rights_to , :except => [:edit, :update]
+  before_filter :correct_event_related_to_user, :except => [:edit, :update]
   before_filter :is_invited , :only => [:edit, :update]
 
   def new
@@ -151,17 +151,9 @@ class InvitationsController < ApplicationController
   end
 
 
-  def has_rights_to
-    e = Event.find(params[:event_id])
-    unless current_user?(e.user)
-      flash[:notice] = "Azione non consentita"
-      redirect_to event_path(e)
-    end
-  end
-
   def is_invited
     r = Invitation.find(params[:id])
-    unless current_user?(r.user)
+    unless current_user?(r.user) || current_user.admin?
       flash[:notice] = "Azione non consentita"
       redirect_to event_path(r.event)
     end

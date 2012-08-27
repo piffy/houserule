@@ -40,7 +40,6 @@ Scenario: Non loggato (Redirect amichevole)
 
 Scenario: Già interessato
 Quando mi loggo con email "pluto@nomail.it" e password "12345678"
-Dato che ci sono 1 gruppi di "paolino@nomail.it"
 E che esistono i seguenti gruppi di "paolino@nomail.it":
 | name                  |
 | Gruppo OK             |

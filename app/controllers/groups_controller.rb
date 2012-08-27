@@ -90,7 +90,7 @@ class GroupsController < ApplicationController
 
   def has_rights_to
     @group = Group.find(params[:id])
-    unless current_user?(@group.user)
+    unless current_user?(@group.user) || current_user.admin?
       flash[:notice] = "Azione non consentita"
       redirect_to group_path(@group)
     end

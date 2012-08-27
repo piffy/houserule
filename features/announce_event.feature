@@ -21,6 +21,7 @@ E che esistono i seguenti eventi dell'utente "pluto@nomail.it":
 | Semifinale            | Monopoli   | 21-7-2013  |
 
 
+
 Scenario:   Navigazione
 Dato mi loggo con email "paolino@nomail.it" e password "12345678"
 E vado alla visualizzazione evento di "Campionato"

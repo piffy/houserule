@@ -52,7 +52,7 @@ Funzionalità: Modifica Evento
     E      inserisco in "session_password" "12345678"
     E      premo "Login"
     Quando vado alla modifica evento di "Semifinale"
-    Allora dovrei essere nella home page
+    Allora dovrei essere nella pagina di dettagli dell'evento  "Semifinale"
     E dovrei vedere "Azione non consentita"
 
 

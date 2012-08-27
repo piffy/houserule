@@ -45,6 +45,13 @@ class EventMailer < ActionMailer::Base
     mail(:from => "noreplay.houserules@heroku.com", :to => user_list, :subject => subject )
   end
 
+  #Use this method to send admin info to a list of users.
+  def send_admin_message(sender, user_list, subject, text)
+    @user = sender
+    @text = text
+    mail(:from => "noreplay.houserules@heroku.com", :to => user_list, :subject => subject )
+  end
+
   #Use this method to announce an event
   def announcement(organizer, event, user_list)
     @event = event
