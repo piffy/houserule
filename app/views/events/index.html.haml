@@ -1,5 +1,13 @@
 =provide(:title, 'Eventi')
 %h1 Elenco eventi
+%h4
+  Selezionati
+  %span{:id => "event_selected_count"}
+    =@events.count
+  eventi su
+  %span{:id => "event_total_count"}
+  =@total
+
 
 
 = form_tag events_path, :method => :get, :id => 'filter_form',:html => {:class => "form-horizontal"} do
@@ -17,6 +25,7 @@
 %table{:class => "table table-striped"}
   %tr
     %th{:class => @name_header}= link_to 'Nome evento', events_path(:sort => 'name'), :id => 'name_header'
+    %th
     %th{:class => @system_header}= link_to 'Sistema', events_path(:sort => 'system'), :id => 'system_header'
     %th{:class => @begins_at_header}= link_to 'Data e ora', events_path(:sort => 'begins_at'), :id => 'begins_at_header'
     %th Durata
@@ -30,6 +39,13 @@
   - @events.each do |event|
     %tr
       %td= link_to event.name, event, :title => event.descr_short
+      %td
+        -if event.invite_only?
+          %span{:class=>"label label-info", :title=>"Solo a inviti"}
+            I
+        -if event.reservation_locked?
+          %span{:class=>"label label-important", :title=>"Prenotazioni bloccate"}
+            X
       %td= event.system
       %td= l(event.begins_at, :format => :medium)
       %td= event.duration
@@ -41,7 +57,17 @@
       %td= event.location
       %td
         = event.reservations.count
-        = " / "  + event.max_player_num.to_s unless event.max_player_num ==0
+        - unless event.max_player_num ==0
+          = " / "  + event.max_player_num.to_s
+          - bar_color = "bar-success"
+          -if   event.percentage >75
+            - bar_color="bar-warning"
+          - if  event.percentage == 100 || event.min_player_num>event.reservations.count
+            - bar_color="bar-danger"
+          %div{:class=>"progress", :style=>"width: 50px; height:5px"}
+            %div{:class=>"bar #{bar_color}" , :style=>"width: #{event.percentage}% "}
+
+
       -unless event.invite_only? ||  event.reservation_locked?
         -if !@current_user.nil? && event.already_reserved_by(@current_user)
           %td= link_to 'Sprenota', event_reservation_path(event, event.already_reserved_by(@current_user)), :class =>"btn btn-danger"
@@ -51,6 +77,7 @@
       %td
         -if !@current_user.nil? && (@current_user==event.user || @current_user.admin)
           = link_to 'Modifica', edit_event_path(event), :class =>"btn"
+
 
 = will_paginate
 %br

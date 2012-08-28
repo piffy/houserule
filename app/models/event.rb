@@ -43,6 +43,21 @@ class Event < ActiveRecord::Base
     begins_at > Time.now
   end
 
+  #Checks if the event has still free places
+  def full?
+    max_player_num >0 && reservations.count >= max_player_num
+  end
+
+  def percentage
+    if max_player_num == 0
+      return  [reservations.count, 99].min
+    else
+      return (100*reservations.count.to_f / max_player_num).to_i
+    end
+
+  end
+
+
   #Checks if the event has already been reserved by user
   def already_reserved_by(user)
 

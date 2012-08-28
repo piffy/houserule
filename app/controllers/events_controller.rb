@@ -4,7 +4,8 @@ class EventsController < ApplicationController
 
   def index
     @user=current_user
-    @selection =  params[:selection] || session[:selection] || :all_events
+    @total=Event.count
+    @selection =  params[:selection] || session[:selection] || :not_begun
     sort = params[:sort] || session[:sort]
 
     #Handle sorting
