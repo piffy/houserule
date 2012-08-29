@@ -9,6 +9,10 @@ module InvitationsHelper
     reserved_users=event.reservations.map { |u| u.user_id }
     invited_users=event.invitations.map { |u| u.user_id }
     x= (reserved_users+invited_users).uniq.join(",")
+    if x.blank?
+    User.all
+    else
     User.find_by_sql("select users.* from users where users.id NOT IN (#{x})")
+    end
   end
 end
