@@ -29,18 +29,21 @@
       = simple_format(@user.description)
   %div{:class =>"span4"}
     %h3
-      %b Eventi:
-      =@user.events.count + @user.reserved_events.count
+      %b
+        ="Eventi organizzati ("+ @user.events.count.to_s+"):"
+
     -if @user.events.any?
       -@events=@user.events
       = render "shared/list_event",  :events => @user.events ,:show_organizer => false
+    %h3
+      %b
+        ="Eventi prenotati ("+ @user.reserved_events.count.to_s+"):"
     -if @user.reserved_events.any?
       = render "shared/list_event" , :events => @user.reserved_events ,:show_organizer => true
     -if @user.invitations.pending.any?
       %h3
         %b
-          Inviti pendenti:
-          = @user.invitations.pending.count
+          = "Inviti pendenti (" + @user.invitations.pending.count.to_s+"):"
       %ol{:class =>"events"}
         - @user.invitations.pending.each do |invitation|
           %li
