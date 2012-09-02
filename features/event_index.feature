@@ -56,17 +56,27 @@ Funzionalità:
     Quando mi trovo nella pagina di elenco eventi
     Allora dovrei vedere "" all'interno di "div.bar-warning"
 
-  Scenario: Mostra badge nel caso di eventi con solo invito
+  Scenario: Mostra icona nel caso di eventi con solo invito
 
     Dato che esistono i seguenti eventi dell'utente "pluto@nomail.it":
       | name                  | system     | begins_at  | deadline   | invite_only |
       | Riservato             | Strano     | 21-7-2013  | 21-7-2013  |      true   |
     Quando mi trovo nella pagina di elenco eventi
-    Allora dovrei vedere "I" all'interno di "span.label-info"
+    Allora dovrei vedere "" all'interno di "i.icon-exclamation-sign"
+    E dovrei non vedere "Prenota" all'interno di "a"
 
+  Scenario: Non mostrare bottone in caso di evento bloccato
     Dato che esistono i seguenti eventi dell'utente "pluto@nomail.it":
       | name                  | system     | begins_at  | deadline   | reservation_locked |
       | Bloccato              | Strano     | 21-7-2013  | 21-7-2013  |      true          |
     Quando mi trovo nella pagina di elenco eventi
-    Allora dovrei vedere "X" all'interno di "span.label-important"
+    Allora dovrei non vedere "Prenota" all'interno di "a"
 
+  Scenario: Evento al completo
+    Dato che esistono i seguenti eventi dell'utente "pluto@nomail.it":
+      | name                  | system     | begins_at  | deadline   | max_player_num | min_player_num |
+      | Soltero               | Monopoli   | 21-7-2013  | 21-7-2013  |       1        |        1       |
+    E che esiste la prenotazione dell'evento "Soltero" per l'utente "paolino@nomail.it"
+    Quando mi trovo nella pagina di elenco eventi
+    Allora dovrei non vedere "Prenota" all'interno di "a"
+    E dovrei vedere "Completo" all'interno di "span"
