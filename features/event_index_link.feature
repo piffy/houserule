@@ -31,21 +31,26 @@ Funzionalità: Usare i link dell'elenco eventi
 
 
   Scenario: Modifica evento (loggato)
+    E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
+      | name                  | system     | begins_at  |
+      | First event            | Strange   | 01-10-2012 |
     Dato   mi trovo nella pagina di login
     E      inserisco in "session_email" "paolino@nomail.it"
     E      inserisco in "session_password" "12345678"
     E      premo "Login"
     E      mi trovo nella pagina di elenco eventi
     Quando seguo il link "Modifica"
-    Allora  dovrei essere nella pagina di modifica dell'evento  "Event 7"
+    Allora  dovrei essere nella pagina di modifica dell'evento  "First event"
 
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp
-    Dato ci sono 2 eventi di "pluto@nomail.it"
+    Dato ci sono 1 eventi di "pluto@nomail.it"
+    E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
+      | name                  | system     | begins_at  |
+      | Last event            | Strange     | 9-5-2013  |
     E mi trovo nella homepage
     Allora dovrei non vedere "Event 15"
     E dovrei non vedere "Campionato"
-    E dovrei vedere "Event 10" all'interno di "a"
-    E dovrei vedere "Event 14" all'interno di "a"
+    E dovrei vedere "Last event" all'interno di "a"
     E dovrei vedere "6 eventi presenti"
 
   Scenario: Non mostra gli eventi passati nella hp

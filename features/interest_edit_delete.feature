@@ -53,7 +53,7 @@ Scenario: Utente bannato non può fare modifiche
 Dato mi loggo con email "pippo@nomail.it" e password "12345678"
 Dato "Pippo" è bannato dal gruppo "Gruppo 1"
 Quando vado alla modifica interesse di "Gruppo 1" per "Pippo"
-Allora  dovrei vedere "Sei stato bannato"
+Allora  dovrei vedere "Sei stato bandito"
 
 
 Scenario: Elimina interesse

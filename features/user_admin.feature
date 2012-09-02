@@ -38,7 +38,6 @@ Funzionalità:  Utente amministratore
     Quando vado ai dettagli di un evento
     Allora dovrei vedere "Messaggi" all'interno di "a.btn"
     E dovrei vedere "Annuncia" all'interno di "a.btn"
-    E dovrei vedere "Inviti" all'interno di "a.btn"
     Quando seguo il link "Inviti"
     Allora dovrei non vedere "Azione non consentita"
     Quando vado ai dettagli di un evento

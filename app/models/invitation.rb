@@ -9,7 +9,8 @@ class Invitation < ActiveRecord::Base
   #validates :field, :inclusion => {:in => [true, false]}
   validates_date_of :valid_until
 
-  scope :pending, :conditions => { :pending => true }
+  scope :pending, :conditions => { :pending => true  }
+  scope :not_stale, lambda { {:conditions => ["valid_until > ?", Date.today ]} }
 
   def expired?
     Time.parse(self.valid_until.to_s) < Time.now

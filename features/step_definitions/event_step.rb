@@ -89,3 +89,11 @@ Then  /^dovrei essere nella pagina di (\w+) dell'evento  "([^"]*)"$/ do |action,
          end
   assert_equal path, URI.parse(current_url).path
 end
+
+
+E /^inserisco in "([^"]*)" la data di ieri$/ do |field|
+  if true
+     d=(Date.today-1.day).to_formatted_s(:db)
+  end
+  "inserisco in \"#{field}\" \"#{d}\""
+end

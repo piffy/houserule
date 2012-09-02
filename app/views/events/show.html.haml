@@ -17,7 +17,10 @@
       %p
         %span{:class=>"label label-info span2"}
           = Event.status_string[@event.status]
-
+      -if @event.check_time ==2
+        %p
+          %span{:class=>"label label-info span2"}
+            Iniziato
       -if @event.invite_only?
         %p
           %span{:class=>"label label-warning span2"}
@@ -70,15 +73,12 @@
     %h3
       %b
         = link_to "Inviti", event_invitations_path(@event)
-        = " ("+@event.invitations.pending.count.to_s+"):"
-    = render 'invitations/list_invited', :invitations => @event.invitations.pending
+        = " ("+@event.invitations.pending.not_stale.count.to_s+"):"
+    = render 'invitations/list_invited', :invitations => @event.invitations.pending.not_stale
 
 %div{:class =>"row"}
-  %div{:class =>"span8"}
+  %div{:class =>"span12"}
     = simple_format("<b>Descrizione: </b>"+@event.description, :id => "description") unless @event.description.blank?
-%div{:class =>"row"}
-  %div{:class =>"span4"}
-
 
 %hr
 %div{:class =>"row"}
@@ -87,9 +87,10 @@
       -if !@user.nil? && @event.already_reserved_by(@user)
         = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
       - else
-        = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
-
-    = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"   if !current_user.nil? && (current_user==@event.user || current_user.admin? )
+        = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"   unless @event.check_time>0
+    -if !current_user.nil? && (current_user==@event.user || current_user.admin? )
+      = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
+      = link_to 'Cambia stato', "#", :class=>"btn", :disabled => true
 
     = link_to 'Elenco eventi', events_path, :class=>"btn"
     -if !@user.nil?

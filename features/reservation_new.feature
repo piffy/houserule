@@ -62,6 +62,18 @@ Funzionalità: Prenota evento
     Allora dovrei vedere "Prenotazione impossibile"
     E dovrei vedere "Posti esauriti"
 
+  Scenario: Prenotazione manuale con invito
+    Dato che esiste l'invito all'evento "Semifinale" per l'utente "paolino@nomail.it"
+    Dato vado alla visualizzazione evento di "Semifinale"
+    Quando seguo il link "Prenota"
+    Allora dovrei essere nella pagina di prenotazione dell'evento  "Semifinale"
+    Quando premo "Confermo"
+    Allora dovrei essere nella pagina di dettagli dell'evento  "Semifinale"
+    E dovrei vedere "Prenotazione effettuata"
+    E dovrei vedere "Elimina prenotazione"
+    Quando vado al profilo dell'utente "paolino@nomail.it"
+    Allora dovrei non vedere "Inviti pendenti"
+
 
 
 

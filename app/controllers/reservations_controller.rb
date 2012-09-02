@@ -20,6 +20,7 @@ class ReservationsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     @user = current_user
+    @invitation=  Invitation.find_by_user_id_and_event_id(@user.id,@event.id)
 
     case @event.can_be_reserved_by(@user)
       when 1
@@ -39,6 +40,11 @@ class ReservationsController < ApplicationController
         @reservation.user_id=@current_user.id
         @reservation.status=1; #proposed
         if  @reservation.save
+          unless @invitation.nil?
+            @invitation.pending=false
+            @invitation.accepted=true
+            @invitation.save
+          end
           EventMailer.new_reservation(@reservation).deliver
           flash[:success] = "Prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
           redirect_to event_path(@event)

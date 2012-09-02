@@ -36,8 +36,8 @@ Funzionalità: Conferma invito
       E dovrei vedere il pulsante "Rinuncio"
       Quando premo il pulsante "Confermo"
       Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
-      E dovrei vedere "Invito accettato e prenotazione effettuata."
-      E dovrei vedere "Pluto" all'interno di "div.player-description"
+      E dovrei vedere "Invito accettato e prenotazione effettuata"
+      E dovrei vedere "Pluto" all'interno di "ul.users"
       Quando vado alla pagina di conferma invito dell'evento "Campionato" dell'utente "Pluto"
       Allora dovrei vedere "invito già utilizzato"
       E il sistema ha inviato 1 email

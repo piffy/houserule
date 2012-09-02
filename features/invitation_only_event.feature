@@ -22,7 +22,7 @@ Funzionalità:  Eventi (chiusi) e senza iscrizioni
     Allora dovrei vedere "Evento creato!"
     Quando vado alla visualizzazione evento di "Evento chiuso"
     Allora dovrei vedere "Solo invitati"
-    E dovrei non vedere "Prenota"
+    E dovrei non vedere "Prenota" all'interno di "a"
     Quando mi trovo nella pagina di elenco eventi
     Allora dovrei vedere "Evento chiuso"
     E dovrei non vedere "Prenota" all'interno di "li"
