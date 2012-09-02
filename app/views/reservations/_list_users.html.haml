@@ -1,0 +1,13 @@
+%ul{:class=>"users"}
+  -reservations.each do |reservation|
+    %li{class:"no-bullet"}
+      %span
+        = gravatar_for reservation.user, 24
+        = link_to reservation.user.first_name_or_nick, edit_user_path(reservation.user)
+        = l(reservation.created_at, :format => :short)
+      -# Admin section
+      %span
+        -if true
+          %a{:href => event_reservation_path(reservation.event, reservation)}
+            %i{class:"icon-remove", title:"modifica"}
+

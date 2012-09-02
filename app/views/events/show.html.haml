@@ -1,86 +1,83 @@
 =provide(:title, 'Dettagli evento')
-%div{:class =>"row"}
-  %div{:class =>"span4"}
-    %h4
-      Data e ora
-    %p
-      = l(@event.begins_at, :format => :long)
-      = "("+@event.duration+")" unless @event.duration.blank?
-    %br
-      %b Deadline:
-      = l(@event.deadline, :format => :long)
 
+-unless @event.descr_short.blank?
+  %h1{:style => "margin-bottom:0px;"}
+    = '"'+@event.name+'"'
+  %p{:class =>"center"}
+    = "("+@event.descr_short+")"
+-else
+  %h1
+    = '"'+@event.name+'"'
 
-  %div{:class =>"span8"}
-    %h1
-      = '"'+@event.name+'"'
-  -unless @event.descr_short.blank?
-    %p{:class =>"center"}
-      %strong
-        = "("+@event.descr_short+")"
-%hr
-%div{:class =>"row"}
+%div{class:"row"}
+  %aside{class:"span4"}
+    %section
+      %h2
+
+      %p
+        %span{:class=>"label label-info span2"}
+          = Event.status_string[@event.status]
+
+      -if @event.invite_only?
+        %p
+          %span{:class=>"label label-warning span2"}
+            Solo invitati
+      -if @event.reservation_locked?
+        %p
+          %span{:class=>"label label-important span2"}
+            Prenotazioni bloccate
+      -if @event.reservations.count < @event.min_player_num
+        %p
+          %span{:class=>"label label-important span2"}
+            Prenotazioni scarse
   %div{:class =>"span4"}
-    %p
-      %b Organizzatore:
-    %div{:class =>"row organizer"}
-      %span{:id =>"organizer-icon"}
-      = gravatar_for(@event.user,48)
-      %a{:href=> user_path(@event.user)}
-        =@event.user.first_name_or_nick
-    %div{:class =>"row"}
     -unless @event.system.blank?
       %p
         %b Sistema di gioco:
         = @event.system
+    %p
+      %b Data e ora:
+      = l(@event.begins_at, :format => :long)
+      = "("+@event.duration+")" unless @event.duration.blank?
+    - unless @event.deadline == @event.begins_at
+      %p
+        %b Deadline:
+        = l(@event.deadline, :format => :long)
+
     -unless @event.location.blank?
       %p
         %b Luogo:
         = @event.location
-    %p
-      %span{:class=>"label label-info"}
-        = Event.status_string[@event.status]
-    -if @event.invite_only?
-      %span{:class=>"label label-warning"}
-        Solo invitati
-    -if @event.reservation_locked?
-      %span{:class=>"label label-important"}
-        Prenotazioni bloccate
 
-  %div{:class =>"span8"}
-  -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
-    %p
-      %b Giocatori prenotati:
-      = @event.reservations.count
-      = "/ Inviti: " +  @event.invitations.pending.count.to_s unless @event.invitations.pending.count == 0
-  -else
-    %p
+  %div{:class =>"span4"}
+    %h3
       %b
-        Giocatori:
-      =  "da "+@event.min_player_num.to_s + " a "  + @event.max_player_num.to_s
-      = "(Prenotati: "+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+")"
-      = "/ Inviti: " +  @event.invitations.pending.count.to_s unless @event.invitations.pending.count == 0
+        Organizzato da:
+    %ul{class:"users"}
+      %li{class:"no-bullet"}
+        %span
+          = gravatar_for @event.user, 32
+          = link_to @event.user.first_name_or_nick, user_path(@event.user), id:"group_owner"
+    %br
+    %h3
+      %b
+      -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
+        = "Prenotati ("+@event.reservations.count.to_s+"):"
+      -else
+        = "Prenotati ("+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+"):"
+    = render 'reservations/list_users', :reservations => @event.reservations
+    %br
+    %h3
+      %b
+        = link_to "Inviti", event_invitations_path(@event)
+        = " ("+@event.invitations.pending.count.to_s+"):"
+    = render 'invitations/list_invited', :invitations => @event.invitations.pending
 
-
-  %div{:class=> "player"}
-  - @event.reservations.each do |reservation|
-    %div{:class=> "player"}
-      %a{:href=>user_path(reservation.user)}
-        = gravatar_for(reservation.user,80,"player-icon")
-      -#=link_to image_tag("offline-user-icon.png", alt: "player", class: "player-icon"), user_path(reservation.user_id)
-      %div{:class=> "player-description"}
-        =User.find_by_id(reservation.user_id).first_name_or_nick
-        %span{:class=>"label label-success"}
-          Ok
-        %a{:href =>  event_reservation_path(@event, reservation), class: "nomargin" }
-          %i{class:"icon-edit", title:"modifica"}
-        -#=link_to   "X", event_reservation_path(@event, reservation), class: "btn btn-danger nomargin"
-
--unless @event.description.blank?
-  %hr
-  %div{:class =>"row"}
-    %div{:class =>"span12"}
-      = simple_format(@event.description)
+%div{:class =>"row"}
+  %div{:class =>"span8"}
+    = simple_format("<b>Descrizione: </b>"+@event.description, :id => "description") unless @event.description.blank?
+%div{:class =>"row"}
+  %div{:class =>"span4"}
 
 
 %hr
@@ -92,15 +89,12 @@
       - else
         = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"
 
-    = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
-    %nbsp
+    = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"   if !current_user.nil? && (current_user==@event.user || current_user.admin? )
+
     = link_to 'Elenco eventi', events_path, :class=>"btn"
     -if !@user.nil?
-      %nbsp
       = link_to 'Messaggi', event_compose_path(@event), :class=>"btn"
       -if current_user?(@event.user)  || current_user.admin?
-        %nbsp
         = link_to 'Annuncia', new_event_announcement_path(@event), :class=>"btn"
-        = link_to 'Inviti', event_invitations_path(@event), :class =>"btn"
 
 

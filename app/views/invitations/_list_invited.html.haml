@@ -1,0 +1,13 @@
+%ul{:class=>"users"}
+  -invitations.each do |invitation|
+    %li{class:"no-bullet"}
+      %span
+        = gravatar_for invitation.user, 24
+        = link_to invitation.user.first_name_or_nick, edit_user_path(invitation.user)
+        = l(invitation.valid_until, :format => :short)
+      -# Admin section
+      %span
+        -if true
+          %a{:href => event_invitation_path(invitation.event, invitation)}
+            %i{class:"icon-remove", title:"modifica"}
+

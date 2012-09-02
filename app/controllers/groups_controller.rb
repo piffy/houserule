@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @interested=already_interested?(current_user,@group)
     if @interested && @interested.is_banned?
-      flash[:notice]="Sei stato bandito da questo gruppo"
+      flash.now[:notice]="Sei stato bandito da questo gruppo"
     end
 
 
