@@ -26,7 +26,7 @@ Funzionalità: Creazione gruppo
     Quando premo "Invia"
     Allora  dovrei essere nella pagina di dettagli del gruppo "Un nome"
     E dovrei vedere "Gruppo creato"
-    E dovrei vedere "Paperino" all'interno di "span#group_owner"
+    E dovrei vedere "Paperino" all'interno di "a#group_owner"
 
   Scenario:  Non inserisco il nome
     Dato mi loggo con email "paolino@nomail.it" e password "12345678"

@@ -3,7 +3,7 @@
     -if (interest.is_visible  && !interest.is_banned)  || @group.user==current_user || interest.user==current_user
       %li{class:"no-bullet"}
         %span
-          = gravatar_for interest.user, 16
+          = gravatar_for interest.user, 24
           = link_to interest.user.name, edit_group_interest_path(@group,interest)
         %span
           -if interest.is_visible

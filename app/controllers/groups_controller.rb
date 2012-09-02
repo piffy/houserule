@@ -17,6 +17,10 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @interested=already_interested?(current_user,@group)
+    if @interested && @interested.is_banned?
+      flash[:notice]="Sei stato bandito da questo gruppo"
+    end
 
 
     respond_to do |format|
