@@ -1,4 +1,6 @@
-
+Dato /^mi trovo nell'elenco utenti con ordinamento "([^"]*)"$/ do |order|
+  visit users_path+"?sort="+order
+end
 
 
 Then /^dovrei essere alla  home\s?page$/ do

@@ -6,6 +6,32 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    sort = params[:sort] || session[:sort]
+
+    #Handle sorting
+    case sort
+      when 'name'
+        ordering,@name_header = 'name', 'hilite'
+      when 'created_at'
+        ordering,@created_at_header = 'created_at', 'hilite'
+    end
+
+    #Handle Pagination
+    if ordering.nil?
+      @users = User.paginate(page: params[:page])
+    else
+      @users = User.page(params[:page]).order(ordering)
+    end
+
+
+    #Preserve sorting selection in session
+    if params[:sort] != session[:sort]
+      session[:sort] = sort
+      redirect_to :sort => sort, :selection => @selection and return
+    end
+
+
+
   end
 
   #Register a new user. You can't register if you're logged in.

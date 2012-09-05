@@ -1,0 +1,15 @@
+%tr
+  %td
+    = gravatar_for user, 24
+
+    = link_to user.name, user
+  %td
+    = user.nick || "-"
+  %td
+    =l(user.created_at, :format => :long_date_only)
+  %td{id: "event_count_#{user_counter}"}
+    = user.events.count
+  %td
+    = user.groups.count
+  %td{id: "reserved_event_count_#{user_counter}"}
+    = user.reserved_events.count
