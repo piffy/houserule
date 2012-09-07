@@ -26,6 +26,7 @@ Houserule::Application.routes.draw do
     resources :reservations, only: [:new, :create, :destroy, :show]
     resources :announcements, only: [:new, :create]
     resources :invitations
+    resources :event_wizard
     match  'announcements/compose', :to => "announcements#compose", :as => "compose"
     match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
   end

@@ -40,12 +40,15 @@
         = @event.system
     %p
       %b Data e ora:
-      = l(@event.begins_at, :format => :long)
-      = "("+@event.duration+")" unless @event.duration.blank?
-    - unless @event.deadline == @event.begins_at
-      %p
-        %b Deadline:
-        = l(@event.deadline, :format => :long)
+      - if @event.begins_at.nil?
+        Non ancora stabilita
+      -else
+        = l(@event.begins_at, :format => :long)
+        = "("+@event.duration+")" unless @event.duration.blank?
+      - unless @event.begins_at.nil? || @event.deadline.nil? || @event.deadline == @event.begins_at
+        %p
+          %b Deadline:
+          = l(@event.deadline, :format => :long)
 
     -unless @event.location.blank?
       %p

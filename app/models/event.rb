@@ -16,8 +16,10 @@ class Event < ActiveRecord::Base
   validates :min_player_num, :numericality => { :greater_than_or_equal_to => 0 }
   validates :status, :numericality => true
 
-  validates_date_of :begins_at
-  validates :deadline, :date => {:before_or_equal_to => :begins_at }
+  validates_date_of :begins_at, :allow_nil => true
+  validates_date_of :deadline, :allow_nil => true
+  validates :deadline, :date => {:before_or_equal_to => :begins_at }, :allow_nil => true
+
 
 
   default_scope order: 'events.begins_at ASC'
@@ -30,7 +32,7 @@ class Event < ActiveRecord::Base
 
   #Lists of all possible states (in Italian - unused in 0.1)
   def self.status_string
-    %w(Archiviato Proposto Confermato Sospeso)
+    %w(Indefinito Proposto Confermato Sospeso)
   end
 
   #Converts status to string
@@ -72,10 +74,10 @@ class Event < ActiveRecord::Base
 
   #Checks if event has begun or can't be reserved anymore [NEED REFACTORING]
   def check_time
-    if Time.now > self.begins_at
+    if self.begins_at && Time.now > self.begins_at
       return 2
     end
-    if Time.now > self.deadline
+    if self.deadline && Time.now > self.deadline
       return 3
     end
     return 0

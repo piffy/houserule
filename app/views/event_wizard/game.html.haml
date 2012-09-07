@@ -1,0 +1,70 @@
+=provide(:title, 'Wizard evento: '+ step.to_s )
+%h1
+  =@event.name
+
+= form_for @event, :html => {:class => "form-horizontal well"}, :url => event_event_wizard_path(@event), :method => :put do |f|
+  -if @event.errors.any?
+    #error_explanation
+      %h2
+        = @event.errors.count == 1 ? "Un errore non ha" : "#{@event.errors.count} errori non hanno"
+        reso possibile il salvataggio
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span9"}
+      .field
+        = f.label :system, 'Sistema di gioco'
+        = f.text_field :system, :placeholder => "Può rimanere vuoto, ma è opportuno indicarlo" , :"data-provide" => "typeahead", :"data-items"=>"8",  :"data-source"=> @system_list
+    %div{:class=>"span3"}
+      Lookup
+      %br
+      %a{:class =>"btn", :disabled => true}
+        bgg
+      %a{:class =>"btn", :disabled => true}
+        rpgg
+  :javascript
+    $('.typeahead').typeahead()
+
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span3"}
+      .field
+        = f.label :min_player_num , 'Giocatori (min)'
+        = f.number_field :min_player_num, :min=>"0", :size=>"3", :maxlenght =>3, :class => "input-small"
+        %abbr{:title=>"Lasciare a 0 per non avere minimo. Valore indicativo."}
+          %i{:class=>"icon-question-sign"}
+
+    %div{:class=>"span3"}
+      .field
+        = f.label :max_player_num , 'Giocatori (max)'
+        = f.number_field :max_player_num, :min=>"0", :size=>"3", :maxlenght =>3, :class => "input-small"
+        %abbr{:title=>"Lasciare a 0 per non avere limite."}
+          %i{:class=>"icon-question-sign"}
+    %div{:class=>"span3"}
+
+      .field
+        = f.label :min_player_num , 'Lista attesa'
+        %input{:type=>"input", :disabled=> true, :class => "input-small", :value => 0}
+        %i{:class=>"icon-question-sign"}
+    %div{:class=>"span3"}
+      Flags
+      .field
+        = f.check_box :invite_only
+        Evento a soli inviti
+        %i{:class=>"icon-question-sign"}
+      .field
+        = f.check_box :reservation_locked
+        Prenotazioni bloccate
+        %i{:class=>"icon-question-sign"}
+      .field
+        %input{:type=>"checkbox", :disabled=> true}
+        Inviti contano come iscritti
+        %i{:class=>"icon-question-sign"}
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      %br
+      .actions
+        = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')
+
+

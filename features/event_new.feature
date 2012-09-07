@@ -18,17 +18,20 @@ perché gli altri utenti si possano iscrivere
 
   Scenario:   Aggiugere un nuovo evento
     Dato   inserisco in "event_name" "Evento"
-    E      inserisco in "event_system" "Pimpinella"
-    E      inserisco in "event_duration" "3 ore"
     E      inserisco in "event_description" "Una partita davvero inutile"
     E      inserisco in "event_descr_short" "partita"
+    Quando premo "Prossimo"
+    Allora dovrei vedere "Evento creato!"
+    Quando      inserisco in "event_system" "Pimpinella"
+
+    E      inserisco in "event_duration" "3 ore"
+
     E      inserisco in "event_location" "Paperopoli"
     E      inserisco in "event_min_player_num" "2"
     E      inserisco in "event_max_player_num" "4"
     E      inserisco in "event_begins_at_date_only" "10-05-2013"
     E      inserisco in "event_deadline_date_only" "09-05-2013"
-    Quando premo "Invia"
-    Allora dovrei vedere "Evento creato!"
+
 
   Scenario:   Dimenticare il nome (percorso triste)
     Quando premo "Invia"

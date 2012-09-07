@@ -64,10 +64,26 @@ describe Event do
     @event.should_not be_valid
   end
 
-  it "should have valid deadline"  do
-    @event.deadline="Not a date";
-    @event.should_not be_valid
+  #it "should accept nil as begining_date"  do
+  #  @event.begins_at=nil;
+  #  @event.should be_valid
+  #end
+
+  it "should accept both dates as nil"  do
+    @event.begins_at=nil;
+    @event.deadline=nil;
+    @event.should be_valid
   end
+
+  it "should accept nil as deadline"  do
+    @event.deadline=nil;
+    @event.should be_valid
+  end
+
+  #it "should have valid deadline"  do
+  #  @event.deadline="Not a date";
+  #  @event.should_not be_valid
+  #end
 
   it "should have a plausible deadline"  do
     @event.deadline=@event.begins_at+1.day;

@@ -37,7 +37,8 @@ gem 'haml-rails'
 
 # Handle dates properly
 gem "date_validator", "~> 0.6.3"
-
+# Wizard handling
+gem 'wicked'
 
 # use Ruby debugger
 group :development, :test do

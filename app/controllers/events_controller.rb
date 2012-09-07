@@ -81,6 +81,20 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    @user = current_user
+    params[:event].delete("user_id")
+    @event = current_user.events.build(params[:event])
+    @event.status=0; #proposed
+
+    if @event.save
+      flash[:success] = "Evento creato!"
+      redirect_to event_event_wizard_path(@event)
+    else
+      render :new
+    end
+
+
+=begin
     @user=current_user
     params[:event].delete("user_id")
     datepicker_adapter
@@ -96,7 +110,7 @@ class EventsController < ApplicationController
       render 'new'
     end
 
-
+=end
 end
 
   # PUT /events/1
