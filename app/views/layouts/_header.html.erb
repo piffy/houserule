@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to image_tag("tiny_logo.jpg", alt: "House Rule", id: "logo") %>
+      <%= link_to image_tag("tiny_logo.jpg", alt: "House Rule", id: "logo",:href=>root_path) %>
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
@@ -25,7 +25,7 @@
               Eventi <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Eventi", events_path  %></li>
+              <li><%= link_to "Elenco", events_path  %></li>
               <li><%= link_to "Organizza evento", new_event_path %></li>
             </ul>
             <% if signed_in?  %>
@@ -34,7 +34,7 @@
                 Utenti <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Utenti", users_path  %></li>
+                <li><%= link_to "Elenco", users_path  %></li>
                 <li><%= link_to "Gruppi", groups_path %></li>
               </ul>
 
