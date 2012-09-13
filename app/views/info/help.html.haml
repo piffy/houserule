@@ -10,26 +10,23 @@
   Per registravi basta fornire un' email e una password e potete immediatamente
   usarla (vi verrà invata una email di conferma, ma l'attivazione non è ancora prevista.)
   A quel punto potete accedere alla modifica del vostro utente e aggiungere i dati restanti.
-%h4
-  Email
-%p
-  L'email è anche l'username di accesso al sistema. Al momento, non può essere modificato
-%h4
-  Nome utente
-%p
-  Il nome utente può essere modificato liberamente e non è necessario sia un nome reale, (anche se aiuta gli altri giocatori)!
-  Sono possibili omonimie.
-%h4
-  Luogo
-%p
-  Potete indicare il luogo in cui vi trovate. Ciò può aiutare potenziali giocatori a trovarvi e, in futuro, il sistema potrebbe
-  trovare automaticamente eventi e giocatori a voi vicini.
-%h4
-  Nick
-%a{:name => "gravatar"}
-  %nbsp
-%p
-  Il nick è a sua volta un elemento che aiuta gli altri giocatori ad identificarvi. Anche quiesto può non essere univoco.
+  %dl{class:"dl-horizontal"}
+    %dt
+      Email
+    %dd
+      L'email è anche l'username di accesso al sistema. Al momento, non può essere modificato
+    %dt
+      Nome utente
+    %dd
+      Il nome utente può essere modificato liberamente e non è necessario sia un nome reale, (anche se aiuta gli altri giocatori)!
+      Sono possibili omonimie
+    %dt
+      Nick
+      %a{:name => "gravatar"}
+        %nbsp
+    %dd
+      Il nick è a sua volta un elemento che aiuta gli altri giocatori ad identificarvi. Anche quiesto può non essere univoco.
+
 %h4
   Icona e Gravatar
 %p
@@ -47,48 +44,58 @@
   presenta i prossimi cinque eventi in ordine di tempo, ma potete avere un quadro più completo nella
   = link_to "pagina di elenco degli eventi,", events_path
   dove potrete scorrere eventi nuovi e vecchi, cambiare l'ordine di visualizzazione (in prospettiva ci sarà una funzione di ricerca più completa)
-%h2
-  Iscrizione
+%h3
+  Dettagli di un evento
 %p
-  Se vedete un evento che vi interessa, potete fare click sul pulsante
+  Facendo click sul nome di un evento si raggiunge la schermata informativa dell'evento stesso.
+%p
+  %img{src:"/assets/show_event.png", style:"border: solid black 2px "}
+%p La pagina è organizzata in modo da avere le informazioni principali al centro (nome, sottotitolo e descrizione, bordati verdi e i dettagli operativi, bordati in blu)
+Le informazioni di secondo livello (organizzatore, stato dell'evento, persone prenotate) sono ai lati (bordati arancioni)
+%p Le azioni possibili sono elencate in basso, sotto forma di pulsanti, o in alto a destra, sotto forma di menu.
+
+%h3 Iscrizione
+%p
+  Se un evento che vi interessa, potete fare click sul pulsante
   = link_to 'Prenota', '#', :class=>"btn btn-success"
-  che si trova sia nell'elenco degli eventi sia nella pagina di dettaglio dell'evento.
+  che si trova sia nell'elenco degli eventi sia nella pagina di dettaglio dell'evento. Questa azione è ovviamente possibile
+  solo agli utenti registrati.
 %p
   In certi casi la prenotazione non è possibile (per esempio, se ci sono troppi iscritti, oppure se l'evento
   è iniziato o oltre il limite fissato dall'organizzatore). Se la prenotazione ha successo, l'organizzatore
   riceve un messaggio dell'avvenuta prenotazione
-%h2
+%h3
   Organizzare un nuovo evento
 %p
   Per organizzare un evento è sufficiente premere il pulsante
   = link_to 'Organizza evento', new_event_path, :class => "btn"
   presente nella pagina del proprio utente,  oppure tramite menu da qualunque pagina.
 %p
-  Alcune informazioni sono obbligatorie, come
-  %ul
-    %li il nome
-    %li la data (che deve essere posteriore alla data attuale)
-    %li il numero di giocatori (mettere entrambi a 0 se non ci sono limiti)
+  L'unica informazione veramente obbligatoria è il nome dell'evento. La data dell'evento più essere
+  lasciata in bianco, per il momento, ma in questo caso l'evento è considerato "in cantiere" e non sono possibli né inviti
+  né prenotazioni
 %p
-  E' prevista una data limite
+  Può prevista una data limite
   %i
     (deadline)
-  oltre la quale non è possibile prenotarsi. Se non la si vuole, basta che sia identica
-  alla data prevista dall'evento
+  oltre la quale non è possibile prenotarsi. Se non la si vuole, basta fare click sul pulsante
+  %br
+  %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" } Senza deadline
+  %br
   Le altre informazioni sono del tutto opzionali, ma possono essere utili per capire di che
   tipo di evento si tratta.
 %p
-  E' possibile anche attiviare alcune speciali proprietà:
-  %ul
-    %li
+  È possibile anche attivare alcune speciali proprietà:
+  %dl{class:"dl-horizontal"}
+    %dt
       = check_box_tag :invite_only
       Evento a soli inviti
-      %br
+    %dd
       Permette le iscrizioni solo a persone invitate (v. oltre)
-    %li
-      = check_box_tag :reservation_locked
+    %dt
+      = check_box_tag :invite_only
       Prenotazioni bloccate
-      %br
+    %dd
       Blocca del tutto le prenotazioni (anche quelle su invito)
 
 
