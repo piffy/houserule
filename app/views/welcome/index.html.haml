@@ -15,7 +15,7 @@
   %div{:class =>"span8"}
     -if @events.any?
       %h2
-        =link_to "Eventi in partenza", events_path
+        =link_to "Eventi in partenza", events_path+"?selection=not_begun"
       = render "shared/list_event", :events => @events , :show_organizer => true
       %p
         ="...ed altri "+(@not_yet_started_event_count-5).to_s unless @not_yet_started_event_count<=5

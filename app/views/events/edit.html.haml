@@ -1,7 +1,8 @@
 =provide(:title, 'Modifica evento')
 %h1
-  Modifica di
-  = "'"+@event.name+"'"
+  = @event.name
+
+= render 'step_banner', :creation => false
 
 = render 'form'
 

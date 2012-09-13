@@ -1,0 +1,18 @@
+%ul{:class=>"nav nav-tabs"}
+  %li{:class => "active"}
+    %a{:href=> "#"}
+      1.
+      =t(:name)
+  - ["game","when_where"].each_with_index do |s, index|
+
+    -if creation
+      %li{:class => "disabled"}
+        %a
+          =(index+2).to_s+"."
+          = t(s)
+    -else
+      %li
+        %a{:href=> event_event_wizard_path(@event,s)}
+          =(index+2).to_s+"."
+          = t(s)
+

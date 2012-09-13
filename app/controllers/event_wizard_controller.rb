@@ -6,7 +6,7 @@ class EventWizardController < ApplicationController
   def show
     @event = Event.find(params[:event_id])
     @system_list=Event.all(:select => "system").uniq.map(&:system).delete_if {|x| x == nil || x == ""}
-    @location_list = (Group.all(:select => "location")+User.all(:select => "Location")).map(&:location).delete_if {|x| x == nil || x == ""}
+    @location_list = (Group.all(:select => "location")+User.all(:select => "Location")+Event.all(:select => "Location")).map(&:location).delete_if {|x| x == nil || x == ""}
     @no_date=@event.begins_at.nil?
     if @no_date and step != :game
       @event.begins_at=Time.now+7.days

@@ -1,19 +1,12 @@
-=provide(:title, 'Wizard evento: '+ step.to_s )
+=provide(:title, 'Wizard evento: '+ t(step.to_s) )
 %h1
-  =@event.name + ": " + step.to_s
+  =@event.name
 
-
+= render 'step_banner'
 
 = form_for @event, :html => {:class => "form-horizontal well"}, :url => event_event_wizard_path(@event), :method => :put do |f|
 
-  -if @event.errors.any?
-    #error_explanation
-      %h2
-        = @event.errors.count == 1 ? "Un errore non ha" : "#{@event.errors.count} errori non hanno"
-        reso possibile il salvataggio
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'error_messages'
 
 
   %div{:class=>"row-fluid"}

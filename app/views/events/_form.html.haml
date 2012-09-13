@@ -1,13 +1,6 @@
 
 = form_for @event, :html => {:class => "form-horizontal well" } do |f|
-  -if @event.errors.any?
-    #error_explanation
-      %h2
-        = @event.errors.count == 1 ? "Un errore non ha" : "#{@event.errors.count} errori non hanno"
-        reso possibile il salvataggio
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'event_wizard/error_messages'
   %div{:class=>"row-fluid"}
     %div{:class=>"span6"}
       .field

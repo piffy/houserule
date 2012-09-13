@@ -249,3 +249,7 @@ it:
     previous_label: "&#8592; Precedente"
     next_label: "Prossimo &#8594;"
     page_gap: "&hellip;"
+
+  name: "Nome"
+  game: "Gioco"
+  when_where: "Dove e quando"

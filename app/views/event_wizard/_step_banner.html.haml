@@ -1,0 +1,12 @@
+%ul{:class=>"nav nav-tabs"}
+  %li
+    %a{:href=> edit_event_path(@event)}
+      1.
+      =t(:name)
+  - wizard_steps.each_with_index do |s, index|
+
+    - active="active" if current_step?(s)
+    %li{:class => active}
+      %a{:href=> event_event_wizard_path(@event,s)}
+        =(index+2).to_s+"."
+        = t(s)
