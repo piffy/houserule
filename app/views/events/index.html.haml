@@ -6,7 +6,7 @@
     =@events.count
   eventi su
   %span{:id => "event_total_count"}
-  =@total
+    =@total
 
 = form_tag events_path, :method => :get, :id => 'filter_form',:html => {:class => "form-horizontal"} do
   %span{:class =>"label label-info" }
@@ -15,6 +15,9 @@
     %span{:class =>"label label-info" }
     = radio_button_tag 'selection', 'not_begun', @selection=='not_begun'
     Non iniziati
+    %span{:class =>"label label-info" }
+    = radio_button_tag 'selection', 'no_date', @selection=='no_date'
+    Senza data
   %br
   = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
 
@@ -37,11 +40,11 @@
     %tr
       %td= link_to event.name, event, :title => event.descr_short
       %td= event.system
-      %td= l(event.begins_at, :format => :medium)
+      %td= l(event.begins_at, :format => :medium) unless event.begins_at.nil?
       %td= event.duration
       %td
-        -if event.begins_at==event.deadline
-          No
+        -if event.begins_at==event.deadline ||  event.deadline.nil?
+          ="-" unless event.deadline.nil?
         -else
           =l(event.deadline, :format => :short)
       %td= event.location

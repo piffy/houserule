@@ -12,6 +12,48 @@
     =link_to "Registrati", new_user_path, :class =>"btn btn-primary"
 
 %div{:class =>"row"}
+  %div{:class =>"span8"}
+    -if @events.any?
+      %h2
+        =link_to "Eventi in partenza", events_path
+      = render "shared/list_event", :events => @events , :show_organizer => true
+      %p
+        ="...ed altri "+(@not_yet_started_event_count-5).to_s unless @not_yet_started_event_count<=5
+
+  %div{:class =>"span4"}
+    %h2
+      =link_to "Eventi in cantiere", events_path+"?selection=no_date"
+    = render "shared/list_event", :events => @undefined_events , :show_organizer => true
+    %p
+      ="...ed altri "+(@undefined_event_count-5).to_s unless @undefined_event_count<=5
+
+
+%hr
+
+%div{:class =>"row"}
+  %div{:class =>"span8"}
+    %h2
+      News
+      %span{class: "label"}
+        ALPHA
+        =ApplicationController.version
+    %p
+      Il sito è in fase di lavorazione, vi preghiamo di provarlo e di segnalarci eventuali errori via
+      = link_to "email.", "mailto:piffy@treemme.org"
+      Abbiamo appena rilasciato la nuova release, (0.2), che si concentra sulle nuove funzionalità relative ai
+      Gruppi, Annunci e Messaggi. Vi preghiamo pertanto di provare in particolare le nuove funzionalità (un grazie a quelli che
+      lo hanno già fatto). La versione attuale elimina alcuni errori e propone una pagina eventi più compatta.
+
+    %p
+      Vi saremmo comunque grati se voleste lasciarci un commento
+      =link_to "in questa sondaggio.", info_feedback_path
+      %br
+        %i
+          (Nota: il sondaggio è nuovo, se lo avete già fatto per la 0.1 siete pregati di rifarlo per registrare i miglioramenti/peggioramenti)
+      %br
+      Per ulteriori dettagli visitate
+      =link_to "la pagina informativa del progetto", info_about_path
+
   %div{:class =>"span4"}
     %h2 Status
     %p
@@ -28,33 +70,5 @@
       presenti, di cui
       =@not_yet_started_event_count
       non ancora iniziati
-  %div{:class =>"span8"}
-    -if @events.any?
-      %h2  Prossimi eventi in partenza
-      = render "shared/list_event", :events => @events , :show_organizer => true
-      =link_to "Elenco completo eventi...", events_path, :class =>"btn"
 
-%hr
-
-
-%h4
-  %span{class: "label"}
-    ALPHA
-    =ApplicationController.version
-%p
-  Il sito è in fase di lavorazione, vi preghiamo di provarlo e di segnalarci eventuali errori via
-  = link_to "email.", "mailto:piffy@treemme.org"
-  Abbiamo appena rilasciato la nuova release, (0.2), che si concentra sulle nuove funzionalità relative ai
-  Gruppi, Annunci e Messaggi. Vi preghiamo pertanto di provare in particolare le nuove funzionalità (un grazie a quelli che
-  lo hanno già fatto). La versione attuale elimina alcuni errori e propone una pagina eventi più compatta.
-
-%p
-  Vi saremmo comunque grati se voleste lasciarci un commento
-  =link_to "in questa sondaggio.", info_feedback_path
-  %br
-    %i
-      (Nota: il sondaggio è nuovo, se lo avete già fatto per la 0.1 siete pregati di rifarlo per registrare i miglioramenti/peggioramenti)
-  %br
-  Per ulteriori dettagli visitate
-  =link_to "la pagina informativa del progetto", info_about_path
 

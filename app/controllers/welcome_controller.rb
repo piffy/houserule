@@ -9,6 +9,8 @@ class WelcomeController < ApplicationController
     @group_count=Group.count
     @events=Event.not_begun.all(:limit=>5)
     @not_yet_started_event_count = Event.not_begun.all.count
+    @undefined_events=Event.no_date.all(:limit=>5)
+    @undefined_event_count=Event.no_date.all.count
 
 
 

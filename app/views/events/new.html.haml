@@ -1,34 +1,7 @@
 =provide(:title, 'Proponi evento')
 %h1 Nuovo evento per #{@user.first_name_or_nick}
 
-
-= form_for @event, :html => {:class => "form-horizontal well"} do |f|
-  -if @event.errors.any?
-    #error_explanation
-      %h2
-        = @event.errors.count == 1 ? "Un errore non ha" : "#{@event.errors.count} errori non hanno"
-        reso possibile il salvataggio
-      %ul
-        - @event.errors.full_messages.each do |msg|
-          %li= msg
-  %div{:class=>"row-fluid"}
-    %div{:class=>"span6"}
-      .field
-        = f.label :name, 'Nome'
-        = f.text_field :name , :placeholder => "Obbligatorio!"
-    %div{:class=>"span6"}
-      .field
-        = f.label :descr_short , 'Descrizione breve'
-        = f.text_field :descr_short , :placeholder => "Sottotitolo d'impatto"
-    %div{:class=>"row-fluid"}
-      %div{:class=>"span12"}
-        %div
-          .field
-            = f.label :description , 'Descrizione estesa'
-            = f.text_area :description , :placeholder => "Puoi mettere anche link ad altre pagine o siti."
-        .actions
-          = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')
-
+= render 'form'
 
 %hr
 = link_to 'Torna all\'elenco eventi', events_path

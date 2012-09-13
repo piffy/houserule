@@ -49,20 +49,47 @@ describe UserMailer do
     sent.first.to.should include(organizer.email)
     sent.first.body.should include(organizer.name)
   end
+
+  it 'should send email to user list for a new event even when without dates' do
+    event.begins_at = nil
+    event.deadline=nil
+    event.status = 0
+    lambda { EventMailer.announcement(organizer, event, user.email+";"+organizer.email).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should =~ /Nuovo evento in cantiere: #{event.name}/#correct subject
+    sent.first.body.should include(event.name) #correct
+    sent.first.to.should include(user.email)
+    sent.first.to.should include(organizer.email)
+    sent.first.body.should include(organizer.name)
+  end
+
+
   it 'should send info email to user(s)' do
     text = Faker::Lorem.paragraph(3)
     subject = Faker::Lorem.words(1)[0]
-    lambda { EventMailer.send_message(admin, user.email, subject, text).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    lambda { EventMailer.send_message(admin, event, user.email, subject, text).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
     sent.first.subject.should include(subject) #correct subject
     sent.first.body.should include(text) #correct
     sent.first.to.should include(user.email)
-    sent.first.body.should include(organizer.name)
+    sent.first.body.should include(admin.name)
+  end
+
+  it 'should send changed date message to user(s)' do
+    event.begins_at=nil
+    event.deadline=nil
+    text = Faker::Lorem.paragraph(3)
+    subject = Faker::Lorem.words(1)[0]
+    lambda { EventMailer.send_message(admin, event, user.email, subject, "changed_date").deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should include(subject) #correct subject
+    sent.first.body.should include("evento in questione ha modificato la data") #correct
+    sent.first.body.should include("evento ora non ha alcuna data fissata") #correct
+    sent.first.to.should include(user.email)
+    sent.first.body.should include(admin.name)
   end
 
   it 'should send info admin email to user(s)' do
     text = Faker::Lorem.paragraph(3)
     subject = Faker::Lorem.words(1)[0]
-    lambda { EventMailer.send_admin_message(organizer, user.email, subject, text.deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    lambda { EventMailer.send_admin_message(organizer, user.email, subject, text).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
     sent.first.subject.should include(subject) #correct subject
     sent.first.body.should include(text) #correct
     sent.first.to.should include(user.email)

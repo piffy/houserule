@@ -35,6 +35,8 @@ class EventWizardController < ApplicationController
           @event.status=0
           @event.deadline=@event.begins_at=nil
           delete_dates_from_parms(true)
+          delete_all_invites_and_reservations(@event)
+
         end
 
     end
@@ -46,7 +48,30 @@ class EventWizardController < ApplicationController
 
   private
 
+  def delete_all_invites_and_reservations(event)
+    list=Array.new
+    if event.invitations.any?
+      event.invitations.each do |invitation|
+        list << invitation.user.email
+        invitation.destroy
+      end
+    end
+    if event.reservations.any?
+      event.reservations.each do |reservation|
+        list << reservation.user.email
+        reservation.destroy
+      end
+    end
+    #list.each do  |email|
+    #  EventMailer.send_message(event.user, event, email, "House Rule: modifica importante in "+@event.name, "changed_date").deliver
+    #end
+    if list.count >0
+      EventMailer.send_message(event.user, event, list.join(";"), "House Rule: modifica importante in "+@event.name, "changed_date").deliver
+    end
+  end
+
   def finish_wizard_path
+    flash[:success]="Evento modificato con successo"
     event_path(Event.find(params[:event_id]))
   end
 

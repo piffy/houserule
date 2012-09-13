@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
   default_scope order: 'events.begins_at ASC'
   scope :all_events
   scope :not_begun, lambda { {:conditions => ["begins_at > ?", Date.today ]} }
-  #named_scope :confirmed, :conditions => { :status => 2 }
+  scope :no_date, :conditions => { :status => 0 }
   #named_scope :cheap, :conditions => { :price => 0..5 }
   #named_scope :recent, lambda { |*args| {:conditions => ["released_at > ?", (args.first || 2.weeks.ago)]} }
   #named_scope :visible, :include => :category, :conditions => { 'categories.hidden' => false }
@@ -105,6 +105,10 @@ class Event < ActiveRecord::Base
 
     if self.reservation_locked?
       return 6
+    end
+
+    if self.begins_at.nil?
+      return 7
     end
 
     return true

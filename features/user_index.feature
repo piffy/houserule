@@ -35,7 +35,7 @@ Funzionalità:
     E dovrei vedere "Pippo" prima di  "Zorro"
     E dovrei vedere "Clarabella" prima di  "Pippo"
 
-  Scenario: ordina gli eventi in ordine alfabetico
+  Scenario: ordina gli utenti in ordine alfabetico
     Dato che esistono i seguenti utenti:
       | name                  | email                 | password  |
       | Clarabella            | clara@nomail.it       | 12345678  |
@@ -43,6 +43,6 @@ Funzionalità:
       | Zorro                 | zorro@nomail.it       | 12345678  |
     Dato mi trovo nell'elenco utenti con ordinamento "name"
     Allora dovrei vedere "Nome" all'interno di "th.hilite"
-    Allora dovrei vedere "Clarabella" prima di  "Paperino"
     E dovrei vedere "Paperino" prima di  "Pippo"
     E dovrei vedere "Pippo" prima di  "Zorro"
+    Allora dovrei vedere "Clarabella" prima di  "Pippo"

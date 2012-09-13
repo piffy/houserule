@@ -88,29 +88,13 @@ class EventsController < ApplicationController
 
     if @event.save
       flash[:success] = "Evento creato!"
-      redirect_to event_event_wizard_path(@event)
+      redirect_to event_event_wizard_path(@event,"game")
     else
       render :new
     end
 
 
-=begin
-    @user=current_user
-    params[:event].delete("user_id")
-    datepicker_adapter
 
-
-    @event = current_user.events.build(params[:event])
-    @event.status=1; #proposed
-
-    if  @event.save
-      flash[:success] = "Evento creato!"
-      redirect_to user_path(current_user)
-    else
-      render 'new'
-    end
-
-=end
 end
 
   # PUT /events/1
@@ -118,18 +102,14 @@ end
   def update
     @event = Event.find(params[:id])
 
-    datepicker_adapter
-
-
-    respond_to do |format|
-      if @event.update_attributes(params[:event])
-        format.html { redirect_to @event, notice: 'Evento aggiornato' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update_attributes(params[:event])
+      flash[:success] = "Evento aggiornato"
+      redirect_to event_event_wizard_path(@event,'game')
+    else
+      render "edit"
     end
+
+
   end
 
   # DELETE /events/1

@@ -1,8 +1,5 @@
 
-
-
-
-= form_for @event, :html => {:class => "form-horizontal well"} do |f|
+= form_for @event, :html => {:class => "form-horizontal well" } do |f|
   -if @event.errors.any?
     #error_explanation
       %h2
@@ -12,86 +9,19 @@
         - @event.errors.full_messages.each do |msg|
           %li= msg
   %div{:class=>"row-fluid"}
-    %div{:class=>"span4"}
+    %div{:class=>"span6"}
       .field
         = f.label :name, 'Nome'
-        = f.text_field :name
-    %div{:class=>"span4"}
-      .field
-        = f.label :system, 'Sistema'
-        = f.text_field :system
-    %div{:class=>"span4"}
-      .field
-        = f.label :location, 'Luogo'
-        = f.text_field :location
-  %div{:class=>"row-fluid"}
-    %div{:class=>"span4"}
-      .field
-        = f.label :duration, 'Durata', :title => "Indicare la durata, se possibile, in ore"
-        = f.text_field :duration
-    %div{:class=>"span8"}
+        = f.text_field :name , :placeholder => "Obbligatorio!"
+    %div{:class=>"span6"}
       .field
         = f.label :descr_short , 'Descrizione breve'
-        = f.text_field :descr_short
-  %div{:class=>"row-fluid"}
-    %div{:class=>"span3"}
-      .field
-        = f.label :begins_at, "Inizio il "
-
-        %div{:class=>"input-append date input-xxlarge", :id=>"begins_at_date", :"data-date"=> @event.begins_at.strftime("%d-%m-%Y"), :"data-date-format"=>"dd-mm-yyyy"}
-          %input{:class=>"span4", :type=>"text", :value=>@event.begins_at.strftime("%d-%m-%Y"), :name => "event[begins_at_date_only]", :id => "event_begins_at_date_only"  }
-            #span{:class=>"add-on"}
-              #i{:class=>"icon-th"}
-    %div{:class=>"span3"}
-      .field
-        = f.label :begins_at, "alle "
-        = f.time_select :begins_at, :ignore_date => true,:minute_step => 15
-        :javascript
-          $('#begins_at_date').datepicker({
-              language: 'it'
-          });
-
-
-        -#= f.date_select :begins_at, :use_month_numbers=>true,:order => [:day, :month, :year], :start_year => Time.now.year - 1, :end_year => Time.now.year+1
-
-
-    %div{:class=>"span3"}
-      .field
-        = f.label :deadline , 'Conferma entro il'
-        %div{:class=>"input-append date input-xxlarge ", :id=>"deadline_date", :"data-date"=> @event.deadline.strftime("%d-%m-%Y"), :"data-date-format"=>"dd-mm-yyyy"}
-          %input{:class=>"span4", :type=>"text", :value=>@event.deadline.strftime("%d-%m-%Y"), :name => "event[deadline_date_only]", :id => "event_deadline_date_only" }
-            #span{:class=>"add-on"}
-              #i{:class=>"icon-th"}
-    %div{:class=>"span3"}
-      .field
-        = f.label :begins_at, "alle "
-        = f.time_select :deadline, :ignore_date => true,:minute_step => 15
-        :javascript
-          $('#deadline_date').datepicker({
-              language: 'it'
-          });
-
+        = f.text_field :descr_short , :placeholder => "Sottotitolo d'impatto"
     %div{:class=>"row-fluid"}
-      %div{:class=>"span8"}
+      %div{:class=>"span12"}
         %div
           .field
             = f.label :description , 'Descrizione estesa'
-            = f.text_area :description
-      %div{:class=>"span4"}
-        .field
-          = f.label :min_player_num , 'Giocatori previsti'
-          = f.number_field :min_player_num, :min=>"0", :size=>"3", :maxlenght =>3, :class => "input-small"
-          %abbr{:title=>"Lasciare a 0 per non avere minimo. Valore indicativo."}
-            min
-          = f.number_field :max_player_num, :min=>"0", :size=>"3", :maxlenght =>3, :class => "input-small"
-          %abbr{:title=>"Lasciare a 0 per non avere limite."}
-            max
-        .field
-          = f.check_box :invite_only
-          Evento a soli inviti
-        .field
-          = f.check_box :reservation_locked
-          Prenotazioni bloccate
-        %br
+            = f.text_area :description , :placeholder => "Puoi mettere anche link ad altre pagine o siti."
         .actions
-          = f.submit(:class=>"btn btn-primary", :value => 'Invia')
+          = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')

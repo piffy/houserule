@@ -10,11 +10,19 @@
       relativo a
       =" '"+@event.name+"'"
 
-    %p
-      %i
-        =@text
-    %p
-      =@user.first_name_or_nick
+
+      %p
+        %i
+          - if @text=="changed_date"
+            L'evento in questione ha modificato la data, per cui tutte le prenotazioni e gli inviti
+            sono stati annullati.
+            -if @event.begins_at.nil?
+              In particolare, l'evento ora non ha alcuna data fissata, per cui inviti e prenotazioni non sono possibili.
+          -else
+            =@text
+      %p
+        =@user.first_name_or_nick
+
 
     %p
       L'evento cui si fa riferimento è

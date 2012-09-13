@@ -5,7 +5,7 @@ Funzionalità:  Eventi (chiusi) e senza iscrizioni
   voglio permettere solo agli invitati di iscriversi
   perché sono molto scontroso
 
-  Contesto: Esiste un evento chiuso
+  Contesto: Esistono due utenti
     Dato   che esistono i seguenti utenti:
       | name                  | email                 | password  | password_confirmation | nick | location   |  description |
       | Paperino              | paolino@nomail.it     | 12345678  | 12345678              | pap  | Paperopoli |  Papero      |
@@ -16,25 +16,28 @@ Funzionalità:  Eventi (chiusi) e senza iscrizioni
     Dato mi loggo con email "paolino@nomail.it" e password "12345678"
     Quando mi trovo nella pagina di creazione evento
     E   inserisco in "event_name" "Evento chiuso"
-    E   inserisco in "event_system" "Paths of glory"
-    E   seleziono la casella "event_invite_only"
-    Quando premo "Invia"
+    Quando premo "Prossimo"
     Allora dovrei vedere "Evento creato!"
-    Quando vado alla visualizzazione evento di "Evento chiuso"
-    Allora dovrei vedere "Solo invitati"
-    E dovrei non vedere "Prenota" all'interno di "a"
-    Quando mi trovo nella pagina di elenco eventi
+    Quando   seleziono la casella "event_invite_only"
+    E premo "Prossimo"
+    E premo "Prossimo"
+    Allora dovrei vedere il titolo "Dettagli evento"
+    E dovrei vedere "Solo invitati" all'interno di "span.label-warning"
+    Allora dovrei non vedere "Prenota" all'interno di "a"
+    Dato mi trovo nella pagina di elenco eventi
     Allora dovrei vedere "Evento chiuso"
     E dovrei non vedere "Prenota" all'interno di "li"
+
 
   Scenario:  Creazione di evento con blocco prenotazioni
     Dato mi loggo con email "paolino@nomail.it" e password "12345678"
     Quando mi trovo nella pagina di creazione evento
     E   inserisco in "event_name" "Evento bloccato"
-    E   inserisco in "event_system" "Avogadro"
-    E   seleziono la casella "event_reservation_locked"
-    Quando premo "Invia"
+    Quando premo "Prossimo"
     Allora dovrei vedere "Evento creato!"
+    Quando seleziono la casella "event_reservation_locked"
+    Quando premo "Prossimo"
+    E premo "Prossimo"
     Quando vado alla visualizzazione evento di "Evento bloccato"
     Allora dovrei vedere "Prenotazioni bloccate"
     E dovrei non vedere "Prenota" all'interno di "li"

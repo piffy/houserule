@@ -67,16 +67,17 @@
     %br
     %h3
       %b
-      -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
-        = "Prenotati ("+@event.reservations.count.to_s+"):"
-      -else
-        = "Prenotati ("+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+"):"
+        -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
+          = "Prenotati ("+@event.reservations.count.to_s+"):"
+        -else
+          = "Prenotati ("+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+"):"
     = render 'reservations/list_users', :reservations => @event.reservations
     %br
     %h3
       %b
         = link_to "Inviti", event_invitations_path(@event)
-        = " ("+@event.invitations.pending.not_stale.count.to_s+"):"
+        %span{id: "invitation_count"}
+          = " ("+@event.invitations.pending.not_stale.count.to_s+"):"
     = render 'invitations/list_invited', :invitations => @event.invitations.pending.not_stale
 
 %div{:class =>"row"}

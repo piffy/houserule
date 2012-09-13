@@ -12,12 +12,19 @@
       intende informati che organizza un nuovo evento, chiamato
       =@event.name
 
-    %h4
-      Descrizione dell'evento'
-      '
     %p
-      Per ulteriori informazioni, incluso la possibilità di prenotarti, puoi iscriverti
-      = link_to "qui", @url
+      %b Data e ora:
+      - if @event.begins_at.nil?
+        Non ancora stabilita (Non sono ancora possibili le prenotazioni)
+      -else
+        = l(@event.begins_at, :format => :long)
+    %p
+      %b Descrizione:
+      =@event.description
+    %p
+      = link_to "Per ulteriori informazioni", @url
+      - unless @event.begins_at.nil?
+        (incluso la possibilità di prenotarti)
     %p Your House Rule Robot
 
     %h5

@@ -12,6 +12,10 @@ class ReservationsController < ApplicationController
     if @event.invite_only?
       flash.now[:error] = "Questo evento è solo a invito"
     end
+    if @event.begins_at.nil?
+      flash[:error] = "Prenotazione impossibile: data non stabilita"
+      redirect_to event_path(@event)
+    end
 
   end
 
@@ -33,6 +37,10 @@ class ReservationsController < ApplicationController
       when 6
         #Only invited
         flash[:error] = "Prenotazione impossibile: prenotazioni bloccate"
+        redirect_to event_path(@event)
+      when 7
+        #Event is hypothetical
+        flash[:error] = "Prenotazione impossibile: data non stabilita"
         redirect_to event_path(@event)
       when true
         #Create reservation and save it

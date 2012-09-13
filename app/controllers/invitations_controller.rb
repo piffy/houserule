@@ -7,6 +7,10 @@ class InvitationsController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
+    if @event.begins_at.nil?
+      flash[:error] = "Invito impossibile: data non stabilita"
+      redirect_to event_path(@event)
+    end
     @users = users_that_can_be_invited(@event)
     @groups = Group.all
     @invitation = Invitation.new
@@ -15,6 +19,10 @@ class InvitationsController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
+    if @event.begins_at.nil?
+      flash[:error] = "Invito impossibile: data non stabilita"
+      redirect_to event_path(@event)
+    end
     email_list = Array.new
     #get list of selected users email
     unless params[:user_ids].nil?

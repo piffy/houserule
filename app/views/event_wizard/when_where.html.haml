@@ -24,16 +24,16 @@
     %div{:class=>"span3"}
       .field
         %label Tipo di evento
-        %input{type:"radio", name:"date_type", value:"NODATE",
+        %input{type:"radio", name:"date_type", value:"NODATE", id: "no_date",
           onclick:"alert('Sicuro? In questo modo le iscrizioni non sono possibili, inviti e prenotazioni saranno eliminati!')" } Data non stabilita
         %br
-        %input{type:"radio", name:"date_type", value:"NODEADLINE" , checked: @no_deadline} Senza deadline
+        %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" , checked: @no_deadline} Senza deadline
     %div{:class=>"span3"}
       .field
         %br
-        %input{type:"radio", name:"date_type", value:"STANDARD", checked: !@no_deadline} Standard
+        %input{type:"radio", name:"date_type", id: "standard", value:"STANDARD", checked: !@no_deadline} Standard
         %br
-        %input{type:"radio", name:"date_type", value:"REPEATING", :disabled=> true} Ripetuto
+        %input{type:"radio", name:"date_type", id: "repeating", value:"REPEATING", :disabled=> true} Ripetuto
 
 
   %br

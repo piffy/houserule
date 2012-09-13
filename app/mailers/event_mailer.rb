@@ -57,9 +57,11 @@ class EventMailer < ActionMailer::Base
     @event = event
     @user = organizer
     @url  = root_url(:host => ApplicationController.hostname)+"events/"+@event.id.to_s
-    mail(:from => "noreplay.houserules@heroku.com", :to => user_list, :subject => "Nuovo evento: #{event.name}")
+    hypothetical=@event.begins_at.blank? ? " in cantiere" : ""
+    mail(:from => "noreplay.houserules@heroku.com", :to => user_list, :subject => "Nuovo evento#{hypothetical}: #{event.name}")
 
-  end
+
+    end
 
 
 end
