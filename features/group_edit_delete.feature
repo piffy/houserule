@@ -27,7 +27,15 @@ Scenario:   Navigazione e Modifica
   Allora  dovrei essere nella pagina di dettagli del gruppo "Un nome cambiato"
   E dovrei vedere "Gruppo modificato"
 
-Scenario:  Non inserisco il nome
+Scenario: Troncamento descrizione lunga nell'elenco
+  Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+  E    vado alla modifica gruppo di "Gruppo 1"
+  E    inserisco in "group_description" "Una descrizione moooolto lunga: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"
+  E premo "Invia"
+  Quando vado alla pagina di elenco gruppo
+  Allora dovrei vedere "..." all'interno di "td"
+
+  Scenario:  Non inserisco il nome
   Dato mi loggo con email "paolino@nomail.it" e password "12345678"
   E    vado alla modifica gruppo di "Gruppo 1"
   E      inserisco in "group_name" ""

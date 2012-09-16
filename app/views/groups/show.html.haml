@@ -6,6 +6,9 @@
     %section
       %h1
         = image_tag @group.image_url_or_default, :alt => "Group logo", :id =>"group-logo", :class => "gravatar"
+    %p
+      =simple_format("<b>Descrizione: </b>"+@group.description, :id => "description")
+
   %div{:class =>"span4"}
     %p
       %b
@@ -25,7 +28,6 @@
       = @group.location
 
 
-
   %div{:class =>"span4"}
     %h3
       %b
@@ -43,9 +45,7 @@
           ="("+@group.interests.count.to_s+"):"
     = render 'interests/list_interested_users', :interests => @group.interests
 
-%div{:class =>"row"}
-  %div{:class =>"span12"}
-    = simple_format("<b>Descrizione: </b>"+@group.description, :id => "description")
+%hr
 %div{:class =>"row"}
   %div{:class =>"span4"}
     %p
