@@ -18,6 +18,7 @@
     %tr
       %td
         = image_tag group.image_url_or_default, :alt => "logo", :class =>"tiny-group-logo"
+        %i{class:"icon-calendar", title:"convention"}
       %td=  link_to group.name, group
       %td= truncate(group.description,:separator => " ", :length => 140)
       %td=  link_to group.user.name, group.user

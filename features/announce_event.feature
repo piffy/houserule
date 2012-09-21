@@ -56,7 +56,7 @@ E dovrei vedere "Non sono stati inseriti indirizzi"
 
 
 @email
-Scenario: Invio mail di annuncio a uno o più gruppi
+Scenario: Invio mail di annuncio a uno o più gruppi (senza mailing list)
 Dato che esistono i seguenti gruppi di "paolino@nomail.it":
 | name                  | description               |
 | Gruppo 1              | Un grande gruppo          |
@@ -75,7 +75,7 @@ E dovrei non vedere "Gruppo 4"
 Quando seleziono la casella "Gruppo 1"
 E seleziono la casella "Gruppo 3"
 Quando premo "Invia annuncio ai gruppi"
-Allora dovrei vedere "Annuncio inviato a 2 indirizzi"
+Allora dovrei vedere "Annuncio inviato a 2 indirizzi e 0 mailing list"
 E il sistema ha inviato 1 email
 
 Scenario: Non seleziono gruppo
@@ -109,4 +109,27 @@ E deseleziono la casella "Paperoga"
 E premo "Invia annuncio a questi utenti"
 Allora dovrei vedere "Non sono stati inseriti utenti"
 
-
+  @email
+  Scenario: Invio mail di annuncio ad un gruppo (con mailing list)
+    Dato che esistono i seguenti gruppi di "paolino@nomail.it":
+      | name                  | description               |
+      | Gruppo 1              | Un grande gruppo          |
+      | Gruppo 2              | Un altro gruppo           |
+    E che esistono i seguenti gruppi di "pluto@nomail.it":
+      | name                  | description               | mailing_list       |
+      | Gruppo 3              | Gruppo interessante       | the_mail@nomail.it |
+      | Gruppo 4              | Gruppo poco interessante  |                    |
+    Dato a "Paperino" interessa il gruppo "Gruppo 3"
+    E    a "Paperoga" interessa il gruppo "Gruppo 3"
+    Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+    E vado alla pagina di nuovo annuncio per "Campionato"
+    Allora dovrei vedere "Gruppo 1"
+    E dovrei vedere "Gruppo 2"
+    E dovrei vedere "Gruppo 3"
+    E dovrei non vedere "Gruppo 4"
+    Quando seleziono la casella "Gruppo 3"
+    Quando deseleziono la casella "Gruppo 2"
+    Quando deseleziono la casella "Gruppo 1"
+    Quando premo "Invia annuncio ai gruppi"
+    Allora dovrei vedere "1 mailing list"
+    E il sistema ha inviato 1 email

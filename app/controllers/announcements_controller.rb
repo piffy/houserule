@@ -31,13 +31,21 @@ class AnnouncementsController < ApplicationController
       when 'Invia annuncio ai gruppi'
           #second case: group members
           @msg_items="gruppi"
+          list_count=0
           unless params[:group_ids].nil?
             params[:group_ids].each do  |group_id|
               group=Group.find_by_id(group_id)
               email_list << group.user.email
-              group.users.each do |user|
-                email_list << user.email
+              #if mailing list is present, forget group users and just send a mail to the list
+              unless group.mailing_list.nil? || group.mailing_list.blank?
+                email_list << group.mailing_list
+                list_count=list_count+1
+              else
+                group.users.each do |user|
+                  email_list << user.email
+                end
               end
+
             end
           end
 
@@ -61,7 +69,7 @@ class AnnouncementsController < ApplicationController
     if  @email_count>0
       #eventually remove cc: to self
       EventMailer.announcement(current_user, @event, email_list).deliver
-      flash[:success] = "Annuncio inviato a "+@email_count.to_s+" indirizzi"
+      flash[:success] = "Annuncio inviato a "+@email_count.to_s+" indirizzi e #{list_count} mailing list"
       redirect_to event_path(@event)
     else
       flash[:error] = "Non sono stati inseriti "+@msg_items

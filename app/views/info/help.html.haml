@@ -141,7 +141,31 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   è il nome del gruppo stesso, ma fornire più informazioni è ovviamente gradito.
 %p
   In quanto proprietari del gruppo, potrete modificare i parametri del gruppo e le iscrizioni al gruppo stesso.
-  In particolare, potrete "bannare" utenti che non volete facciano parte del vostro gruppo.
+  In particolare, potrete "bannare" utenti che non volete facciano parte del vostro gruppo (ma solo dopo che questi si sono iscritti, non vogliamo
+  fare una battaglia preventiva ).
+%p
+  Alcuni elementi richiedono una spiegazione particolare:
+  %dl{class:"dl-horizontal"}
+    %dt
+      = check_box_tag :is_convention
+      È una convention
+    %dd
+      Questo indica che il gruppo si riferisce ad un evento strutturato (come Play, Origins, Lucca Games). Fra breve sarà possibile
+      raggruppare e visualizzare in modo organico eventi inseriti in questo contesto
+    %dt
+      Mailing list
+      %br
+      %input{:placeholder => "Opzionale, richiede iscrizione manuale", :class=>"span4"}
+    %dd
+      Nel caso il gruppo possedesse una mailing list, un gruppo online (tipo google groups o simili), il programma
+      invierà le comunicazioni relative al gruppo a questa mailing list, anziché ai simboli membri.
+      %i Attenzione!
+      Il programma non ha la possibilità (e non sarà realizzata) di registrare l'indirizzo di posta di Houserule
+      nelle varie mailing list: dovrete effettuare questa operazione manualmente. L'indirizzo attualmente utilizzato per inviare la posta
+      dal sistema è
+      %b noreplay.houserules@heroku.com
+
+
 %h2
   Inviti
 %p

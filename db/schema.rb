@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120826065705) do
+ActiveRecord::Schema.define(:version => 20120920222745) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -43,8 +43,10 @@ ActiveRecord::Schema.define(:version => 20120826065705) do
     t.string   "location"
     t.string   "website_url"
     t.string   "image_url"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "is_convention", :default => false
+    t.string   "mailing_list"
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true

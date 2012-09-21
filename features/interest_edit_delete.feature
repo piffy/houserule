@@ -39,7 +39,7 @@ Allora dovrei vedere il titolo "Modifica interesse"
 Quando seleziono la casella "interest_is_banned"
 Quando premo "Confermo"
 Allora dovrei vedere "Pippo" all'interno di "a"
-E dovrei vedere "" all'interno di "i.icon-fire"
+E dovrei vedere "" all'interno di "i.icon-ban-circle"
 
 
 Scenario: Utente non autorizzato

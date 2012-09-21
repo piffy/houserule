@@ -23,9 +23,14 @@ Scenario:   Navigazione e Modifica
   E      inserisco in "group_description" "Una descrizione modificata"
   E      inserisco in "group_website_url" "http://www.example.com"
   E      inserisco in "group_image_url" "http://images1.informazione.it/OO2o4kTgOElXZx88CZ0u80LjbZ83C1CYkKW2cePI9Qi1udl0oESef2IoG29j0CnJ"
+  E      inserisco in "group_mailing_list" "mailing_list@email.it"
+  E      seleziono la casella "group_is_convention"
   Quando premo "Invia"
   Allora  dovrei essere nella pagina di dettagli del gruppo "Un nome cambiato"
   E dovrei vedere "Gruppo modificato"
+  Quando      vado alla pagina di elenco gruppo
+  Allora dovrei vedere "Un nome cambiato"
+  E      dovrei vedere "" all'interno di "i.icon-calendar"
 
 Scenario: Troncamento descrizione lunga nell'elenco
   Dato mi loggo con email "paolino@nomail.it" e password "12345678"
@@ -41,6 +46,13 @@ Scenario: Troncamento descrizione lunga nell'elenco
   E      inserisco in "group_name" ""
   Quando premo "Invia"
   Allora dovrei vedere il messaggio di errore "Name non può essere lasciato in bianco"
+
+  Scenario:  Indirizzo mailing list errato
+    Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+    E    vado alla modifica gruppo di "Gruppo 1"
+    E      inserisco in "group_mailing_list" "ERRORE"
+    Quando premo "Invia"
+    Allora dovrei vedere il messaggio di errore "Mailing list non è valido"
 
 Scenario:   Non loggato (redirect amichevole)
   Dato    vado alla modifica gruppo di "Gruppo 1"

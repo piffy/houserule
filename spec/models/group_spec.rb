@@ -16,6 +16,8 @@ describe Group do
   it { should respond_to(:image_url) }
   it { should respond_to(:user) }
   it { should respond_to(:image_url_or_default) }
+  it { should respond_to(:is_convention) }
+  it { should respond_to(:mailing_list) }
   its(:user) { should == user }
 
 
@@ -72,6 +74,16 @@ describe Group do
     @group_2.should_not be_valid
   end
 
+  it "should  have a valid mailing_list, if it has one"  do
+    @group.mailing_list = ""
+    @group.should be_valid
+    @group.mailing_list = nil
+    @group.should be_valid
+    @group.mailing_list = "Certainly_not_an_email"
+    @group.should_not be_valid
+    @group.mailing_list = user.email
+    @group.should be_valid
+  end
 
   describe "accessible attributes" do
     it "should not allow access to user_id" do
