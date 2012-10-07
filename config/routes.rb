@@ -1,15 +1,9 @@
 Houserule::Application.routes.draw do
 
-  #get "invitations/new"
-
-  #get "invitations/create"
-
-  #get "invitations/update"
-
-  #get "invitations/destroy"
 
   resources :groups do
     resources :interests
+    resources :linked_events
   end
 
   get "info/index"

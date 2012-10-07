@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120920222745) do
+ActiveRecord::Schema.define(:version => 20120928094120) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20120920222745) do
   add_index "events", ["begins_at"], :name => "index_events_on_begins_at"
   add_index "events", ["name"], :name => "index_events_on_name"
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
+
+  create_table "events_groups", :id => false, :force => true do |t|
+    t.integer "group_id", :null => false
+    t.integer "event_id", :null => false
+  end
+
+  add_index "events_groups", ["group_id", "event_id"], :name => "index_events_groups_on_group_id_and_event_id", :unique => true
 
   create_table "groups", :force => true do |t|
     t.string   "name"

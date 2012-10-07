@@ -53,16 +53,27 @@
 
 %hr
 %div{:class =>"row"}
-  %div{:class =>"span4"}
+  %div{:class =>"span12"}
+    %h3
+      Eventi collegati:
+      = " ("+@group.events.count.to_s+"):"
+    %br
+    = render "shared/list_event", :events => @group.events , :show_organizer => true, :group => @group
+
+%hr
+
+%div{:class =>"row"}
+  %div{:class =>"span8"}
     %p
       %nbsp
       = link_to 'Indietro', groups_path, :class => "btn"
       = link_to 'Modifica', edit_group_path(@group), :class => "btn"  if !current_user.nil? && (current_user==@group.user || current_user.admin? )
-
+      = link_to 'Collega evento', new_group_linked_event_path(@group),:class=>"btn"
       - unless @group.user == current_user
         %nbsp
         -if  @interested
           = link_to 'Non m\'interessa più', edit_group_interest_path(@group,@interested),:class=>"btn btn-danger"  unless @interested.is_banned?
+
         -else
           = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"
 

@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :reservations, dependent: :destroy
   has_many :invitations, dependent: :destroy
+  has_and_belongs_to_many :groups
   #has_many :users, :through => reservations
   validates_presence_of :user_id, :message => "deve avere un utente"
   validates_presence_of :name, :message => "non deve essere vuoto"

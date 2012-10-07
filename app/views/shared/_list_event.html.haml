@@ -13,3 +13,6 @@
         %span{:class => "user"}
           \- proposto da
           =  link_to event.user.first_name_or_nick,event.user
+      -if defined?(group) && current_user
+        %span{:class => "delete_button"}
+          =  link_to "-",edit_group_linked_event_path(group,event), :class => "btn btn-small"

@@ -33,6 +33,9 @@
         %p
           %span{:class=>"label label-important span2"}
             Prenotazioni scarse
+
+
+
   %div{:class =>"span4"}
     -unless @event.system.blank?
       %p
@@ -54,7 +57,11 @@
       %p
         %b Luogo:
         = @event.location
+    %p
 
+      -if @event.groups.any?
+        %b Legato a:
+        = render "shared/list_group" , :groups => @event.groups
   %div{:class =>"span4"}
     %h3
       %b

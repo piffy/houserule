@@ -12,7 +12,7 @@ class Group < ActiveRecord::Base
   before_validation :smart_add_url_protocol
   has_many :interests, dependent: :destroy
   has_many :users, :through => :interests
-
+  has_and_belongs_to_many :events
 
   valid_url_regex_or_empty = /^$|(^((http|https):\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]*)+.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
   validates :image_url,  :format     => { with: valid_url_regex_or_empty }
