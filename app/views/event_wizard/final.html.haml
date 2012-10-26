@@ -2,3 +2,31 @@
 %h1
   =@event.name + ": " + step.to_s
 
+= render 'step_banner'
+
+= form_for @event, :html => {:class => "form-horizontal well"}, :url => event_event_wizard_path(@event), :method => :put do |f|
+
+  %ul
+    %li
+      Vuoi fare un
+      = link_to "annuncio" , new_event_announcement_path(@event)
+      (via email, Houserule o gruppi)?
+    - unless @event.reservations.count == 0
+      %li
+        Vuoi mandare un
+        = link_to "messaggio agli iscritti",event_compose_path(@event)
+        ?
+
+    %li
+      Vuoi
+      = link_to "Invitare dei giocatori", new_event_invitation_path(@event)
+      oppure
+      = link_to "gestire gli inviti", event_invitations_path(@event)
+      già presenti?
+
+  .actions
+    = f.submit(:class=>"btn btn-primary", :value => 'Termina')
+
+
+
+

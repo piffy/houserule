@@ -56,7 +56,8 @@ Funzionalità: Modifica Evento
     E      premo "Prossimo"
     Quando scelgo "no_deadline"
     E premo "Prossimo"
-    Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
+    E vado alla visualizzazione evento di "Campionato"
+    #Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
     E dovrei non vedere "Deadline"
 
 

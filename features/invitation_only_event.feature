@@ -21,6 +21,7 @@ Funzionalità:  Eventi (chiusi) e senza iscrizioni
     Quando   seleziono la casella "event_invite_only"
     E premo "Prossimo"
     E premo "Prossimo"
+    E premo "Termina"
     Allora dovrei vedere il titolo "Dettagli evento"
     E dovrei vedere "Solo invitati" all'interno di "span.label-warning"
     Allora dovrei non vedere "Prenota" all'interno di "a"

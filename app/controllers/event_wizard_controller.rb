@@ -1,7 +1,7 @@
 class EventWizardController < ApplicationController
   before_filter :logged_in_user
   include Wicked::Wizard
-  steps :game, :when_where
+  steps :game, :when_where, :final
 
   def show
     @event = Event.find(params[:event_id])

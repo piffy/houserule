@@ -75,6 +75,7 @@ Funzionalità:
     E      premo "Prossimo"
     Quando scelgo "no_date"
     E premo "Prossimo"
+    E premo "Termina"
     Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
     E dovrei non vedere "Deadline"
     E dovrei vedere "Indefinito" all'interno di "span.label-info"

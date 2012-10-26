@@ -32,6 +32,7 @@ perché gli altri utenti si possano iscrivere
     E      inserisco in "event_begins_at_date_only" "10-05-2013"
     E      inserisco in "event_deadline_date_only" "09-05-2013"
     Quando premo "Prossimo"
+    Quando premo "Termina"
     Allora dovrei essere nella pagina di dettagli dell'evento  "Evento"
     E dovrei vedere "Evento modificato con successo"
 
