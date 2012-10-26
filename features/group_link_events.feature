@@ -11,6 +11,7 @@ Funzionalità:
   | name                  | email                 | password  |
   | Paperino              | paolino@nomail.it     | 12345678  |
   | Pippo                 | pippo@nomail.it       | 12345678  |
+  | Estraneo              | estraneo@nomail.it       | 12345678  |
 
   E che esistono i seguenti gruppi di "pippo@nomail.it":
     | name                  | description               |
@@ -51,24 +52,24 @@ Funzionalità:
     E un evento è collegato al gruppo "Gruppo 1"
     Dato    vado alla visualizzazione gruppo di "Gruppo 1"
     Quando seguo il link "-"
-    Quando premo il pulsante "Elimina"
+    E premo il pulsante "Elimina"
 
 
-  Scenario: Non è possibile linkare evento due volte
+   Scenario: Non è possibile cancellare o creare un link se non si hanno i diritti del gruppo
+    Dato mi loggo con email "estraneo@nomail.it" e password "12345678"
+    Dato un evento è collegato al gruppo "Gruppo 1"
+    Dato    vado alla visualizzazione gruppo di "Gruppo 1"
+    Quando seguo il link "-"
+    Allora dovrei vedere "Azione non consentita"
+    #Non posso ancora testare il post con capybara
 
 
-  Scenario: Non è possibile modificare link se non si hanno i diritti del gruppo
-
-  Scenario: Se l'evento è linkato visualizzare icona e link nella pagina dettagli
-
-  Scenario: Visualizzare eventi linkati nella pagina dettaglio del gruppo
-
-  Scenario: Filtrare eventi per gruppi
-
-  Scenario: Controllo accesso
-
-  #Se convention, link esclusivo
-  #Se convention, possibile iscrizione esclusiva
+Scenario: Controllo accesso (non loggato)
+    Dato un evento è collegato al gruppo "Gruppo 1"
+    Dato    vado alla visualizzazione gruppo di "Gruppo 1"
+    Allora dovrei non vedere "Collega evento" all'interno di "a"
+    Quando mi trovo nella pagina di collegamento di un gruppo
+    Allora dovrei essere nella pagina di login
 
 
 

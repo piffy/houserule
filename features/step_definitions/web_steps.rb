@@ -44,6 +44,9 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
     when /pagina di creazione gruppo/
       visit new_group_path
 
+    when /pagina di collegamento di un gruppo/
+      visit new_group_path(Group.first)
+
     else
       raise "Non posso mappare \"#{page_name}\" a un percorso.\n"
 

@@ -44,12 +44,14 @@
           = gravatar_for @group.user, 32
           = link_to @group.user.name, user_path(@group.user), id:"group_owner"
     %br
+
     %h3
       %b
         Membri
         %span{:id => "member_count"}
-          ="("+@group.interests.count.to_s+"):"
-    = render 'interests/list_interested_users', :interests => @group.interests
+          ="("+@group.interests.count.to_s+")"
+    -if current_user
+      = render 'interests/list_interested_users', :interests => @group.interests
 
 %hr
 %div{:class =>"row"}
@@ -68,12 +70,12 @@
       %nbsp
       = link_to 'Indietro', groups_path, :class => "btn"
       = link_to 'Modifica', edit_group_path(@group), :class => "btn"  if !current_user.nil? && (current_user==@group.user || current_user.admin? )
-      = link_to 'Collega evento', new_group_linked_event_path(@group),:class=>"btn"
+      = link_to 'Collega evento', new_group_linked_event_path(@group),:class=>"btn" unless current_user.nil?
       - unless @group.user == current_user
         %nbsp
         -if  @interested
           = link_to 'Non m\'interessa più', edit_group_interest_path(@group,@interested),:class=>"btn btn-danger"  unless @interested.is_banned?
 
         -else
-          = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"
+          = link_to 'Mi interessa', new_group_interest_path(@group),:class=>"btn btn-primary"  unless current_user.nil?
 

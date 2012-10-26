@@ -18,23 +18,30 @@ E che esistono i seguenti gruppi di "paolino@nomail.it":
 | Gruppo 1              | Un grande gruppo          |
 | Gruppo 2              | Un altro gruppo           |
 
-Scenario: Mostra i dati principali
+Scenario: Mostra i dati principali (non loggato)
 Dato    vado alla visualizzazione gruppo di "Gruppo 1"
 Allora dovrei vedere il titolo "Dettagli gruppo"
 E dovrei vedere "Paperino" all'interno di "a#group_owner"
-E dovrei vedere "0" all'interno di "span#member_count"
+E dovrei vedere "Un grande gruppo" all'interno di "p#description"
+E dovrei non vedere "Mi interessa" all'interno di "a.btn"
+E dovrei non vedere "Modifica" all'interno di "a.btn"
+
+Scenario: Mostra i dati principali (loggato, non membro)
+Dato mi loggo con email "pippo@nomail.it" e password "12345678"
+Dato    vado alla visualizzazione gruppo di "Gruppo 1"
+Allora dovrei vedere il titolo "Dettagli gruppo"
+E dovrei vedere "Paperino" all'interno di "a#group_owner"
 E dovrei vedere "Un grande gruppo" all'interno di "p#description"
 E dovrei vedere "Mi interessa" all'interno di "a.btn"
 E dovrei non vedere "Modifica" all'interno di "a.btn"
 
-Scenario: Mostra gli iscritti standard
+
+Scenario: Mostra gli iscritti standard (non loggato)
 Dato a "Pippo" interessa il gruppo "Gruppo 1"
 E    a "Paperoga" interessa il gruppo "Gruppo 1"
 Quando vado alla visualizzazione gruppo di "Gruppo 1"
 E dovrei vedere "Paperino" all'interno di "a#group_owner"
 E dovrei vedere "2" all'interno di "span#member_count"
-E dovrei vedere "Pippo" all'interno di "a"
-E dovrei vedere "Paperoga" all'interno di "a"
 
 Scenario: Non mostrare gli iscritti non standard
 Dato "Pippo" è bannato dal gruppo "Gruppo 1"

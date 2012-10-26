@@ -31,16 +31,11 @@ Funzionalità: Usare i link dell'elenco eventi
 
 
   Scenario: Modifica evento (loggato)
-    E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
-      | name                  | system     | begins_at  |
-      | First event            | Strange   | 01-10-2012 |
-    Dato   mi trovo nella pagina di login
-    E      inserisco in "session_email" "paolino@nomail.it"
-    E      inserisco in "session_password" "12345678"
-    E      premo "Login"
-    E      mi trovo nella pagina di elenco eventi
-    Quando seguo il link "Modifica"
-    Allora  dovrei essere nella pagina di modifica dell'evento  "First event"
+    Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+    E mi trovo nella pagina di elenco eventi
+    E seguo il link "Nome evento"
+    E seguo il link "Modifica"
+    Allora  dovrei essere nella pagina di modifica dell'evento  "Campionato"
 
   Scenario: Mostra gli ultimi 5 eventi impostati nella hp
     Dato ci sono 1 eventi di "pluto@nomail.it"
