@@ -71,40 +71,56 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   = link_to 'Organizza evento', new_event_path, :class => "btn"
   presente nella pagina del proprio utente,  oppure tramite menu da qualunque pagina.
 %p
-  L'unica informazione veramente obbligatoria è il nome dell'evento. La data dell'evento più essere
-  lasciata in bianco, per il momento, ma in questo caso l'evento è considerato "in cantiere" e non sono possibli né inviti
-  né prenotazioni
-%p
-  Può prevista una data limite
-  %i
-    (deadline)
-  oltre la quale non è possibile prenotarsi. Se non la si vuole, basta fare click sul pulsante
-  %br
-  %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" } Senza deadline
-  %br
-  Le altre informazioni sono del tutto opzionali, ma possono essere utili per capire di che
-  tipo di evento si tratta.
-%p
-  È possibile anche attivare alcune speciali proprietà:
-  %dl{class:"dl-horizontal"}
-    %dt
-      = check_box_tag :invite_only
-      Evento a soli inviti
-    %dd
-      Permette le iscrizioni solo a persone invitate (v. oltre)
-    %dt
-      = check_box_tag :invite_only
-      Prenotazioni bloccate
-    %dd
-      Blocca del tutto le prenotazioni (anche quelle su invito)
+  Vi comparirà un menù (attualmente) di 4 voci
+%dl{class:"dl-horizontal"}
+  %dt
+    1: Nome
+  %dd
+    L'unica informazione veramente obbligatoria è il nome dell'evento. La descrizione breve è una sorta di sottotitolo,
+    mentre la descrizione lunga merita di essere molto dettagliata per far capire ai giocatori di che si tratta. Potete inserire link
+    esterni e immagini senza problemi.
+  %dt
+    2: Gioco
+  %dd
+    Qui potete inserire dati sul sistema di gioco da utilizzare, nonché il numero minimo e massimo di giocatori previsti.
+    Il numero massimo stabilisce anche il massimo numero di inviti e prenotazioni.
+    %br
+    È possibile anche attivare alcune speciali proprietà:
+    %dl{class:"dl-horizontal"}
+      %dt
+        = check_box_tag :invite_only
+        Evento a soli inviti
+      %dd
+        Permette le iscrizioni solo a persone invitate (v. oltre)
+      %dt
+        = check_box_tag :invite_only
+        Prenotazioni bloccate
+      %dd
+        Blocca del tutto le prenotazioni (anche quelle su invito)
+  %dt
+    3: Dove e quando
+  %dd
+    Inserite i dati indicati. La data dell'evento piò essere lasciata in bianco ma in questo caso l'evento è
+    considerato "in cantiere" e non sono possibli né inviti né prenotazioni.
+    %br
+    Può prevista una data limite
+    %i
+      (deadline)
+    oltre la quale non è possibile prenotarsi. Se non la si vuole, basta fare click sul pulsante
+    %br
+    %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" } Senza deadline
+    %br
+  %dt
+    4: Final
+  %dd
+    Si propongono alcune azioni possibili per la pubblicizzazione e la gestione dell'evento (vedi "comunicazioni" e "inviti")
 
-
-%h4
-  Modifica e cancellazione
+%h3
+  Modificare e cancellazione
 %p
   Solo l'organizzatore dell'evento può modificare l'evento stesso e, in paritcolare, cancellarlo.
   Quest'ultima operazione è particolarmente drastica perché elimina completamente l'evento, e tutto quanto
-  ad esso collegato
+  ad esso collegato.
 %h2
   Comunicazioni
 %p
@@ -125,14 +141,17 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   Gruppi
 %p
   I gruppi hanno po' le stesse funzionalità dei gruppi dei social networks, riunendo utenti con
-  interessi simili (in questo sistema le funzioni sono molto più semplici).
+  interessi simili (in questo sistema le funzioni sono molto più semplici). Se non avete troppe pretese, possono essere
+  utilizzate anche per organizzare eventi per piccole convention, radunando in un unico posto un gruppo di eventi collegati
+  %br
+  Oppure, più semplicemente, possono essere utizzati alla stregua dei "tag" dei vari social network.
 %p
   Potete trovare l'elenco dei gruppi scegliendo la voce "Gruppi" dal menu. Se un gruppo vi interessa,
   premete il pulsante
   = link_to 'Mi interessa', "#", :class =>"btn btn-primary"
   e potrete decidere se mostrare il vostro nome assieme agli altri e se ricevere le comunicazioni relative a
   questo gruppo. Se siete già membri potrete sempre decidere di lasciarlo (a meno che non siate bannati)
-%h4
+%h3
   Creazione e amministrazione
 %p
   Premendo
@@ -164,7 +183,16 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
       nelle varie mailing list: dovrete effettuare questa operazione manualmente. L'indirizzo attualmente utilizzato per inviare la posta
       dal sistema è
       %b noreplay.houserules@heroku.com
-
+%h3
+  Collegare eventi
+%p
+  È possibile "collegare un evento" a un particolare gruppo, premendo il pulsante "Collega evento" che si trova sotto alla descrizione del gruppo.
+  Il proprietario di un gruppo può collegare qualsiasi evento presente nel sito, mentre un organizzatore di evento può collegare solo i propri eventi
+  a un gruppo di cui faccia già parte. Lo stesso vale se si vuole scollegare un evento.
+  %br
+  Gli eventi collegati ad un evento appaiono nella pagina di descrizione del gruppo. Allo stesso modo, il gruppo appare nella pagina di
+  dettaglio dell'evento.
+  '
 
 %h2
   Inviti
