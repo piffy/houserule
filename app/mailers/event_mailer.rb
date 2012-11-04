@@ -3,7 +3,7 @@ class EventMailer < ActionMailer::Base
 
 
 #use this method to send to event owner that a new reservation has arrived
-  def new_reservation(reservation,invitation=nil)
+  def new_reservation(reservation,invitation=nil,mailing_list=nil)
     @event = reservation.event
     @reservation = reservation
     @user = reservation.user
@@ -16,7 +16,12 @@ class EventMailer < ActionMailer::Base
       @invitation_message=" accettando il tuo invito."
     end
     @url  = root_url(:host => ApplicationController.hostname)+"events/"+@event.id.to_s
-    mail(:from => "noreplay.houserules@heroku.com", :to => @organizer.email, :subject => subject )
+    if mailing_list == nil
+      mail(:from => "noreplay.houserules@heroku.com", :to => @organizer.email, :subject => subject )
+    else
+      mail(:from => "noreplay.houserules@heroku.com", :to => @organizer.email, :subject => subject+ " (lista d'attesa)" )
+    end
+
   end
 
 #Use this method to send to event owner or player that a reservation has been deleted
@@ -35,6 +40,18 @@ class EventMailer < ActionMailer::Base
     end
 
   end
+
+  def upgrade_reservation(reservation,downgrade=0)
+    @event = reservation.event
+    @reservation = reservation
+    @user = reservation.user
+    @organizer = @event.user
+    @url  = root_url(:host => ApplicationController.hostname)+"events/"+@event.id.to_s
+    recipient = @user.email
+    mail(:from => "noreplay.houserules@heroku.com", :to => recipient, :subject => "Prenotazione a #{@event.name} confermata")
+  end
+
+
 
   #Use this method to send info to a list of users.
   def send_message(sender, event, user_list, subject, text)

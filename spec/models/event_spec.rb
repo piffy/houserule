@@ -29,6 +29,7 @@ describe Event do
   it { should respond_to(:full?) }
   it { should respond_to(:invite_only) }
   it { should respond_to(:reservation_locked) }
+  it { should respond_to(:waiting_list) }
   its(:user) { should == user }
 
   describe "when everything is OK" do
@@ -110,6 +111,13 @@ describe Event do
 
   it "should have a valid status"  do
     @event.status="String";
+    @event.should_not be_valid
+  end
+
+  it "should have a valid waiting list value"  do
+    @event.waiting_list="String";
+    @event.should_not be_valid
+    @event.waiting_list=-1;
     @event.should_not be_valid
   end
 

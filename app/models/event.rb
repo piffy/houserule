@@ -4,7 +4,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :begins_at, :deadline, :descr_short, :description, :duration,
                   :location, :max_player_num, :min_player_num, :name, :status, :system,
-                  :invite_only, :reservation_locked
+                  :invite_only, :reservation_locked, :waiting_list
   belongs_to :user
   has_many :reservations, dependent: :destroy
   has_many :invitations, dependent: :destroy
@@ -16,6 +16,7 @@ class Event < ActiveRecord::Base
   validates :max_player_num, :numericality => { :greater_than_or_equal_to => :min_player_num }
   validates :min_player_num, :numericality => { :greater_than_or_equal_to => 0 }
   validates :status, :numericality => true
+  validates :waiting_list, :numericality => { :greater_than_or_equal_to => 0 }
 
   validates_date_of :begins_at, :allow_nil => true
   validates_date_of :deadline, :allow_nil => true
@@ -90,26 +91,26 @@ class Event < ActiveRecord::Base
       return 1
     end
     if Time.now > self.begins_at
-      return 2
+      return 2   # Event already started
     end
     if Time.now > self.deadline
-      return 3
+      return 3   # Event deadline expored
     end
 
-    if self.max_player_num >0 && self.reservations.count >= self.max_player_num
-      return 4
+    if self.max_player_num >0 && self.reservations.count >= self.max_player_num + self.waiting_list
+      return 4   # No more seats
     end
 
     if self.invite_only?
-      return 5
+      return 5   # Invite only event
     end
 
     if self.reservation_locked?
-      return 6
+      return 6   # Reservation locked
     end
 
     if self.begins_at.nil?
-      return 7
+      return 7   # No date, so you can't make a reservation
     end
 
     return true

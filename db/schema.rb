@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928094120) do
+ActiveRecord::Schema.define(:version => 20121101210219) do
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120928094120) do
     t.datetime "updated_at",                                           :null => false
     t.boolean  "invite_only",                       :default => false
     t.boolean  "reservation_locked",                :default => false
+    t.integer  "waiting_list",                      :default => 0
   end
 
   add_index "events", ["begins_at"], :name => "index_events_on_begins_at"

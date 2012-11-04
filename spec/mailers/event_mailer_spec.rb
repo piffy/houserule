@@ -19,6 +19,22 @@ describe UserMailer do
     sent.first.to.should include(organizer.email)
   end
 
+  it 'should send email to organizer when a new reservation arrives in the waiting list' do
+    lambda { EventMailer.new_reservation(reservation,nil,true).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should =~ /Nuovo iscritto a #{event.name}/#correct subject
+    sent.first.subject.should =~ /attesa/#correct subject
+    sent.first.body.should include(event.name) #correct
+    sent.first.to.should include(organizer.email)
+  end
+
+  it 'should send email to promoted user when somenone deletes his reservation' do
+    lambda { EventMailer.upgrade_reservation(reservation).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
+    sent.first.subject.should =~ /#{event.name} confermata/#correct subject
+    sent.first.subject.should =~ /confermata/#correct subject
+    sent.first.body.should include(event.name) #correct
+  end
+
+
   it 'should send email to organizer when a user deletes reservation' do
     lambda { EventMailer.delete_reservation(reservation).deliver}.should change(ActionMailer::Base.deliveries, :count).by(1)
     sent.first.subject.should =~ /Prenotazione a #{event.name} cancellata/#correct subject

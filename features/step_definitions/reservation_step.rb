@@ -2,6 +2,9 @@ Dato /^che esiste la prenotazione dell'evento "([^"]*)" per l'utente "([^"]*)"$/
   event = Event.find_by_name(event_name)
   res = Reservation.new
   res.status=1
+  if (event.max_player_num)>0 &&  (event.reservations.count>=event.max_player_num)
+    res.status=2
+  end
   user = User.find_by_email(user_name)
   res.user_id = user.id
   res.event_id = event.id
