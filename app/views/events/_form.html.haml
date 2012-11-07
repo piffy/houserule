@@ -4,7 +4,7 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span6"}
       .field
-        = f.label :name, 'Nome'
+        = f.label :name, 'Nome dell\'evento'
         = f.text_field :name , :placeholder => "Obbligatorio!"
     %div{:class=>"span6"}
       .field
@@ -16,5 +16,8 @@
           .field
             = f.label :description , 'Descrizione estesa'
             = f.text_area :description , :placeholder => "Puoi mettere anche link ad altre pagine o siti."
+            -if defined?(@group)
+              =# hidden_field :group, :value => @group.id.to_s
+              =hidden_field :group, :id, :value=>@group.id
         .actions
           = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')

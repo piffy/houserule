@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class EventsController < ApplicationController
   before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
   before_filter :correct_event_for_user,   only: [:edit, :update, :destroy]
@@ -65,6 +67,11 @@ class EventsController < ApplicationController
     @event = Event.new
     @event.begins_at = 7.days.from_now
     @event.deadline = 6.days.from_now
+    unless (params[:group_id].nil?)
+      @group=Group.find(params[:group_id])
+      flash.now[:notice]  ="Questo evento sarà collegato al gruppo '#{@group.name}'"
+    end
+
 
 
     respond_to do |format|
@@ -85,9 +92,16 @@ class EventsController < ApplicationController
     params[:event].delete("user_id")
     @event = current_user.events.build(params[:event])
     @event.status=0; #proposed
-
+    msg = "Evento creato!"
     if @event.save
-      flash[:success] = "Evento creato!"
+      unless (params[:group].nil?)
+        @group=Group.find(params[:group][:id])
+        if ( current_user?(@event.user) || current_user.admin? ||  current_user?(@group.user))
+          @event.groups << @group
+          msg = msg +" L'evento, inoltre, è collegato al gruppo #{@group.name}"
+        end
+      end
+      flash[:success] = msg
       redirect_to event_event_wizard_path(@event,"game")
     else
       render :new

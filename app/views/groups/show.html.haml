@@ -71,6 +71,7 @@
       = link_to 'Indietro', groups_path, :class => "btn"
       = link_to 'Modifica', edit_group_path(@group), :class => "btn"  if !current_user.nil? && (current_user==@group.user || current_user.admin? )
       = link_to 'Collega evento', new_group_linked_event_path(@group),:class=>"btn" unless current_user.nil?
+      = link_to 'Organizza evento collegato', new_group_event_path(@group),:class=>"btn" unless current_user.nil?
       - unless @group.user == current_user
         %nbsp
         -if  @interested

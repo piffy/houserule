@@ -1,10 +1,14 @@
-=provide(:title, 'Conferma eliiminazione collegamento')
-%h1
-  Conferma eliminazione collegamento dell'evento'
+=provide(:title, 'Conferma eliminazione collegamento')
+%h1 Conferma
+%h3
+  Confermi la cancellazione del collegamento dell'evento
   = "'"+@event.name+"'"
-  al gruppo
-  = "'"+@group.name+"'"
-
+  -if (@group.is_convention)
+    alla convention
+  -else
+    al gruppo                  S
+  = "'"+@group.name+"'?"
 
 %p
   =  button_to "Elimina",group_linked_event_path(@group,@event), :method => :delete , :class => "btn btn-small btn-danger form-horizontal"
+  = link_to "Torna all'evento", event_path(@event)

@@ -1,0 +1,16 @@
+=provide(:title, 'Conferma collegamento')
+%h1 Conferma
+%h3
+  Confermi la creazione del collegamento dell'evento
+  = "'"+@event.name+""
+  -if (@group.is_convention)
+    alla convention
+  -else
+    al gruppo                  S
+  = "'"+@group.name+"'?"
+
+= form_for(:linked_event, url: group_linked_events_path(@group) , :html => {:class => "form-horizontal"}) do |f|
+  =hidden_field_tag 'event_id', @event.id
+  =f.submit(:class=>"btn btn-small", :value => "Confermo", :id => "button_#{@event.id}")
+%p
+  =link_to "Torna all'evento", event_path(@event)

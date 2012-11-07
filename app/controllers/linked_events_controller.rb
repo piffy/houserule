@@ -12,6 +12,13 @@ class LinkedEventsController < ApplicationController
 
   end
 
+  def confirm
+    @group=Group.find(params[:group_id])
+    @event=Event.find(params[:event_id])
+
+  end
+
+
   def create
     @group=Group.find(params[:group_id])
     @event=Event.find(params[:event_id])

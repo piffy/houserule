@@ -27,7 +27,8 @@ Funzionalità:
     Allora dovrei vedere "Collega evento" all'interno di "a"
     Quando seguo il link "Collega evento"
     Allora dovrei vedere il titolo "Collega evento"
-    Quando premo il pulsante "button_1"
+    Quando seguo il link "Collega"
+    E premo il pulsante "button_1"
     Allora dovrei vedere "ora collegato al gruppo"
     E dovrei essere nella pagina di dettagli del gruppo "Gruppo 1"
     E dovrei vedere "Eventi collegati: (1)"
@@ -42,6 +43,7 @@ Funzionalità:
     Allora dovrei vedere "Collega evento" all'interno di "a"
     Quando seguo il link "Collega evento"
     Allora dovrei vedere il titolo "Collega evento"
+    Quando seguo il link "Collega"
     Quando premo il pulsante "button_1"
     Allora dovrei vedere "ora collegato al gruppo"
     E dovrei essere nella pagina di dettagli del gruppo "Gruppo 1"
@@ -72,4 +74,13 @@ Scenario: Controllo accesso (non loggato)
     Allora dovrei essere nella pagina di login
 
 
-
+Scenario:  Creare un evento legato al gruppo (se si fa parte del gruppo)
+  Dato mi loggo con email "pippo@nomail.it" e password "12345678"
+  Dato    vado alla visualizzazione gruppo di "Gruppo 1"
+  Allora dovrei vedere "Organizza evento collegato" all'interno di "a"
+  Quando seguo il link "Organizza evento collegato"
+  E dovrei vedere "Questo evento sarà collegato al gruppo 'Gruppo 1'"
+  Dato   inserisco in "event_name" "Nuovo Evento"
+  Quando premo "Prossimo"
+  Allora dovrei vedere "Evento creato!"
+  E dovrei vedere "L'evento, inoltre, è collegato al gruppo"

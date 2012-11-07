@@ -7,12 +7,5 @@
 %h3
   Scegli tra gli eventi
   = "che organizzi" unless current_user == @group.user
-%table
-  - @events.each do |event|
-    %tr
-      %td
-        = form_for(:linked_event, url: group_linked_events_path(@group) , :html => {:class => "form-horizontal"}) do |f|
-          =hidden_field_tag 'event_id', event.id
-          =f.submit(:class=>"btn btn-small", :value => "+", :id => "button_#{event.id}")
-      %td
-        = event.name
+
+= render "shared/list_event",  :events => @events ,:show_organizer => true, :group => @group, :add_link => true

@@ -3,7 +3,9 @@ Houserule::Application.routes.draw do
 
   resources :groups do
     resources :interests
+    match  'linked_events/:event_id/confirm', :to => "linked_events#confirm"
     resources :linked_events
+    resources :events, only: [:new]
   end
 
   get "info/index"
