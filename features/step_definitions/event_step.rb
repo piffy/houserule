@@ -101,3 +101,9 @@ E /^inserisco in "([^"]*)" la data di ieri$/ do |field|
   end
   "inserisco in \"#{field}\" \"#{d}\""
 end
+
+Dato /^che l'evento "([^"]*)" non ha deadline$/ do |name|
+  event = Event.find_by_name(name)
+  event.deadline=nil
+  event.save
+end

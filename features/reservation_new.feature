@@ -35,7 +35,20 @@ Funzionalità: Prenota evento
     E il sistema ha inviato 1 email
     E dovrei vedere "Elimina prenotazione"
 
-  Scenario: Prenotazione impossibile (già prenotato)
+    Scenario: Prenotazione (con navigazione, senza deadline)
+    Dato che l'evento "Semifinale" non ha deadline
+    Dato vado alla visualizzazione evento di "Semifinale"
+    Quando seguo il link "Prenota"
+    Allora dovrei essere nella pagina di prenotazione dell'evento  "Semifinale"
+    Quando premo "Confermo"
+    Allora dovrei essere nella pagina di dettagli dell'evento  "Semifinale"
+    E dovrei vedere "Prenotazione effettuata"
+    E dovrei vedere "Mail inviata all'organizzatore"
+    E il sistema ha inviato 1 email
+    E dovrei vedere "Elimina prenotazione"
+
+
+Scenario: Prenotazione impossibile (già prenotato)
     Dato vado alla prenotazione evento di "Semifinale"
     Quando premo "Confermo"
     Allora dovrei essere nella pagina di dettagli dell'evento  "Semifinale"

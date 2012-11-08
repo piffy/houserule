@@ -92,7 +92,7 @@ class Event < ActiveRecord::Base
     if Time.now > self.begins_at
       return 2
     end
-    if Time.now > self.deadline
+    if !self.deadline.nil? && Time.now > self.deadline
       return 3
     end
 
