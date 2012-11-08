@@ -20,22 +20,22 @@ describe "Groups" do
     it "responds to show" do
       visit group_path(group)
       page.should have_selector('h1', text: group.name)
-      page.should have_selector('span#group_owner', text: group.user.name)
+      page.should have_selector('a', text: group.user.name)
     end
 
     it "responds to show when logged in" do
       login FactoryGirl.create(:user)
       visit group_path(group)
       page.should have_selector('h1', text: group.name)
-      page.should have_selector('span#group_owner', text: group.user.name)
+      page.should have_selector('a', text: group.user.name)
       page.should have_selector('a', text: member.name)
     end
 
     it "shows interested users" do
       visit group_path(group)
       page.should have_selector('h1', text: group.name)
-      page.should have_selector('span#group_owner', text: group.user.name)
-      page.should have_selector('a', text: member.name)
+      page.should have_selector('a', text: group.user.name)
+      page.should_not have_selector('a', text: member.name)
     end
   end
 end

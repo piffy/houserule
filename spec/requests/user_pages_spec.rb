@@ -28,13 +28,13 @@ describe "User pages" do
 
       it "should list each user" do
         User.all[0..2].each do |user|
-          page.should have_selector('li', text: user.name)
+          page.should have_selector('a', text: user.name)
         end
       end
 
       it "should list the first page of users" do
         first_page.each do |user|
-          page.should have_selector('li', text: user.name)
+          page.should have_selector('a', text: user.name)
         end
       end
 
@@ -43,7 +43,7 @@ describe "User pages" do
 
         it "should list the second page of users" do
           second_page.each do |user|
-            page.should have_selector('li', text: user.name)
+            page.should have_selector('a', text: user.name)
           end
         end
       end
