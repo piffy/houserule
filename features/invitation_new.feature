@@ -37,6 +37,22 @@ E dovrei vedere "Pluto" all'interno di "label"
 E dovrei vedere "Paperoga" all'interno di "label"
 E dovrei non vedere "Paperino" all'interno di "label"
 
+Scenario:   Navigazione  (con evento senza deadline)
+Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+E vado alla visualizzazione evento di "Campionato"
+E che l'evento "Campionato" non ha deadline
+Allora dovrei vedere "Inviti" all'interno di "a"
+Quando seguo il link "Inviti"
+Allora dovrei trovarmi nella pagina di elenco inviti per "Campionato"
+Allora dovrei vedere "Invita" all'interno di "a"
+Quando seguo il link "Invita"
+Allora dovrei trovarmi nella pagina di nuovi inviti per "Campionato"
+E dovrei vedere il titolo "Inviti"
+E dovrei vedere "'Campionato'" all'interno di "h1"
+E dovrei vedere "Pluto" all'interno di "label"
+E dovrei vedere "Paperoga" all'interno di "label"
+E dovrei non vedere "Paperino" all'interno di "label"
+
 Scenario: Personalizza scadenza
 
 Scenario: Scadenza errata
