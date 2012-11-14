@@ -1,6 +1,7 @@
 class EventWizardController < ApplicationController
   before_filter :logged_in_user
   include Wicked::Wizard
+  include EventsHelper
   steps :game, :when_where, :final
 
   def show
@@ -36,12 +37,16 @@ class EventWizardController < ApplicationController
           @event.deadline=@event.begins_at=nil
           delete_dates_from_parms(true)
           delete_all_invites_and_reservations(@event)
-
+          flash[:notice]="Tutti gli inviti e le prenotazioni sono stati cancellati"
         end
-
     end
 
-    @event.update_attributes(params[:event])
+    if @event.update_attributes(params[:event])  && step==:game
+      unless (result=update_reservation_status(@event)).nil?
+        flash[:notice]="#{result[0]} prenotazioni modificate e #{result[1]} prenotazioni cancellate"
+      end
+    end
+
     render_wizard @event
 
   end

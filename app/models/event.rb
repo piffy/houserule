@@ -4,7 +4,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :begins_at, :deadline, :descr_short, :description, :duration,
                   :location, :max_player_num, :min_player_num, :name, :status, :system,
-                  :invite_only, :reservation_locked
+                  :invite_only, :reservation_locked, :waiting_list
   belongs_to :user
   has_many :reservations, dependent: :destroy
   has_many :invitations, dependent: :destroy
@@ -16,6 +16,7 @@ class Event < ActiveRecord::Base
   validates :max_player_num, :numericality => { :greater_than_or_equal_to => :min_player_num }
   validates :min_player_num, :numericality => { :greater_than_or_equal_to => 0 }
   validates :status, :numericality => true
+  validates :waiting_list, :numericality => { :greater_than_or_equal_to => 0 }
 
   validates_date_of :begins_at, :allow_nil => true
   validates_date_of :deadline, :allow_nil => true

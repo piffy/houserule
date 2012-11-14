@@ -47,8 +47,8 @@
     %div{:class=>"span3"}
 
       .field
-        = f.label :min_player_num , 'Lista attesa'
-        %input{:type=>"input", :disabled=> true, :class => "input-small", :value => 0}
+        = f.label :waiting_list , 'Lista attesa'
+        = f.number_field :waiting_list, :min=>0, :size=>"3", :maxlenght =>3, :class => "input-small"
         %i{:class=>"icon-question-sign"}
     %div{:class=>"span3"}
       Flags

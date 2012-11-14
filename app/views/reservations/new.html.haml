@@ -32,6 +32,11 @@
         ="("+@event.max_player_num.to_s+")!"
     = link_to 'torna all\'evento', event_path(@event),  :class => "btn btn-primary"
   -else
+    -if  @event.max_player_num >0 && @event.reservations.count >= @event.max_player_num
+      %p{:class => "alert alert-warning"}
+        %b Attenzione!
+        Il numero di iscritti massimo è già stato raggiunto. per cui sarai iscritto nella lista d'attesa e subentrerai
+        solono in caso di rinunce.
 
     %p
       Vuoi confermare un posto per
