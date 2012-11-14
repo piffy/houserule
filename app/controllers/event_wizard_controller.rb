@@ -42,7 +42,9 @@ class EventWizardController < ApplicationController
     end
 
     if @event.update_attributes(params[:event])  && step==:game
-      update_reservation_status(@event)
+      unless (result=update_reservation_status(@event)).nil?
+        flash[:notice]="#{result[0]} prenotazioni modificate e #{result[1]} prenotazioni cancellate"
+      end
     end
 
     render_wizard @event

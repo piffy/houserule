@@ -9,12 +9,12 @@ perché voglio poter avere flessibilità organizzativa
 Contesto:
 
 Dato   che esistono i seguenti utenti:
-| name                  | email                 | password  |
-| Pippo                 | pippo@nomail.it       | 12345678  |
-| Pluto                 | pluto@nomail.it       | 12345678  |
-| Qui                   | qui@nomail.it         | 12345678  |
-| Quo                   | quo@nomail.it         | 12345678  |
-E il sistema non ha ancora inviato emails
+  | name                  | email                 | password  |
+  | Pippo                 | pippo@nomail.it       | 12345678  |
+  | Pluto                 | pluto@nomail.it       | 12345678  |
+  | Qui                   | qui@nomail.it         | 12345678  |
+  | Quo                   | quo@nomail.it         | 12345678  |
+  E il sistema non ha ancora inviato emails
 
 Scenario:   Incremento posti nella lista attesa
   Dato che esistono i seguenti eventi dell'utente "pippo@nomail.it":
@@ -44,6 +44,7 @@ Scenario:   Diminuzione della lista d'attesa
   E premo il pulsante "Prossimo"
   E inserisco in "event_waiting_list" "1"
   E premo "Prossimo"
+  Allora dovrei vedere "0 prenotazioni modificate e 2 prenotazioni cancellate"
   Allora il sistema ha inviato 2 emails
   Quando vado ai dettagli di un evento
   Allora dovrei vedere "1/1" all'interno di "span.waiting_list_count"
@@ -62,6 +63,7 @@ Dato che esistono i seguenti eventi dell'utente "pippo@nomail.it":
   E premo il pulsante "Prossimo"
   E inserisco in "event_max_player_num" "2"
   E premo "Prossimo"
+  Allora dovrei vedere "1 prenotazioni modificate e 0 prenotazioni cancellate"
   Allora il sistema ha inviato 1 email
   Quando vado ai dettagli di un evento
   Allora dovrei vedere "0/2" all'interno di "span.waiting_list_count"
@@ -94,6 +96,7 @@ Dato che esistono i seguenti eventi dell'utente "pippo@nomail.it":
   E premo il pulsante "Prossimo"
   E inserisco in "event_max_player_num" "0"
   E premo "Prossimo"
+  Allora dovrei vedere "2 prenotazioni modificate e 0 prenotazioni cancellate"
+  E il sistema ha inviato 2 emails
   Quando vado ai dettagli di un evento
-  Allora il sistema ha inviato 2 emails
-  E dovrei non vedere "" all'interno di "i.icon-question-sign"
+  Allora dovrei non vedere "" all'interno di "i.icon-question-sign"

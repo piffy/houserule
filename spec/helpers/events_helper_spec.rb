@@ -55,7 +55,6 @@ describe EventsHelper do
 
     it "should change the correct number of reservations" do
       update_reservation_status(waiting_list_event).should == [3,0]
-      waiting_list_event.reservations.last.user_id.should == user.id
     end
 
     it "should not delete any reservation reservation in excess" do
@@ -65,7 +64,7 @@ describe EventsHelper do
     end
 
     it "should send email to alert involved players" do
-      lambda { update_reservation_status(waiting_list_event)}.should change(ActionMailer::Base.deliveries, :count).by(2)
+      lambda { update_reservation_status(waiting_list_event)}.should change(ActionMailer::Base.deliveries, :count).by(3)
     end
 
     it "should change reservation status correctly" do

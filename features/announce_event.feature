@@ -97,6 +97,7 @@ E vado alla pagina di nuovo annuncio per "Campionato"
 Quando seleziono la casella "Pluto"
 E seleziono la casella "Paperoga"
 Quando premo "Invia annuncio a questi utenti"
+
 Allora dovrei vedere "Annuncio inviato a 2 indirizzi"
 E il sistema ha inviato 1 email
 

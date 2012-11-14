@@ -3,6 +3,7 @@
 class ReservationsController < ApplicationController
   before_filter :logged_in_user
   before_filter :has_rights_to, only: [:edit, :update, :destroy]
+  include EventsHelper
 
   #Ask confirm for reservation
   def new
@@ -105,6 +106,11 @@ class ReservationsController < ApplicationController
 
     @event = Event.find(params[:event_id])
     reservation.destroy
+
+    unless update_reservation_status(@event).nil?
+      msg = msg + " Nuovo giocatore prelevato dalla lista d'attesa."
+    end
+=begin
     #if there is at least ONE reservation in the waiting list, "promote" it
     reservation_to_upgrade=Reservation.find_by_event_id_and_status(@event.id,2)
     if reservation_to_upgrade!=nil
@@ -113,7 +119,7 @@ class ReservationsController < ApplicationController
       reservation_to_upgrade.save
       EventMailer.upgrade_reservation(reservation_to_upgrade).deliver
     end
-
+=end
     flash[:success] = "Prenotazione eliminata."+msg
     redirect_to event_path(@event)
   end
