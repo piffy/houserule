@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
   validates_date_of :begins_at, :allow_nil => true
   validates_date_of :deadline, :allow_nil => true
   validates :deadline, :date => {:before_or_equal_to => :begins_at }, :allow_nil => true
-
+  before_save :zap_waiting_list
 
 
   default_scope order: 'events.begins_at ASC'
@@ -33,6 +33,10 @@ class Event < ActiveRecord::Base
   #named_scope :visible, :include => :category, :conditions => { 'categories.hidden' => false }
 
   #Lists of all possible states (in Italian - unused in 0.1)
+  def zap_waiting_list
+    self.waiting_list=0 unless self.max_player_num>0
+  end
+
   def self.status_string
     %w(Indefinito Proposto Confermato Sospeso)
   end
@@ -97,7 +101,7 @@ class Event < ActiveRecord::Base
       return 3
     end
 
-    if self.max_player_num >0 && self.reservations.count >= self.max_player_num
+    if self.max_player_num >0 && self.reservations.count >= self.max_player_num + self.waiting_list
       return 4
     end
 
