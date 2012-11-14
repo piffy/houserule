@@ -1,6 +1,7 @@
 class EventWizardController < ApplicationController
   before_filter :logged_in_user
   include Wicked::Wizard
+  include EventsHelper
   steps :game, :when_where, :final
 
   def show
@@ -38,68 +39,17 @@ class EventWizardController < ApplicationController
           delete_all_invites_and_reservations(@event)
           flash[:notice]="Tutti gli inviti e le prenotazioni sono stati cancellati"
         end
-      when :game
-        if  @event.reservations.count!=0
-
-          #case max player num set to 0
-          max=@event.max_player_num == 0 ? (2**(0.size * 8 -2) -1) : @event.max_player_num-1
-          modified_reservations=0
-          deleted_reservations=0
-
-          @event.reservations.each_with_index do |r,index|
-            puts index.to_s+") "+r.user.name+" -> index>max" + (index>max).to_s
-            if index<=max && r.status!=1
-              #Convert to confirmed
-              r.status=1
-              r.save
-              EventMailer.new_reservation(r).deliver
-              puts index.to_s+") "+r.user.name+" -> CONFIRMED"
-              modified_reservations=modified_reservations+1
-
-            end
-            if r.status!=2 && index>max &&  index<max+params[:event][:max_player_num].to_i && params[:event][:max_player_num].to_i>0
-              #Convert to waiting list
-              r.status=2
-              r.save
-              EventMailer.new_reservation(r,nil,true).deliver
-              puts index.to_s+") "+r.user.name+" -> Waiting List"
-              modified_reservations=modified_reservations+1
-            end
-            if index>max+params[:event][:max_player_num].to_i
-              EventMailer.delete_reservation(r,current_user).deliver
-              r.destroy
-              puts index.to_s+") "+r.user.name+"DELETED"
-              modified_reservations=modified_reservations+1
-            end
-
-          end
-          flash[:notice]="#{modified_reservations} prenotazioni modificate o cancellate" if modified_reservations>0
-=begin
-          if seat_balance == 0
-            n=trim_reservations_by(@event,@event.waiting_list-params[:event][:waiting_list].to_i)
-            flash[:notice]="#{n} prenotazioni cancellate" if n>0
-          end
-=end
-        end
     end
 
-    @event.update_attributes(params[:event])
+    if @event.update_attributes(params[:event])  && step==:game
+      update_reservation_status(@event)
+    end
+
     render_wizard @event
 
   end
 
   private
-  def trim_reservations_by(event,num)
-    #puts "NUM:"+num.to_s
-    return 0 if num<1
-    event.reservations.slice(-num,num).each do |r|
-      #puts "CANCELLAZIONE DI prenotazione di " + r.user.name
-      EventMailer.delete_reservation(r,current_user).deliver
-      r.destroy
-    end
-    return num
-
-  end
 
   def delete_all_invites_and_reservations(event)
     list=Array.new
