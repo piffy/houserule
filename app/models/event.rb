@@ -48,7 +48,7 @@ class Event < ActiveRecord::Base
 
   #Checks if the event has already begun
   def begun?
-    begins_at > Time.now
+    begins_at > Time.now  unless begins_at.nil?
   end
 
   #Checks if the event has still free places

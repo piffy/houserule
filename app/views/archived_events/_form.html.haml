@@ -1,4 +1,4 @@
-= form_for @archived_event, :html => {:class => "form-horizontal well" } do |f|
+= form_for [@event,@archived_event], :html => {:class => "form-horizontal well" } do |f|
   -if @archived_event.errors.any?
     #error_explanation
       %h2= "#{pluralize(@archived_event.errors.count, "error")} prohibited this archived_event from being saved:"
@@ -13,24 +13,40 @@
         = f.label :aftermath , 'Commento'
         = f.text_area :aftermath , :placeholder => "Commento post partita."
     %div{:class=>"span4"}
+      -if action!="edit"
 
-      %p
-        I seguenti dati saranno archiviati automaticamente:
-      %ul
-        %li Nome
-        %li Descrizione
-        %li Descrizione breve
-        %li Date e durata
-        %li Sistema
-        %li Giocatori (min-max)
+        %p
+          I seguenti dati saranno archiviati automaticamente:
+        %ul
+          %li Nome
+          %li Descrizione
+          %li Descrizione breve
+          %li Date e durata
+          %li Sistema
+          %li Giocatori (min-max)
+        .field
+          = check_box_tag "active", 1, true, :disabled => true
+          Includi dati e nomi utenti
+
+      -else
+        .field
+          = f.label :subscriber_list , 'Partecipanti'
+          = f.text_area :subscriber_list , :placeholder => "Elenco partecipanti"
+
       .field
-        = check_box_tag "active", 1, true
-        Includi dati e nomi utenti
-      .field
-        = check_box_tag "anonimize", 1, true, :disabled => true
+        = check_box_tag "anonimize", 1, false, :disabled => true
         Anonimizzami
 
 
-      .actions
-        = f.hidden_field :event_id, :value => @event.id
+    .actions
+      = #f.hidden_field :event_id, :value => @event.id
+      -if action=="edit"
+        = f.submit(:class=>"btn btn-primary", :value => 'Aggiorna')
+        = f.submit(:class=>"btn btn", :value => 'Dearchivia')
+      -else
+
+
         = f.submit(:class=>"btn btn-primary", :value => 'Archivia')
+
+      = link_to 'Elimina', @archived_event, :confirm => 'Sei sicuro?', :method => :delete ,:class=>"btn btn-danger" if action=="edit"
+

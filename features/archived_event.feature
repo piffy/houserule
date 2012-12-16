@@ -32,27 +32,32 @@ Allora dovrei non vedere "Archivia" all'interno di "a"
 
 
 Scenario: Mostra archivia dalla pagina finale di editing
+Scenario:   Cambiamento da standard a senza deadline
+Quando      vado alla modifica evento di "Passato"
+E           premo "Prossimo"
+E           premo "Prossimo"
+E           premo "Prossimo"
+Allora dovrei vedere "archiviarlo" all'interno di "a"
+
 
 
 Scenario: Archiviazione di un evento
-Dato che esiste la prenotazione dell'evento "Passato" per l'utente "paolino@nomail.it"
+Dato che esiste la prenotazione dell'evento "Passato" per l'utente "pluto@nomail.it"
 E vado alla archiviazione evento di "Passato"
 Allora dovrei vedere il titolo "Archivia"
+Quando inserisco in "archived_event_aftermath" "Una partita appassionante"
 Quando premo "Archivia"
 Allora dovrei non vedere "Deadline"
 E dovrei non vedere "Inviti"
 E dovrei vedere "Archiviato il"
+E dovrei vedere "Una partita appassionante"
 E dovrei non vedere "Iniziato"
 E dovrei vedere "Paperino"
-E dovrei non vedere "Modifica Evento"
-
-
-Scenario: un amministratore può de-archiviare un evento
-
-Scenario: un amministratore può cancellare  un evento
-
-
-
+E dovrei vedere "Pluto"
+Dato mi trovo nella pagina di elenco eventi
+Quando scelgo "selection_all_events"
+E premo "Aggiorna"
+Allora dovrei non vedere "Passato"
 
 
 

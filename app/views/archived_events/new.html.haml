@@ -3,6 +3,6 @@
 %h1{:style => "margin-bottom:0px;"}
   = 'Archiviazione di "'+@event.name+'"'
 
-= render 'form'
+= render 'form', :action => "new"
 
 = link_to 'Torna all\'evento', event_path(@event)

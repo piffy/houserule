@@ -50,6 +50,15 @@
           = gravatar_for @event.user, 32
           = link_to @event.user.first_name_or_nick, user_path(@event.user), id:"group_owner"
     %br
+    %h3
+      %b<
+        Partecipanti
+        -unless (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
+          %span{:class=>"reservations", :title=>"Partecipanti"}
+            ="(min: "+ @event.min_player_num.to_s+", max: "+@event.max_player_num.to_s+"):"
+    = simple_format(@event.subscriber_list)
+
+
 %div{:class =>"row"}
   %div{:class =>"span12"}
     %p
@@ -62,9 +71,8 @@
 %hr
 %div{:class =>"row"}
   %div{:class =>"span12"}
-    = link_to 'Clona', event_archive_path(@event) , :class=>"btn"  unless current_user.nil?
+    = link_to 'Clona', new_event_path(@event) , :class=>"btn", :disabled => true  unless current_user.nil?
     -if !current_user.nil? && (current_user.admin? )
-      = link_to 'Elimina definitivamente', edit_event_path(@event), :class=>"btn"
-      = link_to 'Dearchivia', edit_archived_event_path(@event) , :class=>"btn"  unless @event.begun?
+      = link_to 'Modifica', edit_archived_event_path(@event) , :class=>"btn"
 
     = link_to 'Elenco eventi', archived_events_path, :class=>"btn"

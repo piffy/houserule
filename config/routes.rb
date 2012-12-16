@@ -1,7 +1,7 @@
 Houserule::Application.routes.draw do
 
 
-  resources :archived_events, only: [:create, :destroy, :show]
+  resources :archived_events, except: [:new, :create]
 
   resources :groups do
     resources :interests
@@ -26,6 +26,7 @@ Houserule::Application.routes.draw do
     resources :invitations
     resources :event_wizard
     match  'archived_events/new', :to => "archived_events#new", :as => "archive"
+    match  'archived_events', :to => "archived_events#create", :via => :post
     match  'announcements/compose', :to => "announcements#compose", :as => "compose"
     match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
   end

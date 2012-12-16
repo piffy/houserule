@@ -1,7 +1,10 @@
-%h1 Editing archived_event
+=provide(:title, 'Modifica evento archiviato')
 
-= render 'form'
+%h1{:style => "margin-bottom:0px;"}
+  = 'Modifica di "'+@archived_event.name+'"'
 
-= link_to 'Show', @archived_event
+= render 'form', :action => "edit"
+
+= link_to 'Dettagli', @archived_event
 \|
-= link_to 'Back', archived_events_path
+= link_to 'Elenco eventi archiviati', archived_events_path

@@ -18,16 +18,17 @@ ActiveRecord::Schema.define(:version => 20121214080500) do
     t.string   "system"
     t.datetime "begins_at"
     t.string   "duration"
-    t.text     "description"
+    t.text     "description",     :limit => 4000
     t.text     "aftermath"
+    t.text     "subscriber_list", :limit => 4000
     t.string   "descr_short"
     t.datetime "deadline"
     t.string   "location"
-    t.integer  "max_player_num", :default => 0
-    t.integer  "min_player_num", :default => 0
+    t.integer  "max_player_num",                  :default => 0
+    t.integer  "min_player_num",                  :default => 0
     t.integer  "user_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   create_table "events", :force => true do |t|

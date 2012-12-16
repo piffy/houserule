@@ -1,0 +1,7 @@
+-if reservations.any?
+  %ol{:class=>"users"}
+    -reservations.each do |reservation|
+      %li
+        %span
+          = gravatar_for reservation.user, 24
+          = link_to reservation.user.first_name_or_nick, user_path(reservation.user)

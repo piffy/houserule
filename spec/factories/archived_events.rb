@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :archived_event do
       sequence(:name) { |n| "Archived #{n}" }
       system  "System"
-      begins_at "2013-11-13 18:56:50"
+      begins_at "2013-11-12 18:56:50"
       duration "2h"
       description { Faker::Lorem.paragraph(2) }
       descr_short  { Faker::Lorem.sentence }

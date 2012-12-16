@@ -10,6 +10,10 @@ class EventsController < ApplicationController
     @selection =  params[:selection] || session[:selection] || :not_begun
     sort = params[:sort] || session[:sort]
 
+    if @selection=='archived'
+      redirect_to archived_events_path and return
+    end
+
     #Handle sorting
     case sort
       when 'name'

@@ -26,6 +26,7 @@ describe ArchivedEvent do
     it { should respond_to(:name) }
     it { should respond_to(:user) }
     it { should respond_to(:aftermath) }
+    it { should respond_to(:subscriber_list) }
 
 
     describe "when user_id is not present" do
@@ -46,6 +47,22 @@ describe ArchivedEvent do
       @event.descr_short = "x" * 256
       @event.should_not be_valid
     end
+
+    it "should accept a long subscriber list"  do
+      @event.subscriber_list = "x" * 3000
+      @event.should be_valid
+    end
+
+    it "should accept a long aftermath"  do
+      @event.subscriber_list = "x" * 3000
+      @event.should be_valid
+    end
+
+    it "should accept a long descripion"  do
+      @event.description = "x" * 3000
+      @event.should be_valid
+    end
+
 
 
     it "should have valid player numbers"  do

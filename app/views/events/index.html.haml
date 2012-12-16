@@ -18,6 +18,8 @@
     %span{:class =>"label label-info" }
     = radio_button_tag 'selection', 'no_date', @selection=='no_date'
     Senza data
+    = radio_button_tag 'selection', 'archived', @selection=='archived'
+    Archiviati
   %br
   = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
 

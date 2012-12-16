@@ -1,7 +1,7 @@
 class ArchivedEvent < ActiveRecord::Base
   attr_accessible :begins_at, :deadline, :descr_short, :description, :duration,
                   :location, :max_player_num, :min_player_num, :name, :system, :aftermath,
-                  :user_id
+                  :user_id, :subscriber_list
 
   belongs_to :user
   validates_length_of :descr_short, :maximum=>255
