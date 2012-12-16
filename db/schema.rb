@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101210219) do
+ActiveRecord::Schema.define(:version => 20121214080500) do
+
+  create_table "archived_events", :force => true do |t|
+    t.string   "name"
+    t.string   "system"
+    t.datetime "begins_at"
+    t.string   "duration"
+    t.text     "description"
+    t.text     "aftermath"
+    t.string   "descr_short"
+    t.datetime "deadline"
+    t.string   "location"
+    t.integer  "max_player_num", :default => 0
+    t.integer  "min_player_num", :default => 0
+    t.integer  "user_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"

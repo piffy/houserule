@@ -1,6 +1,8 @@
 Houserule::Application.routes.draw do
 
 
+  resources :archived_events, only: [:create, :destroy, :show]
+
   resources :groups do
     resources :interests
     match  'linked_events/:event_id/confirm', :to => "linked_events#confirm"
@@ -23,6 +25,7 @@ Houserule::Application.routes.draw do
     resources :announcements, only: [:new, :create]
     resources :invitations
     resources :event_wizard
+    match  'archived_events/new', :to => "archived_events#new", :as => "archive"
     match  'announcements/compose', :to => "announcements#compose", :as => "compose"
     match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
   end

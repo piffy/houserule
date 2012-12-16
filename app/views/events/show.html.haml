@@ -114,7 +114,7 @@
         = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"   unless @event.check_time>0
     -if !current_user.nil? && (current_user==@event.user || current_user.admin? )
       = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
-      = link_to 'Cambia stato', "#", :class=>"btn", :disabled => true
+      = link_to 'Archivia', event_archive_path(@event) , :class=>"btn"  unless @event.begun?
 
     = link_to 'Elenco eventi', events_path, :class=>"btn"
     -if !@user.nil?

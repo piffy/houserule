@@ -74,6 +74,8 @@ E /^vado alla (\w+) evento di "([^"]*)"$/ do |action,name|
       visit event_path(@event)
     when "prenotazione"
       visit new_event_reservation_path(@event)
+    when "archiviazione"
+      visit event_archive_path(@event)
     else
       raise "Non posso mappare \"#{action}\" a un percorso relativo ad un evento!\n"
   end

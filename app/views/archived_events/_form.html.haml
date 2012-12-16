@@ -1,0 +1,36 @@
+= form_for @archived_event, :html => {:class => "form-horizontal well" } do |f|
+  -if @archived_event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@archived_event.errors.count, "error")} prohibited this archived_event from being saved:"
+      %ul
+        - @archived_event.errors.full_messages.each do |msg|
+          %li= msg
+
+
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span8"}
+      .field
+        = f.label :aftermath , 'Commento'
+        = f.text_area :aftermath , :placeholder => "Commento post partita."
+    %div{:class=>"span4"}
+
+      %p
+        I seguenti dati saranno archiviati automaticamente:
+      %ul
+        %li Nome
+        %li Descrizione
+        %li Descrizione breve
+        %li Date e durata
+        %li Sistema
+        %li Giocatori (min-max)
+      .field
+        = check_box_tag "active", 1, true
+        Includi dati e nomi utenti
+      .field
+        = check_box_tag "anonimize", 1, true, :disabled => true
+        Anonimizzami
+
+
+      .actions
+        = f.hidden_field :event_id, :value => @event.id
+        = f.submit(:class=>"btn btn-primary", :value => 'Archivia')
