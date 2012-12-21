@@ -51,6 +51,46 @@ class EventsController < ApplicationController
 
   end
 
+  # GET /owned_events/
+  def owned_events
+    sort = params[:sort] || session[:sort]
+    #Handle sorting
+    case sort
+      when 'name'
+        ordering,@name_header = 'name', 'hilite'
+      when 'begins_at'
+        @begins_at_header = 'hilite'
+      when 'system'
+        ordering,@system_header = 'system', 'hilite'
+    end
+
+    #Preserve sorting selection in session
+    if params[:sort] != session[:sort]
+      session[:sort] = sort
+      redirect_to :sort => sort and return
+    end
+
+
+    @user = User.find(params[:user_id])
+
+    #Handle Pagination
+    if ordering.nil?
+      @events = Event.where("user_id="+@user.id.to_s).paginate(page: params[:page])
+    else
+
+      @events = Event.where("user_id="+@user.id.to_s).unscoped.page(params[:page]).order(ordering)
+
+    end
+
+    #@events = Event.where("user_id="+@user.id.to_s).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html # show.html.haml
+      format.json { render json: @events }
+    end
+
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show

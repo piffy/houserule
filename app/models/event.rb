@@ -28,6 +28,7 @@ class Event < ActiveRecord::Base
   scope :all_events
   scope :not_begun, lambda { {:conditions => ["begins_at > ?", Date.today ]} }
   scope :no_date, :conditions => { :status => 0 }
+  scope :events_for_user_id, lambda { |user_id| {:conditions => ["user_id = ?", user_id ]} }
   #named_scope :cheap, :conditions => { :price => 0..5 }
   #named_scope :recent, lambda { |*args| {:conditions => ["released_at > ?", (args.first || 2.weeks.ago)]} }
   #named_scope :visible, :include => :category, :conditions => { 'categories.hidden' => false }

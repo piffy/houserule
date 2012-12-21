@@ -30,7 +30,7 @@
   %div{:class =>"span4"}
     %h3
       %b
-        =link_to "Eventi organizzati ("+ @user.events.count.to_s+"):" , "#"
+        =link_to "Eventi organizzati ("+ @user.events.count.to_s+"):" , user_owned_events_path(@user)
 
     -if @user_events.any?
       = render "shared/list_event",  :events => @user_events ,:show_organizer => false

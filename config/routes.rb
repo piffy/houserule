@@ -36,7 +36,9 @@ Houserule::Application.routes.draw do
 
   get "users/show"
 
-  resources :users#  , :collection =>{ :deactivate => :get }
+  resources :users do
+    match  'owned_events', :to => "events#owned_events"
+  end
 
   get "welcome/index"
   get "welcome/administration", :as => "administration"

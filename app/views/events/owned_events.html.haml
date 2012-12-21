@@ -1,0 +1,16 @@
+=provide(:title, "Eventi di #{@user.name}")
+%h1
+  Elenco eventi di
+  =@user.name
+
+
+=will_paginate
+
+=render "index_listing" , :path => "users"
+
+= will_paginate
+
+%br
+
+= link_to "Profilo di #{@user.name}" , user_path(@user), :class =>"btn"
+= link_to "Elenco eventi" , events_path, :class =>"btn"
