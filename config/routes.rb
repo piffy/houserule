@@ -16,6 +16,7 @@ Houserule::Application.routes.draw do
   get "info/license"
   get "info/feedback"
   get "info/help"
+  get "info/faq"
 
 
   #match  'announcements/compose', :to => "announcements#compose", :as => "compose", :path_prefix => "/event/:event_id"

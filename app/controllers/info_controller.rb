@@ -16,6 +16,10 @@ class InfoController < ApplicationController
   def license
   end
 
+  #Faq
+  def faq
+  end
+
   #Guide /Help
   def help
   end

@@ -47,10 +47,10 @@
         %i{:class=>"icon-check", :title=>"Completato"}
       %li
         Archiviazione vecchi eventi
-        %i{:class=>"icon-arrow-left", :title=>"In lavorazione"}
+        %i{:class=>"icon-check", :title=>"Completato"}
       %li
-        Feedback post-game
-        %i{:class=>"icon-remove", :title=>"Da fare"}
+        Indice eventi personali migliorato
+        %i{:class=>"icon-arrow-left", :title=>"In lavorazione"}
       %li
         Liste d'attesa per eventi pieni
         %i{:class=>"icon-check", :title=>"Completato"}
@@ -82,5 +82,9 @@
       presenti, di cui
       =@not_yet_started_event_count
       non ancora iniziati
+      %br
+      %i{:class=>"icon-calendar", :title=>"Eventi archiviati"}
+      =@archived_event_count
+      = link_to "eventi archiviati", archived_events_path
 
 
