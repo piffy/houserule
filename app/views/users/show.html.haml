@@ -30,16 +30,19 @@
   %div{:class =>"span4"}
     %h3
       %b
-        ="Eventi organizzati ("+ @user.events.count.to_s+"):"
+        =link_to "Eventi organizzati ("+ @user.events.count.to_s+"):" , "#"
 
-    -if @user.events.any?
-      -@events=@user.events
-      = render "shared/list_event",  :events => @user.events ,:show_organizer => false
+    -if @user_events.any?
+      = render "shared/list_event",  :events => @user_events ,:show_organizer => false
+      %p
+        ="...ed altri "+(@user.events.count-5).to_s unless @user.events.count<=5
     %h3
       %b
-        ="Eventi prenotati ("+ @user.reserved_events.count.to_s+"):"
+        =link_to "Eventi prenotati ("+ @user.reserved_events.count.to_s+"):", "#"
     -if @user.reserved_events.any?
-      = render "shared/list_event" , :events => @user.reserved_events ,:show_organizer => true
+      = render "shared/list_event" , :events => @user_reserved_events ,:show_organizer => true
+    %p
+      ="...ed altri "+(@user.reserved_events.count-5).to_s unless @user.reserved_events.count<=5
     -if @user.invitations.pending.any?
       %h3
         %b
