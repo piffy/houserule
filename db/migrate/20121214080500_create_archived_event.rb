@@ -5,9 +5,9 @@ class CreateArchivedEvent < ActiveRecord::Migration
       t.string :system
       t.datetime   :begins_at
       t.string :duration
-      t.text :description, :limit => 4000
+      t.text :description
       t.text :aftermath
-      t.text :subscriber_list, :limit => 4000
+      t.text :subscriber_list
       t.string :descr_short
       t.datetime :deadline
       #t.integer :status
