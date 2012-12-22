@@ -1,11 +1,10 @@
 == Welcome to House Rule
-=== version 0.2.0, 12/08/2012
+=== version 0.3.0, 22/12/2012
 
 House Rule aims to become the site to advertise, contact and manage gaming
 sessions among friends, with a modern, "web 2.0" attitude
 
-At this moment release 0.2 is out. We added a lot of functionality to our previous relelase, focusing on
-communication between users.
+At this moment release 0.3 is out.
 
 
 == People involved 
@@ -35,8 +34,10 @@ volentieri. Vi offriamo un abiente di sviluppo completo, comprensivo di editor "
 E se siete esperti di gioco, i vostri suggerimenti, richieste e consigli sono altrettanto ben accetti.
 
 == Test implementation
-Our test implemetation is currently hosted on Heroku at this address.
+Our test implemetation is currently hosted on Heroku at this address:
 http://afternoon-spring-6294.herokuapp.com/
+or its more palatable alias
+http://www.houserule.it/
 Please come, have a look, and leave a feedback.
 
 
