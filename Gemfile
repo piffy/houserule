@@ -43,6 +43,7 @@ gem 'wicked'
 # use Ruby debugger
 group :development, :test do
   gem 'ruby-debug19'
+  gem 'simplecov', :require => false, :group => :test
   gem 'cucumber', '1.1.3'
   gem 'rspec', '2.7.0'
   gem 'rspec-rails'
