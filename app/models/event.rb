@@ -61,7 +61,7 @@ class Event < ActiveRecord::Base
     if max_player_num == 0
       return  [reservations.count, 99].min
     else
-      return (100*reservations.count.to_f / max_player_num).to_i
+      return [(100*reservations.count.to_f / max_player_num).to_i,100].min
     end
 
   end

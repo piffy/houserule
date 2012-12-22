@@ -17,12 +17,17 @@
         -else
           =l(event.deadline, :format => :short)
       %td= event.location
-      %td
-        = event.reservations.count
+      %td{:class => "reservations"}
         - unless event.max_player_num ==0
-          = " / "  + event.max_player_num.to_s
+          = [event.reservations.count,event.max_player_num].min.to_s+ "/"  + event.max_player_num.to_s
+          -if event.waiting_list >0
+            %span{:class => "waiting_list_count"}
+              = "+"+[(event.reservations.count-event.max_player_num), 0].max.to_s
+        -else
+          = event.reservations.count
         -if event.invite_only?
           %i{:class=>"icon-exclamation-sign", :title=>"Solo a inviti"}
+
 
         - bar_color = "bar-success"
         -if   event.percentage >75

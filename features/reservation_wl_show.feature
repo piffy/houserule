@@ -20,7 +20,7 @@ Scenario:   Visualizzazione lista attesa (posti disponibli in lista)
   | Crowded event            | Yahtzee       | 10-5-2014  |              1 |            2 |
   Dato che esiste la prenotazione dell'evento "Crowded event" per l'utente "pluto@nomail.it"
   Dato che io mi trovo nella pagina di elenco eventi
-  Allora dovrei vedere "1 / 1" all'interno di "span.reservations"
+  Allora dovrei vedere "1/1" all'interno di "td.reservations"
   E dovrei vedere "+0" all'interno di "span.waiting_list_count"
   E dovrei vedere "In lista" all'interno di "a"
   Quando vado ai dettagli di un evento
@@ -32,7 +32,7 @@ Scenario:   Visualizzazione lista attesa (posti normali disponibli)
   | name                     | system        | begins_at  | max_player_num | waiting_list |
   | Empty event              | Yahtzee       | 10-5-2014  |              1 |            0 |
   E che io mi trovo nella pagina di elenco eventi
-  Allora dovrei vedere "0 / 1" all'interno di "span.reservations"
+  Allora dovrei vedere "0/1" all'interno di "td.reservations"
   E dovrei vedere "Prenota" all'interno di "a"
   Ma dovrei non vedere "+0" all'interno di "span.waiting_list_count"
   Quando vado ai dettagli di un evento
@@ -46,7 +46,7 @@ Scenario:   Visualizzazione nell'elenco eventi (posti esauriti)
   Dato che esiste la prenotazione dell'evento "Full event" per l'utente "pluto@nomail.it"
   Dato che esiste la prenotazione dell'evento "Full event" per l'utente "qui@nomail.it"
   E che io mi trovo nella pagina di elenco eventi
-  Allora dovrei vedere "1 / 1" all'interno di "span.reservations"
+  Allora dovrei vedere "1/1" all'interno di "td.reservations"
   E dovrei vedere "+1" all'interno di "span.waiting_list_count"
   E dovrei non vedere "Prenota" all'interno di "a"
   Quando vado ai dettagli di un evento
