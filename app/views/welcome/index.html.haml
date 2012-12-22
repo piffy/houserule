@@ -1,7 +1,7 @@
 =provide(:title, 'Home')
 %div
   %p{:class=>"center"}
-    =link_to image_tag("large_logo.png", alt: "House Rule logo", id: "large logo")
+    =link_to image_tag("santa_sleigh_w_reindeer_logo.png", alt: "House Rule christmas logo", id: "large logo")
 
 %div
   %p
@@ -40,28 +40,25 @@
     %p
       Il sito è in fase di lavorazione, vi preghiamo di provarlo e di segnalarci eventuali errori via
       = link_to "email.", "mailto:piffy@treemme.org"
-      Abbiamo appena rilasciato la nuova release, (0.2),ed ora stiamo puntando alle nuove funzionalità, ovvero:
+      In prossimità del natale, vi proponiamo la  nuova release (0.3). Oltre ai miglioramenti "interni" e poco visibili,
+      le novità introdotte sono parecchie, ovvero:
     %ul
       %li
-        Possibilità di collegare eventi a gruppi
-        %i{:class=>"icon-check", :title=>"Completato"}
+        Possibilità di collegare eventi a gruppi (creando una sorta di mini-convention)
       %li
         Archiviazione vecchi eventi
-        %i{:class=>"icon-check", :title=>"Completato"}
       %li
-        Indice eventi personali migliorato
-        %i{:class=>"icon-arrow-left", :title=>"In lavorazione"}
-      %li
-        Liste d'attesa per eventi pieni
-        %i{:class=>"icon-check", :title=>"Completato"}
+        Liste d'attesa
 
 
     %p
-      Vi saremmo grati se voleste lasciarci un commento
-      =link_to "in questo sondaggio.", info_feedback_path
+      Ora tocca a voi: dovrete provare queste nuove funzionalità per scoprire gli errori. Vi chiederemmo inoltre di partecipare
+      al processo creativo utilizzando
+      =link_to "questo sondaggio.", info_feedback_path
+      Fateci sapere sapere cosa va, cosa non va, e soprattutto che cosa vi interesserebbe nelle versioni successive. Il sondaggio non vi chiederà più di 5 minuti.
       %br
         %i
-          (Nota: il sondaggio è nuovo, se lo avete già fatto per la 0.1 siete pregati di rifarlo per registrare i miglioramenti/peggioramenti)
+          (Nota: il sondaggio è nuovo! Va rifatto!)
       %br
       Per ulteriori dettagli visitate
       =link_to "la pagina informativa del progetto", info_about_path
