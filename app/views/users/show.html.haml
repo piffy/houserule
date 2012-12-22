@@ -23,10 +23,6 @@
       %b
         Luogo:
       = @user.location
-    %p
-      %b
-        Descrizione:
-      = simple_format(@user.description)
   %div{:class =>"span4"}
     %h3
       %b
@@ -38,7 +34,7 @@
         ="...ed altri "+(@user.events.count-5).to_s unless @user.events.count<=5
     %h3
       %b
-        =link_to "Eventi prenotati ("+ @user.reserved_events.count.to_s+"):", "#"
+        =link_to "Eventi prenotati ("+ @user.reserved_events.count.to_s+"):", user_reserved_events_path(@user)
     -if @user.reserved_events.any?
       = render "shared/list_event" , :events => @user_reserved_events ,:show_organizer => true
     %p
@@ -80,6 +76,11 @@
         = render "shared/list_group" , :groups => @groups
       -if @interesting_groups.any?
         = render "shared/list_group" , :groups => @interesting_groups
+%div{class:"row"}
+  %div{:class =>"span12"}
+    %p
+      %b Descrizione:
+    = simple_format(@user.description)
 
 %hr
 %div{:class=>"btn-group"}

@@ -1,5 +1,10 @@
 # encoding: utf-8
 
+Dato /^vado alla pagina degli eventi organizzati da "([^"]*)" con ordinamento "([^"]*)"$/ do |user_email,ordering|
+  user = User.find_by_email(user_email)
+  visit user_owned_events_path(user)+"?sort="+ordering
+end
+
 Given /^l'evento "([^"]*)" è "([^"]*)"$/ do |event_name, condition|
   event = Event.find_by_name(event_name)
   if condition=="riservato"

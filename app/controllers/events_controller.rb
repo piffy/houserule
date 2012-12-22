@@ -51,6 +51,13 @@ class EventsController < ApplicationController
 
   end
 
+  def reserved_events
+    @reserved=true
+    @user = User.find(params[:user_id])
+    @events = @user.reserved_events
+    @current_user=current_user
+  end
+
   # GET /owned_events/
   def owned_events
     sort = params[:sort] || session[:sort]
@@ -72,6 +79,7 @@ class EventsController < ApplicationController
 
 
     @user = User.find(params[:user_id])
+    @current_user=current_user
 
     #Handle Pagination
     if ordering.nil?

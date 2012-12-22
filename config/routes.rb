@@ -38,6 +38,7 @@ Houserule::Application.routes.draw do
 
   resources :users do
     match  'owned_events', :to => "events#owned_events"
+    match  'reserved_events', :to => "events#reserved_events"
   end
 
   get "welcome/index"
