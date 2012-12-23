@@ -32,6 +32,16 @@ Scenario:   Navigazione e Modifica
   Allora dovrei vedere "Un nome cambiato"
   E      dovrei vedere "" all'interno di "i.icon-calendar"
 
+Scenario:   Smart add http
+  Dato mi loggo con email "paolino@nomail.it" e password "12345678"
+  E    vado alla modifica gruppo di "Gruppo 1"
+  Allora dovrei vedere il titolo "Modifica gruppo"
+  E      inserisco in "group_website_url" "wwww.example.com"
+  E      inserisco in "group_image_url" "images1.informazione.it/OO2o4kTgOElXZx88CZ0u80LjbZ83C1CYkKW2cePI9Qi1udl0oESef2IoG29j0CnJ"
+  Quando premo "Invia"
+  Allora dovrei vedere un link per "http://wwww.example.com"
+  E dovrei vedere un link per "http://images1.informazione.it/OO2o4kTgOElXZx88CZ0u80LjbZ83C1CYkKW2cePI9Qi1udl0oESef2IoG29j0CnJ"
+
 Scenario: Troncamento descrizione lunga nell'elenco
   Dato mi loggo con email "paolino@nomail.it" e password "12345678"
   E    vado alla modifica gruppo di "Gruppo 1"
