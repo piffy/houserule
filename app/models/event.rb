@@ -59,6 +59,8 @@ class Event < ActiveRecord::Base
 
   def percentage
     if max_player_num == 0
+      return  [reservations.count, 6].min unless reservations.count>4
+      return  [reservations.count, 10].min unless reservations.count>8
       return  [reservations.count, 99].min
     else
       return [(100*reservations.count.to_f / max_player_num).to_i,100].min
@@ -67,16 +69,10 @@ class Event < ActiveRecord::Base
   end
 
 
-  #Checks if the event has already been reserved by user
+  #Checks if the event has already been reserved by user and if so return reservation
   def already_reserved_by(user)
-
-    r=Reservation.where("user_id = :user_id AND event_id = :event_id", { :user_id => user.id, :event_id => self.id } ).first
-
-    if (r==nil)
-      return false
-    else
-      return r
-    end
+    return self.reservations.where(:user_id => user.id).first unless  self.reservations.where(:user_id => user.id)==[]
+    return false
   end
 
   #Checks if event has begun or can't be reserved anymore [NEED REFACTORING]

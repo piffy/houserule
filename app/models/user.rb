@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :interests, dependent: :destroy
   has_many :reservations, dependent: :destroy, :through => :events
   has_many :invitations, dependent: :destroy
-  #has_many :reserved_events, :through => :reservations ,:source => :event,:dependent => :destroy
+  #has_many :reserved_events_2, :through => :reservations ,:source => :event
   #has_and_belongs_to_many :interesting_groups, :class_name => "Group", :join_table => "interests" , :association_foreign_key => "group_id"
   has_many :interesting_groups, :through => :interests, :source => :group
 
