@@ -15,4 +15,15 @@ class ApplicationController < ActionController::Base
       'localhost:3000'
     end
   end
+
+  def self.en_hostname
+    if Rails.env == 'production'
+      #'afternoon-spring-6294.herokuapp.com'
+      'en.houserule.it'
+    else
+      'en.localhost:3000'
+    end
+  end
+
+
 end
