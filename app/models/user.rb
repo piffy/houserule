@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :interests, dependent: :destroy
   has_many :reservations, dependent: :destroy, :through => :events
   has_many :invitations, dependent: :destroy
+  has_one  :reputation, dependent: :destroy
   #has_many :reserved_events, :class_name => 'Event',:through => :reservations, :source => :events
 
 
@@ -66,6 +67,13 @@ class User < ActiveRecord::Base
     #self.create_perishable_token
     #self.save
     "http://"+ApplicationController.hostname+"/password_resets/"+self.remember_token+"/edit"
+  end
+  def score
+    if reputation.nil?
+      return "N/A"
+    else
+      return reputation.score
+    end
   end
 
   private
