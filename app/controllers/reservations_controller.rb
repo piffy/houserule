@@ -3,6 +3,7 @@
 class ReservationsController < ApplicationController
   before_filter :logged_in_user
   before_filter :has_rights_to, only: [:edit, :update, :destroy]
+  include EventsHelper
 
   #Ask confirm for reservation
   def new
@@ -53,8 +54,17 @@ class ReservationsController < ApplicationController
             @invitation.accepted=true
             @invitation.save
           end
-          EventMailer.new_reservation(@reservation).deliver
-          flash[:success] = "Prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")"
+          if  @event.max_player_num >0 && @event.reservations.count >= @event.max_player_num
+            @reservation.status=2; #waiting list
+            @reservation.save
+            EventMailer.new_reservation(@reservation,nil,true).deliver
+            flash[:success] = "Prenotazione effettuata (lista d'attesa). Mail inviata all'organizzatore ("+@event.user.name+")."
+          else
+            EventMailer.new_reservation(@reservation).deliver
+            flash[:success] = "Prenotazione effettuata. Mail inviata all'organizzatore ("+@event.user.name+")."
+          end
+
+
           redirect_to event_path(@event)
         else
           flash[:error] = "problemi"
@@ -75,7 +85,7 @@ class ReservationsController < ApplicationController
     @event = @r.event
     @user = current_user
     if @event.check_time >0
-      flash[:notice] = "Impossibile modificare la prenotazione"
+      flash[:notice] = "Impossibile modificare la prenotazione."
       redirect_to event_path(@event)
     end
 
@@ -88,14 +98,28 @@ class ReservationsController < ApplicationController
     #send confirmation email
     if reservation.user == current_user
       EventMailer.delete_reservation(reservation).deliver
-      msg=" Mail inviata all'organizzatore ("+reservation.event.user.name+")"
+      msg=" Mail inviata all'organizzatore ("+reservation.event.user.name+"). "
     else
       EventMailer.delete_reservation(reservation,current_user).deliver
-      msg=" Mail inviata all'utente ("+reservation.user.name+")"
+      msg=" Mail inviata all'utente ("+reservation.user.name+"). "
     end
 
     @event = Event.find(params[:event_id])
     reservation.destroy
+
+    unless update_reservation_status(@event).nil?
+      msg = msg + " Nuovo giocatore prelevato dalla lista d'attesa."
+    end
+=begin
+    #if there is at least ONE reservation in the waiting list, "promote" it
+    reservation_to_upgrade=Reservation.find_by_event_id_and_status(@event.id,2)
+    if reservation_to_upgrade!=nil
+      msg = msg + " Nuovo giocatore prelevato dalla lista d'attesa."
+      reservation_to_upgrade.status=1
+      reservation_to_upgrade.save
+      EventMailer.upgrade_reservation(reservation_to_upgrade).deliver
+    end
+=end
     flash[:success] = "Prenotazione eliminata."+msg
     redirect_to event_path(@event)
   end

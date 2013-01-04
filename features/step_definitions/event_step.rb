@@ -1,5 +1,10 @@
 # encoding: utf-8
 
+Dato /^vado alla pagina degli eventi organizzati da "([^"]*)" con ordinamento "([^"]*)"$/ do |user_email,ordering|
+  user = User.find_by_email(user_email)
+  visit user_owned_events_path(user)+"?sort="+ordering
+end
+
 Given /^l'evento "([^"]*)" è "([^"]*)"$/ do |event_name, condition|
   event = Event.find_by_name(event_name)
   if condition=="riservato"
@@ -29,7 +34,7 @@ Given /^che esistono i seguenti eventi dell'utente "([^"]*)":$/ do |user_email, 
 
 end
 
-Dato /^(?:|che )ci sono (\d+) eventi? ?(passati|indefiniti)? di "([^"]*)"$/ do |n, past, user_email|
+Dato /^(?:|che )ci sono (\d+) eventi? ?(passati|indefiniti|archiviati)? di "([^"]*)"$/ do |n, past, user_email|
   user = User.find_by_email(user_email)
   #FactoryGirl.reload
   if past.blank?
@@ -42,6 +47,9 @@ Dato /^(?:|che )ci sono (\d+) eventi? ?(passati|indefiniti)? di "([^"]*)"$/ do |
     n.to_i.times {u=FactoryGirl.create(:event, :user => user);
                   u.name="Indefinite "+u.name; u.begins_at=nil;u.status=0;
                   u.deadline=nil; u.save}
+  elsif past=='archiviati'
+    n.to_i.times {u=FactoryGirl.create(:archived_event, :user => user);
+    u.begins_at=nil; u.deadline=nil; u.save}
   end
 
 end
@@ -55,6 +63,11 @@ Then /^dovrei vedere "([^"]*)" prima di  "([^"]*)"$/ do |arg1, arg2|
   x.should == true
 end
 
+Quando /^vado alla modifica di un evento archiviato$/ do
+  @event = ArchivedEvent.first
+  visit edit_archived_event_path(@event)
+end
+
 Quando /^vado alla modifica di un evento$/ do
   @event = Event.first
   visit edit_event_path(@event)
@@ -63,6 +76,11 @@ end
 Quando /^vado ai dettagli di un evento$/ do
   @event = Event.first
   visit event_path(@event)
+end
+
+Quando /^archivio un evento$/ do
+  @event = Event.first
+  visit event_archive_path(@event)
 end
 
 E /^vado alla (\w+) evento di "([^"]*)"$/ do |action,name|
@@ -74,6 +92,8 @@ E /^vado alla (\w+) evento di "([^"]*)"$/ do |action,name|
       visit event_path(@event)
     when "prenotazione"
       visit new_event_reservation_path(@event)
+    when "archiviazione"
+      visit event_archive_path(@event)
     else
       raise "Non posso mappare \"#{action}\" a un percorso relativo ad un evento!\n"
   end

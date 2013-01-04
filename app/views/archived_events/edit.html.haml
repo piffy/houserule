@@ -1,0 +1,10 @@
+=provide(:title, 'Modifica evento archiviato')
+
+%h1{:style => "margin-bottom:0px;"}
+  = 'Modifica di "'+@archived_event.name+'"'
+
+= render 'form', :action => "edit"
+
+= link_to 'Dettagli', @archived_event
+\|
+= link_to 'Elenco eventi archiviati', archived_events_path

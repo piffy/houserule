@@ -15,7 +15,7 @@ Funzionalità: Usare i link dell'elenco eventi
 
     E che esistono i seguenti eventi dell'utente "paolino@nomail.it":
       | name                  | system     | begins_at  |
-      | Campionato            | Risiko     | 10-5-2013  |
+      | Campionato            | Risiko     | 10-5-2014  |
 
     Dato ci sono 3 eventi di "paolino@nomail.it"
 
@@ -43,7 +43,7 @@ Funzionalità: Usare i link dell'elenco eventi
       | name                  | system     | begins_at  |
       | Last event            | Strange     | 9-5-2013  |
     E mi trovo nella homepage
-    Allora dovrei non vedere "Event 15"
+    Allora dovrei non vedere "Event 14"
     E dovrei non vedere "Campionato"
     E dovrei vedere "Last event" all'interno di "a"
     E dovrei vedere "6 eventi presenti"

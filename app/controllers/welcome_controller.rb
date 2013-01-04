@@ -11,6 +11,7 @@ class WelcomeController < ApplicationController
     @not_yet_started_event_count = Event.not_begun.all.count
     @undefined_events=Event.no_date.all(:limit=>5)
     @undefined_event_count=Event.no_date.all.count
+    @archived_event_count = ArchivedEvent.count
 
 
 

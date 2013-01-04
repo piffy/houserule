@@ -10,6 +10,10 @@ class EventsController < ApplicationController
     @selection =  params[:selection] || session[:selection] || :not_begun
     sort = params[:sort] || session[:sort]
 
+    if @selection=='archived'
+      redirect_to archived_events_path and return
+    end
+
     #Handle sorting
     case sort
       when 'name'
@@ -43,6 +47,54 @@ class EventsController < ApplicationController
 
       @events = Event.unscoped.send(@selection).page(params[:page]).order(ordering)
 
+    end
+
+  end
+
+  def reserved_events
+    @reserved=true
+    @user = User.find(params[:user_id])
+    @events = @user.reserved_events
+    @current_user=current_user
+  end
+
+  # GET /owned_events/
+  def owned_events
+    sort = params[:sort] || session[:sort]
+    #Handle sorting
+    case sort
+      when 'name'
+        ordering,@name_header = 'name', 'hilite'
+      when 'begins_at'
+        @begins_at_header = 'hilite'
+      when 'system'
+        ordering,@system_header = 'system', 'hilite'
+    end
+
+    #Preserve sorting selection in session
+    if params[:sort] != session[:sort]
+      session[:sort] = sort
+      redirect_to :sort => sort and return
+    end
+
+
+    @user = User.find(params[:user_id])
+    @current_user=current_user
+
+    #Handle Pagination
+    if ordering.nil?
+      @events = Event.where("user_id="+@user.id.to_s).paginate(page: params[:page])
+    else
+
+      @events = Event.where("user_id="+@user.id.to_s).unscoped.page(params[:page]).order(ordering)
+
+    end
+
+    #@events = Event.where("user_id="+@user.id.to_s).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html # show.html.haml
+      format.json { render json: @events }
     end
 
   end

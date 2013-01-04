@@ -1,0 +1,78 @@
+=provide(:title, 'Dettagli evento (archiviato)')
+
+-unless @event.descr_short.blank?
+  %h1{:style => "margin-bottom:0px;"}
+    = '"'+@event.name+'"'
+  %p{:class =>"center"}
+    = "("+@event.descr_short+")"
+-else
+  %h1
+    = '"'+@event.name+'"'
+
+%div{class:"row"}
+  %aside{class:"span4"}
+    %section
+      %h2
+
+      %p
+        %span{:class=>"label label-info span2"}
+          Archiviato
+
+
+
+  %div{:class =>"span4"}
+    -unless @event.system.blank?
+      %p
+        %b Sistema di gioco:
+        = @event.system
+    %p
+      %b Data e ora:
+      - if @event.begins_at.nil?
+        Non stabilita
+      -else
+        = l(@event.begins_at, :format => :long)
+        = "("+@event.duration+")" unless @event.duration.blank?
+    %p
+      %b Archiviato il:
+      = l(@event.created_at, :format => :long)
+
+    -unless @event.location.blank?
+      %p
+        %b Luogo:
+        = @event.location
+  %div{:class =>"span4"}
+    %h3
+      %b
+        Organizzato da:
+    %ul{class:"users"}
+      %li{class:"no-bullet"}
+        %span
+          = gravatar_for @event.user, 32
+          = link_to @event.user.first_name_or_nick, user_path(@event.user), id:"group_owner"
+    %br
+    %h3
+      %b<
+        Partecipanti
+        -unless (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
+          %span{:class=>"reservations", :title=>"Partecipanti"}
+            ="(min: "+ @event.min_player_num.to_s+", max: "+@event.max_player_num.to_s+"):"
+    = simple_format(@event.subscriber_list)
+
+
+%div{:class =>"row"}
+  %div{:class =>"span12"}
+    %p
+      = simple_format("<b>Descrizione: </b>"+@event.description, :id => "description") unless @event.description.blank?
+  %div{:class =>"span12"}
+    %p
+      = simple_format("<b>Commento post partita: </b>"+@event.aftermath, :id => "description")
+
+
+%hr
+%div{:class =>"row"}
+  %div{:class =>"span12"}
+    = link_to 'Clona', new_event_path(@event) , :class=>"btn", :disabled => true  unless current_user.nil?
+    -if !current_user.nil? && (current_user.admin? )
+      = link_to 'Modifica', edit_archived_event_path(@event) , :class=>"btn"
+
+    = link_to 'Elenco eventi', archived_events_path, :class=>"btn"

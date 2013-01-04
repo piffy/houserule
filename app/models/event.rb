@@ -4,7 +4,7 @@
 class Event < ActiveRecord::Base
   attr_accessible :begins_at, :deadline, :descr_short, :description, :duration,
                   :location, :max_player_num, :min_player_num, :name, :status, :system,
-                  :invite_only, :reservation_locked
+                  :invite_only, :reservation_locked, :waiting_list
   belongs_to :user
   has_many :reservations, dependent: :destroy
   has_many :invitations, dependent: :destroy
@@ -16,22 +16,28 @@ class Event < ActiveRecord::Base
   validates :max_player_num, :numericality => { :greater_than_or_equal_to => :min_player_num }
   validates :min_player_num, :numericality => { :greater_than_or_equal_to => 0 }
   validates :status, :numericality => true
+  validates :waiting_list, :numericality => { :greater_than_or_equal_to => 0 }
 
   validates_date_of :begins_at, :allow_nil => true
   validates_date_of :deadline, :allow_nil => true
   validates :deadline, :date => {:before_or_equal_to => :begins_at }, :allow_nil => true
-
+  before_save :zap_waiting_list
 
 
   default_scope order: 'events.begins_at ASC'
   scope :all_events
   scope :not_begun, lambda { {:conditions => ["begins_at > ?", Date.today ]} }
   scope :no_date, :conditions => { :status => 0 }
+  scope :events_for_user_id, lambda { |user_id| {:conditions => ["user_id = ?", user_id ]} }
   #named_scope :cheap, :conditions => { :price => 0..5 }
   #named_scope :recent, lambda { |*args| {:conditions => ["released_at > ?", (args.first || 2.weeks.ago)]} }
   #named_scope :visible, :include => :category, :conditions => { 'categories.hidden' => false }
 
   #Lists of all possible states (in Italian - unused in 0.1)
+  def zap_waiting_list
+    self.waiting_list=0 unless self.max_player_num>0
+  end
+
   def self.status_string
     %w(Indefinito Proposto Confermato Sospeso)
   end
@@ -43,7 +49,7 @@ class Event < ActiveRecord::Base
 
   #Checks if the event has already begun
   def begun?
-    begins_at > Time.now
+    begins_at > Time.now  unless begins_at.nil?
   end
 
   #Checks if the event has still free places
@@ -96,7 +102,7 @@ class Event < ActiveRecord::Base
       return 3
     end
 
-    if self.max_player_num >0 && self.reservations.count >= self.max_player_num
+    if self.max_player_num >0 && self.reservations.count >= self.max_player_num + self.waiting_list
       return 4
     end
 

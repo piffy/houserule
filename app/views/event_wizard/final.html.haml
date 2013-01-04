@@ -23,6 +23,11 @@
       oppure
       = link_to "gestire gli inviti", event_invitations_path(@event)
       già presenti?
+    %li
+      Se l'evento non ti serve più,  forse vuoi
+      = link_to "archiviarlo", event_archive_path(@event)
+      ? Se vuoi eliminarlo definitivamente, il pulsante è
+      = link_to "qui",edit_event_path(@event)
 
   .actions
     = f.submit(:class=>"btn btn-primary", :value => 'Termina')

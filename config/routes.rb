@@ -1,6 +1,8 @@
 Houserule::Application.routes.draw do
 
 
+  resources :archived_events, except: [:new, :create]
+
   resources :groups do
     resources :interests
     match  'linked_events/:event_id/confirm', :to => "linked_events#confirm"
@@ -14,6 +16,7 @@ Houserule::Application.routes.draw do
   get "info/license"
   get "info/feedback"
   get "info/help"
+  get "info/faq"
 
 
   #match  'announcements/compose', :to => "announcements#compose", :as => "compose", :path_prefix => "/event/:event_id"
@@ -23,6 +26,8 @@ Houserule::Application.routes.draw do
     resources :announcements, only: [:new, :create]
     resources :invitations
     resources :event_wizard
+    match  'archived_events/new', :to => "archived_events#new", :as => "archive"
+    match  'archived_events', :to => "archived_events#create", :via => :post
     match  'announcements/compose', :to => "announcements#compose", :as => "compose"
     match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
   end
@@ -31,7 +36,10 @@ Houserule::Application.routes.draw do
 
   get "users/show"
 
-  resources :users#  , :collection =>{ :deactivate => :get }
+  resources :users do
+    match  'owned_events', :to => "events#owned_events"
+    match  'reserved_events', :to => "events#reserved_events"
+  end
 
   get "welcome/index"
   get "welcome/administration", :as => "administration"

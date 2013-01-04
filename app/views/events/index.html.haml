@@ -18,64 +18,14 @@
     %span{:class =>"label label-info" }
     = radio_button_tag 'selection', 'no_date', @selection=='no_date'
     Senza data
+    = radio_button_tag 'selection', 'archived', @selection=='archived'
+    Archiviati
   %br
   = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
 
 =will_paginate
 
-%table{:class => "table table-striped"}
-  %tr
-    %th{:class => @name_header}= link_to 'Nome evento', events_path(:sort => 'name'), :id => 'name_header'
-    %th{:class => @system_header}= link_to 'Sistema', events_path(:sort => 'system'), :id => 'system_header'
-    %th{:class => @begins_at_header}= link_to 'Data e ora', events_path(:sort => 'begins_at'), :id => 'begins_at_header'
-    %th Durata
-    %th Conferma?
-    %th Luogo
-    %th Prenotati
-    %th
-    %th
-    %th
-
-  - @events.each do |event|
-    %tr
-      %td= link_to event.name, event, :title => event.descr_short
-      %td= event.system
-      %td= l(event.begins_at, :format => :medium) unless event.begins_at.nil?
-      %td= event.duration
-      %td
-        -if event.begins_at==event.deadline ||  event.deadline.nil?
-          ="-" unless event.deadline.nil?
-        -else
-          =l(event.deadline, :format => :short)
-      %td= event.location
-      %td
-        = event.reservations.count
-        - unless event.max_player_num ==0
-          = " / "  + event.max_player_num.to_s
-        -if event.invite_only?
-          %i{:class=>"icon-exclamation-sign", :title=>"Solo a inviti"}
-
-        - bar_color = "bar-success"
-        -if   event.percentage >75
-          - bar_color="bar-warning"
-        - if  event.percentage == 100 || event.min_player_num>event.reservations.count
-          - bar_color="bar-danger"
-        %div{:class=>"progress", :style=>"width: 50px; height:5px"}
-          %div{:class=>"bar #{bar_color}" , :style=>"width: #{event.percentage}% "}
-
-      %td
-        -unless event.invite_only? ||  event.reservation_locked?
-          -if !@current_user.nil? && event.already_reserved_by(@current_user)
-            = link_to 'Sprenota', event_reservation_path(event, event.already_reserved_by(@current_user)), :class =>"btn btn-danger"
-          -elsif event.max_player_num<=event.reservations.count && event.max_player_num>0
-            %span{:class =>"label label-important" }
-              Completo
-          -else
-            =link_to 'Prenota', new_event_reservation_path(event), :class =>"btn btn-primary"
-
-        -if !@current_user.nil? && (@current_user==event.user || @current_user.admin)
-          %td= link_to 'Modifica', edit_event_path(event), :class =>"btn"
-
+=render "index_listing" , :path => "events"
 
 = will_paginate
 %br

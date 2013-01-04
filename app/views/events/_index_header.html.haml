@@ -1,0 +1,11 @@
+%tr
+  %th{:class => @name_header}= link_to 'Nome evento', events_path(:sort => 'name'), :id => 'name_header'
+  %th{:class => @system_header}= link_to 'Sistema', events_path(:sort => 'system'), :id => 'system_header'
+  %th{:class => @begins_at_header}= link_to 'Data e ora', events_path(:sort => 'begins_at'), :id => 'begins_at_header'
+  %th Durata
+  %th Conferma?
+  %th Luogo
+  %th Prenotati
+  %th
+  %th
+  %th

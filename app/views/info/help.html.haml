@@ -83,20 +83,25 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
     2: Gioco
   %dd
     Qui potete inserire dati sul sistema di gioco da utilizzare, nonché il numero minimo e massimo di giocatori previsti.
-    Il numero massimo stabilisce anche il massimo numero di inviti e prenotazioni.
+    Il numero massimo stabilisce anche il massimo numero di inviti e prenotazioni. E' possibile anche indicare le dimensioni
+    della lista d'attesa. In caso di rinunce, si preleverà un giocatore dalla lista d'attesa.
     %br
-    È possibile anche attivare alcune speciali proprietà:
-    %dl{class:"dl-horizontal"}
-      %dt
-        = check_box_tag :invite_only
-        Evento a soli inviti
-      %dd
-        Permette le iscrizioni solo a persone invitate (v. oltre)
-      %dt
-        = check_box_tag :invite_only
-        Prenotazioni bloccate
-      %dd
-        Blocca del tutto le prenotazioni (anche quelle su invito)
+    %b Importante:
+    Se si modificano i valori di lista d'attesa o numero massimo di giocatori, le prenotazioni saranno modificate automaticamente
+
+    %br
+      È possibile anche attivare alcune speciali proprietà:
+      %dl{class:"dl-horizontal"}
+        %dt
+          = check_box_tag :invite_only
+          Evento a soli inviti
+        %dd
+          Permette le iscrizioni solo a persone invitate (v. oltre)
+        %dt
+          = check_box_tag :invite_only
+          Prenotazioni bloccate
+        %dd
+          Blocca del tutto le prenotazioni (anche quelle su invito)
   %dt
     3: Dove e quando
   %dd
@@ -113,14 +118,36 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   %dt
     4: Final
   %dd
-    Si propongono alcune azioni possibili per la pubblicizzazione e la gestione dell'evento (vedi "comunicazioni" e "inviti")
+    Si propongono alcune azioni possibili per la pubblicizzazione e la gestione dell'evento, nonché la sua archiviazione
 
 %h3
-  Modificare e cancellazione
+  Modificare ed eliminare
 %p
   Solo l'organizzatore dell'evento può modificare l'evento stesso e, in paritcolare, cancellarlo.
   Quest'ultima operazione è particolarmente drastica perché elimina completamente l'evento, e tutto quanto
   ad esso collegato.
+%h3
+  Archiviare un evento
+%p
+  Quando l'evento è terminato, l'organizzatore può decidere di eliminare l'evento o archiviarlo. Eliminando l'evento
+  scompare ogni traccia della sua esistenza, incluso chi vi ha partecipato e - in futuro - i commenti.
+  Se invece si desidera archiviare l'evento, questo potrà essere cercato e visualizzato e utilizzato come base per
+  creare eventi simili. Alcune note
+  %ul
+    %li
+      L'operazione cancella in modo
+      %b
+        irreversibile
+      inviti e prenotazioni; non sarà più possibile inviare annunci.
+  %ul
+    %li
+      Solo l'amministratore può cancellare o modificare un evento archiviato.
+%p
+  Si può archiviare un evento tramite l'ultima schermata della modifica eventi, oppure tramite pulsante che appare in calce alla visualizzazione dei propri eventi
+%p
+  E' possibile inserire un commento postpartita.
+
+
 %h2
   Comunicazioni
 %p

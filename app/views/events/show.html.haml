@@ -73,12 +73,25 @@
           = link_to @event.user.first_name_or_nick, user_path(@event.user), id:"group_owner"
     %br
     %h3
-      %b
+      %b<
+        Prenotati (
         -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
-          = "Prenotati ("+@event.reservations.count.to_s+"):"
+          - show_limit=nil
+          %span{:class=>"reservations", :title=>"Prenotazioni"}
+            = @event.reservations.count.to_s
         -else
-          = "Prenotati ("+  @event.reservations.count.to_s+"/"+@event.max_player_num.to_s+"):"
-    = render 'reservations/list_users', :reservations => @event.reservations
+          -show_limit = @event.max_player_num
+          %span{:class=>"reservations", :title=>"Prenotazioni"}
+            =[@event.reservations.count,@event.max_player_num].min.to_s+"/"+@event.max_player_num.to_s
+          - if @event.waiting_list>0
+
+            %span{:class=>"waiting_list_count", :title=>"Lista d'attesa"}
+              = "+ "+[@event.reservations.count-@event.waiting_list,0].max.to_s+"/"+@event.waiting_list.to_s
+        ):
+
+
+    = render 'reservations/list_users', :reservations => @event.reservations , :show_limit=>show_limit
+
     %br
     %h3
       %b
@@ -101,7 +114,7 @@
         = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"   unless @event.check_time>0
     -if !current_user.nil? && (current_user==@event.user || current_user.admin? )
       = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
-      = link_to 'Cambia stato', "#", :class=>"btn", :disabled => true
+      = link_to 'Archivia', event_archive_path(@event) , :class=>"btn"  unless @event.begun?
 
     = link_to 'Elenco eventi', events_path, :class=>"btn"
     -if !@user.nil?

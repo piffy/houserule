@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928094120) do
+ActiveRecord::Schema.define(:version => 20121214080500) do
+
+  create_table "archived_events", :force => true do |t|
+    t.string   "name"
+    t.string   "system"
+    t.datetime "begins_at"
+    t.string   "duration"
+    t.text     "description",     :limit => 4000
+    t.text     "aftermath"
+    t.text     "subscriber_list", :limit => 4000
+    t.string   "descr_short"
+    t.datetime "deadline"
+    t.string   "location"
+    t.integer  "max_player_num",                  :default => 0
+    t.integer  "min_player_num",                  :default => 0
+    t.integer  "user_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -30,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120928094120) do
     t.datetime "updated_at",                                           :null => false
     t.boolean  "invite_only",                       :default => false
     t.boolean  "reservation_locked",                :default => false
+    t.integer  "waiting_list",                      :default => 0
   end
 
   add_index "events", ["begins_at"], :name => "index_events_on_begins_at"

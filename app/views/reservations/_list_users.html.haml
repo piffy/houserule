@@ -5,6 +5,10 @@
         = gravatar_for reservation.user, 24
         = link_to reservation.user.first_name_or_nick, edit_user_path(reservation.user)
         = l(reservation.created_at, :format => :short)
+        - if reservation.status==1
+          %i{:class => "icon-ok-sign", :title=>"Confermato"}
+        -else
+          %i{:class => "icon-question-sign", :title=>"Lista d'attesa"}
       -# Admin section
       %span
         -if true
