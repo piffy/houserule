@@ -49,7 +49,7 @@ class InvitationsController < ApplicationController
       user = User.find_by_email(email)
       invitation = Invitation.new(:user_id=> user.id,
                                   :pending => true,
-                                  :valid_until=>@event.deadline)
+                                  :valid_until=>@event.deadline || @event.begins_at)
       invitation.event=@event
       if invitation.save!
         InvitationMailer.new_invitation(invitation).deliver
