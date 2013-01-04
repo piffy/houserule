@@ -1,0 +1,33 @@
+= form_for @reputation, :html => {:class => "form-horizontal well"} do |f|
+  -if @reputation.errors.any?
+    #error_explanation
+      %h2
+        = @reputation.errors.count == 1 ? "Un errore non ha" : "#{@reputation.errors.count} errori non hanno"
+        reso possibile il salvataggio
+      %ul
+        - @reputation.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      .field
+        = f.label "Partecipazioni"
+        = f.number_field :participations
+      .field
+        = f.label "Feedback positivi"
+        = f.number_field :positive_fb
+      .field
+        = f.label "Feedback negativi"
+        = f.number_field :negative_fb
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      .field
+        = f.label "Eventi organizzati"
+        = f.number_field :organized
+      .field
+        = f.label "Eventi archiviati"
+        = f.number_field :archived
+
+
+  .actions
+    = f.submit 'Modifica'

@@ -11,24 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121214080500) do
+ActiveRecord::Schema.define(:version => 20121228214716) do
 
   create_table "archived_events", :force => true do |t|
     t.string   "name"
     t.string   "system"
     t.datetime "begins_at"
     t.string   "duration"
-    t.text     "description",     :limit => 4000
+    t.text     "description"
     t.text     "aftermath"
-    t.text     "subscriber_list", :limit => 4000
+    t.text     "subscriber_list"
     t.string   "descr_short"
     t.datetime "deadline"
     t.string   "location"
-    t.integer  "max_player_num",                  :default => 0
-    t.integer  "min_player_num",                  :default => 0
+    t.integer  "max_player_num",  :default => 0
+    t.integer  "min_player_num",  :default => 0
     t.integer  "user_id"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "events", :force => true do |t|
@@ -100,6 +100,17 @@ ActiveRecord::Schema.define(:version => 20121214080500) do
   add_index "invitations", ["event_id"], :name => "index_invitations_on_event_id"
   add_index "invitations", ["user_id", "event_id"], :name => "index_invitations_on_user_id_and_event_id", :unique => true
   add_index "invitations", ["user_id"], :name => "index_invitations_on_user_id"
+
+  create_table "reputations", :force => true do |t|
+    t.integer "user_id"
+    t.integer "participations", :default => 0
+    t.integer "positive_fb",    :default => 0
+    t.integer "negative_fb",    :default => 0
+    t.integer "organized",      :default => 0
+    t.integer "archived",       :default => 0
+  end
+
+  add_index "reputations", ["user_id"], :name => "index_reputations_on_user_id", :unique => true
 
   create_table "reservations", :force => true do |t|
     t.integer  "user_id"

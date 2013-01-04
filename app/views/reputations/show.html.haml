@@ -1,0 +1,49 @@
+=provide(:title, 'Reputazione di '+@reputation.user.first_name_or_nick)
+%h1
+  Reputazione di
+  = @reputation.user.first_name_or_nick
+  \:
+  %b{:id => :reputation_score}
+    = @reputation.score
+%h2
+  %b Classe:
+  = @reputation.score_to_s
+
+%table{class: "table table-striped", style: "width: 80%"}
+  %caption Distinta del punteggio
+  %tr
+    %th Caso
+    %th Valore
+    %th Incremento
+  %tr
+    %td Partecipazioni a eventi
+    %td= @reputation.participations
+    %td=Math.log(@reputation.participations+1,2).to_i
+  %tr
+    %td Organizzazione di eventi
+    %td= @reputation.organized
+    %td=Math.log(@reputation.organized+1,2).to_i
+  %tr
+    %td Archiviazione eventi
+    %td= @reputation.archived
+    %td=Math.log(@reputation.archived+1,2).to_i
+  %tr
+    %td Feedback positivi ricevuti
+    %td= @reputation.positive_fb
+    %td= @reputation.positive_fb
+  %tr
+    %td Feedback negativi ricevuti
+    %td= @reputation.negative_fb
+    %td= "-"+@reputation.positive_fb.to_s
+  %tr
+    %td Membro di gruppi
+    %td= @reputation.user.interests.count
+    %td= @reputation.user.interests.count
+  %tr
+    %td Organizzatore di gruppi
+    %td= @reputation.user.groups.count
+    %td= @reputation.user.groups.count
+
+
+= link_to 'Dettaglio utente', user_path(@reputation.user), :class => "btn"
+= link_to 'Elenco reputazioni', reputations_path, :class => "btn"

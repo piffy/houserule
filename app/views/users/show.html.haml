@@ -23,6 +23,26 @@
       %b
         Luogo:
       = @user.location
+
+    -if @user.reputation.nil?
+      %p
+        %b
+          Reputazione:
+        %span{:id => "reputation_score"}
+          =@user.score
+      -if !current_user.nil? && (current_user==@user || current_user.admin?)
+        = form_for @reputation do |f|
+          =hidden_field_tag 'id', @user.id
+          .actions
+            = f.submit 'Attiva' , :class => "btn btn-tiny"
+
+    -else
+      %p
+        %b
+          = link_to "Reputazione:", reputation_path(@user.reputation)
+        %span{:id => "reputation_score"}
+          = @user.score
+
   %div{:class =>"span4"}
     %h3
       %b
