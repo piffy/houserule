@@ -12,8 +12,7 @@ When I follow "English"
 Then I should see an english page
 When I follow "Italiano"
 Then I should see an italian page
-And  I should see the image "en.png"
+And  I should see the image "it.png"
 
-Scenario:   English homepage
-Given I am on the english homepage
+
 

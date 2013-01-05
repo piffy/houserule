@@ -6,6 +6,9 @@
 # - Davide Guerri (d.guerri@caspur.it)
 
 it:
+  per: "per"
+  proposto_da: "proposto da"
+
   number:
     format:
       delimiter: ","

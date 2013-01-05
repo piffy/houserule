@@ -4,12 +4,19 @@ class WelcomeController < ApplicationController
   before_filter :set_locale
 
   def set_locale
-    I18n.locale = extract_locale_from_subdomain || I18n.default_locale
+    extracted_locale = params[:locale] ||
+        extract_locale_from_subdomain ||
+        extract_locale_from_accept_language_header
+
+    I18n.locale = (I18n::available_locales.include? extracted_locale.to_sym) ? extracted_locale : I18n.default_locale
+  end
+
+  def extract_locale_from_accept_language_header
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 
   def extract_locale_from_subdomain
-    @parsed_locale = request.subdomains.first
-    I18n.available_locales.include?(parsed_locale.to_sym) ? @parsed_locale : nil unless @parsed_locale.nil?
+    request.host.split('.').first
   end
 
   def index

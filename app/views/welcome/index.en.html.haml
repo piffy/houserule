@@ -1,0 +1,76 @@
+=provide(:title, "Home")
+
+%div
+  %p{:class=>"center"}
+    =link_to image_tag("santa_sleigh_w_reindeer_logo.png", alt: "House Rule christmas logo", id: "large logo")
+
+%div
+  %p
+    %em  The perfect website to organize your simulation, roleplaying or whatever type of games. With your friends, at your gaming club, online. Wherever you like. Whenever you like.
+  -unless signed_in?
+    =link_to "Login", login_path, :class =>"btn btn-primary"
+    or
+    =link_to "Register", new_user_path, :class =>"btn btn-primary"
+
+%div{:class =>"row"}
+  %div{:class =>"span8"}
+    -if @events.any?
+      %h2
+        =link_to "Starting Events", events_path+"?selection=not_begun"
+      = render "shared/list_event", :events => @events , :show_organizer => true
+      %p
+        ="...and "+(@not_yet_started_event_count-5).to_s+ "more!" unless @not_yet_started_event_count<=5
+
+  %div{:class =>"span4"}
+    %h2
+      =link_to "Unscheduled Events", events_path+"?selection=no_date"
+    = render "shared/list_event", :events => @undefined_events , :show_organizer => true
+    %p
+      ="...and "+(@undefined_event_count-5).to_s+ "more!" unless @undefined_event_count<=5
+
+
+%hr
+
+%div{:class =>"row"}
+  %div{:class =>"span8"}
+    %h2
+      News
+      %span{class: "label"}
+        ALPHA
+        =ApplicationController.version
+    %p
+      The website is still in the development phase. We kindly ask you to try it out,
+      and flag errors via this
+      = link_to "email.", "mailto:piffy@treemme.org"
+    %p
+      and possibly send us this
+      =link_to "feedback form", info_feedback_path
+      (italian only at the moment, but hey, Google Translator works wonders).
+      Let us know what's good,what's bad, and - most of all, what you'd like in future releases (won't take more that 5 mins)
+
+      %br
+      More info on the
+      =link_to "project info page", info_about_path
+
+  %div{:class =>"span4"}
+    %h2 Status
+    %p
+      %i{:class=>"icon-user", :title=>"Utenti"}
+      = @user_count
+      = link_to "registered users", users_path
+      organizzati in
+      = @group_count
+      = link_to "groups", groups_path
+      %br
+      %i{:class=>"icon-calendar", :title=>"Events"}
+      =@event_count
+      = link_to "events", events_path
+      present,
+      =@not_yet_started_event_count
+      of which not yet begun
+      %br
+      %i{:class=>"icon-calendar", :title=>"Archived Events"}
+      =@archived_event_count
+      = link_to "Archived Events", archived_events_path
+
+

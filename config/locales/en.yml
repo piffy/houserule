@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+  per: "For"
+  proposto_da: "proposed by"
+
+  time:
+    formats:
+      formatted: "on %b %d %y at %H:%M"
+

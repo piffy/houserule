@@ -1,6 +1,6 @@
 Given /^I am on the (italian|english)? homepage$/ do |locale|
   if locale=="english"
-    visit "en."+root_path
+    visit root_path.gsub(/(http:\/\/)(en|it|www)(.+)/, '\1en\3')
   end
   visit root_path
 end

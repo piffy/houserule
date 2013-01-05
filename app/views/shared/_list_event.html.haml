@@ -5,13 +5,14 @@
         %a{:href => event_path(event)}
           =event.name
       %span{:class => "system"}
-        = "per '" + event.system+"'"  unless event.system.blank?
+        = t(:per)+" '" + event.system+"'"  unless event.system.blank?
       -unless event.begins_at.nil?
         %span{:class => "timestamp"}
           = l(event.begins_at, :format => :formatted )
       -if show_organizer
         %span{:class => "user"}
-          \- proposto da
+          \-
+          =t :proposto_da
           =  link_to event.user.first_name_or_nick,event.user
       -if defined?(group) && current_user
         -if defined?(add_link) && add_link==true

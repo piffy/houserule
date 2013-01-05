@@ -11,47 +11,47 @@
               Info <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Il progetto", info_about_path  %></li>
-              <li><%= link_to "Contribuire", info_contact_path  %></li>
-              <li><%= link_to "Licenza", info_license_path %></li>
+              <li><%= link_to "Projecto", info_about_path  %></li>
+              <li><%= link_to "Contribute", info_contact_path  %></li>
+              <li><%= link_to "License", info_license_path %></li>
               <li><%= link_to "Feedback", info_feedback_path %></li>
-              <li><%= link_to "Guida", info_help_path %></li>
+              <li><%= link_to "Manual", info_help_path %></li>
             </ul>
 
 
 
           <li id="fat2-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Eventi <b class="caret"></b>
+              Events <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Elenco", events_path  %></li>
-              <li><%= link_to "Organizza evento", new_event_path %></li>
-              <li><%= link_to "Archivio", archived_events_path  %></li>
+              <li><%= link_to "Index", events_path  %></li>
+              <li><%= link_to "Organize Event", new_event_path %></li>
+              <li><%= link_to "Archived", archived_events_path  %></li>
             </ul>
             <% if signed_in?  %>
             <li id="fat2-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Utenti <b class="caret"></b>
+                Users <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Elenco", users_path  %></li>
-                <li><%= link_to "Gruppi", groups_path %></li>
+                <li><%= link_to "Index", users_path  %></li>
+                <li><%= link_to "Groups", groups_path %></li>
               </ul>
 
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Account
                   <% if @current_user.admin? %>
-                    <span class="badge badge-important" title="Amministratore">*</span>
+                    <span class="badge badge-important" title="Amministrator">*</span>
                   <% end %>
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to "Profilo di "+ current_user.name, user_path(@current_user) %></li>
-                  <li><%= link_to "Preferenze", edit_user_path(@current_user) %></li>
+                  <li><%= link_to  current_user.name, user_path(@current_user)+ " Profile" %></li>
+                  <li><%= link_to "Preferences", edit_user_path(@current_user) %></li>
                   <% if @current_user.admin? %>
-                      <li><%= link_to "Amministrazione", administration_path %></li>
+                      <li><%= link_to "Administrtion", administration_path %></li>
                   <% end %>
                   <li class="divider"></li>
                   <li>
@@ -65,16 +65,15 @@
 
 
         <% else %>
-              <li><%= link_to "Gruppi", groups_path %></li>
+              <li><%= link_to "Groups", groups_path %></li>
               <li><%= link_to "Login", login_path %></li>
           <% end %>
           <li id="fat5-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= image_tag("it.png") %>
+              <%= image_tag("en.png") %>
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-
               <li><%= link_to("Italiano", request.original_url.gsub(/(http:\/\/)(en|it|www)(.+)/, '\1www\3')) %>
               <li><%= link_to("English", request.original_url.gsub(/(http:\/\/)(en|it|www)(.+)/, '\1en\3')) %>
             </ul>
