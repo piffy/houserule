@@ -66,7 +66,7 @@ When /^seleziono la data "[^"](\d?\d)-(\d?\d)-(\d{4})" in "([^"]*)"$/ do  |day,m
 end
 
 
-When /^inserisco in "(\w+)" "([^"]*)"$/ do |name,value|
+When /^(?:I |io )?(?:inserisco|insert) in "(\w+)" "([^"]*)"$/ do |name,value|
   fill_in name , :with =>value
 end
 

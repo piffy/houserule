@@ -1,6 +1,8 @@
 # encoding: utf-8
 #Contrller class for User object
 class UsersController < ApplicationController
+  include ApplicationHelper
+  before_filter :set_locale
   before_filter :logged_in_user, only: [:index, :edit, :update]
   before_filter :correct_user,   only: [:edit, :update, :destroy]
 
@@ -85,9 +87,12 @@ class UsersController < ApplicationController
     if @user.save
       begin
       UserMailer.welcome_email(@user).deliver
-      flash[:success] = "Utente #{@user.name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login"
+
+      flash[:success] = t 'greet_new_user_mail', :name => @user.name
+         #"Utente #{@user.name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login"
       rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-        flash[:notice] = "Utente #{@user.name} creato. Ora puoi fare il login. Problemi nell'invio mail di conferma"
+        flash[:notice] = t 'greet_new_user_no_mail', :name => @user.name
+        #"Utente #{@user.name} creato. Ora puoi fare il login. Problemi nell'invio mail di conferma"
       end
       redirect_to "/"
     else

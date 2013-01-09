@@ -1,23 +1,10 @@
 #This class handles the home page
 class WelcomeController < ApplicationController
+  include ApplicationHelper
   before_filter :admin_only,   except: [:index]
   before_filter :set_locale
 
-  def set_locale
-    extracted_locale = params[:locale] ||
-        extract_locale_from_subdomain ||
-        extract_locale_from_accept_language_header
 
-    I18n.locale = (I18n::available_locales.include? extracted_locale.to_sym) ? extracted_locale : I18n.default_locale
-  end
-
-  def extract_locale_from_accept_language_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-  end
-
-  def extract_locale_from_subdomain
-    request.host.split('.').first
-  end
 
   def index
     @user_count=User.count

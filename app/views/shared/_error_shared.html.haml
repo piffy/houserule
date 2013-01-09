@@ -1,7 +1,6 @@
 -if @user.errors.any?
   %div{:id => "error_explanation", :class=>"alert alert-error"}
-    = @user.errors.count == 1 ? "Un errore non ha" : "#{@user.errors.count} errori non hanno"
-    reso possibile il salvataggio
+    =t('misc.errors', :count => @user.errors.count)
     %ul
     - @user.errors.full_messages.each do |msg|
       %li

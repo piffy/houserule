@@ -1,0 +1,22 @@
+=provide(:title, 'Register')
+%h1 Register a new user
+
+= render 'shared/error_shared', :user => @user
+
+= form_for(@user)  do |f|
+  %div{:class =>"row"}
+    %div{:class =>"span4"}
+      = f.label t(:name)
+      = f.text_field :name
+      %br
+      = f.label :email
+      = f.text_field :email
+      %br
+    %div{:class =>"span4"}
+      = f.label t(:password)+" "+t(:password_length)  #'Password (6-15 lettere)'
+      = f.password_field :password
+      %br
+      = f.label t(:password_confirmation) #'Conferma Password
+      = f.password_field :password_confirmation
+      %br
+  = f.submit t(:create), :class => "btn btn-primary"

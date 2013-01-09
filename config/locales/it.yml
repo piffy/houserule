@@ -8,6 +8,23 @@
 it:
   per: "per"
   proposto_da: "proposto da"
+  name: "Nome"
+  password: "Password"
+  password_length: "(6-15 caratteri)"
+  password_confirmation: "Ripeti la password password"
+  create: "Create"
+  greet_new_user_mail: "Utente %{name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login"
+  greet_new_user_no_mail: "Utente %{name} creato. Ora puoi fare il login. Problemi nell'invio mail di conferma"
+  wrong_email_or_password:  "Email o password errata"
+  logged_off: 'Scollegato.'
+  already_logged_in: Sei gia loggato.
+
+  misc:
+    errors:
+      zero: Nessun errore rilevato
+      one: Rilevato un errore
+      other: Rilevati %{count} errori
+
 
   number:
     format:
