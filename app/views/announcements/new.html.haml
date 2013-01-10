@@ -19,7 +19,7 @@
       Email
 
 %div{:id=>"myTabContent",:class=>"tab-content"}
-  %div{:class=>"tab-pane fade in active", :id=>"group"}
+  %div{:class=>"tab-pane in active", :id=>"group"}
 
     -if @groups.nil?
       %p
@@ -44,7 +44,7 @@
 
 
 
-  %div{:class=>"tab-pane fade in active", :id=>"users"}
+  %div{:class=>"tab-pane in active", :id=>"users"}
     %p
       Seleziona gli utenti (massimo 6 per volta) cui vuoi segnalare questo evento
     =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-horizontal"}) do |f|
@@ -61,7 +61,7 @@
           = f.submit(:class=>"btn btn-primary btn-large", :value => 'Invia annuncio a questi utenti')
       %br
 
-  %div{:class=>"tab-pane fade in active", :id=>"email"}
+  %div{:class=>"tab-pane in active", :id=>"email"}
     %p Inserisci gli indirizzi di 6 persone (al massimo) cui vuoi segnalare questo evento
 
     =form_for(:announcement, :url => event_announcements_path(@event), :html => {:class => "form-vertical"}) do |f|
@@ -78,7 +78,7 @@
       %br
 
 :javascript
-  $(function () {$('#myTab a:last').tab('show'); })
+  $(function () {$('#myTab a:last').tab('show'); });
 -if !@commit.nil?  && @commit=="Invia annuncio ai gruppi"
   :javascript
     $(function () {$('#myTab a[href="#group"]').tab('show'); })
