@@ -30,6 +30,5 @@ Scenario: Double Login
   And I am on the login page
   When I follow "English"
   Given I am on the login page
-  * mostra la pagina
 
 

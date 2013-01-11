@@ -1,12 +1,12 @@
-=provide(:title, 'Preferenze')
+=provide(:title, t(:preferences_for)+@user.first_name_or_nick)
 %div{class:"row"}
   %aside{class:"span4"}
     %section
       %h1
         = gravatar_for @user
-        = "Modifica di "+ @user.first_name_or_nick
+        = (t(:edit, :model => "")+ @user.first_name_or_nick).titleize
       %span<
-        L'icona è fornita da
+        =t(:icon_provided_by)
         %nbsp
         = link_to "Gravatar", "http://www.gravatar.com"
         %a{:href=> info_help_path+"#gravatar" }

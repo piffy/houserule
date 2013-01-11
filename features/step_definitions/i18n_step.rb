@@ -18,6 +18,10 @@ Then /^I should see an (italian|english) page$/ do |locale|
   end
 end
 
+Then /^I should see "([^"]*)" within "([^"]*)"$/ do |text, selector|
+  page.should have_css(selector, :text => text)
+end
+
 Then /^I should see the title "([^"]*)"$/ do |title|
   page.should have_selector('title', :text => title)
 end
@@ -35,6 +39,14 @@ Given /^a user is logged in$/ do
   "mi loggo con email \"#{u.email}\" e password \"#{u.password}\""
 end
 
+And /^I destroy user "([^"]*)"$/ do |user|
+  "vado alla eliminazione dell'utente \"user\""
+end
+
+And /^there are (\d+) users?$/ do |n|
+  n.to_i.times {FactoryGirl.create(:user) }
+end
+
 Given /^I am on the (.+)$/ do |page_name|
 
   case page_name
@@ -42,18 +54,18 @@ Given /^I am on the (.+)$/ do |page_name|
     when /^home\s?page$/
       visit root_path
 
-    when /pagina di registrazione/
-      visit new_user_path
+    when /show user page/
+      visit "http://en.example.com/users/"+(User.first.id).to_s
 
 
-    when /pagina di creazione evento/
-      visit new_event_path
+    when /edit user page/
+      visit "http://en.example.com/users/"+(User.first.id).to_s+"/edit"
 
     when /login page/
       visit "http://en.example.com/login"
 
-    when /pagina di elenco eventi/
-      visit events_path
+    when /user index page/
+      visit "http://en.example.com/users"
 
     when /pagina di elenco utenti/
       visit users_path

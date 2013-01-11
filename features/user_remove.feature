@@ -20,12 +20,13 @@ Funzionalità: Elimina utente
   Scenario:   Eliminazione Utente (con navigazione)
     Dato  vado al profilo dell'utente "paolino@nomail.it"
     Quando seguo il link "Elimina utente"
-    Allora dovrei vedere "Modifica di Paperino"
+    Allora dovrei vedere "Modifica Paperino"
     E dovrei vedere "Disattivazione"
     Quando vado alla eliminazione dell'utente "paolino@nomail.it"
     #Il prossimo passo NON può essere testato automaticamente
     E      mi trovo nella pagina di login
-    Allora dovrei vedere "Utente Paperino eliminato. Addio per sempre!"
+    * mostra la pagina
+    Allora dovrei vedere "Utente eliminato con successo"
     E      inserisco in "session_email" "paolino@nomail.it"
     E      inserisco in "session_email" "paolino@nomail.it"
     E      premo "Login"

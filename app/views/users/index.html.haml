@@ -1,16 +1,21 @@
-=provide(:title, 'Utenti')
-%h1 Elenco utenti registrati
+=provide(:title, User.model_name.human(:count =>2).capitalize)
+-if I18n.locale == :it
+  %h1
+    Elenco utenti registrati
+-else
+  %h1
+    Registered user list
 
 = will_paginate
 
 %table{class: "table table-striped"}
   %tr
-    %th{:class => @name_header}= link_to 'Nome', users_path(:sort => 'name'), :id => 'name_header'
+    %th{:class => @name_header}= link_to t(:name), users_path(:sort => 'name'), :id => 'name_header'
     %th Nick
-    %th{:class => @created_at_header}= link_to 'Iscritto il', users_path(:sort => 'created_at'), :id => 'created_at_header'
-    %th Eventi
-    %th Gruppi
-    %th Partecipa
+    %th{:class => @created_at_header}= link_to t(:registered_on).capitalize, users_path(:sort => 'created_at'), :id => 'created_at_header'
+    %th= Event.model_name.human(:count =>2).capitalize
+    %th= Group.model_name.human(:count =>2).capitalize
+    %th= Reservation.model_name.human(:count =>2).capitalize
 
   = render :partial => "user", :collection => @users
 

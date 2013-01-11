@@ -6,12 +6,35 @@ en:
   password: "Password"
   password_length: "(6-15 characters)"
   password_confirmation: "Repeat password"
-  create: "Create"
+
+
   greet_new_user_mail: "User %{name} created, you should receive a confirmation email. Now you can log in."
   greet_new_user_no_mail: "User %{name} created. Now you can log in. Problems sending email."
   wrong_email_or_password:  "Wrong email or password"
   already_logged_in: "Already logged in."
   logged_off: 'Logged off.'
+  preferences_for: "Preferences for "
+  icon_provided_by: "Icon provided by"
+  leave_empty: "Leave empty if you don't want to change it"
+  are_you_sure: "Are you sure? It cant be undone!"
+
+  administrator: administrator
+  registered_on: registered on
+  location: location
+  organized_events: organized events
+  organize_event: organize event
+  reserved_events: reserved events
+  invitations: invitations
+  description: description
+
+
+  edit: "edit %{model}"
+  delete: "delete %{model}"
+  index: "index"
+  create: "create %{model}"
+  show: "details for %{model}"
+  updated_success: "%{model} updated successfully"
+  deleted_success: "%{model} deleted successfully"
 
   hello: "Hello world"
   per: "For"
@@ -26,4 +49,19 @@ en:
   time:
     formats:
       formatted: "on %b %d %y at %H:%M"
+      long_date_only: "%B %d, %Y"
 
+  activerecord:
+    models:
+      user:
+        one: user
+        other: users
+      group:
+        one: group
+        other: groups
+      event:
+        one: event
+        other: events
+      reservation:
+        one: reservation
+        other: reservations

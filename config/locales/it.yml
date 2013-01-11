@@ -11,13 +11,34 @@ it:
   name: "Nome"
   password: "Password"
   password_length: "(6-15 caratteri)"
-  password_confirmation: "Ripeti la password password"
-  create: "Create"
+  password_confirmation: "Ripeti la password"
+
   greet_new_user_mail: "Utente %{name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login"
   greet_new_user_no_mail: "Utente %{name} creato. Ora puoi fare il login. Problemi nell'invio mail di conferma"
   wrong_email_or_password:  "Email o password errata"
   logged_off: 'Scollegato.'
   already_logged_in: Sei gia loggato.
+  preferences_for: "Preferenze di "
+  icon_provided_by: "L'icona è fornita da"
+  leave_empty: "Lascia vuoto se non vuoi cambiarla"
+  are_you_sure: 'Sei sicuro? Non si può tornare indietro!'
+
+  administrator: amministratore
+  registered_on: iscritto il
+  location: luogo
+  organized_events: eventi organizzati
+  organize_event: organizza evento
+  reserved_events: eventi prenotati
+  invitations: inviti
+  description: descrizione
+
+  edit: "modifica %{model}"
+  delete: "elimina %{model}"
+  index: "lista"
+  create: "crea %{model}"
+  show: "dettagli di %{model}"
+  updated_success: "%{model} aggiornato con successo"
+  deleted_success: "%{model} eliminato con successo"
 
   misc:
     errors:
@@ -250,7 +271,19 @@ it:
           attributes:
             deadline:
               before_or_equal_to: "non deve precedere l'inizio"
-
+    models:
+      user:
+        one: utente
+        other: utenti
+      group:
+        one: gruppo
+        other: gruppi
+      event:
+        one: evento
+        other: eventi
+      reservation:
+        one: prenotazione
+        other: prenotazioni
 
       template:
         header:

@@ -30,5 +30,8 @@
         Con una semplice procedure l'utente può riattivarsi'
 
 
-  = f.submit "Elimina", :class=>"btn btn-danger",  :confirm => 'Sei sicuro? Non si può tornare indietro!'
+  = f.submit "#{t(:delete, :model=> @user.name).capitalize}", :class=>"btn btn-danger",  :confirm => t(:are_you_sure)
 
+= link_to "#{t(:index).capitalize}", users_path,  :class => "btn"
+= link_to "#{t(:show, :model=> @user.first_name_or_nick).capitalize}", user_path(@user), :class => "btn"
+= link_to "#{t(:edit, :model=> @user.first_name_or_nick).capitalize}", edit_user_path(@user), :class => "btn"

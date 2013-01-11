@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   #Register a new user. You can't register if you're logged in.
   def new
     if current_user
-      flash[:notice] = 'Sei già loggato.'
+      flash[:notice] = t(:already_logged_in)
       redirect_to root_path
     end
     @user=User.new
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
       #@user.password_confirmation=@user.password
     end
     if @user.update_attributes(params[:user])
-      flash[:success] = "Preferenze aggiornate"
+      flash[:success] = t(:updated_success, :model => User.model_name.human).capitalize
       sign_in @user
       redirect_to @user
     else
@@ -101,12 +101,12 @@ class UsersController < ApplicationController
   end
 
   #Currently wipes out the user completely
-  #Should allow a gentlier destroy!
+  #TODO: Should allow a gentlier destroy!
   def destroy
     @user = User.find(params[:id])
     #TODO You should NOT be able to destroy id #1 (Admin) and #2 (Generic user)
-    flash[:success] = "Utente "+@user.name+" eliminato. Addio per sempre!"
-    redirect_to "/"
+    flash[:success] = t(:deleted_success, :model => User.model_name.human).capitalize
+    redirect_to root_path
     sign_out
     @user.destroy
   end

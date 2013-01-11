@@ -1,0 +1,32 @@
+%h3 Deactivation
+
+%p
+  Deactivation is quite a drastic operation, which can have a strong impact on the program. Therefore we offer you two alternatives:
+
+= form_for(@user,:method => :delete )  do |f|
+  %div{:class =>"row well"}
+    %div{:class =>"span8"}
+      %p
+        = radio_button_tag 'delete_style', "destroy", true, :class=>"checkbox"
+        %b
+          Destroy
+        %br
+        Using this method, user
+        = "''"+@user.name+"''"
+        will be completelu removed from the system, leaving no trace. At the same time, all of his events, groups, etc.
+        will also be removed.
+
+      %p
+        = radio_button_tag 'delete_style', "deactivate", false, :disabled => true
+        %b
+          Deactivate
+        %i (Option not yet implemented)
+        %br
+        Using this method, user
+        = "''"+@user.name+"''"
+        will be deactivated and won't be able to logon, be invited or give feedbacks. Preferences, events and
+        feedbacks will still be on the system and can be viewed. The user can be easily reactivated.
+
+
+  = f.submit "Elimina", :class=>"btn btn-danger",  :confirm => 'Sei sicuro? Non si può tornare indietro!'
+

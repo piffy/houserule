@@ -27,7 +27,7 @@ Contesto:
   Scenario:   Modifica password (percorso triste)
     Dato inserisco in "user_password" "123"
     Quando premo "Modifica"
-    Allora dovrei vedere "Modifica di Paperino"
+    Allora dovrei vedere "Modifica Paperino"
     E dovrei vedere "error"
 
 

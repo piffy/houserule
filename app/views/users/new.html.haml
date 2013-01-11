@@ -19,4 +19,4 @@
       = f.label :password_confirmation , 'Conferma Password'
       = f.password_field :password_confirmation
       %br
-  = f.submit "Crea utente", :class => "btn btn-primary"
+  = f.submit "#{t(:create, :model=> t(:user)).capitalize}", :class => "btn btn-primary"

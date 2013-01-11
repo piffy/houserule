@@ -2,18 +2,18 @@
 = form_for(@user)  do |f|
   %div{:class =>"row"}
     %div{:class =>"span4"}
-      = f.label :name
+      = f.label t(:name)
       = f.text_field :name
       %br
       = f.label :email
       = f.text_field :email,:disabled => true
       %br
     %div{:class =>"span4"}
-      = f.label :password , 'Password (6-15)'
-      = f.password_field :password,:placeholder => "Lascia vuoto se non vuoi cambiarla"
+      = f.label t(:password)+" "+t(:password_length)
+      = f.password_field :password,:placeholder => t(:leave_empty)
       .field
-      = f.label :password , 'Conferma Password'
-      = f.password_field :password_confirmation, :placeholder => "Lascia vuoto se non vuoi cambiarla"
+      = f.label t(:password_confirmation)
+      = f.password_field :password_confirmation, :placeholder => t(:leave_empty)
       %br
   %div{:class =>"row"}
     %div{:class =>"span4"}
@@ -21,17 +21,17 @@
       = f.text_field :nick
       %br
     %div{:class =>"span4"}
-      = f.label :location , "Luogo"
+      = f.label t(:location).capitalize
       = f.text_field :location
       %br
   %div{:class =>"row"}
     %div{:class =>"span8"}
-      = f.label :description , 'Qualcosa su di te:'
+      = f.label t(:description).capitalize
       %br
       = f.text_area :description
       %br
   = f.submit "Modifica", :class=>"btn btn-primary"
   %div{:class=>"btn-group"}
-    = link_to 'Lista utenti', users_path,  :class => "btn"
-    = link_to 'Mostra', user_path(@user), :class => "btn"
-    = link_to 'Elimina utente', edit_user_path(@user)+".delete", :class => "btn btn-danger"
+    = link_to "#{t(:index).capitalize}", users_path,  :class => "btn"
+    = link_to "#{t(:show, :model=> @user.first_name_or_nick).capitalize}", user_path(@user), :class => "btn"
+    = link_to "#{t(:delete, :model=> @user.first_name_or_nick).capitalize}", edit_user_path(@user)+".delete", :class => "btn btn-danger"
