@@ -18,6 +18,9 @@
 ./idea/*
 .idea/*
 
+# Ignore coverage data
+coverage
+
 #Ignore strange file
 C:\\nppdf32Log\\debuglog.txt
 

@@ -9,11 +9,10 @@ class UsersController < ApplicationController
     sort = params[:sort] || session[:sort]
 
     #Handle sorting
-    case sort
-      when 'name'
-        ordering,@name_header = 'name', 'hilite'
-      when 'created_at'
-        ordering,@created_at_header = 'created_at', 'hilite'
+    if sort=='name'
+      ordering,@name_header = 'name', 'hilite'
+    else
+      ordering,@created_at_header = 'created_at', 'hilite'
     end
 
     #Handle Pagination

@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
   has_many :interests, dependent: :destroy
   has_many :reservations, dependent: :destroy, :through => :events
   has_many :invitations, dependent: :destroy
-  #has_many :reserved_events, :class_name => 'Event',:through => :reservations, :source => :events
-
-
+  #has_many :reserved_events_2, :through => :reservations ,:source => :event
+  #has_and_belongs_to_many :interesting_groups, :class_name => "Group", :join_table => "interests" , :association_foreign_key => "group_id"
+  has_many :interesting_groups, :through => :interests, :source => :group
 
   valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -58,10 +58,6 @@ class User < ActiveRecord::Base
     Event.find_by_sql("select events.* from events,reservations where events.id=reservations.event_id AND reservations.user_id="+self.id.to_s)
   end
 
-  # Returns a list of the groups to which the user has shown interest (plain SQL query)
-  def interesting_groups
-    Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+self.id.to_s)
-  end
   def reset_password_url
     #self.create_perishable_token
     #self.save

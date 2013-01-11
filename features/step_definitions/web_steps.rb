@@ -87,6 +87,10 @@ Then /^dovrei vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|
   page.should have_css(selector, :text => text)
 end
 
+Then /^dovrei vedere un link per "([^"]*)"$/ do |link|
+  page.should have_selector('a', {:href=>link})
+end
+
 Then /^dovrei non vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|
   page.should_not have_css(selector, :text => text)
 end
