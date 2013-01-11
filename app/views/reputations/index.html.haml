@@ -1,0 +1,31 @@
+=provide(:title, 'Reputazioni')
+%h1 Elenco reputazioni
+
+%table
+  %tr
+    %th Utente
+    %th Reputazione
+    %th Participazioni
+    %th
+      Feedback
+      %br
+      (pos/neg)
+    %th
+      Gruppi
+      %br
+      (part./org.)
+    - if !current_user.nil? && current_user.admin?
+      %th
+      %th
+
+  - @reputations.each do |reputation|
+    %tr
+      %td= link_to  reputation.user_name, user_path(reputation.user_id)
+      %td= reputation.score_to_s+"("+reputation.score.to_s+")"
+      %td= reputation.participations
+      %td= reputation.positive_fb.to_s+"/"+reputation.negative_fb.to_s
+      %td= reputation.user.interests.count.to_s+"/"+reputation.user.groups.count.to_s
+      - if !current_user.nil? && current_user.admin?
+        %td= link_to 'Modifica', edit_reputation_path(reputation) , :class =>"btn"
+        %td= link_to 'Resetta', reputation, :confirm => 'Are you sure?', :method => :delete, :class =>"btn btn-warning"
+

@@ -1,0 +1,36 @@
+=provide(:title, 'Modifica reputazione')
+%h1
+  Modifica reputazione di
+  =@reputation.user.first_name_or_nick
+
+%p
+  La reputazione attuale di
+  %b
+    =@reputation.score
+  è determinata da
+  =@reputation.participations
+  partecipazioni,
+  =@reputation.positive_fb
+  feedback positivi,
+  =@reputation.negative_fb
+  feedback negativi,
+  =@reputation.organized
+  eventi organizzati,
+  =@reputation.archived
+  eventi archiviati,
+  =@reputation.user.interests.count + @reputation.user.groups.count
+  association e coordinamento gruppi.
+%p
+  Questo puntaggio classifica l'utente a livello
+  ='"'+@reputation.score_to_s+'"'
+
+= render 'form'
+
+
+
+%h5 Nota che la reputazione dovuta ai gruppi non è modificabile
+
+
+= link_to 'Show', @reputation
+\|
+= link_to 'Elenco', reputations_path

@@ -71,6 +71,7 @@ class UsersController < ApplicationController
     @user_events=@user.events.limit(5)
     @user_reserved_events=@user.reserved_events.slice(0,5)
     @groups=@user.groups
+    @reputation = Reputation.new
     #TODO Refactor!
     @interesting_groups=Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+@user.id.to_s)
     #@groups<<@user.interesting_groups

@@ -166,10 +166,20 @@ describe User do
 
     it "should destroy associated events" do
       events = @user.events
-      @user.destroy
-      events.each do |event|
-        Event.find_by_id(event.id).should be_nil
-      end
+      expect{@user.destroy}.to change{Event.count}.by(-2)
+    end
+
+  end
+  describe "reputation association" do
+    before { @user.save }
+    let!(:reputation) do
+      FactoryGirl.create(:reputation, user: @user)
+    end
+
+    it { should respond_to(:reputation) }
+
+    it "should destroy associated reputation" do
+      expect{@user.destroy}.to change{Reputation.count}.by(-1)
     end
 
   end

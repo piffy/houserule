@@ -1,9 +1,6 @@
 Houserule::Application.routes.draw do
 
-
-  resources :tests
-
-  resources :group_controllers
+  resources :reputations
 
   resources :archived_events, except: [:new, :create]
 
