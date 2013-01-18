@@ -33,7 +33,7 @@ Funzionalità: Usare i link dell'elenco eventi
   Scenario: Modifica evento (loggato)
     Dato mi loggo con email "paolino@nomail.it" e password "12345678"
     E mi trovo nella pagina di elenco eventi
-    E seguo il link "Nome evento"
+    E seguo il link "Nome"
     E seguo il link "Modifica"
     Allora  dovrei essere nella pagina di modifica dell'evento  "Campionato"
 

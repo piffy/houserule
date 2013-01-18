@@ -1,27 +1,28 @@
-=provide(:title, 'Eventi')
-%h1 Elenco eventi
+=provide(:title, t(:event_listing).capitalize)
+%h1= t(:event_listing).capitalize
 %h4
-  Selezionati
+  =t(:selected_models, :model =>  Event.model_name.human(:count => 2) ).capitalize
+  \:
   %span{:id => "event_selected_count"}
     =@events.count
-  eventi su
+  \/
   %span{:id => "event_total_count"}
     =@total
 
 = form_tag events_path, :method => :get, :id => 'filter_form',:html => {:class => "form-horizontal"} do
   %span{:class =>"label label-info" }
     = radio_button_tag 'selection', 'all_events', @selection=='all_events'
-    Tutti
+    = t(:all).capitalize
     %span{:class =>"label label-info" }
     = radio_button_tag 'selection', 'not_begun', @selection=='not_begun'
-    Non iniziati
+    = t(:not_yet_started).capitalize
     %span{:class =>"label label-info" }
     = radio_button_tag 'selection', 'no_date', @selection=='no_date'
-    Senza data
+    = t(:unscheduled).capitalize
     = radio_button_tag 'selection', 'archived', @selection=='archived'
-    Archiviati
+    = t(:archived).capitalize
   %br
-  = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
+  = submit_tag t(:update).capitalize, :id => 'filter_submit', :class=> "btn btn-small"
 
 =will_paginate
 
@@ -30,4 +31,4 @@
 = will_paginate
 %br
 
-= link_to 'Organizza evento', new_event_path, :class =>"btn"
+= link_to t(:organize_event).capitalize, new_event_path, :class =>"btn"

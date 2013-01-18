@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class EventsController < ApplicationController
+  include ApplicationHelper
+  before_filter :set_locale
   before_filter :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :create]
   before_filter :correct_event_for_user,   only: [:edit, :update, :destroy]
 

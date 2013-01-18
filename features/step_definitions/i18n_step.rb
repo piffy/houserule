@@ -36,7 +36,7 @@ end
 
 Given /^a user is logged in$/ do
   u=User.first
-  "mi loggo con email \"#{u.email}\" e password \"#{u.password}\""
+  step "mi loggo con email \"#{u.email}\" e password \"#{u.password}\""
 end
 
 And /^I destroy user "([^"]*)"$/ do |user|
@@ -45,6 +45,10 @@ end
 
 And /^there are (\d+) users?$/ do |n|
   n.to_i.times {FactoryGirl.create(:user) }
+end
+
+Given /^there are (\d+) events$/ do |arg1|
+  step "ci sono #{arg1} eventi di \"#{User.first.email}\""
 end
 
 Given /^I am on the (.+)$/ do |page_name|
@@ -67,11 +71,11 @@ Given /^I am on the (.+)$/ do |page_name|
     when /user index page/
       visit "http://en.example.com/users"
 
-    when /pagina di elenco utenti/
-      visit users_path
+    when /event index page/
+      visit "http://en.example.com/events"
 
-    when /pagina di creazione gruppo/
-      visit new_group_path
+    when /event show page/
+      visit "http://en.example.com/events/1"
 
     when /pagina di collegamento di un gruppo/
       visit new_group_path(Group.first)

@@ -7,7 +7,7 @@ en:
   password_length: "(6-15 characters)"
   password_confirmation: "Repeat password"
 
-
+  #user translations
   greet_new_user_mail: "User %{name} created, you should receive a confirmation email. Now you can log in."
   greet_new_user_no_mail: "User %{name} created. Now you can log in. Problems sending email."
   wrong_email_or_password:  "Wrong email or password"
@@ -18,6 +18,22 @@ en:
   leave_empty: "Leave empty if you don't want to change it"
   are_you_sure: "Are you sure? It cant be undone!"
 
+  #event translations
+  event_listing: "event listing"
+  all: "all"
+  not_yet_started: "not yet started"
+  unscheduled: "no date set"
+  archived: "archived"
+  duration: "duration"
+  deadline: "deadline"
+  system: "system"
+  date_and_time: "Date and Time"
+  reserve: 'Reserve'
+  unreserve: "Unreserve"
+  full: "Full"
+  waiting_list: 'Waiting list'
+
+  #generic buttons
   administrator: administrator
   registered_on: registered on
   location: location
@@ -27,12 +43,14 @@ en:
   invitations: invitations
   description: description
 
-
+  #action and generic messages
   edit: "edit %{model}"
   delete: "delete %{model}"
   index: "index"
+  update: "update"
   create: "create %{model}"
   show: "details for %{model}"
+  selected_models: "Selected %{model}: "
   updated_success: "%{model} updated successfully"
   deleted_success: "%{model} deleted successfully"
 
@@ -50,6 +68,7 @@ en:
     formats:
       formatted: "on %b %d %y at %H:%M"
       long_date_only: "%B %d, %Y"
+      medium: "%d %b %Y - %H:%M"
 
   activerecord:
     models:

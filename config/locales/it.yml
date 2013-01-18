@@ -32,11 +32,30 @@ it:
   invitations: inviti
   description: descrizione
 
+ #event translations
+  event_listing: "Elenco eventi"
+  all: "Tutti"
+  not_yet_started: "Non iniziati"
+  unscheduled: "Senza data"
+  archived: "Archiviati"
+  duration: "durata"
+  deadline: "conferma"
+  system: "sistema"
+  date_and_time: "Data e Ora"
+  invite_only: "Solo a inviti"
+  reserve: 'Prenota'
+  unreserve: "Sprenota"
+  full: "Pieno"
+  waiting_list: 'In lista'
+
+  #generic buttons
   edit: "modifica %{model}"
   delete: "elimina %{model}"
   index: "lista"
+  update: "aggiorna"
   create: "crea %{model}"
   show: "dettagli di %{model}"
+  selected_models: "%{model} selezionati"
   updated_success: "%{model} aggiornato con successo"
   deleted_success: "%{model} eliminato con successo"
 
