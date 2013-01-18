@@ -20,6 +20,7 @@ en:
 
   #event translations
   event_listing: "event listing"
+  event_details: "event details"
   all: "all"
   not_yet_started: "not yet started"
   unscheduled: "no date set"
@@ -32,6 +33,14 @@ en:
   unreserve: "Unreserve"
   full: "Full"
   waiting_list: 'Waiting list'
+  linked_to: "Linked to "
+  announce: 'Announce'
+  messages: 'Messages'
+
+  #labels, status and medals
+  invite_only: "Invite only"
+  reservations_locked: "Reservations locked"
+  reservations_low: "Reservations low"
 
   #generic buttons
   administrator: administrator
@@ -84,3 +93,6 @@ en:
       reservation:
         one: reservation
         other: reservations
+      invitation:
+       one: invitation
+       other: invitations

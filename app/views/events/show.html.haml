@@ -1,4 +1,4 @@
-=provide(:title, 'Dettagli evento')
+=provide(:title, t(:event_details).capitalize)
 
 -unless @event.descr_short.blank?
   %h1{:style => "margin-bottom:0px;"}
@@ -16,56 +16,56 @@
 
       %p
         %span{:class=>"label label-info span2"}
-          = Event.status_string[@event.status]
+          = t(Event.status_string[@event.status])
       -if @event.check_time ==2
         %p
           %span{:class=>"label label-info span2"}
-            Iniziato
+            =t(:started)
       -if @event.invite_only?
         %p
           %span{:class=>"label label-warning span2"}
-            Solo invitati
+            =t(:invite_only)
       -if @event.reservation_locked?
         %p
           %span{:class=>"label label-important span2"}
-            Prenotazioni bloccate
+            =t(:reservations_locked)
       -if @event.reservations.count < @event.min_player_num
         %p
           %span{:class=>"label label-important span2"}
-            Prenotazioni scarse
+            =t(:reservations_low)
 
 
 
   %div{:class =>"span4"}
     -unless @event.system.blank?
       %p
-        %b Sistema di gioco:
+        %b= t(:system).capitalize + ":"
         = @event.system
     %p
-      %b Data e ora:
+      %b=t(:date_and_time).capitalize + ":"
       - if @event.begins_at.nil?
-        Non ancora stabilita
+        =t(:unscheduled)
       -else
         = l(@event.begins_at, :format => :long)
         = "("+@event.duration+")" unless @event.duration.blank?
       - unless @event.begins_at.nil? || @event.deadline.nil? || @event.deadline == @event.begins_at
         %p
-          %b Deadline:
+          %b= t(:deadline).capitalize+ ":"
           = l(@event.deadline, :format => :long)
 
     -unless @event.location.blank?
       %p
-        %b Luogo:
+        %b= t(:location).capitalize + ":"
         = @event.location
     %p
 
       -if @event.groups.any?
-        %b Legato a:
+        %b= t(:linked_to)+":"
         = render "shared/list_group" , :groups => @event.groups
   %div{:class =>"span4"}
     %h3
       %b
-        Organizzato da:
+        =t(:organizer)+":"
     %ul{class:"users"}
       %li{class:"no-bullet"}
         %span
@@ -74,7 +74,7 @@
     %br
     %h3
       %b<
-        Prenotati (
+        =Reservation.model_name.human(:count=>2).capitalize+ " ("
         -if (@event.min_player_num == @event.max_player_num) && (@event.min_player_num == 0)
           - show_limit=nil
           %span{:class=>"reservations", :title=>"Prenotazioni"}
@@ -95,31 +95,31 @@
     %br
     %h3
       %b
-        = link_to "Inviti", event_invitations_path(@event)
+        = link_to Invitation.model_name.human(:count=>2).capitalize, event_invitations_path(@event)
         %span{id: "invitation_count"}
           = " ("+@event.invitations.pending.not_stale.count.to_s+"):"
     = render 'invitations/list_invited', :invitations => @event.invitations.pending.not_stale
 
 %div{:class =>"row"}
   %div{:class =>"span12"}
-    = simple_format("<b>Descrizione: </b>"+@event.description, :id => "description") unless @event.description.blank?
+    = simple_format("<b>"+t(:description).capitalize+": </b>"+@event.description, :id => "description") unless @event.description.blank?
 
 %hr
 %div{:class =>"row"}
   %div{:class =>"span12"}
     -unless @event.invite_only? || @event.reservation_locked?
       -if !@user.nil? && @event.already_reserved_by(@user)
-        = link_to 'Elimina prenotazione', event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
+        = link_to t(:delete, :model=> Reservation.model_name.human).capitalize, event_reservation_path(@event, @event.already_reserved_by(@user)) ,:class=>"btn btn-danger"
       - else
-        = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"   unless @event.check_time>0
+        = link_to t(:reserve), new_event_reservation_path(@event), :class=>"btn btn-success"   unless @event.check_time>0
     -if !current_user.nil? && (current_user==@event.user || current_user.admin? )
-      = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
+      = link_to t(:edit, :model => Event.model_name.human).capitalize, edit_event_path(@event), :class=>"btn"
       = link_to 'Archivia', event_archive_path(@event) , :class=>"btn"  unless @event.begun?
 
-    = link_to 'Elenco eventi', events_path, :class=>"btn"
+    = link_to t(:event_listing).capitalize, events_path, :class=>"btn"
     -if !@user.nil?
-      = link_to 'Messaggi', event_compose_path(@event), :class=>"btn"
+      = link_to t(:messages), event_compose_path(@event), :class=>"btn"
       -if current_user?(@event.user)  || current_user.admin?
-        = link_to 'Annuncia', new_event_announcement_path(@event), :class=>"btn"
+        = link_to t(:announce), new_event_announcement_path(@event), :class=>"btn"
 
 

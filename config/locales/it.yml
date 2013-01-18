@@ -34,6 +34,7 @@ it:
 
  #event translations
   event_listing: "Elenco eventi"
+  event_details: "Dettagli evento"
   all: "Tutti"
   not_yet_started: "Non iniziati"
   unscheduled: "Senza data"
@@ -42,11 +43,19 @@ it:
   deadline: "conferma"
   system: "sistema"
   date_and_time: "Data e Ora"
-  invite_only: "Solo a inviti"
+
   reserve: 'Prenota'
   unreserve: "Sprenota"
   full: "Pieno"
   waiting_list: 'In lista'
+  linked_to: "Collegato a"
+  announce: 'Annuncia'
+  messages: 'Messaggi'
+
+  #labels, status and medals
+  invite_only: "Solo a inviti"
+  reservations_locked: "Prenotazioni bloccate"
+  reservations_low: "Prenotazioni scarse"
 
   #generic buttons
   edit: "modifica %{model}"
@@ -303,6 +312,9 @@ it:
       reservation:
         one: prenotazione
         other: prenotazioni
+      invitation:
+        one: invito
+        other: inviti
 
       template:
         header:
