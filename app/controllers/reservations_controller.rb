@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class ReservationsController < ApplicationController
+  include ApplicationHelper
+  before_filter :set_locale
   before_filter :logged_in_user
   before_filter :has_rights_to, only: [:edit, :update, :destroy]
   include EventsHelper
