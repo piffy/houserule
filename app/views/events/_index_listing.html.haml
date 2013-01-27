@@ -19,7 +19,7 @@
       %td= event.location
       %td{:class => "reservations"}
         - unless event.max_player_num ==0
-          = [event.reservations.count,event.max_player_num].min.to_s+ "/" + event.max_player_num.to_s
+          = [event.reservations.count,event.max_player_num].min.to_s+ "/"  + event.max_player_num.to_s
           -if event.waiting_list >0
             %span{:class => "waiting_list_count"}
               = "+"+[(event.reservations.count-event.max_player_num), 0].max.to_s

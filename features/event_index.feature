@@ -15,10 +15,14 @@ Funzionalità:
       | Quo                   | quo@nomail.it         | 12345678  |
 
   Scenario: Paginazione
-    E ci sono 40 eventi di "paolino@nomail.it"
-    Dato mi trovo nella pagina di elenco eventi
-    Allora dovrei non vedere "Event 31"
-    E dovrei vedere "Event 30"
+    Dato ci sono 29 eventi di "paolino@nomail.it"
+    E che esistono i seguenti eventi dell'utente "pluto@nomail.it":
+    | name                  | system     | begins_at  |
+    | Ultimo                | Monopoli   | 21-7-2014  |
+    | Ultimissimo           | Monopoli   | 21-7-2014  |
+    Quando mi trovo nella pagina di elenco eventi
+    Allora dovrei non vedere "Ultimissimo"
+    E dovrei vedere "Ultimo"
 
 
   Scenario: Mostra barra di progresso rossa se evento al completo

@@ -47,6 +47,13 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
     when /pagina di collegamento di un gruppo/
       visit new_group_path(Group.first)
 
+
+    when /pagina di elenco reputazioni/
+      visit reputations_path
+
+    when /pagina di modifica reputazione di un utente/
+      visit edit_reputation_path(Reputation.last)
+
     else
       raise "Non posso mappare \"#{page_name}\" a un percorso.\n"
 
@@ -85,6 +92,10 @@ end
 
 Then /^dovrei vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|
   page.should have_css(selector, :text => text)
+end
+
+Then /^dovrei vedere un link per "([^"]*)"$/ do |link|
+  page.should have_selector('a', {:href=>link})
 end
 
 Then /^dovrei non vedere "([^"]*)" all'interno di "([^"]*)"$/ do |text, selector|

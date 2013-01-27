@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.11'
 gem 'bootstrap-sass', '2.0.0'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
@@ -43,6 +43,7 @@ gem 'wicked'
 # use Ruby debugger
 group :development, :test do
   gem 'ruby-debug19'
+  gem 'simplecov', :require => false, :group => :test
   gem 'cucumber', '1.1.3'
   gem 'rspec', '2.7.0'
   gem 'rspec-rails'

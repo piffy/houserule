@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121214080500) do
+ActiveRecord::Schema.define(:version => 20121228214716) do
 
   create_table "archived_events", :force => true do |t|
     t.string   "name"
@@ -62,6 +62,11 @@ ActiveRecord::Schema.define(:version => 20121214080500) do
 
   add_index "events_groups", ["group_id", "event_id"], :name => "index_events_groups_on_group_id_and_event_id", :unique => true
 
+  create_table "group_controllers", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -100,6 +105,17 @@ ActiveRecord::Schema.define(:version => 20121214080500) do
   add_index "invitations", ["event_id"], :name => "index_invitations_on_event_id"
   add_index "invitations", ["user_id", "event_id"], :name => "index_invitations_on_user_id_and_event_id", :unique => true
   add_index "invitations", ["user_id"], :name => "index_invitations_on_user_id"
+
+  create_table "reputations", :force => true do |t|
+    t.integer "user_id"
+    t.integer "participations", :default => 0
+    t.integer "positive_fb",    :default => 0
+    t.integer "negative_fb",    :default => 0
+    t.integer "organized",      :default => 0
+    t.integer "archived",       :default => 0
+  end
+
+  add_index "reputations", ["user_id"], :name => "index_reputations_on_user_id", :unique => true
 
   create_table "reservations", :force => true do |t|
     t.integer  "user_id"

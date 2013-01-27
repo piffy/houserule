@@ -44,6 +44,32 @@ Funzionalità: Conferma invito
       E l'ultima mail dovrebbe contenere "Pluto"
       E l'ultima mail dovrebbe contenere "accettando"
 
+
+@email
+Scenario: Conferma di un invito e conseguente iscrizione
+  Dato mi loggo con email "pluto@nomail.it" e password "12345678"
+  E che l'evento "Campionato" non ha deadline
+  E il sistema non ha ancora inviato email
+  Allora dovrei vedere "Profilo di Pluto"
+  E dovrei vedere "Campionato"
+  Quando seguo il link "Campionato"
+  Allora dovrei essere nella pagina di conferma invito dell'evento "Campionato" per l'utente "Pluto"
+  E dovrei vedere il titolo "Conferma invito"
+  E dovrei vedere il pulsante "Confermo"
+  E dovrei vedere il pulsante "Rinuncio"
+  Quando premo il pulsante "Confermo"
+  Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
+  E dovrei vedere "Invito accettato e prenotazione effettuata"
+  E dovrei vedere "Pluto" all'interno di "ul.users"
+  Quando vado alla pagina di conferma invito dell'evento "Campionato" dell'utente "Pluto"
+  Allora dovrei vedere "invito già utilizzato"
+  E il sistema ha inviato 1 email
+  E l'ultima mail dovrebbe contenere "Pluto"
+  E l'ultima mail dovrebbe contenere "accettando"
+
+
+
+
     @email
     Scenario: Rinuncia a un invito
       E il sistema non ha ancora inviato email

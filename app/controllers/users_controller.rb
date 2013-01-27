@@ -11,11 +11,10 @@ class UsersController < ApplicationController
     sort = params[:sort] || session[:sort]
 
     #Handle sorting
-    case sort
-      when 'name'
-        ordering,@name_header = 'name', 'hilite'
-      when 'created_at'
-        ordering,@created_at_header = 'created_at', 'hilite'
+    if sort=='name'
+      ordering,@name_header = 'name', 'hilite'
+    else
+      ordering,@created_at_header = 'created_at', 'hilite'
     end
 
     #Handle Pagination
@@ -74,6 +73,7 @@ class UsersController < ApplicationController
     @user_events=@user.events.limit(5)
     @user_reserved_events=@user.reserved_events.slice(0,5)
     @groups=@user.groups
+    @reputation = Reputation.new
     #TODO Refactor!
     @interesting_groups=Group.find_by_sql("select groups.* from groups,interests where groups.id=interests.group_id AND interests.user_id="+@user.id.to_s)
     #@groups<<@user.interesting_groups

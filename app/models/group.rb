@@ -9,7 +9,9 @@ class Group < ActiveRecord::Base
   validates :is_convention, :inclusion => {:in => [true, false]}
 
   validates :name, presence: true, :uniqueness => { case_sensitive: false }
-  before_validation :smart_add_url_protocol
+  before_save :smart_add_url_protocol
+  #before_save :sanitize_url
+
   has_many :interests, dependent: :destroy
   has_many :users, :through => :interests
   has_and_belongs_to_many :events
