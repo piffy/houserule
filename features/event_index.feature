@@ -79,4 +79,4 @@ Funzionalità:
     E che esiste la prenotazione dell'evento "Soltero" per l'utente "paolino@nomail.it"
     Quando mi trovo nella pagina di elenco eventi
     Allora dovrei non vedere "Prenota" all'interno di "a"
-    E dovrei vedere "Completo" all'interno di "span"
+    E dovrei vedere "Pieno" all'interno di "span"

@@ -79,9 +79,9 @@ Funzionalità:
     Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
     E dovrei non vedere "Deadline"
     E dovrei vedere "Indefinito" all'interno di "span.label-info"
-    E dovrei vedere "Non ancora stabilita" all'interno di "p"
+    E dovrei vedere "Senza data" all'interno di "p"
     E dovrei vedere "(0)" all'interno di "span#invitation_count"
-    E dovrei vedere "Prenotati ( 0 )"
+    E dovrei vedere "Prenotazioni ( 0 )"
     E il sistema ha inviato 1 emails
     E l'ultima mail dovrebbe contenere "evento in questione ha modificato la data"
 

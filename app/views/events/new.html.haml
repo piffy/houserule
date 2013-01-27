@@ -1,9 +1,9 @@
-=provide(:title, 'Proponi evento')
-%h1 Nuovo evento per #{@user.first_name_or_nick}
+=provide(:title, t(:create, :model => Event.model_name.human).capitalize)
+%h1
+  = t(:create, :model => Event.model_name.human).capitalize + " " + t(:per).downcase + " "+ @user.first_name_or_nick
 
 = render 'step_banner', :creation => true
 
 = render 'form'
 
-%hr
-= link_to 'Torna all\'elenco eventi', events_path
+= link_to t(:event_listing).capitalize, events_path, :class=>"btn"

@@ -1,4 +1,6 @@
 class EventWizardController < ApplicationController
+  include ApplicationHelper
+  before_filter :set_locale
   before_filter :logged_in_user
   include Wicked::Wizard
   include EventsHelper

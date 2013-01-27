@@ -21,7 +21,7 @@ perché gli altri utenti si possano iscrivere
     E      inserisco in "event_description" "Una partita davvero inutile"
     E      inserisco in "event_descr_short" "partita"
     Quando premo "Prossimo"
-    Allora dovrei vedere "Evento creato!"
+    Allora dovrei vedere "Evento creato con successo"
     Quando      inserisco in "event_system" "Pimpinella"
     E      inserisco in "event_min_player_num" "2"
     E      inserisco in "event_max_player_num" "4"

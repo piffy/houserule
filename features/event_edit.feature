@@ -26,7 +26,7 @@ Funzionalità: Modifica Evento
     E      inserisco in "session_password" "12345678"
     E      premo "Login"
     E      vado alla modifica evento di "Campionato"
-    Allora dovrei vedere "Modifica evento"
+    Allora dovrei vedere "Modifica"
     Quando inserisco in "event_name" "Finale"
     E      inserisco in "event_description" "Una partita davvero inutile"
     E      inserisco in "event_descr_short" "partita"
@@ -60,4 +60,12 @@ Funzionalità: Modifica Evento
     #Allora dovrei essere nella pagina di dettagli dell'evento  "Campionato"
     E dovrei non vedere "Deadline"
 
+
+  Scenario:   Eliminazione di un evento
+  Dato   mi loggo con email "paolino@nomail.it" e password "12345678"
+  E      vado alla modifica evento di "Campionato"
+  #simulo pressione tasto
+  E      vado all'eliminazione dell'evento "Campionato"
+  Allora dovrei vedere "Evento eliminato con successo"
+  E dovrei non vedere "Campionato"
 

@@ -1,4 +1,4 @@
-=provide(:title, 'Modifica evento')
+=provide(:title, t(:edit, :model => @event.name).capitalize)
 %h1
   = @event.name
 
@@ -6,8 +6,8 @@
 
 = render 'form'
 
-= link_to 'Dettagli', @event ,  :class=>"btn"
+= link_to t(:event_details).capitalize, @event ,  :class=>"btn"
 
-= link_to 'Elimina', @event, :confirm => 'Sei sicuro?', :method => :delete ,:class=>"btn btn-danger"
+= link_to t(:delete, :model => Event.model_name.human ).capitalize, @event, :confirm => t(:are_you_sure), :method => :delete ,:class=>"btn btn-danger"
 
-= link_to 'Elenco eventi', events_path, :class=>"btn"
+= link_to t(:event_listing).capitalize, events_path, :class=>"btn"

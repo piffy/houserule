@@ -4,20 +4,20 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span6"}
       .field
-        = f.label :name, 'Nome dell\'evento'
-        = f.text_field :name , :placeholder => "Obbligatorio!"
+        = f.label t(:name)
+        = f.text_field :name , :placeholder => t(:mandatory)
     %div{:class=>"span6"}
       .field
-        = f.label :descr_short , 'Descrizione breve'
-        = f.text_field :descr_short , :placeholder => "Sottotitolo d'impatto"
+        = f.label t(:descr_short).capitalize
+        = f.text_field :descr_short , :placeholder => t(:impact)
     %div{:class=>"row-fluid"}
       %div{:class=>"span12"}
         %div
           .field
-            = f.label :description , 'Descrizione estesa'
-            = f.text_area :description , :placeholder => "Puoi mettere anche link ad altre pagine o siti."
+            = f.label t(:description).capitalize
+            = f.text_area :description , :placeholder => t(:links_too)
             -if defined?(@group)
               =# hidden_field :group, :value => @group.id.to_s
               =hidden_field :group, :id, :value=>@group.id
         .actions
-          = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')
+          = f.submit(:class=>"btn btn-primary", :value => t(:next).capitalize)

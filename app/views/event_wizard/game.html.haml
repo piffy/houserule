@@ -1,4 +1,4 @@
-=provide(:title, 'Wizard evento: '+ t(step.to_s) )
+=provide(:title, t(:edit, :model=>Event.model_name.human ).capitalize+": "+ t(step.to_s) )
 
 
 
@@ -18,8 +18,8 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span9"}
       .field
-        = f.label :system, 'Sistema di gioco'
-        = f.text_field :system, :placeholder => "Può rimanere vuoto, ma è opportuno indicarlo" , :"data-provide" => "typeahead", :"data-items"=>"8",  :"data-source"=> @system_list
+        = f.label t(:system).capitalize
+        = f.text_field :system, :placeholder => t(:may_be_blank) , :"data-provide" => "typeahead", :"data-items"=>"8",  :"data-source"=> @system_list
     %div{:class=>"span3"}
       Lookup
       %br
@@ -33,41 +33,41 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span3"}
       .field
-        = f.label :min_player_num , 'Giocatori (min)'
+        = f.label t(:min_player_num).capitalize
         = f.number_field :min_player_num, :min=>"0", :size=>"3", :maxlenght =>3, :class => "input-small"
         %abbr{:title=>"Lasciare a 0 per non avere minimo. Valore indicativo."}
           %i{:class=>"icon-question-sign"}
 
     %div{:class=>"span3"}
       .field
-        = f.label :max_player_num , 'Giocatori (max)'
+        = f.label t(:max_player_num).capitalize
         = f.number_field :max_player_num, :min=>"0", :size=>"3", :maxlenght =>3, :class => "input-small"
         %abbr{:title=>"Lasciare a 0 per non avere limite."}
           %i{:class=>"icon-question-sign"}
     %div{:class=>"span3"}
 
       .field
-        = f.label :waiting_list , 'Lista attesa'
+        = f.label t(:waiting_list).capitalize
         = f.number_field :waiting_list, :min=>0, :size=>"3", :maxlenght =>3, :class => "input-small"
         %i{:class=>"icon-question-sign"}
     %div{:class=>"span3"}
       Flags
       .field
         = f.check_box :invite_only
-        Evento a soli inviti
+        = t :invite_only
         %i{:class=>"icon-question-sign"}
       .field
         = f.check_box :reservation_locked
-        Prenotazioni bloccate
+        = t :reservation_locked
         %i{:class=>"icon-question-sign"}
       .field
         %input{:type=>"checkbox", :disabled=> true}
-        Inviti contano come iscritti
+        = t :invites_as_reserved
         %i{:class=>"icon-question-sign"}
   %div{:class=>"row-fluid"}
     %div{:class=>"span4"}
       %br
       .actions
-        = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')
+        = f.submit(:class=>"btn btn-primary", :value => t(:next).capitalize)
 
 

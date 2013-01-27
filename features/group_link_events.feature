@@ -33,7 +33,7 @@ Funzionalità:
     E dovrei essere nella pagina di dettagli del gruppo "Gruppo 1"
     E dovrei vedere "Eventi collegati: (1)"
     Quando vado ai dettagli di un evento
-    Allora dovrei vedere "Legato a:"
+    Allora dovrei vedere "Collegato a:"
     E dovrei vedere "Gruppo 1"
     E dovrei vedere "" all'interno di "img.tiny-group-logo"
 
@@ -82,5 +82,5 @@ Scenario:  Creare un evento legato al gruppo (se si fa parte del gruppo)
   E dovrei vedere "Questo evento sarà collegato al gruppo 'Gruppo 1'"
   Dato   inserisco in "event_name" "Nuovo Evento"
   Quando premo "Prossimo"
-  Allora dovrei vedere "Evento creato!"
+  Allora dovrei vedere "Evento creato con successo"
   E dovrei vedere "L'evento, inoltre, è collegato al gruppo"

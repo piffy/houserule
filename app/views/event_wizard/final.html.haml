@@ -1,6 +1,6 @@
-=provide(:title, 'Wizard evento: '+ step.to_s )
+=provide(:title, t(:edit, :model=>Event.model_name.human ).capitalize+": "+ t(step.to_s) )
 %h1
-  =@event.name + ": " + step.to_s
+  =@event.name + ": " + t(step.to_s)
 
 = render 'step_banner'
 

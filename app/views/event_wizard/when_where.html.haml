@@ -1,4 +1,4 @@
-=provide(:title, 'Wizard evento: '+ t(step.to_s) )
+=provide(:title, t(:edit, :model=>Event.model_name.human ).capitalize+": "+ t(step.to_s) )
 %h1
   =@event.name
 
@@ -12,28 +12,32 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span6"}
       .field
-        = f.label :duration, 'Durata', :title => "Indicare la durata, se possibile, in ore"
+        = f.label t(:duration).capitalize, :title => "Indicare la durata, se possibile, in ore"
         = f.text_field :duration, :placeholder => "Siate brevi: 4h. 1d, tutto il giorno..."
     %div{:class=>"span3"}
       .field
-        %label Tipo di evento
+        %label= t :event_type
         %input{type:"radio", name:"date_type", value:"NODATE", id: "no_date",
-          onclick:"alert('Sicuro? In questo modo le iscrizioni non sono possibili, inviti e prenotazioni saranno eliminati!')" } Data non stabilita
+          onclick:"alert('Sicuro? In questo modo le iscrizioni non sono possibili, inviti e prenotazioni saranno eliminati!')" }
+          = t :unscheduled
         %br
-        %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" , checked: @no_deadline} Senza data limite prenotazioni
+        %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" , checked: @no_deadline}
+          =t :no_deadline
     %div{:class=>"span3"}
       .field
         %br
-        %input{type:"radio", name:"date_type", id: "standard", value:"STANDARD", checked: !@no_deadline} Con data limite prenotazioni
+        %input{type:"radio", name:"date_type", id: "standard", value:"STANDARD", checked: !@no_deadline}
+          =t :with_deadline
         %br
-        %input{type:"radio", name:"date_type", id: "repeating", value:"REPEATING", :disabled=> true} Ripetuto
+        %input{type:"radio", name:"date_type", id: "repeating", value:"REPEATING", :disabled=> true}
+          =t :repeating
 
 
   %br
   %div{:class=>"row-fluid"}
     %div{:class=>"span3"}
       .field
-        = f.label :begins_at, "Inizio il "
+        = f.label t :begins_at_date
 
         %div{:class=>"input-append date input-xxlarge", :id=>"begins_at_date", :"data-date"=> @event.begins_at.strftime("%d-%m-%Y"), :"data-date-format"=>"dd-mm-yyyy"}
           %input{:class=>"span4", :type=>"text", :value=>(@event.begins_at) .strftime("%d-%m-%Y"), :name => "event[begins_at_date_only]", :id => "event_begins_at_date_only"  }
@@ -41,7 +45,7 @@
               #i{:class=>"icon-th"}
     %div{:class=>"span3"}
       .field
-        = f.label :begins_at, "alle "
+        = f.label t :at_time
         = f.time_select :begins_at, :ignore_date => true,:minute_step => 15
         :javascript
           $('#begins_at_date').datepicker({
@@ -54,14 +58,14 @@
 
     %div{:class=>"span3"}
       .field
-        = f.label :deadline , 'Conferma entro il'
+        = f.label t :deadline_date
         %div{:class=>"input-append date input-xxlarge ", :id=>"deadline_date", :"data-date"=> @event.deadline.strftime("%d-%m-%Y"), :"data-date-format"=>"dd-mm-yyyy"}
           %input{:class=>"span4", :type=>"text", :value=>@event.deadline.strftime("%d-%m-%Y"), :name => "event[deadline_date_only]", :id => "event_deadline_date_only" }
             #span{:class=>"add-on"}
               #i{:class=>"icon-th"}
     %div{:class=>"span3"}
       .field
-        = f.label :begins_at, "alle "
+        = f.label t :at_time
         = f.time_select :deadline, :ignore_date => true,:minute_step => 15
         :javascript
           $('#deadline_date').datepicker({
@@ -71,7 +75,7 @@
   %div{:class=>"row-fluid"}
     %div{:class=>"span12"}
       .field
-        = f.label :location, 'Luogo'
+        = f.label t :location
         = f.text_field :location, :placeholder => "Indicare via e indirizzo, o coordinate Geolocation" , :"data-provide" => "typeahead", :"data-items"=>"8",  :"data-source"=> @location_list
   :javascript
     $('.typeahead').typeahead()
@@ -80,4 +84,4 @@
     %div{:class=>"span4"}
       %br
       .actions
-        = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')
+        = f.submit(:class=>"btn btn-primary", :value => t(:next).capitalize)

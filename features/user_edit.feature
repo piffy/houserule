@@ -22,7 +22,7 @@ Contesto:
     Dato inserisco in "user_password_confirmation" "87654321"
     Quando premo "Modifica"
     Allora dovrei vedere "Profilo di Paperino"
-    E      dovrei vedere "Preferenze aggiornate"
+    E      dovrei vedere "Utente aggiornato con successo"
 
   Scenario:   Modifica password (percorso triste)
     Dato inserisco in "user_password" "123"

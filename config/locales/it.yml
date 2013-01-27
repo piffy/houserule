@@ -12,12 +12,13 @@ it:
   password: "Password"
   password_length: "(6-15 caratteri)"
   password_confirmation: "Ripeti la password"
+  user: utente
 
   greet_new_user_mail: "Utente %{name} creato, dovresti ricevere una email di conferma. Ora puoi fare il login"
   greet_new_user_no_mail: "Utente %{name} creato. Ora puoi fare il login. Problemi nell'invio mail di conferma"
   wrong_email_or_password:  "Email o password errata"
   logged_off: 'Scollegato.'
-  already_logged_in: Sei gia loggato.
+  already_logged_in: Sei già loggato.
   preferences_for: "Preferenze di "
   icon_provided_by: "L'icona è fornita da"
   leave_empty: "Lascia vuoto se non vuoi cambiarla"
@@ -38,11 +39,23 @@ it:
   all: "Tutti"
   not_yet_started: "Non iniziati"
   unscheduled: "Senza data"
+  no_deadline: "Senza data limite prenotazioni"
+  with_deadline: "Con data limite prenotazioni"
+  repeating: "Ripetuto"
   archived: "Archiviati"
   duration: "durata"
   deadline: "conferma"
   system: "sistema"
   date_and_time: "Data e Ora"
+  description: descrizione
+  descr_short: descrizione breve
+  max_player_num: Massimo numero giocatori
+  min_player_num: Minimo numero giocatori
+  invites_as_reserved: Gli invitati contanto come iscritti
+  event_type: Tipo di evento
+  begins_at_date: Inizio il
+  at_time: alle
+  deadline_date: Conferma entro il
 
   reserve: 'Prenota'
   unreserve: "Sprenota"
@@ -56,17 +69,32 @@ it:
   invite_only: "Solo a inviti"
   reservations_locked: "Prenotazioni bloccate"
   reservations_low: "Prenotazioni scarse"
+  mandatory: "Obbligatorio!"
+  impact: Sottotitolo d'impatto
+  links_too: "Puoi mettere anche link ad altre pagine o siti."
+  may_be_blank: "Può rimanere vuoto, ma è opportuno indicarlo"
+  zero_as_no_min_value: "Lasciare a 0 per non avere minimo. Valore indicativo."
+  zero_as_no_max_value: "Lasciare a 0 per non avere limite."
 
-  #generic buttons
+  #banner
+  name: "Nome"
+  game: "Gioco"
+  when_where: "Dove e quando"
+  final: "Rifiniture"
+
+  #generic buttons and messages
   edit: "modifica %{model}"
   delete: "elimina %{model}"
   index: "lista"
   update: "aggiorna"
-  create: "crea %{model}"
+  create: "nuovo %{model}"
   show: "dettagli di %{model}"
+  next: Prossimo
   selected_models: "%{model} selezionati"
   updated_success: "%{model} aggiornato con successo"
   deleted_success: "%{model} eliminato con successo"
+  created_success: "%{model} creato con successo"
+
 
   misc:
     errors:
@@ -333,7 +361,3 @@ it:
     previous_label: "&#8592; Precedente"
     next_label: "Prossimo &#8594;"
     page_gap: "&hellip;"
-
-  name: "Nome"
-  game: "Gioco"
-  when_where: "Dove e quando"

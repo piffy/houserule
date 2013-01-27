@@ -127,3 +127,10 @@ Dato /^che l'evento "([^"]*)" non ha deadline$/ do |name|
   event.deadline=nil
   event.save
 end
+
+E /^vado all'eliminazione dell'evento "([^"]*)"$/ do |event_name|
+  event = Event.find_by_name(event_name)
+  event.should be
+  Capybara.current_session.driver.delete event_path(event.id)
+  click_link("redirected")
+end

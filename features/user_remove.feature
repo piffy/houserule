@@ -25,7 +25,6 @@ Funzionalità: Elimina utente
     Quando vado alla eliminazione dell'utente "paolino@nomail.it"
     #Il prossimo passo NON può essere testato automaticamente
     E      mi trovo nella pagina di login
-    * mostra la pagina
     Allora dovrei vedere "Utente eliminato con successo"
     E      inserisco in "session_email" "paolino@nomail.it"
     E      inserisco in "session_email" "paolino@nomail.it"

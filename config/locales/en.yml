@@ -6,6 +6,7 @@ en:
   password: "Password"
   password_length: "(6-15 characters)"
   password_confirmation: "Repeat password"
+  user: user
 
   #user translations
   greet_new_user_mail: "User %{name} created, you should receive a confirmation email. Now you can log in."
@@ -24,6 +25,9 @@ en:
   all: "all"
   not_yet_started: "not yet started"
   unscheduled: "no date set"
+  no_deadline: "No deadline"
+  with_deadline: "With deadline"
+  repeating: "Repeating"
   archived: "archived"
   duration: "duration"
   deadline: "deadline"
@@ -36,11 +40,27 @@ en:
   linked_to: "Linked to "
   announce: 'Announce'
   messages: 'Messages'
+  game: game
+  when_where: when and where
+  final: finishes
+  descr_short: short description
+  max_player_num: Max players
+  min_player_num: Min players
+  invites_as_reserved: Invited count against limit
+  begins_at_date: Begins
+  at_time: at
+  deadline_date: Reserve by
 
   #labels, status and medals
   invite_only: "Invite only"
   reservations_locked: "Reservations locked"
   reservations_low: "Reservations low"
+  mandatory: "Mandatory!"
+  impact: "Effective undertitle"
+  links_too: "You can event put links to other pages or websites"
+  may_be_blank: "May be left blank, but it's better to state something"
+  zero_as_no_min_value: "Enter 0 for no min value. Suggestion only."
+  zero_as_no_max_value: "Enter 0 for no max value."
 
   #generic buttons
   administrator: administrator
@@ -51,17 +71,19 @@ en:
   reserved_events: reserved events
   invitations: invitations
   description: description
+  next: next
 
   #action and generic messages
   edit: "edit %{model}"
   delete: "delete %{model}"
   index: "index"
   update: "update"
-  create: "create %{model}"
+  create: "new %{model}"
   show: "details for %{model}"
   selected_models: "Selected %{model}: "
   updated_success: "%{model} updated successfully"
   deleted_success: "%{model} deleted successfully"
+  created_success: "%{model} created successfully"
 
   hello: "Hello world"
   per: "For"

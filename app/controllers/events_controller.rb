@@ -146,7 +146,7 @@ class EventsController < ApplicationController
     params[:event].delete("user_id")
     @event = current_user.events.build(params[:event])
     @event.status=0; #proposed
-    msg = "Evento creato!"
+    msg = t(:created_success, :model=>Event.model_name.human).capitalize
     if @event.save
       unless (params[:group].nil?)
         @group=Group.find(params[:group][:id])
@@ -171,7 +171,7 @@ end
     @event = Event.find(params[:id])
 
     if @event.update_attributes(params[:event])
-      flash[:success] = "Evento aggiornato"
+      flash[:success] = t(:updated_success, :model=>Event.model_name.human).capitalize
       redirect_to event_event_wizard_path(@event,'game')
     else
       render "edit"
@@ -185,7 +185,7 @@ end
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-
+    flash[:success] = t(:deleted_success, :model => Event.model_name.human).capitalize
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }

@@ -36,11 +36,14 @@ end
 
 Given /^a user is logged in$/ do
   u=User.first
-  step "mi loggo con email \"#{u.email}\" e password \"#{u.password}\""
+  step "I am on the login page"
+  step "I insert in \"session_email\" \"#{u.email}\""
+  step "I insert in \"session_password\" \"#{u.password}\""
+  step "I press \"Login\""
 end
 
 And /^I destroy user "([^"]*)"$/ do |user|
-  "vado alla eliminazione dell'utente \"user\""
+ step "vado alla eliminazione dell'utente \"#{user}\""
 end
 
 And /^there are (\d+) users?$/ do |n|
@@ -77,8 +80,11 @@ Given /^I am on the (.+)$/ do |page_name|
     when /event show page/
       visit "http://en.example.com/events/1"
 
-    when /pagina di collegamento di un gruppo/
-      visit new_group_path(Group.first)
+    when /new event page/
+      visit "http://en.example.com/events/new"
+
+    when /event edit page/
+      visit "http://en.example.com/events/1/edit"
 
     else
       raise "Can't map \"#{page_name}\" to a path.\n"

@@ -17,13 +17,13 @@ Funzionalità:  Eventi (chiusi) e senza iscrizioni
     Quando mi trovo nella pagina di creazione evento
     E   inserisco in "event_name" "Evento chiuso"
     Quando premo "Prossimo"
-    Allora dovrei vedere "Evento creato!"
+    Allora dovrei vedere "Evento creato con successo"
     Quando   seleziono la casella "event_invite_only"
     E premo "Prossimo"
     E premo "Prossimo"
     E premo "Termina"
     Allora dovrei vedere il titolo "Dettagli evento"
-    E dovrei vedere "Solo invitati" all'interno di "span.label-warning"
+    E dovrei vedere "Solo a inviti" all'interno di "span.label-warning"
     Allora dovrei non vedere "Prenota" all'interno di "a"
     Dato mi trovo nella pagina di elenco eventi
     Allora dovrei vedere "Evento chiuso"
@@ -35,7 +35,7 @@ Funzionalità:  Eventi (chiusi) e senza iscrizioni
     Quando mi trovo nella pagina di creazione evento
     E   inserisco in "event_name" "Evento bloccato"
     Quando premo "Prossimo"
-    Allora dovrei vedere "Evento creato!"
+    Allora dovrei vedere "Evento creato con successo"
     Quando seleziono la casella "event_reservation_locked"
     Quando premo "Prossimo"
     E premo "Prossimo"

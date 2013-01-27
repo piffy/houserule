@@ -13,7 +13,7 @@ When I insert in "user_name" "Donald"
 And  I insert in "user_email" "donald@nomail.it"
 And  I insert in "user_password" "12345678"
 And  I insert in "user_password_confirmation" "12345678"
-And I press "Create user"
+And I press "New user"
 Then I should see the title "Home"
 And I should see "Donald"
 
@@ -22,7 +22,7 @@ Given I am on the homepage
 When I follow "English"
 And I follow "Register"
 Then I should see the title "Register"
-And I press "Create user"
+And I press "New user"
 Then I should see "5 errors have been found"
 
 Scenario:  Show basic user information and navigation in english
@@ -47,7 +47,7 @@ And I should see "Groups" within "b"
 And I should see "Index" within "a"
 And I should see "Edit user" within "a"
 And I should see "Organize event" within "a"
-And I should see "Create group" within "a"
+And I should see "New group" within "a"
 And I should see "Delete user" within "a"
 #And  I should see "Event One"
 #Reservations, invites, etc.

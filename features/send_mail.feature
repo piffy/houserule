@@ -11,7 +11,7 @@ Funzionalità: Invio email
   E      inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "12345678"
   E      inserisco in "user_password_confirmation" "12345678"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrebbe spedire una mail di conferma registrazione a "paolino@nomail.it"
 
 

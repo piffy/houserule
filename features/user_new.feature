@@ -13,7 +13,7 @@ Scenario:   Aggiugere un nuovo utente
   E      inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "12345678"
   E      inserisco in "user_password_confirmation" "12345678"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei essere nella home page
   E dovrei vedere "Utente Paperino creato"
 
@@ -27,7 +27,7 @@ Scenario:   Email esistente
   E      inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "12345678"
   E      inserisco in "user_password_confirmation" "12345678"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei vedere il messaggio di errore "Email è già in uso"
   E dovrei vedere "Rilevato un errore"
 
@@ -37,7 +37,7 @@ Scenario:   Password  troppo corta
   E      inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "1234"
   E      inserisco in "user_password_confirmation" "1234"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei vedere il messaggio di errore "Password è troppo corto (il minimo è 6 caratteri)"
   E dovrei vedere "Rilevato un errore"
 
@@ -47,7 +47,7 @@ Scenario:   Password  troppo lunga
   E      inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "1234567890123456"
   E      inserisco in "user_password_confirmation" "1234567890123456"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei vedere il messaggio di errore "Password è troppo lungo (il massimo è 15 caratteri)"
   E dovrei vedere "Rilevato un errore"
 
@@ -56,7 +56,7 @@ Scenario:   Password  troppo lunga
   Quando inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "12345678"
   E      inserisco in "user_password_confirmation" "12345678"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei vedere il messaggio di errore "Name non può essere lasciato in bianco"
   E dovrei vedere "Rilevato un errore"
 
@@ -65,7 +65,7 @@ Scenario:   Password  troppo lunga
   Quando inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "12345678"
   E      inserisco in "user_password_confirmation" "error"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei vedere il messaggio di errore "Password non coincide con la conferma"
   E dovrei vedere "Rilevati 2 errori"
 
@@ -73,6 +73,6 @@ Scenario:   Password  troppo lunga
   Dato   che mi trovo nella pagina di registrazione
   Quando inserisco in "user_email" "paolino@nomail.it"
   E      inserisco in "user_password" "12345678"
-  Quando premo "Crea utente"
+  Quando premo "Nuovo utente"
   Allora dovrei vedere il messaggio di errore "Password confirmation non può essere lasciato in bianco"
   E dovrei vedere "Rilevati 3 errori"

@@ -1,0 +1,37 @@
+=provide(:title, t(:edit, :model=>Event.model_name.human ).capitalize+": "+ t(step.to_s) )
+%h1
+  =@event.name + ": " + t(step.to_s)
+
+= render 'step_banner'
+
+= form_for @event, :html => {:class => "form-horizontal well"}, :url => event_event_wizard_path(@event), :method => :put do |f|
+
+  %ul
+    %li
+      Would you like to make an
+      = link_to "announcement" , new_event_announcement_path(@event)
+      (via email, Houserule or groups)?
+    - unless @event.reservations.count == 0
+      %li
+        Would you like to send a
+        = link_to "message to people who have a reservation",event_compose_path(@event)
+        ?
+
+    %li
+      Do you want to
+      = link_to "invite players", new_event_invitation_path(@event)
+      or
+      = link_to "manage existing invitations", event_invitations_path(@event)
+      ?
+    %li
+      If you don't need this event anymore, maybe you could
+      = link_to "archive it", event_archive_path(@event)
+      ? If you want to delete it completely, you'll find the button
+      = link_to "here",edit_event_path(@event)
+
+  .actions
+    = f.submit(:class=>"btn btn-primary", :value => 'End editing')
+
+
+
+
