@@ -1,0 +1,37 @@
+%h1 Listing conventions
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th User
+    %th Location
+    %th Website url
+    %th Image url
+    %th Gcc
+    %th Boolean
+    %th Begin date
+    %th End date
+    %th
+    %th
+    %th
+
+  - @conventions.each do |convention|
+    %tr
+      %td= convention.name
+      %td= convention.description
+      %td= convention.user_id
+      %td= convention.location
+      %td= convention.website_url
+      %td= convention.image_url
+      %td= convention.gcc
+      %td= convention.boolean
+      %td= convention.begin_date
+      %td= convention.end_date
+      %td= link_to 'Show', convention
+      %td= link_to 'Edit', edit_convention_path(convention)
+      %td= link_to 'Destroy', convention, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Convention', new_convention_path

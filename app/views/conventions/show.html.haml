@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @convention.name
+%p
+  %b Description:
+  = @convention.description
+%p
+  %b User:
+  = @convention.user_id
+%p
+  %b Location:
+  = @convention.location
+%p
+  %b Website url:
+  = @convention.website_url
+%p
+  %b Image url:
+  = @convention.image_url
+%p
+  %b Gcc:
+  = @convention.gcc
+%p
+  %b Boolean:
+  = @convention.boolean
+%p
+  %b Begin date:
+  = @convention.begin_date
+%p
+  %b End date:
+  = @convention.end_date
+
+= link_to 'Edit', edit_convention_path(@convention)
+\|
+= link_to 'Back', conventions_path

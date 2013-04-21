@@ -1,5 +1,8 @@
 Houserule::Application.routes.draw do
 
+  resources :conventions, except: [:new, :create]
+
+
   resources :reputations
 
   resources :archived_events, except: [:new, :create]
@@ -40,6 +43,7 @@ Houserule::Application.routes.draw do
   resources :users do
     match  'owned_events', :to => "events#owned_events"
     match  'reserved_events', :to => "events#reserved_events"
+    resources :conventions, only: [:new, :create]
   end
 
   get "welcome/index"

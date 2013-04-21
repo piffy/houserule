@@ -1,0 +1,40 @@
+= form_for @convention do |f|
+  -if @convention.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@convention.errors.count, "error")} prohibited this convention from being saved:"
+      %ul
+        - @convention.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label :website_url
+    = f.text_field :website_url
+  .field
+    = f.label :image_url
+    = f.text_field :image_url
+  .field
+    = f.label :gcc
+    = f.text_field :gcc
+  .field
+    = f.label :boolean
+    = f.text_field :boolean
+  .field
+    = f.label :begin_date
+    = f.datetime_select :begin_date
+  .field
+    = f.label :end_date
+    = f.datetime_select :end_date
+  .actions
+    = f.submit 'Save'

@@ -11,24 +11,39 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228214716) do
+ActiveRecord::Schema.define(:version => 20130421102117) do
 
   create_table "archived_events", :force => true do |t|
     t.string   "name"
     t.string   "system"
     t.datetime "begins_at"
     t.string   "duration"
-    t.text     "description",     :limit => 4000
+    t.text     "description"
     t.text     "aftermath"
-    t.text     "subscriber_list", :limit => 4000
+    t.text     "subscriber_list"
     t.string   "descr_short"
     t.datetime "deadline"
     t.string   "location"
-    t.integer  "max_player_num",                  :default => 0
-    t.integer  "min_player_num",                  :default => 0
+    t.integer  "max_player_num",  :default => 0
+    t.integer  "min_player_num",  :default => 0
     t.integer  "user_id"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  create_table "conventions", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "location"
+    t.string   "website_url"
+    t.string   "image_url"
+    t.string   "gcc"
+    t.boolean  "linked_event_check", :default => false
+    t.datetime "begin_date"
+    t.datetime "end_date"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "events", :force => true do |t|
@@ -61,11 +76,6 @@ ActiveRecord::Schema.define(:version => 20121228214716) do
   end
 
   add_index "events_groups", ["group_id", "event_id"], :name => "index_events_groups_on_group_id_and_event_id", :unique => true
-
-  create_table "group_controllers", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"

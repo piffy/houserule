@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :reservations, dependent: :destroy, :through => :events
   has_many :invitations, dependent: :destroy
   has_many :interesting_groups, :through => :interests, :source => :group
+  has_many :conventions, dependent: :destroy
   has_one  :reputation, dependent: :destroy
 
   valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
