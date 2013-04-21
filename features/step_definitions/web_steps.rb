@@ -54,6 +54,10 @@ Given /^(?:|[cC]he )(?:|[Ii]o )mi trovo nella (.+)$/ do |page_name|
     when /pagina di modifica reputazione di un utente/
       visit edit_reputation_path(Reputation.last)
 
+    when /pagina di creazione convention/
+      user = User.first
+      visit new_user_convention_path(user)
+
     else
       raise "Non posso mappare \"#{page_name}\" a un percorso.\n"
 
