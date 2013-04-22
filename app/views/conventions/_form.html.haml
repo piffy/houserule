@@ -1,37 +1,75 @@
-= form_for @convention do |f|
+= form_for @convention  do |f|
   -if @convention.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@convention.errors.count, "error")} prohibited this convention from being saved:"
+      %h2
+        = @convention.errors.count == 1 ? "Un errore non ha" : "#{@convention.errors.count} errori non hanno"
+        reso possibile il salvataggio
       %ul
         - @convention.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :location
-    = f.text_field :location
-  .field
-    = f.label :website_url
-    = f.text_field :website_url
-  .field
-    = f.label :image_url
-    = f.text_field :image_url
-  .field
-    = f.label :gcc
-    = f.text_field :gcc
-  .field
-    = f.label :begin_date
-    = f.datetime_select :begin_date
-  .field
-    = f.label :end_date
-    = f.datetime_select :end_date
+
+
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span8"}
+      .field
+        = f.label :name, 'Nome'
+        = f.text_field :name
+    %div{:class=>"span4"}
+      .field
+        = f.label :location, 'Luogo'
+        = f.text_field :location, :"data-provide" => "typeahead", :"data-items"=>"8",  :"data-source"=> @location_list
+        :javascript
+          $('.typeahead').typeahead()
+
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span4"}
+      .field
+        = f.label :website_url, 'Sito web'
+        = f.text_field :website_url ,  :placeholder => "Opzionale"
+    %div{:class=>"span4"}
+      .field
+        = f.label :image_url, 'Immagine'
+        = f.text_field :image_url, :placeholder => "Opzionale"
+    %div{:class =>"span4"}
+      .field<
+        = f.label :facebook_url, "Facebook link"
+        = f.text_field :facebook_url, :placeholder => "Opzionale"
+  %div{:class=>"row-fluid"}
+    %div{:class=>"span12"}
+      .field
+        = f.label :description , 'Descrizione'
+        = f.text_area :description, rows: 4
+
+  %div{:class=>"row-fluid", :id=>"convention_only", :style=>"hidden"}
+    %div{:class=>"span4"}
+      .field
+        = f.label :begin_date, "Inizia il"
+        %div{:class=>"input-append date input-xxlarge", :id=>"begin_date", :"data-date"=> "12-04-2014", :"data-date-format"=>"dd-mm-yyyy"}
+          %input{:class=>"span4", :type=>"text", :value=>"12-04-2013", :name => "convention[begin_date_only]", :id => "convention_begin_date_only"  }
+            #span{:class=>"add-on"}
+              #i{:class=>"icon-th"}
+          :javascript
+            $('#begin_date').datepicker({
+                language: 'it'
+            });
+    %div{:class=>"span4"}
+      .field
+        = f.label :end_date, "Finisce il"
+        %div{:class=>"input-append date input-xxlarge", :id=>"end_date", :"data-date"=> "12-04-2014", :"data-date-format"=>"dd-mm-yyyy"}
+          %input{:class=>"span4", :type=>"text", :value=>"12-04-2013", :name => "convention[end_date_only]", :id => "convention_end_date_only"  }
+            #span{:class=>"add-on"}
+              #i{:class=>"icon-th"}
+          :javascript
+            $('#end_date').datepicker({
+                language: 'it'
+            });
+
+    %div{:class=>"span4"}
+      .field
+        = f.label "Eventi collegati"
+        = f.check_box :linked_event_check
+        Controlla congruenza date
+
   .actions
-    = f.submit 'Save'
+    = f.submit 'Invia', class:"btn btn-primary"

@@ -7,7 +7,7 @@ FactoryGirl.define do
     location { Faker::Address.city }
     website_url "http://www.example.com"
     image_url "http://www.example.com/image.jpg"
-    gcc "http://www.gcc.com"
+    facebook_url "http://www.gcc.com"
     begin_date "2013-04-21 12:21:17"
     end_date "2013-04-21 12:21:17"
     association :user

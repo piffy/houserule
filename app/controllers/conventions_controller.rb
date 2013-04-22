@@ -1,4 +1,5 @@
 class ConventionsController < ApplicationController
+  before_filter :logged_in_user
   # GET /conventions
   # GET /conventions.json
   def index
@@ -24,7 +25,11 @@ class ConventionsController < ApplicationController
   # GET /conventions/new
   # GET /conventions/new.json
   def new
+    @user=current_user
     @convention = Convention.new
+    @convention.begin_date = Date.today + 7.days
+    @convention.end_date = Date.today + 9.days
+    #@location_list = (Group.all(:select => "location")+User.all(:select => "Location")+Event.all(:select => "Location")).map(&:location).delete_if {|x| x == nil || x == ""}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,11 +45,15 @@ class ConventionsController < ApplicationController
   # POST /conventions
   # POST /conventions.json
   def create
-    @convention = Convention.new(params[:convention])
+
+    @user=current_user
+    datepicker_adapter
+    @convention = Convention.create(params[:convention])
+    @convention.user_id = @user.id
 
     respond_to do |format|
       if @convention.save
-        format.html { redirect_to @convention, notice: 'Convention was successfully created.' }
+        format.html { redirect_to @convention, notice: 'Convention creata con successo.' }
         format.json { render json: @convention, status: :created, location: @convention }
       else
         format.html { render action: "new" }
@@ -60,7 +69,7 @@ class ConventionsController < ApplicationController
 
     respond_to do |format|
       if @convention.update_attributes(params[:convention])
-        format.html { redirect_to @convention, notice: 'Convention was successfully updated.' }
+        format.html { redirect_to @convention, notice: 'Convention modificata con successo.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,4 +89,23 @@ class ConventionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  #TODO Refactor this!!!
+  def datepicker_adapter
+    if params[:convention]["begin_date_only"]
+      /(\d\d)-(\d\d)-(\d\d\d\d)/ =~ params[:convention]["begin_date_only"]
+      params[:convention][:"begin_date(1i)"]=Regexp.last_match[3]
+      params[:convention][:"begin_date(2i)"]=Regexp.last_match[2]
+      params[:convention][:"begin_date(3i)"]=Regexp.last_match[1]
+      /(\d\d)-(\d\d)-(\d\d\d\d)/ =~ params[:convention]["end_date_only"]
+      params[:convention][:"end_date(1i)"]=Regexp.last_match[3]
+      params[:convention][:"end_date(2i)"]=Regexp.last_match[2]
+      params[:convention][:"end_date(3i)"]=Regexp.last_match[1]
+      params[:convention].delete("begin_date_only")
+      params[:convention].delete("end_date_only")
+    end
+  end
+
+
+
 end

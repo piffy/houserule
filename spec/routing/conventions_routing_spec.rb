@@ -8,7 +8,7 @@ describe ConventionsController do
     end
 
     it "routes to #new" do
-      get("users/1/conventions/new").should route_to("conventions#new", :user_id => "1")
+      get("conventions/new").should route_to("conventions#new")
     end
 
     it "routes to #show" do
@@ -20,7 +20,7 @@ describe ConventionsController do
     end
 
     it "routes to #create" do
-      post("/users/1/conventions").should route_to("conventions#create", :user_id => "1")
+      post("/conventions").should route_to("conventions#create")
     end
 
     it "routes to #update" do

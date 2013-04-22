@@ -19,7 +19,7 @@ describe Convention do
   it { should respond_to(:user) }
   it { should respond_to(:begin_date) }
   it { should respond_to(:end_date) }
-  it { should respond_to(:gcc) }
+  it { should respond_to(:facebook_url) }
   it { should respond_to(:linked_event_check)  }
   it { should respond_to(:image_url_or_default) }
   its(:user) { should == user }
@@ -39,8 +39,13 @@ describe Convention do
     it { should_not be_valid }
   end
 
-  describe "when name is blank" do
-    before { @convention.name = "" }
+  describe "when location is blank" do
+    before { @convention.location= "" }
+    it { should_not be_valid }
+  end
+
+  describe "when location is not present" do
+    before { @convention.location= nil }
     it { should_not be_valid }
   end
 
@@ -65,10 +70,10 @@ describe Convention do
   end
 
   describe "accessible attributes" do
-    it "should not allow access to user_id" do
+    it "should allow access to user_id" do
       expect do
-        Event.new(user_id: user.id)
-      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+        Convention.new(user_id: user.id)
+      end.should_not raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
 

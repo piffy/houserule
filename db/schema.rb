@@ -38,13 +38,15 @@ ActiveRecord::Schema.define(:version => 20130421102117) do
     t.string   "location"
     t.string   "website_url"
     t.string   "image_url"
-    t.string   "gcc"
+    t.string   "facebook_url"
     t.boolean  "linked_event_check", :default => false
     t.datetime "begin_date"
     t.datetime "end_date"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
+
+  add_index "conventions", ["name"], :name => "index_conventions_on_name", :unique => true
 
   create_table "events", :force => true do |t|
     t.string   "name"
