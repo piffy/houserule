@@ -1,5 +1,6 @@
 class ConventionsController < ApplicationController
   before_filter :logged_in_user
+  before_filter :has_rights_to,   only: [:edit, :update, :destroy]
   # GET /conventions
   # GET /conventions.json
   def index
@@ -66,7 +67,7 @@ class ConventionsController < ApplicationController
   # PUT /conventions/1.json
   def update
     @convention = Convention.find(params[:id])
-
+    datepicker_adapter
     respond_to do |format|
       if @convention.update_attributes(params[:convention])
         format.html { redirect_to @convention, notice: 'Convention modificata con successo.' }
@@ -106,6 +107,13 @@ class ConventionsController < ApplicationController
     end
   end
 
+  def has_rights_to
+    @convention = Convention.find(params[:id])
+    unless current_user?(@convention.user) || current_user.admin?
+      flash[:notice] = "Azione non consentita"
+      redirect_to convention_path(@convention)
+    end
+  end
 
 
 end

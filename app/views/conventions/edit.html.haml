@@ -1,7 +1,17 @@
-%h1 Editing convention
+=provide(:title, 'Modifica convention')
+%h1 Modifica convention
+
+%h2
+  Organizzatore:
+  %b
+    = link_to @convention.user.first_name_or_nick, @convention.user
 
 = render 'form'
 
-= link_to 'Show', @convention
-\|
-= link_to 'Back', conventions_path
+
+= link_to 'Dettagli', @convention,  :class => "btn"
+
+= link_to 'Calendario', conventions_path,  :class => "btn"
+
+= form_for(@convention,:method => :delete )  do |f|
+  = f.submit "Elimina", :class=>"btn btn-danger",  :confirm => 'Sei sicuro?'
