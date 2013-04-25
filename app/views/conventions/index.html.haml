@@ -1,35 +1,40 @@
-%h1 Listing conventions
+=provide(:title, 'Calendario Convention')
+%h1 Calendario Convention
+
+
+=#if current add .info style
+
+%ul{:id => id="myTab",:class=>"nav nav-tabs"}
+  %li{:class =>"active"}
+    %a{ :href=>"#list_view", "data-toggle"=>"tab"}
+      Elenco
+  %li{:class =>"disabled"}
+    %a{:href=>"#calendar_view","data-toggle"=>"tab"}
+      Calendario
 
 %table
   %tr
-    %th Name
-    %th Description
-    %th User
-    %th Location
-    %th Website url
-    %th Image url
-    %th Facebook
-    %th Begin date
-    %th End date
-    %th
-    %th
-    %th
 
   - @conventions.each do |convention|
-    %tr
-      %td= convention.name
-      %td= convention.description
-      %td= convention.user_id
-      %td= convention.location
-      %td= convention.website_url
-      %td= convention.image_url
-      %td= convention.facebook_url
-      %td= convention.begin_date
-      %td= convention.end_date
-      %td= link_to 'Show', convention
-      %td= link_to 'Edit', edit_convention_path(convention)
-      %td= link_to 'Destroy', convention, :confirm => 'Are you sure?', :method => :delete
+    %tr{:class=>"table table-striped convention_listing_item clrfix"}
+      %td{:class=>"convention_logo span1"}
+        =link_to (image_tag convention.image_url_or_default, :alt => "Convention logo", :id =>"convention-logo", :class => "icon64" ),convention
+      %td{:class=>"convention_info span10"}
+        %h3= link_to convention.name, convention
+        Organizzato da:
+        = link_to convention.user.first_name_or_nick, convention.user
 
-%br
+        %h4
+          %i{:class=>"icon-map-marker"}
+          = convention.location
+        %h4
+          %i{:class=>"icon-calendar"}
+          = l(convention.begin_date.to_date)
+          =" &divide; ".html_safe + l(convention.end_date.to_date)  unless  convention.begin_date.to_date == convention.end_date.to_date
+      %td{:class=>"convention_links span1" }
+        = link_to(image_tag("home.png", alt: "home lnk", class: "icon24"),convention.website_url) unless convention.website_url.blank?
+        = link_to(image_tag("facebook_32.png", alt: "fb lnk", class: "icon24"),convention.facebook_url)  unless convention.facebook_url.blank?
+        =# link_to(image_tag("eb-icon_large.png", alt: "eb lnk", class: "icon24"),"http://www.eventbrite.it")
 
-=# link_to 'New Convention', new_convention_path
+
+= link_to 'Organizza convention', new_convention_path, :class => "btn"

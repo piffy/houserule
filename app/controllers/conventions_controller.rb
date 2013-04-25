@@ -1,5 +1,5 @@
 class ConventionsController < ApplicationController
-  before_filter :logged_in_user
+  before_filter :logged_in_user, except: [:index]
   before_filter :has_rights_to,   only: [:edit, :update, :destroy]
   # GET /conventions
   # GET /conventions.json
