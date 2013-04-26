@@ -4,7 +4,16 @@ class ConventionsController < ApplicationController
   # GET /conventions
   # GET /conventions.json
   def index
-    @conventions = Convention.all
+    @conventions = Convention.incoming.order(:begin_date).all
+    @selectionc =  params[:selectionc] || session[:selectionc] || :incoming
+
+    #preserve selection is session
+    if params[:selectionc] != session[:selectionc]
+      session[:selectionc] = params[:selectionc]
+      redirect_to :selectionc => @selectionc and return
+    end
+
+    @conventions =Convention.send(@selectionc).order(:begin_date).all
 
     respond_to do |format|
       format.html # index.html.erb

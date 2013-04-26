@@ -2,21 +2,25 @@
 %h1 Calendario Convention
 
 
-=#if current add .info style
-
-%ul{:id => id="myTab",:class=>"nav nav-tabs"}
-  %li{:class =>"active"}
-    %a{ :href=>"#list_view", "data-toggle"=>"tab"}
-      Elenco
-  %li{:class =>"disabled"}
-    %a{:href=>"#calendar_view","data-toggle"=>"tab"}
-      Calendario
+= form_tag conventions_path, :method => :get, :id => 'filter_form',:html => {:class => "form-horizontal"} do
+  %span{:class =>"label label-info" }
+    = radio_button_tag 'selectionc', 'incoming', @selectionc=='incoming'
+    In arrivo
+    %span{:class =>"label label-info" }
+    = radio_button_tag 'selectionc', 'past', @selectionc=='past'
+    Terminate
+    %span{:class =>"label label-info" }
+  %br
+  = submit_tag 'Aggiorna', :id => 'filter_submit', :class=> "btn btn-small"
 
 %table
   %tr
 
   - @conventions.each do |convention|
-    %tr{:class=>"table table-striped convention_listing_item clrfix"}
+    - if convention.begin_date.to_date>=Date.today
+      - style="info"
+
+    %tr{:class=>"table table-striped convention_listing_item clrfix #{style}"}
       %td{:class=>"convention_logo span1"}
         =link_to (image_tag convention.image_url_or_default, :alt => "Convention logo", :id =>"convention-logo", :class => "icon64" ),convention
       %td{:class=>"convention_info span10"}

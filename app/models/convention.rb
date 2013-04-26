@@ -9,6 +9,9 @@ class Convention < ActiveRecord::Base
   validates_uniqueness_of :name, :message => "in uso" , :case_sensitive => false
   validates_presence_of :location, :message => "non deve essere vuoto"
 
+  scope :incoming, lambda { {:conditions => ["begin_date >= ?", Date.today ]} }
+  scope :past, lambda { {:conditions => ["end_date < ?", Date.today ]} }
+
   # Returns convention image url. If it is empty, returns default icon
   def image_url_or_default
     unless self.image_url.nil?  ||   self.image_url.empty?
