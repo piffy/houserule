@@ -1,33 +1,53 @@
-%p#notice= notice
-
-%p
-  %b Name:
+=provide(:title, 'Dettagli convention')
+%h1
   = @convention.name
-%p
-  %b Description:
-  = @convention.description
-%p
-  %b User:
-  = @convention.user_id
-%p
-  %b Location:
-  = @convention.location
-%p
-  %b Website url:
-  = @convention.website_url
-%p
-  %b Image url:
-  = @convention.image_url
-%p
-  %b Facebook:
-  = @convention.facebook_url
-%p
-  %b Begin date:
-  = @convention.begin_date
-%p
-  %b End date:
-  = @convention.end_date
 
-= link_to 'Edit', edit_convention_path(@convention)
-\|
-= link_to 'Back', conventions_path
+%div{class:"row"}
+  %aside{class:"span4"}
+    %section
+      %h1
+        = image_tag @convention.image_url_or_default, :alt => "Convention logo", :id =>"convention-logo", :class => "gravatar"
+    %p
+      =simple_format("<b>Descrizione: </b>"+@convention.description, :id => "description")
+
+  %div{:class =>"span4"}
+    - unless @convention.website_url.blank?
+      %p
+        %b
+        = link_to "Sito web", @convention.website_url
+    %p
+      %b
+        Luogo:
+      = @convention.location
+
+
+  %div{:class =>"span4"}
+    %h3
+      %b
+        Organizzato da:
+    %ul{class:"users"}
+      %li{class:"no-bullet"}
+        %span
+          = gravatar_for @convention.user, 32
+          = link_to @convention.user.name, user_path(@convention.user), id:"convention_owner"
+    %br
+
+%hr
+%div{:class =>"row"}
+  %div{:class =>"span12"}
+    %h3
+      Eventi collegati:
+      =# " ("+@convention.events.count.to_s+"):"
+    %br
+    =# render "shared/list_event", :events => @convention.events , :show_organizer => true, :group => @convention
+
+%hr
+
+%div{:class =>"row"}
+  %div{:class =>"span8"}
+    %p
+      %nbsp
+      = link_to 'Indietro', conventions_path, :class => "btn"
+      = link_to 'Modifica', edit_convention_path(@convention), :class => "btn"  if !current_user.nil? && (current_user==@convention.user || current_user.admin? )
+      =# link_to 'Collega evento', new_group_linked_event_path(@convention),:class=>"btn" unless current_user.nil?
+      =# link_to 'Organizza evento collegato', new_group_event_path(@convention),:class=>"btn" unless current_user.nil?

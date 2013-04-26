@@ -41,3 +41,7 @@ E /^che la convention si svolge(?:|va) (oggi|ieri)$/ do  |today|
   c.end_date=c.begin_date
   c.save!
 end
+
+Dato /^vado alla pagina di visualizzazione di una convention$/ do
+  visit convention_path(Convention.first)
+end
