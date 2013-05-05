@@ -123,6 +123,10 @@ class EventsController < ApplicationController
       @group=Group.find(params[:group_id])
       flash.now[:notice]  ="Questo evento sarà collegato al gruppo '#{@group.name}'"
     end
+    unless (params[:convention_id].nil?)
+      @convention=Convention.find(params[:convention_id])
+      flash.now[:notice]  ="Questo evento sarà proposto per essere inserito nella convention '#{@convention.name}'"
+    end
 
 
 
@@ -144,6 +148,7 @@ class EventsController < ApplicationController
     params[:event].delete("user_id")
     @event = current_user.events.build(params[:event])
     @event.status=0; #proposed
+    @convention=Convention.find(params[:convention][:id]) unless params[:convention].nil?
     msg = "Evento creato!"
     if @event.save
       unless (params[:group].nil?)
@@ -153,6 +158,16 @@ class EventsController < ApplicationController
           msg = msg +" L'evento, inoltre, è collegato al gruppo #{@group.name}"
         end
       end
+      unless (params[:convention].nil?)
+
+        @convention=Convention.find(params[:convention][:id])
+        @event.begins_at=@convention.begin_date
+        @event.deadline=@event.begins_at
+        @convention.link(@event)
+        msg = msg +" Evento proposto per la convention #{@convention.name}"
+      end
+
+
       flash[:success] = msg
       redirect_to event_event_wizard_path(@event,"game")
     else
@@ -189,6 +204,20 @@ end
       format.json { head :no_content }
     end
   end
+
+  def convention_unlink
+    @event = Event.find(params[:event_id])
+    convention=@event.convention
+    if convention.nil?
+      flash[:warning] = "Evento non associato"
+    else
+      convention.unlink(@event)
+      flash[:success] = "Evento rimosso dal programma"
+    end
+
+    render 'edit'
+  end
+
 end
 
 private

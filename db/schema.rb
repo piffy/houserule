@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421102117) do
+ActiveRecord::Schema.define(:version => 20130429161553) do
 
   create_table "archived_events", :force => true do |t|
     t.string   "name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130421102117) do
     t.boolean  "invite_only",                       :default => false
     t.boolean  "reservation_locked",                :default => false
     t.integer  "waiting_list",                      :default => 0
+    t.integer  "convention_id"
   end
 
   add_index "events", ["begins_at"], :name => "index_events_on_begins_at"

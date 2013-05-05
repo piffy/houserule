@@ -1,0 +1,15 @@
+=provide(:title, 'Proposta inserimento convention')
+%h1
+  Proposta di inserimento di
+  =@event.name
+  nel programma di una convention
+-unless @conventions.each.any?
+  %h3 Nessuna convention compatibile
+-else
+  =render "list_convention"
+
+%div{:class =>"row"}
+  %div{:class =>"span8"}
+    %p
+      %nbsp
+      = link_to 'Indietro', event_path(@event), :class => "btn"

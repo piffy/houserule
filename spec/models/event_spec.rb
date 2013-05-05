@@ -30,6 +30,7 @@ describe Event do
   it { should respond_to(:invite_only) }
   it { should respond_to(:reservation_locked) }
   it { should respond_to(:waiting_list) }
+  it { should respond_to(:convention_id) }
   its(:user) { should == user }
 
   describe "when everything is OK" do
@@ -120,6 +121,31 @@ describe Event do
     @event.waiting_list=-1;
     @event.should_not be_valid
   end
+
+  describe "Convention"  do
+    it "should be linkable to a convention"  do
+      convention= FactoryGirl.create(:convention, :user => user)
+      convention.save
+      @event.convention_id=convention.id
+      @event.should be_valid
+      @event.convention.name.should == convention.name
+      @event.status.should == 4
+    end
+
+    it "should be unlinkable with no ill effect"  do
+      convention= FactoryGirl.create(:convention, :user => user)
+      convention.save
+      @event.convention_id=convention.id
+      @event.should be_valid
+      @event.save
+      convention.destroy
+      @event.should be_valid
+      @event.convention.should be_nil
+      @event.status.should == 0
+    end
+
+  end
+
 
   describe "accessible attributes" do
     it "should not allow access to user_id" do

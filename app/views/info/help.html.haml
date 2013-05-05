@@ -162,16 +162,94 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   = link_to 'Messaggi', "#", :class=>"btn"
   invece, potrete inviare messaggi a chi si è iscritto al vostro evento e, allo stesso modo,
   gli iscritti potranno comuncare con voi
+%a{:name => "conventions"}
+  %nbsp
+
+%h2
+  Convention
+%p
+  Le convention sono un raggruppamento di eventi che si svolgono, in genere, all'interno di uno stesso periodo e all' interno
+  di uno stesso luogo.Il sistema si presta bene per convention per la gestione di piccoli ritrovi amatoriali, ma non ha la pretesa
+  di gestire eventi molto grandi tipo PLAY, Lucca Games o simili. In particolare, il programma non gestisce le iscrizioni nè i biglietti
+  (in futuro potrebbe essere integrato con siti specializzati quali Eventbrite).
+%p
+  Un evento può far parte del programma di una sola convention (può però far parte di più gruppi, vedi oltre).
+  L'evento deve avere date e orari precisi
+  per essere incluso nel programma: fintanto che ne fa parte, tali dati
+  %b non possono
+  essere modificati.
+%h3
+  Creazione e amministrazione
+%p
+  Per creare una convention occorre per prima cosa andare all'elenco convention, selezionando dal menu principale, in alto a destra, la voce
+  = link_to 'Convention', "#"
+  proprio sotto alla voce "Eventi". Qui potete scegliere il menu
+  = link_to 'Organizza convention', "#" , :class => "btn"
+  Succesivamente, dovrete inserire alcune informazioni: in particolare l'inserimento delle date e del luogo è obbligatorio.
+  Premendo invia la vostra convention è creata e apparirà nel Calendario convention.
+  %b Nota:
+  In questo modo siete amministratore della convention in modo quasi "irreversibile"
+%p
+  Dall'elenco delle convention, facendo click sul nome, potrete vedere i dettagli della convention e (in futuro) gli eventi che
+  ne fanno parte. Potete anche modificarne i dati ed eventualmente cancellarla.
+%h3
+  Link a evento
+%p
+  Ci sono due modi per inserire un evento in una convention.
+  %ul
+    %li
+      Il primo consiste nel creare un nuovo evento collegato alla convention. Andate alla pagina della convention, e troverete il pulsante
+      = link_to 'Proponi evento', "#" , :class => "btn"
+      Create un evento con le solite modalità, ma troverete preimpostate date e luoghi compatibili con la convention
+    %li
+      Se volete proporre un evento esistente, basta andare nella pagina di visualizzazione di un evento di cui siete amministratori
+      e premete
+      = link_to 'Proponi per convention', "#" , :class => "btn"
+      Apparirà un elenco delle convention le cui date sono
+      %b
+        compatibili
+      con l'evento (potrebbe essere vuota!). Scegliete quella che vi interessa  e scegliete
+      = link_to 'Proponi', "#" , :class => "btn btn-default"
+
+
+  Dall'elenco delle convention, facendo click sul nome, potrete vedere i dettagli della convention e (in futuro) gli eventi che
+  ne fanno parte. Potete anche modificarne i dati ed eventualmente cancellarla.
+
+%h3
+  Approvazione, rifiuto e rimozione di un evento del programma
+%p
+  Per far parte ufficialmente del programma di una con, l'amministratore della stessa deve approvarla. Nel programma della con troverete una
+  %abbr{:title=>"Proposto"}
+    (P)
+  oppure una
+  %abbr{:title=>"Confermato"}
+    (C)
+  di fianco all'evento che vi indicano lo stato dell'evento
+
+  Per approvare (o rifutare)l'evento l'amministratore della convention deve soltanto fare click su
+  %a{href: "#"}
+    %i{:class=>"icon-ok"}
+    Approva
+  %a{href:"#"}
+    %i{:class=>"icon-remove"}
+    Rifiuta
+%p
+  L'amministratore dell'
+  %b evento
+  invece può rimuovere l'evento del programma, in ogni momento, tramite il pulsante
+  = link_to 'Rimuovi dal programma',  "#", :class=>"btn btn-warning"
+  presente nella modifica degli eventi
+
 %a{:name => "groups"}
   %nbsp
+
 %h2
   Gruppi
 %p
   I gruppi hanno po' le stesse funzionalità dei gruppi dei social networks, riunendo utenti con
-  interessi simili (in questo sistema le funzioni sono molto più semplici). Se non avete troppe pretese, possono essere
-  utilizzate anche per organizzare eventi per piccole convention, radunando in un unico posto un gruppo di eventi collegati
-  %br
-  Oppure, più semplicemente, possono essere utizzati alla stregua dei "tag" dei vari social network.
+  interessi simili (in questo sistema le funzioni sono molto più semplici). Possono essere utilizzate per indicare l'appartenenza
+  di un evento a una particolare categoria [come dei 'tag'], per comunicare eventi all'interno del gruppo e altro ancora.
+
 %p
   Potete trovare l'elenco dei gruppi scegliendo la voce "Gruppi" dal menu. Se un gruppo vi interessa,
   premete il pulsante
@@ -190,14 +268,8 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   In particolare, potrete "bannare" utenti che non volete facciano parte del vostro gruppo (ma solo dopo che questi si sono iscritti, non vogliamo
   fare una battaglia preventiva ).
 %p
-  Alcuni elementi richiedono una spiegazione particolare:
+  Questo elemento  richiede una spiegazione particolare:
   %dl{class:"dl-horizontal"}
-    %dt
-      = check_box_tag :is_convention
-      È una convention
-    %dd
-      Questo indica che il gruppo si riferisce ad un evento strutturato (come Play, Origins, Lucca Games). Fra breve sarà possibile
-      raggruppare e visualizzare in modo organico eventi inseriti in questo contesto
     %dt
       Mailing list
       %br
@@ -219,10 +291,13 @@ Le informazioni di secondo livello (organizzatore, stato dell'evento, persone pr
   %br
   Gli eventi collegati ad un evento appaiono nella pagina di descrizione del gruppo. Allo stesso modo, il gruppo appare nella pagina di
   dettaglio dell'evento.
+%p
+  L'amministratore di un gruppo ha la possibilità di inserire e rimuovere nominativi all'interno del gruppo. In casi particolari, si può bandire in modo permanente un utente dal gruppo
+
   '
 
 %h2
-  Inviti
+  Inviti ad eventi
 %p
   Se lo si desidera, l'organizzatore può invitare direttamente uno o più giocatori (che in questo caso devono essere utenti già registrati nel sistema)
   Se il giocatore accetta, sarà automaticamente prenotato per l'evento in questione. Se rinuncia, non potrà più farlo.

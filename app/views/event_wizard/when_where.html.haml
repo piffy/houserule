@@ -8,29 +8,49 @@
 
   = render 'error_messages'
 
-
-  %div{:class=>"row-fluid"}
-    %div{:class=>"span6"}
-      .field
-        = f.label :duration, 'Durata', :title => "Indicare la durata, se possibile, in ore"
-        = f.text_field :duration, :placeholder => "Siate brevi: 4h. 1d, tutto il giorno..."
-    %div{:class=>"span3"}
-      .field
-        %label Tipo di evento
-        %input{type:"radio", name:"date_type", value:"NODATE", id: "no_date",
-          onclick:"alert('Sicuro? In questo modo le iscrizioni non sono possibili, inviti e prenotazioni saranno eliminati!')" } Data non stabilita
+  -if @event.status==2
+    %div{:class=>"row-fluid"}
+      %div{:class=>"span12"}
+        .field
+          = f.label :duration, 'Durata', :title => "Indicare la durata, se possibile, in ore"
+          = f.text_field :duration, :placeholder => "Siate brevi: 4h. 1d, tutto il giorno..."
+    %div{:class=>"row-fluid"}
+      %div{:class=>"span12"}
         %br
-        %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" , checked: @no_deadline} Senza data limite prenotazioni
-    %div{:class=>"span3"}
-      .field
-        %br
-        %input{type:"radio", name:"date_type", id: "standard", value:"STANDARD", checked: !@no_deadline} Con data limite prenotazioni
-        %br
-        %input{type:"radio", name:"date_type", id: "repeating", value:"REPEATING", :disabled=> true} Ripetuto
+        %p
+          Data e ora:
+          = l(@event.begins_at, :format => :long)
+          = "("+@event.duration+")" unless @event.duration.blank?
+          - unless @event.begins_at.nil? || @event.deadline.nil? || @event.deadline == @event.begins_at
+            \-
+            Deadline:
+            = l(@event.deadline, :format => :long)
+          %abbr{:title=>"Trattandosi di un evento confermato, date e orari non possono essere modificati"}
+            %i{:class=>"icon-question-sign"}
+  -else
+
+    %div{:class=>"row-fluid"}
+      %div{:class=>"span6"}
+        .field
+          = f.label :duration, 'Durata', :title => "Indicare la durata, se possibile, in ore"
+          = f.text_field :duration, :placeholder => "Siate brevi: 4h. 1d, tutto il giorno..."
+      %div{:class=>"span3"}
+        .field
+          %label Tipo di evento
+          %input{type:"radio", name:"date_type", value:"NODATE", id: "no_date",
+            onclick:"alert('Sicuro? In questo modo le iscrizioni non sono possibili, inviti e prenotazioni saranno eliminati!')" } Data non stabilita
+          %br
+          %input{type:"radio", name:"date_type", id:"no_deadline", value:"NODEADLINE" , checked: @no_deadline} Senza data limite prenotazioni
+      %div{:class=>"span3"}
+        .field
+          %br
+          %input{type:"radio", name:"date_type", id: "standard", value:"STANDARD", checked: !@no_deadline} Con data limite prenotazioni
+          %br
+          %input{type:"radio", name:"date_type", id: "repeating", value:"REPEATING", :disabled=> true} Ripetuto
 
 
-  %br
-  %div{:class=>"row-fluid"}
+    %br
+    %div{:class=>"row-fluid"}
     %div{:class=>"span3"}
       .field
         = f.label :begins_at, "Inizio il "

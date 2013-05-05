@@ -21,6 +21,80 @@ class ConventionsController < ApplicationController
     end
   end
 
+
+  def propose
+    @event = Event.find(params[:event_id])
+    @conventions = Convention.starting_after(@event.begins_at).ending_before(@event.begins_at)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @convention }
+    end
+  end
+
+  def link
+    @convention=Convention.find(params[:event][:convention_id])
+    @event = Event.find(params[:event_id])
+
+
+      respond_to do |format|
+        if @convention.compatible_with?(@event) && @event.convention_id.nil?
+          @convention.link(@event)
+          format.html { redirect_to @convention, notice: "Evento proposto per la convention #{@convention.name}" }
+          format.json { render json: @convention, status: :created, location: @convention }
+        else
+          format.html { redirect_to @convention, error: "Evento incompatibile" }
+          format.json { render json: @convention.errors, status: :unprocessable_entity }
+        end
+      end
+
+  end
+
+  def approve
+    @event = Event.find(params[:event_id])
+    redirect_to @event and return  if @event.convention.nil?
+    @convention=Convention.find(@event.convention_id)
+
+    respond_to do |format|
+      if @convention.compatible_with?(@event) && @event.status==4
+        @event.status=2
+        @event.save
+        format.html { redirect_to @convention, notice: "Evento confermato per il programma di #{@convention.name}" }
+        format.json { render json: @convention, status: :created, location: @convention }
+      else
+        format.html { redirect_to @convention, error: "Evento incompatibile" }
+        format.json { render json: @convention.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def disapprove
+    @event = Event.find(params[:event_id])
+    redirect_to @event and return  if @event.convention.nil?
+    @convention=Convention.find(@event.convention_id)
+
+    respond_to do |format|
+      if @event.status==4 || @event.status==2
+        @event.convention_id=nil
+        if (@event.deadline==@event.begins_at) && (@event.begins_at==nil)
+          @event.status=0
+        else
+          @event.status=1
+        end
+        @event.save
+        format.html { redirect_to @convention, notice: "Evento rimosso dal programma il programma di #{@convention.name}" }
+        format.json { render json: @convention, status: :created, location: @convention }
+      else
+        format.html { redirect_to @convention, error: "Errore di sistema" }
+        format.json { render json: @convention.errors, status: :unprocessable_entity }
+
+
+      end
+    end
+
+  end
+
+
   # GET /conventions/1
   # GET /conventions/1.json
   def show

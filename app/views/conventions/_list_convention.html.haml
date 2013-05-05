@@ -1,0 +1,28 @@
+%table
+  %tr
+
+    - @conventions.each do |convention|
+      - if convention.begin_date.to_date>=Date.today
+        - style="info"
+
+      %tr{:class=>"table table-striped convention_listing_item clrfix #{style}"}
+        %td{:class=>"convention_logo span1"}
+          =link_to (image_tag convention.image_url_or_default, :alt => "Convention logo", :id =>"convention-logo", :class => "icon48" ),convention
+        %td{:class=>"convention_info span10"}
+          %h3= link_to convention.name, convention
+
+          %h4
+            %i{:class=>"icon-map-marker"}
+            = convention.location
+          %p
+            %i{:class=>"icon-calendar"}
+            = l(convention.begin_date.to_date)
+            =" &divide; ".html_safe + l(convention.end_date.to_date)  unless  convention.begin_date.to_date == convention.end_date.to_date
+        %td{:class=>"convention_links span1" }
+          = form_for(@event, url: event_propose_path(@event) )  do |f|
+            = f.hidden_field :convention_id, :value => convention.id
+            = f.submit "Proponi", :class => "btn btn-primary"
+
+          = link_to(image_tag("home.png", alt: "home lnk", class: "icon24"),convention.website_url) unless convention.website_url.blank?
+          = link_to(image_tag("facebook_32.png", alt: "fb lnk", class: "icon24"),convention.facebook_url)  unless convention.facebook_url.blank?
+          =# link_to(image_tag("eb-icon_large.png", alt: "eb lnk", class: "icon24"),"http://www.eventbrite.it")

@@ -21,3 +21,25 @@
         -else
           %span{:class => "delete_button"}
             =  link_to "-",edit_group_linked_event_path(group,event), :class => "btn btn-small"
+      -if defined?(convention) && current_user
+        -if current_user==convention.user
+
+          -if event.status ==4
+            %span{:class=>"badge badge-warning"}
+              %abbr{:title=>"Proposto"}
+                (P)
+            %a{href: event_approve_path(event)}
+              %i{:class=>"icon-ok"}
+              Approva
+            %a{href:event_disapprove_path(event)}
+              %i{:class=>"icon-remove"}
+              Rifiuta
+
+          -if event.status ==2
+            %span{:class=>"badge badge-success"}
+              %abbr{:title=>"Confermato"}
+                (C)
+            %a{href:event_disapprove_path(event)}
+              %i{:class=>"icon-remove"}
+              Rimuovi
+

@@ -69,6 +69,7 @@ describe Convention do
     @convention.should_not be_valid
   end
 
+
   describe "accessible attributes" do
     it "should allow access to user_id" do
       expect do
@@ -76,5 +77,50 @@ describe Convention do
       end.should_not raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
+
+  describe "linking events"  do
+    it "should be linkable to a compatible event"  do
+      event= FactoryGirl.create(:event, :user => user)
+      event.begins_at=@convention.begin_date
+      event.deadline=@convention.begin_date
+      event.should be_valid
+      event.save
+      @convention.compatible_with?(event).should be_true
+      @convention.link(event).should be_true
+    end
+
+    it "should not be linkable to an incompatible event"  do
+      event= FactoryGirl.create(:event, :user => user)
+      event.begins_at=@convention.begin_date-1.day
+      event.deadline=@convention.begin_date-1.day
+      event.should be_valid
+      event.save
+      @convention.compatible_with?(event).should be_false
+      @convention.link(event).should be_false
+    end
+
+    it "should not be linkable to an indetermined event"  do
+      event= FactoryGirl.create(:event, :user => user)
+      event.begins_at=nil
+      event.deadline=nil
+      event.should be_valid
+      event.save
+      @convention.compatible_with?(event).should be_false
+      @convention.link(event).should be_false
+    end
+
+    it "should be unlinkable with no ill effect"  do
+      event= FactoryGirl.create(:event, :user => user)
+      event.save
+      event.convention_id=@convention.id
+      event.should be_valid
+      event.convention.name.should == @convention.name
+      @convention.destroy
+      event.should be_valid
+      #event.convention.should be_nil
+    end
+
+  end
+
 
 end

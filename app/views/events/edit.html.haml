@@ -2,6 +2,12 @@
 %h1
   = @event.name
 
+-unless @event.convention.nil?
+  %h2
+    In programma per '
+    =link_to(@event.convention.name,@event.convention)
+    \'
+
 = render 'step_banner', :creation => false
 
 = render 'form'
@@ -11,3 +17,6 @@
 = link_to 'Elimina', @event, :confirm => 'Sei sicuro?', :method => :delete ,:class=>"btn btn-danger"
 
 = link_to 'Elenco eventi', events_path, :class=>"btn"
+
+-unless @event.convention.nil?
+  = link_to 'Rimuovi dal programma',  event_convention_unlink_path(@event), :confirm => 'Sei sicuro?', :method => :put ,:class=>"btn btn-warning"

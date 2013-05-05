@@ -19,5 +19,8 @@
             -if defined?(@group)
               =# hidden_field :group, :value => @group.id.to_s
               =hidden_field :group, :id, :value=>@group.id
+            -if defined?(@convention)
+              =hidden_field :convention, :id, :value=>@convention.id
         .actions
           = f.submit(:class=>"btn btn-primary", :value => 'Prossimo')
+

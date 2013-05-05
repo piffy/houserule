@@ -24,7 +24,6 @@ Scenario:   Navigazione e Modifica
   E      inserisco in "group_website_url" "http://www.example.com"
   E      inserisco in "group_image_url" "http://images1.informazione.it/OO2o4kTgOElXZx88CZ0u80LjbZ83C1CYkKW2cePI9Qi1udl0oESef2IoG29j0CnJ"
   E      inserisco in "group_mailing_list" "mailing_list@email.it"
-  E      seleziono la casella "group_is_convention"
   Quando premo "Invia"
   Allora  dovrei essere nella pagina di dettagli del gruppo "Un nome cambiato"
   E dovrei vedere "Gruppo modificato"

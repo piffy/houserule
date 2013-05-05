@@ -8,13 +8,20 @@
       %h1
         = image_tag @convention.image_url_or_default, :alt => "Convention logo", :id =>"convention-logo", :class => "gravatar"
     %p
-      =simple_format("<b>Descrizione: </b>"+@convention.description, :id => "description")
+      =simple_format("<b>Descrizione: </b>"+@convention.description, :id => "description")  unless @convention.description.nil?
 
   %div{:class =>"span4"}
     - unless @convention.website_url.blank?
       %p
         %b
         = link_to "Sito web", @convention.website_url
+    %p
+      %b Inizio:
+      =l(@convention.begin_date.to_date)
+    %p
+      %b Fine:
+      =l(@convention.end_date.to_date)
+
     %p
       %b
         Luogo:
@@ -31,15 +38,16 @@
           = gravatar_for @convention.user, 32
           = link_to @convention.user.name, user_path(@convention.user), id:"convention_owner"
     %br
+    =link_to 'Proponi evento', new_convention_event_path(@convention),:class=>"btn" unless current_user.nil?
 
 %hr
 %div{:class =>"row"}
   %div{:class =>"span12"}
     %h3
-      Eventi collegati:
-      =# " ("+@convention.events.count.to_s+"):"
+      Eventi collegati
+      = " ("+@convention.events.count.to_s+"):"
     %br
-    =# render "shared/list_event", :events => @convention.events , :show_organizer => true, :group => @convention
+    = render "shared/list_event", :events => @convention.events , :show_organizer => true, :convention => @convention
 
 %hr
 
@@ -49,5 +57,5 @@
       %nbsp
       = link_to 'Indietro', conventions_path, :class => "btn"
       = link_to 'Modifica', edit_convention_path(@convention), :class => "btn"  if !current_user.nil? && (current_user==@convention.user || current_user.admin? )
-      =# link_to 'Collega evento', new_group_linked_event_path(@convention),:class=>"btn" unless current_user.nil?
+
       =# link_to 'Organizza evento collegato', new_group_event_path(@convention),:class=>"btn" unless current_user.nil?

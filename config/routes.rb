@@ -1,6 +1,9 @@
 Houserule::Application.routes.draw do
 
-  resources :conventions
+  resources :conventions do
+    resources :events, only: [:new]
+  end
+
 
   resources :reputations
 
@@ -33,6 +36,11 @@ Houserule::Application.routes.draw do
     match  'archived_events', :to => "archived_events#create", :via => :post
     match  'announcements/compose', :to => "announcements#compose", :as => "compose"
     match  'announcements/deliver', :to => "announcements#deliver", :as => "deliver" , :via => :post
+    match  'propose', :to=> "conventions#propose", :via => :get
+    match  'propose', :to=> "conventions#link", :via => :put
+    match  'approve', :to=> "conventions#approve"
+    match  'disapprove', :to=> "conventions#disapprove"
+    match  'convention_unlink', :to=> "events#convention_unlink", :via => :put
   end
 
   match 'users/:id/deactivate', :to => 'users#deactivate'

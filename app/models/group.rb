@@ -1,12 +1,11 @@
 class Group < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :description, :image_url, :location, :name, :website_url, :convention, :mailing_list, :is_convention
+  attr_accessible :description, :image_url, :location, :name, :website_url, :mailing_list
 
   valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :mailing_list, :format     => { with: valid_email_regex },
             :allow_blank => true, :allow_nil => true
-  validates :is_convention, :inclusion => {:in => [true, false]}
 
   validates :name, presence: true, :uniqueness => { case_sensitive: false }
   before_save :smart_add_url_protocol

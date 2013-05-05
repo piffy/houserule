@@ -9,6 +9,8 @@
   %h1
     = '"'+@event.name+'"'
 
+
+
 %div{class:"row"}
   %aside{class:"span4"}
     %section
@@ -41,6 +43,14 @@
       %p
         %b Sistema di gioco:
         = @event.system
+    -unless @event.convention.nil?
+      %p
+        %span{:class => "name"}
+          %a{:href => convention_path(@event.convention)}
+            = image_tag @event.convention.image_url_or_default, :alt => "logo", :class =>"tiny-group-logo"
+            = @event.convention.name
+
+
     %p
       %b Data e ora:
       - if @event.begins_at.nil?
@@ -114,6 +124,7 @@
         = link_to 'Prenota', new_event_reservation_path(@event), :class=>"btn btn-success"   unless @event.check_time>0
     -if !current_user.nil? && (current_user==@event.user || current_user.admin? )
       = link_to 'Modifica Evento', edit_event_path(@event), :class=>"btn"
+      = link_to 'Proponi per convention', event_propose_path(@event) , :class=>"btn"  if @event.convention.nil?
       = link_to 'Archivia', event_archive_path(@event) , :class=>"btn"  unless @event.begun?
 
     = link_to 'Elenco eventi', events_path, :class=>"btn"

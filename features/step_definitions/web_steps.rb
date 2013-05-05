@@ -143,6 +143,21 @@ Quando /^seleziono la prima casella$/ do
   check(find("input[type='checkbox']"))
 end
 
+Then /^il campo "([^\"]*)" dovrebbe contenere "([^\"]*)"$/ do |field, value|
+  field_labeled(field).value.should =~ /#{value}/
+end
+
+Then /^dovrei( non)? vedere il campo "([^"]*)"$/ do |negate, name|
+  expectation = negate ? :should_not : :should
+  begin
+    field = find_field(name)
+  rescue Capybara::ElementNotFound
+    # In Capybara 0.4+ #find_field raises an error instead of returning nil
+  end
+  field.send(expectation, be_present)
+end
+
+
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield

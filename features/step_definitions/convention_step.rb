@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Allora /^dovrei essere nella pagina di dettagli di una convention$/ do
   c=Convention.first
   assert_equal convention_path(c), URI.parse(current_url).path
@@ -44,4 +46,24 @@ end
 
 Dato /^vado alla pagina di visualizzazione di una convention$/ do
   visit convention_path(Convention.first)
+end
+
+E /^un evento compatibile attende l'approvazione per una convention$/ do
+  c=Convention.first
+  e=Event.first
+  e.begins_at=c.begin_date
+  e.deadline=e.begins_at
+  e.save
+  c.link(e)
+end
+
+E /^l'evento è stato confermato$/ do
+  e=Event.first
+  e.status=2
+  e.save
+end
+
+Quando /^la convention viene distrutta$/ do
+  c=Convention.first
+  c.destroy
 end
