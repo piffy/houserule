@@ -123,16 +123,30 @@ describe Event do
   end
 
   describe "Convention"  do
-    it "should be linkable to a convention"  do
+    it "should be linkable to a convention, if compatible"  do
       convention= FactoryGirl.create(:convention, :user => user)
+      convention.begin_date=@event.begins_at
+      convention.end_date=@event.begins_at
       convention.save
-      @event.convention_id=convention.id
+      convention.link(@event)
       @event.should be_valid
       @event.convention.name.should == convention.name
       @event.status.should == 4
     end
 
     it "should be unlinkable with no ill effect"  do
+      convention= FactoryGirl.create(:convention, :user => user)
+      convention.begin_date=@event.begins_at
+      convention.end_date=@event.begins_at
+      convention.save
+      convention.link(@event)
+      convention.unlink(@event)
+      @event.should be_valid
+      @event.convention.should be_nil
+      @event.status.should == 1
+    end
+
+    it "should be OK if convention is destroyed"  do
       convention= FactoryGirl.create(:convention, :user => user)
       convention.save
       @event.convention_id=convention.id
@@ -141,8 +155,10 @@ describe Event do
       convention.destroy
       @event.should be_valid
       @event.convention.should be_nil
-      @event.status.should == 0
+      @event.status.should == 1
     end
+
+
 
   end
 

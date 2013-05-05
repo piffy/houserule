@@ -69,5 +69,7 @@ Quando vado al profilo dell'utente "paolino@nomail.it"
 Allora dovrei vedere "N/A" all'interno di "#reputation_score"
 E dovrei vedere il pulsante "Attiva"
 Quando premo "Attiva"
-Allora dovrei vedere "Sistema di reputazione attivato"
-E dovrei vedere "0" all'interno di "#reputation_score"
+
+#Il sistema di reputazione NON e' ancora attivo
+#Allora dovrei vedere "Sistema di reputazione attivato"
+#E dovrei vedere "0" all'interno di "#reputation_score"

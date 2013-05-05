@@ -8,8 +8,8 @@ FactoryGirl.define do
     website_url "http://www.example.com"
     image_url "http://www.example.com/image.jpg"
     facebook_url "http://www.gcc.com"
-    begin_date "2013-04-21 12:21:17"
-    end_date "2013-04-21 12:21:17"
+    begin_date "2014-04-21 12:21:17"
+    end_date "2014-04-21 12:21:17"
     association :user
   end
 end

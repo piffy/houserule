@@ -29,7 +29,6 @@ Scenario:   Navigazione e Modifica
   E dovrei vedere "Gruppo modificato"
   Quando      vado alla pagina di elenco gruppo
   Allora dovrei vedere "Un nome cambiato"
-  E      dovrei vedere "" all'interno di "i.icon-calendar"
 
 Scenario:   Smart add http
   Dato mi loggo con email "paolino@nomail.it" e password "12345678"

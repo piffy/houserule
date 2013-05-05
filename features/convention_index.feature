@@ -19,7 +19,7 @@ Scenario: Visualizzazione a lista (con navigazione)
   Allora dovrei vedere "Convention" all'interno di ".convention_info"
   Allora dovrei vedere "Organizzato da:" all'interno di ".convention_info"
   E      dovrei vedere "" all'interno di ".convention_info"
-  E      dovrei vedere "" all'interno di ".icon64"
+  E      dovrei vedere "" all'interno di ".icon48"
 
 Scenario: Visualizzazione ordinata per data
   Dato   che esistono le seguenti convention:
