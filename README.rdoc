@@ -1,10 +1,10 @@
 == Welcome to House Rule
-=== version 0.3.0, 22/12/2012
+=== version 0.3.1, 5/5/2013
 
 House Rule aims to become the site to advertise, contact and manage gaming
 sessions among friends, with a modern, "web 2.0" attitude
 
-At this moment release 0.3 is out.
+At this moment, release 0.3.1 is out.
 
 
 == People involved 
